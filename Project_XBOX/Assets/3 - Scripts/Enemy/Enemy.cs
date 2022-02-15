@@ -18,7 +18,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Properties")]
     [SerializeField] protected float lifePoint = 50f;
     [SerializeField] protected float speed = 10f;
-    [SerializeField] protected float initialSpeed = 10f;
+    protected float initialSpeed = 10f;
     [SerializeField] protected float damageOnCollision = 10f;
     [SerializeField] protected Transform target;
 
@@ -87,16 +87,33 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // Move toward the target
-    public virtual void MoveToward(Transform _target, float _speed)
+    public virtual void MoveToward()
     {
         float step = speed * Time.deltaTime;
 
-        transform.position = Vector2.MoveTowards(transform.position, _target.position, step);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, step);
     }
 
-    public virtual void MoveToBeInRange(Transform _target, float _speed, float _range)
+    // Rotate toward the target
+    public virtual void RotateToward(float _speed, Transform _objToRotate)
     {
+        // Determine which direction to rotate towards
+        Vector2 targetDirection = target.position - transform.position;
 
+        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg + 90;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        _objToRotate.rotation = Quaternion.Slerp(_objToRotate.rotation, q, Time.deltaTime * speed);
+    }
+
+    public virtual void MoveToBeInRange(float _range)
+    {
+        float dist = Vector3.Distance(target.position, transform.position);
+        float step = speed * Time.deltaTime;
+
+        if (dist > _range)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+        }
     }
 
     public virtual void ShootInRange()
