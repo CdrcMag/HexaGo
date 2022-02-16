@@ -205,26 +205,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1148297839 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 139817739442116457, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
-  m_PrefabInstance: {fileID: 1652934406}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1148297844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148297839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c88ebc82d15644b88035daaa579e79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 0
-  bulletDamage: 0
-  minIntervalBetweenShots: 0
 --- !u!1 &1577934259
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +376,10 @@ PrefabInstance:
     - target: {fileID: 139817739442116458, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 139817739442116469, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: rotationSpeed
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
