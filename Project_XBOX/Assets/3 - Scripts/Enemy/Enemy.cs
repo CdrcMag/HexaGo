@@ -116,9 +116,12 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void ShootInRange()
+    public virtual void Shoot(GameObject _bulletPref, Transform _posToShoot, Transform _canon, float _speed)
     {
-
+        GameObject bullet;
+        bullet = Instantiate(_bulletPref, _posToShoot.position, Quaternion.identity);
+        bullet.GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * _speed;
+        Destroy(bullet, 10f);
     }
 
     public virtual void ShootAround()
