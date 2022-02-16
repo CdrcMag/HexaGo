@@ -30,7 +30,7 @@ public class Spinner : Enemy
 
     public void Update()
     {
-        base.MoveToward(target, GetSpeed());
+        base.MoveToward();
 
         RotateSpin(rotatingSpeed);
     }
