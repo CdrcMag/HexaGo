@@ -432,7 +432,7 @@ MonoBehaviour:
   FrontStartWeapon: 4
   BackStartWeapon: 0
   FrontRightStartWeapon: 0
-  FrontLeftStartWeapon: 0
+  FrontLeftStartWeapon: 4
   BackRightStartWeapon: 0
   BackLeftStartWeapon: 0
   ArmesFront:
