@@ -382,9 +382,10 @@ GameObject:
   - component: {fileID: 5440286231233564747}
   - component: {fileID: 5440286231233564744}
   - component: {fileID: 5932536877815902821}
+  - component: {fileID: 783943880110464908}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,6 +471,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.765
+--- !u!114 &783943880110464908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440286231233564746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfddfd7ccab00c43bbb73da25b2cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5440286230762614829}
 --- !u!1 &5440286231648629599
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,9 +495,10 @@ GameObject:
   - component: {fileID: 5440286231648629596}
   - component: {fileID: 5440286231648629597}
   - component: {fileID: 5466700308259422006}
+  - component: {fileID: 2670026127128950929}
   m_Layer: 0
   m_Name: Canon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -591,3 +606,16 @@ PolygonCollider2D:
       - {x: 0.44, y: -1.5999999}
       - {x: 0.47, y: -1.56}
       - {x: 0.47, y: -1.13}
+--- !u!114 &2670026127128950929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440286231648629599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfddfd7ccab00c43bbb73da25b2cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5440286230762614829}

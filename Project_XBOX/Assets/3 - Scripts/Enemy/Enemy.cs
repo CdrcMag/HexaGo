@@ -74,16 +74,25 @@ public abstract class Enemy : MonoBehaviour
         return _isEmpty;
     }
 
-    public virtual void HitPlayer(float _damageOnCollision)
+    public virtual void HitPlayer()
     {
-        Debug.Log("Player hit !");
-        Debug.Log("Damaged : " + _damageOnCollision);
+        PlayerManager player = target.GetComponent<PlayerManager>();
+        float currentLifePoint = player.GetLifePoint();
+        player.SetLifePoint(currentLifePoint - damageOnCollision);
     }
 
     public virtual void TakeDamage(float _damage)
     {
-        Debug.Log("Enemy hit !");
-        Debug.Log("Damaged : " + _damage);
+        lifePoint -= _damage;
+        if(lifePoint <= 0)
+        {
+            Die();
+        }
+    }
+
+    public virtual void Die()
+    {
+        Destroy(gameObject);
     }
 
     // Move toward the target
