@@ -12,6 +12,7 @@ public class Gunner : Enemy
     private float range = 5f;
     private float delay = 4f;
     private float bulletSpeed = 3f;
+    private bool isGrowingBody = false;
 
     [Header("Components")]
     [SerializeField] private Transform body;
@@ -74,5 +75,32 @@ public class Gunner : Enemy
             yield return new WaitForSeconds(0.01f);
             canon.localScale = new Vector2(canon.localScale.x - 0.02f, canon.localScale.y - 0.02f);
         }
+    }
+
+    public override void TakeDamage(float _damage)
+    {
+        base.TakeDamage(_damage);
+
+        if (!isGrowingBody)
+            StartCoroutine(GrowBody());
+    }
+
+    private IEnumerator GrowBody()
+    {
+        isGrowingBody = true;
+
+        while (body.localScale.x < 1.3f)
+        {
+            yield return new WaitForSeconds(0.005f);
+            body.localScale = new Vector2(body.localScale.x + 0.04f, body.localScale.y + 0.04f);
+        }
+
+        while (body.localScale.x > 1f)
+        {
+            yield return new WaitForSeconds(0.005f);
+            body.localScale = new Vector2(body.localScale.x - 0.04f, body.localScale.y - 0.04f);
+        }
+
+        isGrowingBody = false;
     }
 }

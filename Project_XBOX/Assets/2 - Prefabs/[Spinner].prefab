@@ -126,9 +126,10 @@ GameObject:
   - component: {fileID: 2729590895964798905}
   - component: {fileID: 2729590895964798906}
   - component: {fileID: 2729590895964798907}
+  - component: {fileID: 4336762175182213998}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,6 +247,19 @@ PolygonCollider2D:
       - {x: 0.265, y: -0.72499996}
       - {x: 0.445, y: -0.615}
       - {x: 0.59499997, y: -0.465}
+--- !u!114 &4336762175182213998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729590895964798904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfddfd7ccab00c43bbb73da25b2cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2729590896833227459}
 --- !u!1 &2729590896435617990
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,9 +271,10 @@ GameObject:
   - component: {fileID: 2729590896435617991}
   - component: {fileID: 2729590896435617992}
   - component: {fileID: 2729590896435617993}
+  - component: {fileID: 4222268039129636932}
   m_Layer: 0
   m_Name: spin03
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,6 +391,19 @@ PolygonCollider2D:
       - {x: -0.12, y: -0.695}
       - {x: -0.03, y: -0.675}
       - {x: 0.19, y: -0.545}
+--- !u!114 &4222268039129636932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729590896435617990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfddfd7ccab00c43bbb73da25b2cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2729590896833227459}
 --- !u!1 &2729590896594977218
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,9 +415,10 @@ GameObject:
   - component: {fileID: 2729590896594977219}
   - component: {fileID: 2729590896594977220}
   - component: {fileID: 2729590896594977221}
+  - component: {fileID: 3600139348756532125}
   m_Layer: 0
   m_Name: spin01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,6 +535,19 @@ PolygonCollider2D:
       - {x: -0.12, y: -0.695}
       - {x: -0.03, y: -0.675}
       - {x: 0.19, y: -0.545}
+--- !u!114 &3600139348756532125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729590896594977218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfddfd7ccab00c43bbb73da25b2cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2729590896833227459}
 --- !u!1 &2729590896667477079
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,9 +732,10 @@ GameObject:
   - component: {fileID: 2729590896951098910}
   - component: {fileID: 2729590896951098911}
   - component: {fileID: 2729590896951098880}
+  - component: {fileID: 1644527664896177637}
   m_Layer: 0
   m_Name: spin02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -809,3 +852,16 @@ PolygonCollider2D:
       - {x: -0.12, y: -0.695}
       - {x: -0.03, y: -0.675}
       - {x: 0.19, y: -0.545}
+--- !u!114 &1644527664896177637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729590896951098909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dfddfd7ccab00c43bbb73da25b2cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2729590896833227459}
