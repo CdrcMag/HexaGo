@@ -62,17 +62,7 @@ public class Player_Movement : MonoBehaviour
 
         //Rotation
         currentRotation += Input.GetAxisRaw("Input_Rotation") * rotationSpeed * -1;
-    }
-
-    private void HandleInputsController()
-    {
-        //Déplacement en X et Y
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        //Rotation
-        //currentRotation += Input.GetAxisRaw("Input_Rotation_Controller") * RotationSpeed * -1;
-    }
+    } 
 
     private void HandleMovementKeyboard()
     {
@@ -83,6 +73,16 @@ public class Player_Movement : MonoBehaviour
         if(Input.GetAxisRaw("Input_Rotation") != 0)
             _rb.MoveRotation(currentRotation * Time.deltaTime);
      
+    }
+
+    private void HandleInputsController()
+    {
+        //Déplacement en X et Y
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        //Rotation
+        //currentRotation += Input.GetAxisRaw("Input_Rotation_Controller") * RotationSpeed * -1;
     }
 
     private void HandleMovementController()

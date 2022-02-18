@@ -5,6 +5,8 @@ using UnityEngine;
 public class Shotgun : Weapon
 {
 
+    private float cpt = 0;
+
     private void Awake()
     {
         this.projectilePrefab = Resources.Load<GameObject>("Projectiles/Shotgun Projectile Prefab");
@@ -12,9 +14,24 @@ public class Shotgun : Weapon
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(!canShoot)
         {
-            this.Shoot();
+            cpt += Time.deltaTime;
+            if(cpt >= this.minIntervalBetweenShots)
+            {
+                cpt = 0;
+                canShoot = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1_Controller") > 0.9f)
+        {
+            if(canShoot)
+            {
+                this.Shoot();
+                canShoot = false;
+            }
+            
         }
     }
 
