@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[RequireComponent(typeof(Animator))]
-public class Eye : MonoBehaviour
+public class EyeMenu : MonoBehaviour
 {
     public enum State { None, Blink, Angry };
 
@@ -17,7 +15,6 @@ public class Eye : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private Transform eyeIris;
-    [SerializeField] private Enemy enemy;
     private State state = State.None;
     private float scale;
     private Vector3 startPositionIris;
@@ -45,11 +42,6 @@ public class Eye : MonoBehaviour
             eyeIris = transform.GetChild(0);
         }
 
-        if (enemy == null)
-        {
-            enemy = GetComponentInParent<Enemy>();
-        }
-
         scale = transform.lossyScale.x;
         startPositionIris = eyeIris.position;
         startLocalPosition = transform.localPosition;
@@ -57,13 +49,13 @@ public class Eye : MonoBehaviour
         StartCoroutine(BlinkEye());
     }
 
-    private void Update()
-    {
-        if (state == State.None)
-        {
-            FollowTarget();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (state == State.None)
+    //    {
+    //        FollowTarget();
+    //    }
+    //}
 
 
 
@@ -87,14 +79,14 @@ public class Eye : MonoBehaviour
     }
 
     // The Iris follows the target
-    private void FollowTarget()
-    {
-        magnitude = scale / COEFF_SCALE;
+    //private void FollowTarget()
+    //{
+    //    magnitude = scale / COEFF_SCALE;
 
-        Vector3 newPos = Vector3.ClampMagnitude(new Vector3(enemy.GetTarget().position.x - startPositionIris.x, enemy.GetTarget().position.y - startPositionIris.y, startPositionIris.z), magnitude);
+    //    Vector3 newPos = Vector3.ClampMagnitude(new Vector3(enemy.GetTarget().position.x - startPositionIris.x, enemy.GetTarget().position.y - startPositionIris.y, startPositionIris.z), magnitude);
 
-        eyeIris.localPosition = newPos;
-    }
+    //    eyeIris.localPosition = newPos;
+    //}
 
     // Blink at delay and continuously
     private IEnumerator BlinkEye()
@@ -115,53 +107,5 @@ public class Eye : MonoBehaviour
         }
 
         StartCoroutine(BlinkEye());
-    }
-
-    public void MakeAngryEye()
-    {
-        StartCoroutine(AngryEye());
-    }
-
-    // Angry animation
-    private IEnumerator AngryEye()
-    {
-        eyeIris.gameObject.SetActive(false);
-        SetState(2);
-
-        yield return new WaitForSeconds(0.45f);
-
-        int cpt = 0;
-        int cpt2 = 0;
-
-        while(cpt < 40)
-        {
-            float x = Random.Range(-0.15f, 0.15f);
-            float y = Random.Range(-0.15f, 0.15f);
-            float xPart = x / 4;
-            float yPart = y / 4;
-            cpt2 = 0;
-
-            while (cpt2 < 4)
-            {
-                yield return new WaitForSeconds(0.01f);
-                cpt++;
-                cpt2++;
-                transform.localPosition = new Vector2(transform.localPosition.x + xPart, transform.localPosition.y + yPart);
-            }
-
-            cpt2 = 0;
-
-            while (cpt2 < 4)
-            {
-                yield return new WaitForSeconds(0.01f);
-                cpt++;
-                cpt2++;
-                transform.localPosition = new Vector2(transform.localPosition.x - xPart, transform.localPosition.y - yPart);
-            }
-        }
-
-        transform.localPosition = startLocalPosition;
-        eyeIris.gameObject.SetActive(true);
-        SetState(0);
     }
 }
