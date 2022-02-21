@@ -41,21 +41,45 @@ public class Player_Movement : MonoBehaviour
         //Controller
         if (UseControllerSettings)
         {
-            HandleInputsController();
-            HandleRotationController();
+            //HandleInputsController();
+            //HandleRotationController();
+
+            //Déplacement en X et Y
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+
+            float h = Input.GetAxis("Input_Rotation_Controller_Horizontal");
+            float v = Input.GetAxis("Input_Rotation_Controller_Vertical");
+
+            //print($"H : {h} / V : {v}");
+
+            //Movement
+            movement.Normalize();
+            _rb.MovePosition(_rb.position + movement * speed * Time.deltaTime);
+
+            if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
+            {
+                float angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg + 180;
+                float newRotation = Mathf.SmoothDampAngle(transform.eulerAngles.z, angle, ref zVelocity, 0.1f);
+                transform.rotation = Quaternion.Euler(0,0, newRotation);
+                //_rb.MoveRotation(angle);
+            }
+           
+
+
         }
-            
+
+
     }
+
+    float zVelocity = 0.0f;
 
     private void FixedUpdate()
     {
         //Gère le mouvement du personnage au clavier
         if(UseKeyboardSettings)
             HandleMovementKeyboard();
-
-        //Gère le mouvement du personnage à la manette
-        if(UseControllerSettings)
-            HandleMovementController();
+        
     }
 
     private void HandleInputsKeyboard()
@@ -79,58 +103,36 @@ public class Player_Movement : MonoBehaviour
      
     }
 
-    private void HandleInputsController()
-    {
-        //Déplacement en X et Y
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        //Rotation
-        //currentRotation += Input.GetAxisRaw("Input_Rotation_Controller") * RotationSpeed * -1;
-    }
-
-    private void HandleMovementController()
-    {
-        //Movement
-        movement.Normalize();
-        _rb.MovePosition(_rb.position + movement * speed * Time.deltaTime);
-
-    }
-
-    float h;
-    float v;
-    float angle;
-    float s = 0;
-
-
+  
     private void HandleRotationController()
     {
-        //Rotation
-        h = Input.GetAxisRaw("Input_Rotation_Controller_Horizontal");
-        v = Input.GetAxisRaw("Input_Rotation_Controller_Vertical");
+        ////Rotation
+        //h = Input.GetAxisRaw("Input_Rotation_Controller_Horizontal");
+        //v = Input.GetAxisRaw("Input_Rotation_Controller_Vertical");
 
-        if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
-        {
-            angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg + 180;
-            //transform.rotation = Quaternion.Euler(0, 0, angle);
-            Vector3 newAngle = new Vector3(0, 0, angle);
+        //if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
+        //{
+        //    angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg;// + 180;
 
-            Vector3 newDirection = Vector3.RotateTowards(transform.rotation.eulerAngles, newAngle, 0, rotationSpeed * Time.deltaTime);
+        //    print(angle);
+        //    Vector3 newAngle = new Vector3(0, 0, angle);
 
-            transform.rotation = Quaternion.Euler(0,0, newDirection.z);
+        //    Vector3 newDirection = Vector3.RotateTowards(transform.rotation.eulerAngles, newAngle, 0, rotationSpeed * Time.deltaTime);
+
+        //    transform.rotation = Quaternion.Euler(0, 0, newDirection.z);
+
+        //}
+        //else
+        //{
+        //    s = 0;
+        //}
 
 
 
 
 
 
-        }
-        else
-        {
-            s = 0;
-        }
 
-        
     }
 
 
