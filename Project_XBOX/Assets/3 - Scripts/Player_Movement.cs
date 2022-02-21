@@ -60,25 +60,19 @@ public class Player_Movement : MonoBehaviour
             if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
             {
                 float angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg + 180;
-                _rb.MoveRotation(angle);
+                float newRotation = Mathf.SmoothDampAngle(transform.eulerAngles.z, angle, ref zVelocity, 0.1f);
+                transform.rotation = Quaternion.Euler(0,0, newRotation);
+                //_rb.MoveRotation(angle);
             }
-            
-
-
-
-
-
-
-
-
-
-
-
+           
 
 
         }
-            
+
+
     }
+
+    float zVelocity = 0.0f;
 
     private void FixedUpdate()
     {
