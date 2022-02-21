@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6193202712179566864}
   - component: {fileID: 6193202712179566865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GFX
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6193202712866946161}
   - component: {fileID: 6193202712866946166}
   - component: {fileID: 3254785158387797467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shotgun Projectile Prefab
   m_TagString: Projectile
   m_Icon: {fileID: 0}
