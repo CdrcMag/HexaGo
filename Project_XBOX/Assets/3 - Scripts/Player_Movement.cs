@@ -40,7 +40,11 @@ public class Player_Movement : MonoBehaviour
 
         //Controller
         if (UseControllerSettings)
+        {
             HandleInputsController();
+            HandleRotationController();
+        }
+            
     }
 
     private void FixedUpdate()
@@ -62,17 +66,7 @@ public class Player_Movement : MonoBehaviour
 
         //Rotation
         currentRotation += Input.GetAxisRaw("Input_Rotation") * rotationSpeed * -1;
-    }
-
-    private void HandleInputsController()
-    {
-        //Déplacement en X et Y
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        //Rotation
-        //currentRotation += Input.GetAxisRaw("Input_Rotation_Controller") * RotationSpeed * -1;
-    }
+    } 
 
     private void HandleMovementKeyboard()
     {
@@ -85,21 +79,58 @@ public class Player_Movement : MonoBehaviour
      
     }
 
+    private void HandleInputsController()
+    {
+        //Déplacement en X et Y
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        //Rotation
+        //currentRotation += Input.GetAxisRaw("Input_Rotation_Controller") * RotationSpeed * -1;
+    }
+
     private void HandleMovementController()
     {
         //Movement
         movement.Normalize();
         _rb.MovePosition(_rb.position + movement * speed * Time.deltaTime);
 
+    }
+
+    float h;
+    float v;
+    float angle;
+    float s = 0;
+
+
+    private void HandleRotationController()
+    {
         //Rotation
-        float horizontal = Input.GetAxisRaw("Input_Rotation_Controller_Horizontal");
-        float vertical = Input.GetAxisRaw("Input_Rotation_Controller_Vertical");
-        float angle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg - 180;
+        h = Input.GetAxisRaw("Input_Rotation_Controller_Horizontal");
+        v = Input.GetAxisRaw("Input_Rotation_Controller_Vertical");
 
-        if(horizontal != 0)
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        //transform.Rotate(new Vector3(0, 0, angle) * Time.deltaTime);
+        if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
+        {
+            angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg + 180;
+            //transform.rotation = Quaternion.Euler(0, 0, angle);
+            Vector3 newAngle = new Vector3(0, 0, angle);
 
+            Vector3 newDirection = Vector3.RotateTowards(transform.rotation.eulerAngles, newAngle, 0, rotationSpeed * Time.deltaTime);
+
+            transform.rotation = Quaternion.Euler(0,0, newDirection.z);
+
+
+
+
+
+
+        }
+        else
+        {
+            s = 0;
+        }
+
+        
     }
 
 

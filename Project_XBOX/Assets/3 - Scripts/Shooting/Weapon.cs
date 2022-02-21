@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     protected float minIntervalBetweenShots;
 
+    protected bool canShoot = true;
 
 
     public virtual void Shoot()
