@@ -16,10 +16,6 @@ public class EyeMenu : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform eyeIris;
     private State state = State.None;
-    private float scale;
-    private Vector3 startPositionIris;
-    private float magnitude = 0.1f;
-    private Vector3 startLocalPosition;
 
     // =====================================================
 
@@ -42,21 +38,8 @@ public class EyeMenu : MonoBehaviour
             eyeIris = transform.GetChild(0);
         }
 
-        scale = transform.lossyScale.x;
-        startPositionIris = eyeIris.position;
-        startLocalPosition = transform.localPosition;
-
         StartCoroutine(BlinkEye());
     }
-
-    //private void Update()
-    //{
-    //    if (state == State.None)
-    //    {
-    //        FollowTarget();
-    //    }
-    //}
-
 
 
     // Set the state of animation of the eye
@@ -78,17 +61,6 @@ public class EyeMenu : MonoBehaviour
         }
     }
 
-    // The Iris follows the target
-    //private void FollowTarget()
-    //{
-    //    magnitude = scale / COEFF_SCALE;
-
-    //    Vector3 newPos = Vector3.ClampMagnitude(new Vector3(enemy.GetTarget().position.x - startPositionIris.x, enemy.GetTarget().position.y - startPositionIris.y, startPositionIris.z), magnitude);
-
-    //    eyeIris.localPosition = newPos;
-    //}
-
-    // Blink at delay and continuously
     private IEnumerator BlinkEye()
     {
         float delay = Random.Range(MIN_DELAY_BLINK, MAX_DELAY_BLINK);

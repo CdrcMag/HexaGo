@@ -79,16 +79,16 @@ public class TitleAnimation : MonoBehaviour
     {
         while (_letter.localScale.x < MAXSCALE)
         {
-            _letter.localScale = new Vector2(_letter.localScale.x + 0.03f, _letter.localScale.y + 0.03f);
+            _letter.localScale = new Vector2(_letter.localScale.x + 0.04f, _letter.localScale.y + 0.04f);
 
-            yield return new WaitForSeconds(DELAY);
+            yield return new WaitForSeconds(0.005f);
         }
 
         while (_letter.localScale.x > MINSCALE)
         {
-            _letter.localScale = new Vector2(_letter.localScale.x - 0.022f, _letter.localScale.y - 0.022f);
+            _letter.localScale = new Vector2(_letter.localScale.x - 0.03f, _letter.localScale.y - 0.03f);
 
-            yield return new WaitForSeconds(DELAY);
+            yield return new WaitForSeconds(0.005f);
         }
     }
 
