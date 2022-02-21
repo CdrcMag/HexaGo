@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817738630555810}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slot04
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817738896745580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BODY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817738990773408}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slot03
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 139817739028064257}
   - component: {fileID: 139817739028064258}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817739033075915}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slot02
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817739143139223}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slot06
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -245,7 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 139817739411013880}
   - component: {fileID: 139817739411013881}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 2240052171100335974}
   - component: {fileID: 139817739442116468}
   - component: {fileID: 3595298784982048917}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817739610243222}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slot05
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -503,7 +503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817739756286568}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slot01
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -534,7 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 139817739921812384}
   - component: {fileID: 139817739921812385}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139817739989441474}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SLOTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 294281819022051493}
   - component: {fileID: 4401131296067967261}
   - component: {fileID: 2554643747354750453}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1779082050336205932}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapons storage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
