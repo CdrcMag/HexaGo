@@ -95,7 +95,14 @@ public class Player_Shooting : MonoBehaviour
         switch (w)
         {
             case WeaponName.Shotgun:
-                return ArmesFront[0];//Shotgun
+                return ArmesFront[0];//Fusil à pompe
+            case WeaponName.Canon:
+                return ArmesFront[1];//Canon
+            case WeaponName.Mitraillette:
+                return ArmesFront[2];//Mitraillette
+            case WeaponName.BigFuckingGun:
+                return ArmesFront[3];//Big fucking gun
+
 
             default:
                 return null;
