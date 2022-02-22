@@ -82,7 +82,7 @@ public class Player_Shooting : MonoBehaviour
             case SlotName.BackRight:
                 return slotBackRight;
             case SlotName.BackLeft:
-                return slotBackRight;
+                return slotBackLeft;
 
             default:
                 return null;
