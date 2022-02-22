@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94fa39de85c268c449de9ec7b97d5e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FrontStartWeapon: 0
+  FrontStartWeapon: 1
   BackStartWeapon: 0
   FrontRightStartWeapon: 0
   FrontLeftStartWeapon: 0
@@ -405,7 +405,8 @@ MonoBehaviour:
   ArmesFront:
   - {fileID: 3311145808247207236}
   - {fileID: 367852164519433825}
-  - {fileID: 0}
+  - {fileID: 4440183951053267427}
+  - {fileID: 5732632517162932791}
   slotFront: {fileID: 139817739756286568}
   slotBack: {fileID: 139817738630555810}
   slotFrontRight: {fileID: 139817739033075915}
@@ -884,6 +885,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2670995170902537776, guid: a99545406c33abb429bad07a7e91ac88, type: 3}
   m_PrefabInstance: {fileID: 7786369999679526140}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4440183951053267427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5877212380802561311, guid: a99545406c33abb429bad07a7e91ac88, type: 3}
+  m_PrefabInstance: {fileID: 7786369999679526140}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443685bef6222f0448693d2fa305078b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7839654285874720818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -941,6 +953,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb8ef4e9ebcac58469e15376188ca91d, type: 3}
+--- !u!114 &5732632517162932791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2540710717375900165, guid: eb8ef4e9ebcac58469e15376188ca91d, type: 3}
+  m_PrefabInstance: {fileID: 7839654285874720818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bec54f397bc74542a9df7293b91a152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5322493887590401538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2670995170902537776, guid: eb8ef4e9ebcac58469e15376188ca91d, type: 3}
