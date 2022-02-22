@@ -48,6 +48,11 @@ public class Transition : MonoBehaviour
         isFullTransition = true;
     }
 
+    public void StartAugment()
+    {
+        StartCoroutine(IAugment());
+    }
+
     IEnumerator IAugment()
     {
         transform.gameObject.SetActive(true);

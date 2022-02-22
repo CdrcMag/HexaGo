@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] private SpriteRenderer selectALevel;
     [SerializeField] private Transform selecter;
     [SerializeField] private RectTransform[] levelIcons;
+    [SerializeField] private Image selecterFlash;
+    [SerializeField] private Transition transition;
 
     private Image selecterImage;
     private bool canSelectLevel = false;
@@ -35,6 +38,22 @@ public class LevelSelection : MonoBehaviour
     {
         StartCoroutine(AnimateSelectALevel());
         StartCoroutine(AnimateSelecter());
+    }
+
+    private void Update()
+    {
+        if ((Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A)) && canSelectLevel)
+        {
+            GoToLevel();
+        }
+    }
+
+    private void GoToLevel()
+    {
+        selecter.gameObject.SetActive(false);
+        selecterFlash.gameObject.SetActive(true);
+
+        StartCoroutine(IFlash());
     }
 
     private IEnumerator AnimateSelectALevel()
@@ -116,5 +135,70 @@ public class LevelSelection : MonoBehaviour
 
         selecter.gameObject.SetActive(true);
         canSelectLevel = true;
+    }
+
+    private IEnumerator IFlash()
+    {
+        float a = 1f;
+
+        while (a > 0.1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selecterFlash.color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a < 1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selecterFlash.color = color;
+            a += 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a > 0.1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selecterFlash.color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a < 1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selecterFlash.color = color;
+            a += 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a > 0.1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selecterFlash.color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a < 1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selecterFlash.color = color;
+            a += 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        transition.StartAugment();
+
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene("Level01");
     }
 }
