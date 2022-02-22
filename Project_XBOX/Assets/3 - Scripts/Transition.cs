@@ -15,6 +15,8 @@ public class Transition : MonoBehaviour
     [Range(0, 10)]
     public float ecart;
 
+    private bool isFullTransition = false;
+
     public void Augment() => StartCoroutine(IAugment());
     public void Reduce() => StartCoroutine(IReduce());
 
@@ -40,6 +42,17 @@ public class Transition : MonoBehaviour
             StartCoroutine(IReduce());
     }
 
+    public void StartFullTransition()
+    {
+        StartCoroutine(IAugment());
+        isFullTransition = true;
+    }
+
+    public void StartAugment()
+    {
+        StartCoroutine(IAugment());
+    }
+
     IEnumerator IAugment()
     {
         transform.gameObject.SetActive(true);
@@ -53,6 +66,11 @@ public class Transition : MonoBehaviour
             StartCoroutine(Augment(carres[i]));
         }
 
+        if(isFullTransition)
+        {
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(IReduce());
+        }
     }
 
     IEnumerator IReduce()
@@ -68,17 +86,30 @@ public class Transition : MonoBehaviour
             StartCoroutine(Reduce(carres[i]));
         }
 
+        isFullTransition = false;
     }
 
     IEnumerator Reduce(Transform t)
     {
+        float rot = 0;
+        Vector3 currentRot;
+        Quaternion currentQuaternionRot = new Quaternion();
+
         t.localScale = new Vector2(1, 1);
         t.gameObject.SetActive(true);
 
         while (t.localScale.x > 0)
         {
             t.localScale = new Vector2(t.localScale.x - speed/100, t.localScale.y - speed/100);
-            yield return null;
+
+            // NEW !!! ROTATION !!!
+            rot += 5;
+            currentRot = new Vector3(0, 0, rot);
+            currentQuaternionRot.eulerAngles = currentRot;
+            t.localRotation = currentQuaternionRot;
+
+            //yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
 
         t.gameObject.SetActive(false);
@@ -88,16 +119,28 @@ public class Transition : MonoBehaviour
 
     IEnumerator Augment(Transform t)
     {
+        float rot = 0;
+        Vector3 currentRot;
+        Quaternion currentQuaternionRot = new Quaternion();
+
         t.localScale = new Vector2(0, 0);
         t.gameObject.SetActive(true);
 
-        while (t.localScale.x < 1f)
+        while (t.localScale.x < 1.2f)
         {
             t.localScale = new Vector2(t.localScale.x + speed/100, t.localScale.y + speed/100);
-            yield return null;
+
+            // NEW !!! ROTATION !!!
+            rot -= 5;
+            currentRot = new Vector3(0, 0, rot);
+            currentQuaternionRot.eulerAngles = currentRot;
+            t.localRotation = currentQuaternionRot;
+
+            //yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
 
-        t.localScale = new Vector2(1f, 1f);
+        //t.localScale = new Vector2(1f, 1f);
         t.gameObject.SetActive(true);
 
         //Destroy(t.gameObject);
