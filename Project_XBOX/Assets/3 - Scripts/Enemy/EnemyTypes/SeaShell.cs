@@ -8,10 +8,10 @@ public class SeaShell : MonoBehaviour
 
     // ===================== VARIABLES =====================
 
-    [SerializeField] private float speedRotating = 300f;
+    [SerializeField] private float speedRotating = 500f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject pearlPref;
-    [SerializeField] private float speedPearl = 5f;
+    [SerializeField] private float speedPearl = 7f;
 
     private bool canSpin = true;
 
@@ -40,7 +40,7 @@ public class SeaShell : MonoBehaviour
         {
             yield return new WaitForSeconds(DELAY);
 
-            speedRotating -= 4.25f;
+            speedRotating -= 7f;
 
             rb.velocity = new Vector2(rb.velocity.x / 1.01f, rb.velocity.y / 1.01f);
         }
@@ -48,7 +48,7 @@ public class SeaShell : MonoBehaviour
         canSpin = false;
         rb.bodyType = RigidbodyType2D.Static;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         while (transform.localScale.x > 0.3)
         {
@@ -66,10 +66,25 @@ public class SeaShell : MonoBehaviour
 
         transform.localScale = new Vector2(0f, 0f);
 
-        GameObject bullet;
-        bullet = Instantiate(pearlPref, transform.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().velocity = speedPearl * Vector2.left;
-        Destroy(bullet, 10f);
+        GameObject bullet01;
+        bullet01 = Instantiate(pearlPref, transform.position, Quaternion.identity);
+        bullet01.GetComponent<Rigidbody2D>().velocity = speedPearl * Vector2.left;
+        Destroy(bullet01, 10f);
+
+        GameObject bullet02;
+        bullet02 = Instantiate(pearlPref, transform.position, Quaternion.identity);
+        bullet02.GetComponent<Rigidbody2D>().velocity = speedPearl * Vector2.right;
+        Destroy(bullet02, 10f);
+
+        GameObject bullet03;
+        bullet03 = Instantiate(pearlPref, transform.position, Quaternion.identity);
+        bullet03.GetComponent<Rigidbody2D>().velocity = speedPearl * Vector2.up;
+        Destroy(bullet03, 10f);
+
+        GameObject bullet04;
+        bullet04 = Instantiate(pearlPref, transform.position, Quaternion.identity);
+        bullet04.GetComponent<Rigidbody2D>().velocity = speedPearl * Vector2.down;
+        Destroy(bullet04, 10f);
 
         Destroy(gameObject);
     }

@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ba227d062fb2744baafa1e5f9755e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoint: 80
+  lifePoint: 60
   speed: 4
   damageOnCollision: 10
   target: {fileID: 0}

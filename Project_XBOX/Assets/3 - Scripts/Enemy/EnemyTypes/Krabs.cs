@@ -235,7 +235,7 @@ public class Krabs : Enemy
 
             cpt++;
 
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.001f);
         }
 
         Shoot(bulletPref, posToShoot, transform, bulletSpeed);

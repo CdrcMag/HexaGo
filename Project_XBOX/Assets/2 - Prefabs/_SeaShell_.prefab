@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4421ddf395bdb874aab310a29189f5ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRotating: 300
+  speedRotating: 500
   rb: {fileID: 7871863546627864416}
   pearlPref: {fileID: 9161936805165897905, guid: 1d0236c19e5dbc44fbb6f84f7e771aa4, type: 3}
-  speedPearl: 5
+  speedPearl: 7
