@@ -6,14 +6,16 @@ public class Player_Shooting : MonoBehaviour
 {
     [Header("Start settings")]
     public WeaponName FrontStartWeapon;
-    public WeaponName BackStartWeapon;
     public WeaponName FrontRightStartWeapon;
     public WeaponName FrontLeftStartWeapon;
-    public WeaponName BackRightStartWeapon;
-    public WeaponName BackLeftStartWeapon;
+
+    public UpgradeName BackStartUpgrade;
+    public UpgradeName BackRightStartUpgrade;
+    public UpgradeName BackLeftStartUpgrade;
 
     [Header("Front weapons")]
     public Weapon[] ArmesFront = new Weapon[3];
+    public Upgrade[] Upgrades = new Upgrade[1];
 
     [Header("Slots")]
     //Répertorie tous les transform des slots
@@ -28,16 +30,22 @@ public class Player_Shooting : MonoBehaviour
     //Nom des slots et noms des armes
     public enum SlotName { Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
     public enum WeaponName { None, Canon, BigFuckingGun, Mitraillette, Shotgun };
+    public enum UpgradeName { None, Propulseur };
 
     private void Start()
     {
         //Assigns weapons at start
         SetWeapon(SlotName.Front, FrontStartWeapon);
-        SetWeapon(SlotName.Back, BackStartWeapon);
+        //SetWeapon(SlotName.Back, BackStartWeapon);
         SetWeapon(SlotName.FrontLeft, FrontLeftStartWeapon);
         SetWeapon(SlotName.FrontRight, FrontRightStartWeapon);
-        SetWeapon(SlotName.BackLeft, BackLeftStartWeapon);
-        SetWeapon(SlotName.BackRight, BackRightStartWeapon);
+        //SetWeapon(SlotName.BackLeft, BackLeftStartWeapon);
+        //SetWeapon(SlotName.BackRight, BackRightStartWeapon);
+
+        SetUpgrade(SlotName.Back, BackStartUpgrade);
+        SetUpgrade(SlotName.BackLeft, BackLeftStartUpgrade);
+        SetUpgrade(SlotName.BackRight, BackRightStartUpgrade);
+
     }
 
     //Assigne une arme à un slot
@@ -64,6 +72,29 @@ public class Player_Shooting : MonoBehaviour
         weaponInstance.SetActive(true);
         
 
+    }
+
+    public void SetUpgrade(SlotName slotName, UpgradeName upgrade)
+    {
+        Upgrade currentUpgrade = GetUpgrade(upgrade);
+        Transform currentSlot = GetSlot(slotName);
+
+        //if no weapons are selected
+        if (currentUpgrade == null)
+            return;
+
+        //Copies the weapon from the storage
+        GameObject upgradeInstance = Instantiate(currentUpgrade.gameObject, transform.position, Quaternion.identity);
+
+        //Sets position and rotation
+        upgradeInstance.transform.localRotation = currentSlot.localRotation;
+        upgradeInstance.transform.localPosition = currentSlot.localPosition;
+
+        //Assigns the weapon to the parent
+        upgradeInstance.transform.SetParent(currentSlot);
+
+        //And activates it
+        upgradeInstance.SetActive(true);
     }
 
 
@@ -107,6 +138,20 @@ public class Player_Shooting : MonoBehaviour
             default:
                 return null;
         }
+    }
+
+    private Upgrade GetUpgrade(UpgradeName u)
+    {
+        switch(u)
+        {
+            case UpgradeName.Propulseur:
+                return Upgrades[0];
+
+            default:
+                break;
+        }
+
+        return null;
     }
 
 
