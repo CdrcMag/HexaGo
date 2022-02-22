@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea37f03ba9cd1547bfe9348cce7d766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoint: 200
+  lifePoint: 100
   speed: 1.5
   damageOnCollision: 10
   target: {fileID: 0}
