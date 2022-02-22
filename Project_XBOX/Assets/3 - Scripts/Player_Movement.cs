@@ -12,6 +12,7 @@ public class Player_Movement : MonoBehaviour
     //Vitesse de déplacement
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] public float speedBoost = 1;
 
     //Vecteur de déplacement
     private Vector2 movement;
@@ -55,7 +56,7 @@ public class Player_Movement : MonoBehaviour
 
             //Movement
             movement.Normalize();
-            _rb.MovePosition(_rb.position + movement * speed * Time.deltaTime);
+            _rb.MovePosition(_rb.position + movement * speed * speedBoost * Time.deltaTime);
 
             if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
             {
@@ -96,7 +97,7 @@ public class Player_Movement : MonoBehaviour
     {
         movement.Normalize();
 
-        _rb.MovePosition(_rb.position + movement * speed * Time.deltaTime);
+        _rb.MovePosition(_rb.position + movement * speed * speedBoost * Time.deltaTime);
 
         if(Input.GetAxisRaw("Input_Rotation") != 0)
             _rb.MoveRotation(currentRotation * Time.deltaTime);
