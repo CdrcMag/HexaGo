@@ -116,8 +116,8 @@ TextureImporter:
         y: 15
         width: 31
         height: 70
-      alignment: 9
-      pivot: {x: 0.5, y: 0.4}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -133,12 +133,12 @@ TextureImporter:
       name: Weapons_1
       rect:
         serializedVersion: 2
-        x: 71
-        y: 38
-        width: 23
-        height: 23
+        x: 67
+        y: 34
+        width: 31
+        height: 31
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
