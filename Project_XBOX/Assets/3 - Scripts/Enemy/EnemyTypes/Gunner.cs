@@ -23,15 +23,18 @@ public class Gunner : Enemy
 
     // =====================================================
 
-    public void Awake()
+    private void Awake()
     {
         base.SetTargetInStart();
         base.SetInitialSpeed(GetSpeed());
+    }
 
+    private void Start()
+    {
         StartCoroutine(ShootByDelay());
     }
 
-    public void Update()
+    private void Update()
     {
         base.MoveToBeInRange(range);
         base.RotateToward(ROTATE_SPEED_CANON, canon);

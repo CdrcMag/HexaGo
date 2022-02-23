@@ -111,7 +111,7 @@ public abstract class Enemy : MonoBehaviour
 
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg + 90;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        _objToRotate.rotation = Quaternion.Slerp(_objToRotate.rotation, q, Time.deltaTime * speed);
+        _objToRotate.rotation = Quaternion.Slerp(_objToRotate.rotation, q, Time.deltaTime * _speed);
     }
 
     public virtual void MoveToBeInRange(float _range)
@@ -128,7 +128,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Shoot(GameObject _bulletPref, Transform _posToShoot, Transform _canon, float _speed)
     {
         GameObject bullet;
-        bullet = Instantiate(_bulletPref, _posToShoot.position, Quaternion.identity);
+        bullet = Instantiate(_bulletPref, _posToShoot.position, _canon.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * _speed;
         Destroy(bullet, 10f);
     }
