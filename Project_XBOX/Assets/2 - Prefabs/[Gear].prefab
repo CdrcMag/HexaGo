@@ -472,6 +472,8 @@ MonoBehaviour:
   target: {fileID: 0}
   eyes:
   - {fileID: 5464234886575677832}
+  ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
+  ptcDiePref: {fileID: 4717575583263620708, guid: 8c62902af13479c42af0f0a06a3852d1, type: 3}
   body: {fileID: 5464234887624532129}
   gear: {fileID: 5464234886084417345}
 --- !u!1 &5464234887224674406

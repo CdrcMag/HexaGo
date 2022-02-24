@@ -100,7 +100,7 @@ BoxCollider2D:
   m_Offset: {x: -0.05117005, y: 0.46052554}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.54126614, y: 0.24696401}
+    pivot: {x: 0.5618985, y: 0.16261828}
     oldSize: {x: 1.24, y: 1.82}
     newSize: {x: 1.24, y: 1.82}
     adaptiveTilingThreshold: 0.5
@@ -255,7 +255,7 @@ BoxCollider2D:
   m_Offset: {x: 0.05117005, y: 0.46052554}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.54126614, y: 0.24696401}
+    pivot: {x: 0.5618985, y: 0.16261828}
     oldSize: {x: 1.24, y: 1.82}
     newSize: {x: 1.24, y: 1.82}
     adaptiveTilingThreshold: 0.5
@@ -918,6 +918,8 @@ MonoBehaviour:
   target: {fileID: 0}
   eyes:
   - {fileID: 4684672061067742640}
+  ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
+  ptcDiePref: {fileID: 4717575583263620708, guid: 8c62902af13479c42af0f0a06a3852d1, type: 3}
   body: {fileID: 4684672060888072122}
   leftClamp: {fileID: 4684672061280456475}
   rightClamp: {fileID: 4684672061391939350}
