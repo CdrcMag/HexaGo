@@ -25,6 +25,12 @@ public abstract class Enemy : MonoBehaviour
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
 
+    [Header("Prefabs")]
+    [SerializeField] protected GameObject ptcHitPref;
+    [SerializeField] protected GameObject ptcDiePref;
+
+    private CameraShake cameraShake;
+
     // =====================================================
 
     // =================== [ SET - GET ] ===================
@@ -45,6 +51,10 @@ public abstract class Enemy : MonoBehaviour
     // =====================================================
 
 
+    private void Start()
+    {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+    }
 
     // Set the variable "target" with the player in the scene
     public virtual void SetTargetInStart()
@@ -84,14 +94,29 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TakeDamage(float _damage)
     {
         lifePoint -= _damage;
+
+        GameObject ptcHit;
+        ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
+        Destroy(ptcHit, 4f);
+
         if(lifePoint <= 0)
         {
             Die();
+        }
+        else
+        {
+            cameraShake.Shake(0.1f, 0.8f);
         }
     }
 
     public virtual void Die()
     {
+        GameObject ptcDie;
+        ptcDie = Instantiate(ptcDiePref, transform.position, Quaternion.identity);
+        Destroy(ptcDie, 8f);
+
+        cameraShake.Shake(0.3f, 1.5f);
+
         Destroy(gameObject);
     }
 
@@ -111,7 +136,7 @@ public abstract class Enemy : MonoBehaviour
 
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg + 90;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        _objToRotate.rotation = Quaternion.Slerp(_objToRotate.rotation, q, Time.deltaTime * speed);
+        _objToRotate.rotation = Quaternion.Slerp(_objToRotate.rotation, q, Time.deltaTime * _speed);
     }
 
     public virtual void MoveToBeInRange(float _range)
@@ -128,13 +153,8 @@ public abstract class Enemy : MonoBehaviour
     public virtual void Shoot(GameObject _bulletPref, Transform _posToShoot, Transform _canon, float _speed)
     {
         GameObject bullet;
-        bullet = Instantiate(_bulletPref, _posToShoot.position, Quaternion.identity);
+        bullet = Instantiate(_bulletPref, _posToShoot.position, _canon.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * _speed;
         Destroy(bullet, 10f);
-    }
-
-    public virtual void ShootAround()
-    {
-
     }
 }

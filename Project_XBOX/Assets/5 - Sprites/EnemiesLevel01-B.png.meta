@@ -62,6 +62,9 @@ TextureImporter:
   - first:
       213: 735896697557933288
     second: EnemiesLevel01-B_7
+  - first:
+      213: -3336934921115390654
+    second: EnemiesLevel01-B_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -175,12 +178,12 @@ TextureImporter:
       name: EnemiesLevel01-B_1
       rect:
         serializedVersion: 2
-        x: 423
+        x: 424
         y: 370
         width: 246
         height: 286
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -222,7 +225,7 @@ TextureImporter:
         width: 183
         height: 79
       alignment: 9
-      pivot: {x: 0.8823976, y: 0.45748052}
+      pivot: {x: 0.9014476, y: 0.4722406}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,11 +263,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 782
-        y: 127
+        y: 128
         width: 124
         height: 182
       alignment: 9
-      pivot: {x: 0.54126614, y: 0.24696401}
+      pivot: {x: 0.5618985, y: 0.16261828}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -285,7 +288,7 @@ TextureImporter:
         width: 102
         height: 141
       alignment: 9
-      pivot: {x: 0.15535063, y: 0.1260192}
+      pivot: {x: 0.1775028, y: 0.14227977}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -301,6 +304,27 @@ TextureImporter:
       name: EnemiesLevel01-B_7
       rect:
         serializedVersion: 2
+        x: 1170
+        y: 65
+        width: 244
+        height: 129
+      alignment: 9
+      pivot: {x: 0.5, y: 0.35}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ecd251c52e663a00800000000000000
+      internalID: 735896697557933288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemiesLevel01-B_8
+      rect:
+        serializedVersion: 2
         x: 162
         y: 75
         width: 36
@@ -312,8 +336,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ecd251c52e663a00800000000000000
-      internalID: 735896697557933288
+      spriteID: 24d225c7e53d0b1d0800000000000000
+      internalID: -3336934921115390654
       vertices: []
       indices: 
       edges: []
