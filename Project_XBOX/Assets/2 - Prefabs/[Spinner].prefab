@@ -721,6 +721,8 @@ MonoBehaviour:
   target: {fileID: 0}
   eyes:
   - {fileID: 2729590896667477082}
+  ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
+  ptcDiePref: {fileID: 4717575583263620708, guid: 8c62902af13479c42af0f0a06a3852d1, type: 3}
   body: {fileID: 2729590895964798905}
   spin: {fileID: 2729590895872603408}
 --- !u!1 &2729590896951098909
