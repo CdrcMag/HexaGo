@@ -230,4 +230,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc3d4114a1461f45a05a6a67e989a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 8108413547451547414}
+  lightMine: {fileID: 8108413547451547414}
