@@ -12,9 +12,9 @@ public class PlayerManager : MonoBehaviour
 
     // =================== [ SET - GET ] ===================
 
-    public void SetLifePoint(float _lifePoint) 
+    public void SetLifePoint(float _damage) 
     { 
-        lifePoint = _lifePoint;
+        lifePoint = lifePoint - _damage;
         
         if(lifePoint <= 0)
         {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     public static CameraShake Instance;
+    public bool isShaking = false;
 
     private Camera cam;
 
@@ -15,10 +16,18 @@ public class CameraShake : MonoBehaviour
         cam = Camera.main;
     }
 
-    public void Shake(float duration, float intensity) => StartCoroutine(IShake(duration, intensity));
+    public void Shake(float duration, float intensity)
+    {
+        if(!isShaking)
+        {
+            StartCoroutine(IShake(duration, intensity));
+        }
+    }
+
     IEnumerator IShake(float duration, float intensity)
     {
         Quaternion originalRotation = cam.transform.localRotation;
+        isShaking = true;
 
         float cpt = 0;
 
@@ -35,6 +44,7 @@ public class CameraShake : MonoBehaviour
         }
 
         cam.transform.localRotation = originalRotation;
+        isShaking = false;
     }
 
 }
