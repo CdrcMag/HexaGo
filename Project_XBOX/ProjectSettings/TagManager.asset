@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Trap
   - Block
+  - Totem
   layers:
   - Default
   - TransparentFX
