@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player_Movement : MonoBehaviour
 {
+    //Allow movement variable
+    public bool canMove = true;
+
     //Rigidbody du joueur
     private Rigidbody2D _rb;
 
@@ -35,6 +38,9 @@ public class Player_Movement : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove)
+            return;
+
         //Keyboard
         if(UseKeyboardSettings)
             HandleInputsKeyboard();
@@ -77,8 +83,11 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canMove)
+            return;
+
         //Gère le mouvement du personnage au clavier
-        if(UseKeyboardSettings)
+        if (UseKeyboardSettings)
             HandleMovementKeyboard();
         
     }
