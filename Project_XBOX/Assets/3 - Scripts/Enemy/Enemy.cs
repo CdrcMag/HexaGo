@@ -30,6 +30,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameObject ptcDiePref;
 
     private CameraShake cameraShake;
+    private RoomManager roomManager;
+    private bool hasUpdated = false;
 
     // =====================================================
 
@@ -54,6 +56,7 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
     }
 
     // Set the variable "target" with the player in the scene
@@ -116,6 +119,12 @@ public abstract class Enemy : MonoBehaviour
         Destroy(ptcDie, 8f);
 
         cameraShake.Shake(0.3f, 1.5f);
+
+        if (!hasUpdated)
+        {
+            roomManager.UpdateState();
+            hasUpdated = true;
+        }
 
         Destroy(gameObject);
     }
