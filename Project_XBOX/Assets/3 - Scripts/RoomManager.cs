@@ -12,6 +12,7 @@ public class RoomManager : MonoBehaviour
     public int currentNumberRoom = 0;
     public int killedEnemies = 0;
     public Transform enemyPool;
+    public Transform player;
 
     private Level01[] currentRooms;
     private int numberRoom;
@@ -78,6 +79,7 @@ public class RoomManager : MonoBehaviour
             print(killedEnemies + " " + currentRooms[numberRoom].killableEnemies);
             ClearScene();
 
+            player.position = currentRooms[numberRoom].startPosPlayer;
             currentNumberRoom++;
             killedEnemies = 0;
 

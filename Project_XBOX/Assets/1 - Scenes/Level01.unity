@@ -1423,6 +1423,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1488635426 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 139817739442116458, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1623824091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1587,7 @@ MonoBehaviour:
   currentNumberRoom: 0
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
+  player: {fileID: 1488635426}
 --- !u!1 &2115403500
 GameObject:
   m_ObjectHideFlags: 0

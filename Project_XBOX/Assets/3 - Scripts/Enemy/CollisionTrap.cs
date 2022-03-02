@@ -21,7 +21,7 @@ public class CollisionTrap : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             float currentLifePoint = player.GetLifePoint();
-            player.SetLifePoint(currentLifePoint - damage);
+            player.SetLifePoint(damage);
         }
     }
 }

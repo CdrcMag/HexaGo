@@ -90,8 +90,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void HitPlayer()
     {
         PlayerManager player = target.GetComponent<PlayerManager>();
-        float currentLifePoint = player.GetLifePoint();
-        player.SetLifePoint(currentLifePoint - damageOnCollision);
+        player.SetLifePoint(damageOnCollision);
     }
 
     public virtual void TakeDamage(float _damage)
