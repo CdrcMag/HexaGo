@@ -1582,6 +1582,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   easyRooms:
   - {fileID: 11400000, guid: d7e02aba14b441d42b137a6465d0cedd, type: 2}
+  - {fileID: 11400000, guid: ef9f37d9df728384eb3ba887c39428b8, type: 2}
+  - {fileID: 11400000, guid: ce16918636ad32745a5fa9d3fdd359ac, type: 2}
+  - {fileID: 11400000, guid: ee1633ee125a4ce41880bb9ecd877199, type: 2}
+  - {fileID: 11400000, guid: dfaa80827d1b31646b6030945b9a2170, type: 2}
+  - {fileID: 11400000, guid: ce95290d3beeaa94abea63101bf99f1c, type: 2}
+  - {fileID: 11400000, guid: ed993fda49a66114ca8e698ab74dab2a, type: 2}
+  - {fileID: 11400000, guid: 0d0b1d6e1508e7f499bf338cd12b1320, type: 2}
+  - {fileID: 11400000, guid: b70f093b69e94fe45a5e040a05ed3a90, type: 2}
   mediumRooms: []
   hardRooms: []
   currentNumberRoom: 0

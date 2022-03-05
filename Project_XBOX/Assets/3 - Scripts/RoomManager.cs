@@ -16,6 +16,7 @@ public class RoomManager : MonoBehaviour
 
     private Level01[] currentRooms;
     private int numberRoom;
+    private bool[] validedRooms = { true, true, true, true, true, true, true, true, true, true };
 
     // =====================================================
 
@@ -42,15 +43,15 @@ public class RoomManager : MonoBehaviour
     {
         Level01[] difficulty = easyRooms;
 
-        if(currentNumberRoom < 4)
+        if(currentNumberRoom < 3)
         {
             difficulty = easyRooms;
         }
-        else if (currentNumberRoom < 7)
+        else if (currentNumberRoom < 6)
         {
             difficulty = mediumRooms;
         }
-        else if (currentNumberRoom < 10)
+        else if (currentNumberRoom < 9)
         {
             difficulty = hardRooms;
         }
@@ -60,7 +61,20 @@ public class RoomManager : MonoBehaviour
 
     private int ChooseRoom(Level01[] _difficulty)
     {
-        int numberRoom = Random.Range(0, _difficulty.Length);
+        bool check = false;
+        int numberRoom = 0;
+
+        while(!check)
+        {
+            numberRoom = Random.Range(0, _difficulty.Length);
+
+            if(validedRooms[numberRoom])
+            {
+                check = true;
+            }
+        }
+
+        validedRooms[numberRoom] = false;
 
         return numberRoom;
     }

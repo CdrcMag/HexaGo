@@ -9,6 +9,6 @@ public class Level01 : ScriptableObject
     public int killableEnemies;
     public GameObject[] enemies;
     public Vector2[] positions;
-    public int[] multiplicatorScale;
+    public float[] multiplicatorScale;
     public Vector2 startPosPlayer = new Vector2(0f, 0f);
 }

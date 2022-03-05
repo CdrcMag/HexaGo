@@ -53,16 +53,14 @@ public abstract class Enemy : MonoBehaviour
     // =====================================================
 
 
-    private void Start()
-    {
-        cameraShake = Camera.main.GetComponent<CameraShake>();
-        roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
-    }
 
     // Set the variable "target" with the player in the scene
     public virtual void SetTargetInStart()
     {
-        if(!IsTargetEmpty())
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+        roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
+
+        if (!IsTargetEmpty())
         {
             return;
         }
