@@ -28,4 +28,11 @@ MonoBehaviour:
   - {x: -7, y: -3.5}
   - {x: -4, y: 0}
   - {x: 4, y: 0}
-  multiplicatorScale: 010000000100000001000000010000000200000002000000
+  multiplicatorScale:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 2
+  - 2
+  startPosPlayer: {x: 0, y: 0}
