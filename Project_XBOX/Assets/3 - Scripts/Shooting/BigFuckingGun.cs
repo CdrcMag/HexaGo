@@ -6,10 +6,12 @@ public class BigFuckingGun : Weapon
 {
 
     private float cpt = 0;
+    private SoundManager soundManager;
 
     private void Awake()
     {
         this.projectilePrefab = Resources.Load<GameObject>("Projectiles/BFG Projectile");
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
     }
 
     private void Update()
@@ -38,6 +40,8 @@ public class BigFuckingGun : Weapon
     public override void Shoot()
     {
         base.Shoot();
+
+        soundManager.playAudioClip(2);
 
         //Spawns a bullet
         GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, transform.parent.rotation);

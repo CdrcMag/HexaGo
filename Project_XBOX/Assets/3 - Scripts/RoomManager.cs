@@ -41,6 +41,16 @@ public class RoomManager : MonoBehaviour
 
             StartCoroutine(IGrowEnemy(enemy, i));
         }
+
+        StartCoroutine(IActivatePlayer());
+    }
+
+    private IEnumerator IActivatePlayer()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        player.GetComponent<Rigidbody2D>().isKinematic = false;
+        player.GetComponent<Player_Movement>().canMove = true;
     }
 
     private IEnumerator IGrowEnemy(GameObject _enemy, int _index)
@@ -107,10 +117,12 @@ public class RoomManager : MonoBehaviour
     {
         if(killedEnemies == currentRooms[numberRoom].killableEnemies)
         {
-            print(killedEnemies + " " + currentRooms[numberRoom].killableEnemies);
             ClearScene();
 
+            player.GetComponent<Player_Movement>().canMove = false;
+            player.GetComponent<Rigidbody2D>().isKinematic = true;
             player.position = currentRooms[numberRoom].startPosPlayer;
+
             currentNumberRoom++;
             killedEnemies = 0;
 

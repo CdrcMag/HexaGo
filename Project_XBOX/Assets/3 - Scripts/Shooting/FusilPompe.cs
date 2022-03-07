@@ -5,10 +5,12 @@ using UnityEngine;
 public class FusilPompe : Weapon
 {
     private float cpt = 0;
+    private SoundManager soundManager;
 
     private void Awake()
     {
         this.projectilePrefab = Resources.Load<GameObject>("Projectiles/Fusil Pompe Projectile");
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
     }
 
     private void Update()
@@ -37,6 +39,8 @@ public class FusilPompe : Weapon
     public override void Shoot()
     {
         base.Shoot();
+
+        soundManager.playAudioClip(4);
 
         //Spawns a bullet
         GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, transform.parent.rotation);

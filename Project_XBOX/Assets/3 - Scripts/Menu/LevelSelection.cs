@@ -15,6 +15,7 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] private RectTransform[] levelIcons;
     [SerializeField] private Image selecterFlash;
     [SerializeField] private Transition transition;
+    [SerializeField] private SoundManager soundManager;
 
     private Image selecterImage;
     private bool canSelectLevel = false;
@@ -45,6 +46,8 @@ public class LevelSelection : MonoBehaviour
         if ((Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A)) && canSelectLevel)
         {
             GoToLevel();
+
+            soundManager.playAudioClip(0);
         }
     }
 
@@ -121,7 +124,7 @@ public class LevelSelection : MonoBehaviour
         {
             while (levelIcons[cpt].localScale.x < 1)
             {
-                levelIcons[cpt].localScale = new Vector2(levelIcons[cpt].localScale.x + 0.1f, levelIcons[cpt].localScale.y + 0.1f);
+                levelIcons[cpt].localScale = new Vector2(levelIcons[cpt].localScale.x + 0.15f, levelIcons[cpt].localScale.y + 0.15f);
 
                 yield return new WaitForSeconds(0.001f);
             }
@@ -131,7 +134,7 @@ public class LevelSelection : MonoBehaviour
             cpt++;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         selecter.gameObject.SetActive(true);
         canSelectLevel = true;

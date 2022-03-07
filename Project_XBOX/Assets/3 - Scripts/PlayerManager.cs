@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private float lifePoint = 100;
     public float reduction = 0;//Percentage ( 0 - 1 )
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] private Transition transition;
 
     // =====================================================
 
@@ -32,6 +35,20 @@ public class PlayerManager : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        soundManager.playAudioClip(7);
+        transform.position = new Vector2(100f, 100f);
+
+        StartCoroutine(ILoadMenu());
+    }
+
+    private IEnumerator ILoadMenu()
+    {
+        yield return new WaitForSeconds(1f);
+
+        transition.StartAugment();
+
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene("Menu");
     }
 }

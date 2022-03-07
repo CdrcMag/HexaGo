@@ -34,6 +34,7 @@ public abstract class Enemy : MonoBehaviour
     private CameraShake cameraShake;
     private RoomManager roomManager;
     private bool hasUpdated = false;
+    private SoundManager soundManager;
 
     // =====================================================
 
@@ -61,6 +62,7 @@ public abstract class Enemy : MonoBehaviour
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
         roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
 
         StartCoroutine(ActivateEnemy());
 
@@ -100,6 +102,7 @@ public abstract class Enemy : MonoBehaviour
     {
         PlayerManager player = target.GetComponent<PlayerManager>();
         player.SetLifePoint(damageOnCollision);
+        soundManager.playAudioClipWithPitch(5, 0.5f);
     }
 
     public virtual void TakeDamage(float _damage)
@@ -117,6 +120,7 @@ public abstract class Enemy : MonoBehaviour
         else
         {
             cameraShake.Shake(0.1f, 0.8f);
+            soundManager.playAudioClip(5);
         }
     }
 
@@ -127,6 +131,7 @@ public abstract class Enemy : MonoBehaviour
         Destroy(ptcDie, 8f);
 
         cameraShake.Shake(0.3f, 1.5f);
+        soundManager.playAudioClip(6);
 
         if (!hasUpdated)
         {
