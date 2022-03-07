@@ -26,6 +26,9 @@ public class Player_Shooting : MonoBehaviour
     public Transform slotBackRight;
     public Transform slotBackLeft;
 
+    public Dictionary<SlotName, WeaponName> currentWeaponsState = new Dictionary<SlotName, WeaponName>();
+    public Dictionary<SlotName, UpgradeName> currentUpgradesState = new Dictionary<SlotName, UpgradeName>();
+
 
     //Nom des slots et noms des armes
     public enum SlotName { Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
@@ -67,6 +70,12 @@ public class Player_Shooting : MonoBehaviour
 
         //And activates it
         weaponInstance.SetActive(true);
+
+        //Updates the dictionnary
+        if(currentWeaponsState.ContainsKey(slotName))
+            currentWeaponsState.Remove(slotName);
+
+        currentWeaponsState.Add(slotName, weaponName);
         
 
     }
@@ -92,6 +101,12 @@ public class Player_Shooting : MonoBehaviour
 
         //And activates it
         upgradeInstance.SetActive(true);
+
+        //Updates the dictionnary
+        if (currentUpgradesState.ContainsKey(slotName))
+            currentUpgradesState.Remove(slotName);
+
+        currentUpgradesState.Add(slotName, upgrade);
     }
 
 
@@ -156,6 +171,25 @@ public class Player_Shooting : MonoBehaviour
 
         return null;
     }
+
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            print("============ ARMES ============");
+            foreach (SlotName n in currentWeaponsState.Keys)
+            {
+                print($"{n} a l'arme {currentWeaponsState[n]}");
+            }
+            print("============UPGRADES ============");
+            foreach (SlotName n in currentUpgradesState.Keys)
+            {
+                print($"{n} a l'upgrade {currentUpgradesState[n]}");
+            }
+        }
+    }
+
 
 
 }
