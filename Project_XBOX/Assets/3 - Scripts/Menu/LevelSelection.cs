@@ -15,6 +15,7 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] private RectTransform[] levelIcons;
     [SerializeField] private Image selecterFlash;
     [SerializeField] private Transition transition;
+    [SerializeField] private SoundManager soundManager;
 
     private Image selecterImage;
     private bool canSelectLevel = false;
@@ -45,6 +46,8 @@ public class LevelSelection : MonoBehaviour
         if ((Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A)) && canSelectLevel)
         {
             GoToLevel();
+
+            soundManager.playAudioClip(0);
         }
     }
 
