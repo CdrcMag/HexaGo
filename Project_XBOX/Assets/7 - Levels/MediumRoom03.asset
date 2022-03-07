@@ -24,8 +24,8 @@ MonoBehaviour:
   - {fileID: 4684672061033364597, guid: 069f88c86f2f6f54ab205fa085fc544e, type: 3}
   positions:
   - {x: 7, y: 0}
-  - {x: -5, y: 0}
-  - {x: -3, y: 0}
+  - {x: 5, y: 0}
+  - {x: 3, y: 0}
   - {x: -7, y: 3.5}
   - {x: -7, y: 0}
   - {x: -7, y: -3.5}

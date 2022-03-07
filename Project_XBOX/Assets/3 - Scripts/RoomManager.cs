@@ -35,6 +35,8 @@ public class RoomManager : MonoBehaviour
         currentRooms = ChooseDifficulty();
         numberRoom = ChooseRoom(currentRooms);
 
+        player.position = currentRooms[numberRoom].startPosPlayer;
+
         for (int i = 0; i < currentRooms[numberRoom].enemies.Length; i++)
         {
             GameObject enemy = Instantiate(currentRooms[numberRoom].enemies[i], currentRooms[numberRoom].positions[i], Quaternion.identity, enemyPool);
@@ -58,11 +60,12 @@ public class RoomManager : MonoBehaviour
         float finalScaleX = _enemy.transform.localScale.x * currentRooms[numberRoom].multiplicatorScale[_index];
         _enemy.transform.localScale = new Vector2(0f, 0f);
 
-        while (_enemy.transform.localScale.x < finalScaleX)
+        while (_enemy != null && _enemy.transform.localScale.x < finalScaleX)
         {
             yield return new WaitForSeconds(DELAY);
 
-            _enemy.transform.localScale = new Vector2(_enemy.transform.localScale.x + ADDSCALE, _enemy.transform.localScale.y + ADDSCALE);
+            if(_enemy != null)
+                _enemy.transform.localScale = new Vector2(_enemy.transform.localScale.x + ADDSCALE, _enemy.transform.localScale.y + ADDSCALE);
         }
     }
 
@@ -121,7 +124,7 @@ public class RoomManager : MonoBehaviour
 
             player.GetComponent<Player_Movement>().canMove = false;
             player.GetComponent<Rigidbody2D>().isKinematic = true;
-            player.position = currentRooms[numberRoom].startPosPlayer;
+            //player.position = currentRooms[numberRoom].startPosPlayer;
 
             currentNumberRoom++;
             killedEnemies = 0;
