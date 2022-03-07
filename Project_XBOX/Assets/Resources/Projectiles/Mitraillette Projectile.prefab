@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6193202712179566867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 6193202712866946161}
   m_RootOrder: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -761887118410055393, guid: 6b31cc5856a8adc4cabf96b8c3799dfb, type: 3}
-  m_Color: {r: 1, g: 0.77683836, b: 0, a: 1}
+  m_Sprite: {fileID: -2594831801276833619, guid: b84ee005c4dbec1438644b37318fd60c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 6193202712866946166}
   - component: {fileID: 3254785158387797467}
   - component: {fileID: 7785261232004053395}
+  - component: {fileID: -6272471552499321141}
   m_Layer: 6
   m_Name: Mitraillette Projectile
   m_TagString: Projectile
@@ -168,3 +169,16 @@ MonoBehaviour:
   newScale: 0.5
   canBounce: 0
   nbrOfBounceMax: 0
+--- !u!114 &-6272471552499321141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193202712866946160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752d1169acbe6d34e98c2c10007e28f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100

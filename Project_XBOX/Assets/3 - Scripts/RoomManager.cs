@@ -58,11 +58,12 @@ public class RoomManager : MonoBehaviour
         float finalScaleX = _enemy.transform.localScale.x * currentRooms[numberRoom].multiplicatorScale[_index];
         _enemy.transform.localScale = new Vector2(0f, 0f);
 
-        while (_enemy.transform.localScale.x < finalScaleX)
+        while (_enemy.transform.localScale.x < finalScaleX && _enemy != null)
         {
             yield return new WaitForSeconds(DELAY);
 
-            _enemy.transform.localScale = new Vector2(_enemy.transform.localScale.x + ADDSCALE, _enemy.transform.localScale.y + ADDSCALE);
+            if(_enemy != null)
+                _enemy.transform.localScale = new Vector2(_enemy.transform.localScale.x + ADDSCALE, _enemy.transform.localScale.y + ADDSCALE);
         }
     }
 

@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!212 &174281625 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 139817739921812385, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &189963306
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +967,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!212 &1123856951 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 139817739411013881, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1245156939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,6 +1308,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!212 &1394676228 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 139817739028064258, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1438968435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1310,12 +1325,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 139817739028064258, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 139817739028064258, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 139817739411013880, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 139817739411013881, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 139817739411013881, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_SortingOrder
@@ -1396,6 +1419,10 @@ PrefabInstance:
     - target: {fileID: 139817739921812384, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalPosition.z
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 139817739921812385, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 139817739921812385, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_SortingOrder
@@ -1517,6 +1544,22 @@ PrefabInstance:
       propertyPath: soundManager
       value: 
       objectReference: {fileID: 769951430}
+    - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: bodies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: bodies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1394676228}
+    - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: bodies.Array.data[1]
+      value: 
+      objectReference: {fileID: 1123856951}
+    - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: bodies.Array.data[2]
+      value: 
+      objectReference: {fileID: 174281625}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
 --- !u!1 &1476844719
