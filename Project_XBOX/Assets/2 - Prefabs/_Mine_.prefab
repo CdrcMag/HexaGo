@@ -231,3 +231,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightMine: {fileID: 8108413547451547414}
+  ptcMinePref: {fileID: 4711247959922000704, guid: c6eb989b6122a11448597d7c59dca1f0, type: 3}
