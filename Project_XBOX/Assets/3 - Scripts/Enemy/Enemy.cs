@@ -11,6 +11,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public const string NAME_PLAYER = "Player";
+    public const float DELAY_TO_START = 2f;
 
 
     // ===================== VARIABLES =====================
@@ -21,6 +22,7 @@ public abstract class Enemy : MonoBehaviour
     protected float initialSpeed = 10f;
     [SerializeField] protected float damageOnCollision = 10f;
     [SerializeField] protected Transform target;
+    [SerializeField] protected bool isActivated = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
@@ -60,6 +62,8 @@ public abstract class Enemy : MonoBehaviour
         cameraShake = Camera.main.GetComponent<CameraShake>();
         roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
 
+        StartCoroutine(ActivateEnemy());
+
         if (!IsTargetEmpty())
         {
             return;
@@ -73,6 +77,13 @@ public abstract class Enemy : MonoBehaviour
         {
             Debug.Log("There is no object called " + NAME_PLAYER + " in the scene !");
         }
+    }
+
+    private IEnumerator ActivateEnemy()
+    {
+        yield return new WaitForSeconds(DELAY_TO_START);
+
+        isActivated = true;
     }
 
     // Return TRUE if the variable "target" is null
@@ -129,6 +140,9 @@ public abstract class Enemy : MonoBehaviour
     // Move toward the target
     public virtual void MoveToward()
     {
+        if (!isActivated)
+            return;
+
         float step = speed * Time.deltaTime;
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, step);
@@ -137,6 +151,9 @@ public abstract class Enemy : MonoBehaviour
     // Rotate toward the target
     public virtual void RotateToward(float _speed, Transform _objToRotate)
     {
+        if (!isActivated)
+            return;
+
         // Determine which direction to rotate towards
         Vector2 targetDirection = target.position - transform.position;
 
@@ -147,6 +164,9 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void MoveToBeInRange(float _range)
     {
+        if (!isActivated)
+            return;
+
         float dist = Vector3.Distance(target.position, transform.position);
         float step = speed * Time.deltaTime;
 
@@ -158,6 +178,9 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Shoot(GameObject _bulletPref, Transform _posToShoot, Transform _canon, float _speed)
     {
+        if (!isActivated)
+            return;
+
         GameObject bullet;
         bullet = Instantiate(_bulletPref, _posToShoot.position, _canon.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * _speed;
