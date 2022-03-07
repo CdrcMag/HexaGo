@@ -7,14 +7,17 @@ public class PlayerManager : MonoBehaviour
     // ===================== VARIABLES =====================
 
     [SerializeField] private float lifePoint = 100;
+    public float reduction = 0;//Percentage ( 0 - 1 )
 
     // =====================================================
 
     // =================== [ SET - GET ] ===================
 
     public void SetLifePoint(float _damage) 
-    { 
-        lifePoint = lifePoint - _damage;
+    {
+        float damageToTake = _damage - (_damage * reduction);
+
+        lifePoint -= damageToTake;
         
         if(lifePoint <= 0)
         {
