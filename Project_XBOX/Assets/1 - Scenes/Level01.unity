@@ -1582,8 +1582,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   easyRooms:
   - {fileID: 11400000, guid: d7e02aba14b441d42b137a6465d0cedd, type: 2}
-  mediumRooms: []
-  hardRooms: []
+  - {fileID: 11400000, guid: ef9f37d9df728384eb3ba887c39428b8, type: 2}
+  - {fileID: 11400000, guid: ce16918636ad32745a5fa9d3fdd359ac, type: 2}
+  - {fileID: 11400000, guid: ee1633ee125a4ce41880bb9ecd877199, type: 2}
+  - {fileID: 11400000, guid: dfaa80827d1b31646b6030945b9a2170, type: 2}
+  - {fileID: 11400000, guid: ce95290d3beeaa94abea63101bf99f1c, type: 2}
+  - {fileID: 11400000, guid: ed993fda49a66114ca8e698ab74dab2a, type: 2}
+  - {fileID: 11400000, guid: 0d0b1d6e1508e7f499bf338cd12b1320, type: 2}
+  - {fileID: 11400000, guid: 73d1018ea9f14994e9f014ff46320bc3, type: 2}
+  - {fileID: 11400000, guid: b70f093b69e94fe45a5e040a05ed3a90, type: 2}
+  mediumRooms:
+  - {fileID: 11400000, guid: 21cba5f2083761043b9bc895e8b546e9, type: 2}
+  - {fileID: 11400000, guid: f9622f9e5036f6947aeb097239ac3d26, type: 2}
+  - {fileID: 11400000, guid: 1daa007f7de6f8f4588ba53251b6aaae, type: 2}
+  - {fileID: 11400000, guid: fcaa5f169dbd7dc4ebdbcbf2ddbb6a72, type: 2}
+  - {fileID: 11400000, guid: 11076eee9ecb7b047b88d69e0cbe5cdc, type: 2}
+  - {fileID: 11400000, guid: f1d6ad746c72d094d965f12502153fbd, type: 2}
+  - {fileID: 11400000, guid: 7f9e9aef1fe925a4c92c859ef77493b7, type: 2}
+  - {fileID: 11400000, guid: 01dcb5de4b07ccf4c88fd2cf224e2d43, type: 2}
+  - {fileID: 11400000, guid: 8be34ab682ff94b40a70499cab1d1066, type: 2}
+  - {fileID: 11400000, guid: f8789af5511b004458a1269e775a7a87, type: 2}
+  hardRooms:
+  - {fileID: 11400000, guid: e541f267f85c533469f4f8bd30d277e2, type: 2}
+  - {fileID: 11400000, guid: 2d916bc5bb4f6324b9d8cdac60414e2f, type: 2}
+  - {fileID: 11400000, guid: 323dbffdb618cc442b9d6c6eaaaede42, type: 2}
+  - {fileID: 11400000, guid: a61b5321986e2a14d90061367a7e46dd, type: 2}
+  - {fileID: 11400000, guid: 1bffae25ba75dfc4c9d1187c4108e22b, type: 2}
+  - {fileID: 11400000, guid: c41c1a96969ba98469018d28084c6699, type: 2}
+  - {fileID: 11400000, guid: 9ea879562524e0449bdc5e23b4969ea5, type: 2}
+  - {fileID: 11400000, guid: 276f69cffaec2f84db5f43cbac8d3316, type: 2}
+  - {fileID: 11400000, guid: 599aa5461b486bb4abfa2ada6f370842, type: 2}
+  - {fileID: 11400000, guid: 2d5f3b7e4963f3f45a8c690fa5a01a30, type: 2}
   currentNumberRoom: 0
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
