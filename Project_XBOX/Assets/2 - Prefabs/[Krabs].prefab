@@ -916,6 +916,7 @@ MonoBehaviour:
   speed: 2
   damageOnCollision: 10
   target: {fileID: 0}
+  isActivated: 0
   eyes:
   - {fileID: 4684672061067742640}
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}

@@ -124,7 +124,7 @@ public class LevelSelection : MonoBehaviour
         {
             while (levelIcons[cpt].localScale.x < 1)
             {
-                levelIcons[cpt].localScale = new Vector2(levelIcons[cpt].localScale.x + 0.1f, levelIcons[cpt].localScale.y + 0.1f);
+                levelIcons[cpt].localScale = new Vector2(levelIcons[cpt].localScale.x + 0.15f, levelIcons[cpt].localScale.y + 0.15f);
 
                 yield return new WaitForSeconds(0.001f);
             }
@@ -134,7 +134,7 @@ public class LevelSelection : MonoBehaviour
             cpt++;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         selecter.gameObject.SetActive(true);
         canSelectLevel = true;
