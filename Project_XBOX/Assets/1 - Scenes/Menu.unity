@@ -849,6 +849,7 @@ MonoBehaviour:
   - {fileID: 1822503218}
   selecterFlash: {fileID: 1973581416}
   transition: {fileID: 378798073}
+  soundManager: {fileID: 235494060}
 --- !u!1 &199631025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,7 +1214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b719c2a74eb669d4786f3bd1baaaa0ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 4624646b189e9974b94f2817a00334f5, type: 3}
 --- !u!82 &235494061
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1991,6 +1993,7 @@ MonoBehaviour:
   levelSelectionMenu: {fileID: 147547551}
   levelSelectionMenuCanvas: {fileID: 1279380029}
   levelSelection: {fileID: 147547553}
+  soundManager: {fileID: 235494060}
 --- !u!1 &564325061
 GameObject:
   m_ObjectHideFlags: 0
