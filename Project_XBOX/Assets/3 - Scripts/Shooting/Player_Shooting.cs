@@ -30,7 +30,7 @@ public class Player_Shooting : MonoBehaviour
     //Nom des slots et noms des armes
     public enum SlotName { Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
     public enum WeaponName { None, Canon, BigFuckingGun, Mitraillette, Shotgun };
-    public enum UpgradeName { None, Propulseur, Dash, Totems };
+    public enum UpgradeName { None, Propulseur, Dash, Totems, Shield };
 
     private void Start()
     {
@@ -147,6 +147,8 @@ public class Player_Shooting : MonoBehaviour
                 return Upgrades[1];
             case UpgradeName.Totems:
                 return Upgrades[2];
+            case UpgradeName.Shield:
+                return Upgrades[3];
 
             default:
                 break;
