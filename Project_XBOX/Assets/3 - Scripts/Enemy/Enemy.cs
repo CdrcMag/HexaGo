@@ -126,15 +126,15 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        GameObject ptcDie;
-        ptcDie = Instantiate(ptcDiePref, transform.position, Quaternion.identity);
-        Destroy(ptcDie, 8f);
-
-        cameraShake.Shake(0.3f, 1.5f);
-        soundManager.playAudioClip(6);
-
         if (!hasUpdated)
         {
+            GameObject ptcDie;
+            ptcDie = Instantiate(ptcDiePref, transform.position, Quaternion.identity);
+            Destroy(ptcDie, 8f);
+
+            cameraShake.Shake(0.3f, 1.5f);
+            soundManager.playAudioClip(6);
+
             roomManager.UpdateState();
             hasUpdated = true;
         }
