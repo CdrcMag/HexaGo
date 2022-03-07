@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transition transition;
     [SerializeField] private SpriteRenderer[] bodies;
     private bool isImmune = false;
+    [SerializeField] private RectTransform lifeBar;
 
     // =====================================================
 
@@ -31,6 +33,7 @@ public class PlayerManager : MonoBehaviour
         isImmune = true;
 
         StartCoroutine(AnimationHit());
+        StartCoroutine(UpdateLifeBar());
         
         if(lifePoint <= 0)
         {
@@ -151,5 +154,17 @@ public class PlayerManager : MonoBehaviour
         }
 
         isImmune = false;
+    }
+
+    private IEnumerator UpdateLifeBar()
+    {
+        float scaleToReach = lifePoint / 100;
+
+        while(lifeBar.localScale.x > scaleToReach)
+        {
+            lifeBar.localScale = new Vector2(lifeBar.localScale.x - 0.025f, lifeBar.localScale.y);
+
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }
