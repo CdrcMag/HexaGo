@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class WeaponSelector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //1. Une méthode qui ouvre un menu
+    //2. Avec arme tempo, choisir ou la mettre, et l'assigner
 }
