@@ -10,29 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a9f476b6d0df834894759192cfe5066, type: 3}
-  m_Name: EasyRoom00
+  m_Name: HardRoom06
   m_EditorClassIdentifier: 
-  id: 0
-  killableEnemies: 4
+  id: 6
+  killableEnemies: 3
   enemies:
-  - {fileID: 2729590896833227457, guid: 76fae5d73b682a64ea0d805d6a594fda, type: 3}
-  - {fileID: 2729590896833227457, guid: 76fae5d73b682a64ea0d805d6a594fda, type: 3}
-  - {fileID: 2729590896833227457, guid: 76fae5d73b682a64ea0d805d6a594fda, type: 3}
-  - {fileID: 2729590896833227457, guid: 76fae5d73b682a64ea0d805d6a594fda, type: 3}
   - {fileID: 8108413547919128440, guid: 40af3994675c0db498767483a3d2c7b5, type: 3}
   - {fileID: 8108413547919128440, guid: 40af3994675c0db498767483a3d2c7b5, type: 3}
+  - {fileID: 4684672061033364597, guid: 069f88c86f2f6f54ab205fa085fc544e, type: 3}
+  - {fileID: 4684672061033364597, guid: 069f88c86f2f6f54ab205fa085fc544e, type: 3}
+  - {fileID: 5464234886984820907, guid: 08302f40c735854469e43c295f4d8ff4, type: 3}
   positions:
-  - {x: 7, y: 3.5}
-  - {x: 7, y: -3.5}
-  - {x: -7, y: 3.5}
-  - {x: -7, y: -3.5}
-  - {x: -4, y: 0}
-  - {x: 4, y: 0}
+  - {x: 0, y: -7}
+  - {x: 0, y: -5}
+  - {x: -3, y: 3.5}
+  - {x: 3, y: 3.5}
+  - {x: -5, y: -2}
   multiplicatorScale:
   - 1
   - 1
   - 1
   - 1
-  - 2
-  - 2
-  startPosPlayer: {x: 0, y: 0}
+  - 1
+  startPosPlayer: {x: 7, y: -3.5}
