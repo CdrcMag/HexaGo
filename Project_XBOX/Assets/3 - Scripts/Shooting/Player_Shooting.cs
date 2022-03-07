@@ -58,15 +58,11 @@ public class Player_Shooting : MonoBehaviour
         if (currentWeapon == null)
             return;
 
+        if (currentSlot.childCount != 0)
+            Destroy(currentSlot.GetChild(0).gameObject);
+
         //Copies the weapon from the storage
-        GameObject weaponInstance = Instantiate(currentWeapon.gameObject, transform.position, Quaternion.identity);
-
-        //Sets position and rotation
-        weaponInstance.transform.localRotation = currentSlot.localRotation;
-        weaponInstance.transform.localPosition = currentSlot.localPosition;
-
-        //Assigns the weapon to the parent
-        weaponInstance.transform.SetParent(currentSlot);
+        GameObject weaponInstance = Instantiate(currentWeapon.gameObject, currentSlot.position, currentSlot.rotation, currentSlot);
 
         //And activates it
         weaponInstance.SetActive(true);
