@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    private const float DELAY = 0.05f;
+    private const float ADDSCALE = 0.05f;
+
     // ===================== VARIABLES =====================
 
     public Level01[] easyRooms;
@@ -32,10 +35,24 @@ public class RoomManager : MonoBehaviour
         currentRooms = ChooseDifficulty();
         numberRoom = ChooseRoom(currentRooms);
 
-        for(int i = 0; i < currentRooms[numberRoom].enemies.Length; i++)
+        for (int i = 0; i < currentRooms[numberRoom].enemies.Length; i++)
         {
             GameObject enemy = Instantiate(currentRooms[numberRoom].enemies[i], currentRooms[numberRoom].positions[i], Quaternion.identity, enemyPool);
-            enemy.transform.localScale = new Vector2(enemy.transform.localScale.x * currentRooms[numberRoom].multiplicatorScale[i], enemy.transform.localScale.y * currentRooms[numberRoom].multiplicatorScale[i]);
+
+            StartCoroutine(IGrowEnemy(enemy, i));
+        }
+    }
+
+    private IEnumerator IGrowEnemy(GameObject _enemy, int _index)
+    {
+        float finalScaleX = _enemy.transform.localScale.x * currentRooms[numberRoom].multiplicatorScale[_index];
+        _enemy.transform.localScale = new Vector2(0f, 0f);
+
+        while (_enemy.transform.localScale.x < finalScaleX)
+        {
+            yield return new WaitForSeconds(DELAY);
+
+            _enemy.transform.localScale = new Vector2(_enemy.transform.localScale.x + ADDSCALE, _enemy.transform.localScale.y + ADDSCALE);
         }
     }
 
