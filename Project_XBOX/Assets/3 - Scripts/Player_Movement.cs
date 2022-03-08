@@ -18,7 +18,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] public float speedBoost = 1;
 
     //Vecteur de déplacement
-    private Vector2 movement;
+    [HideInInspector] public Vector2 movement;
     private float currentRotation;
     
 

@@ -860,7 +860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &990613894
 Transform:
   m_ObjectHideFlags: 0
@@ -1523,11 +1523,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139817739442116469, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: UseKeyboardSettings
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 139817739442116469, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: UseControllerSettings
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1859249418786991146, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: movementSpeedBoost
@@ -1539,11 +1539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackStartUpgrade
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontStartWeapon
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackLeftStartWeapon
@@ -1571,7 +1571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontRightStartWeapon
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: Upgrades.Array.data[0]
