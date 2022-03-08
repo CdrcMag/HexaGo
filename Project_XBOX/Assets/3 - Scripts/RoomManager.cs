@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour
 
     private Level01[] currentRooms;
     private int numberRoom;
-    private bool[] validedRooms = { true, true, true, true, true, true, true, true, true, true };
+    private bool[] validedRooms = { true, true, true, true, true, true, true, true, true, true, true, true };
 
     // =====================================================
 
@@ -74,19 +74,52 @@ public class RoomManager : MonoBehaviour
     {
         Level01[] difficulty = easyRooms;
 
-        if(currentNumberRoom < 3)
+        if(PlayerPrefs.GetString("Difficulty", "Easy") == "Easy")
         {
-            difficulty = easyRooms;
+            if (currentNumberRoom < 3)
+            {
+                difficulty = easyRooms;
+            }
+            else if (currentNumberRoom < 6)
+            {
+                difficulty = mediumRooms;
+                musicManager.pitch = 1.15f;
+            }
+            else if (currentNumberRoom < 9)
+            {
+                difficulty = hardRooms;
+                musicManager.pitch = 1.3f;
+            }
         }
-        else if (currentNumberRoom < 6)
+        else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Normal")
         {
-            difficulty = mediumRooms;
-            musicManager.pitch = 1.2f;
+            if (currentNumberRoom < 2)
+            {
+                difficulty = easyRooms;
+            }
+            else if (currentNumberRoom < 5)
+            {
+                difficulty = mediumRooms;
+                musicManager.pitch = 1.15f;
+            }
+            else if (currentNumberRoom < 9)
+            {
+                difficulty = hardRooms;
+                musicManager.pitch = 1.3f;
+            }
         }
-        else if (currentNumberRoom < 9)
+        else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Hard")
         {
-            difficulty = hardRooms;
-            musicManager.pitch = 1.4f;
+            if (currentNumberRoom < 3)
+            {
+                difficulty = mediumRooms;
+                musicManager.pitch = 1.15f;
+            }
+            else if (currentNumberRoom < 9)
+            {
+                difficulty = hardRooms;
+                musicManager.pitch = 1.3f;
+            }
         }
 
         return difficulty;
