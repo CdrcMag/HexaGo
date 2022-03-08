@@ -18,7 +18,7 @@ public class CollisionEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Projectile"))
+        if (other.CompareTag("Projectile"))
         {
             Destroy(other.gameObject);
             enemy.TakeDamage(20);
