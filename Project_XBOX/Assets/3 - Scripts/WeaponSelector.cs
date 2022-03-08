@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class WeaponSelector : MonoBehaviour
 {
@@ -21,6 +23,12 @@ public class WeaponSelector : MonoBehaviour
     private Upgrade tempUpgrade_2;
 
     int pattern = -1;
+
+    public Sprite[] icons;
+    public Image iconWeapon01;
+    public Image iconWeapon02;
+    public TextMeshProUGUI txtWeapon01;
+    public TextMeshProUGUI txtWeapon02;
 
     private void Awake()
     {
@@ -124,6 +132,8 @@ public class WeaponSelector : MonoBehaviour
             tempUpgrade_1 = GetRandomUpgrade();
 
             print($"1 : {tempWeapon_1} - 2 : {tempUpgrade_1}");
+
+            ShowWeaponSelection(tempWeapon_1.ToString(), tempUpgrade_1.ToString());
         }
     }
 
@@ -140,6 +150,7 @@ public class WeaponSelector : MonoBehaviour
 
         print($"1 : {tempWeapon_1} - 2 : {tempWeapon_2}");
 
+        ShowWeaponSelection(tempWeapon_1.ToString(), tempWeapon_2.ToString());
     }
     IEnumerator IGenerateUpgrades()
     {
@@ -153,6 +164,8 @@ public class WeaponSelector : MonoBehaviour
         }
 
         print($"1 : {tempUpgrade_1} - 2 : {tempUpgrade_2}");
+
+        ShowWeaponSelection(tempUpgrade_1.ToString(), tempUpgrade_2.ToString());
     }
 
     Weapon GetRandomWeapon()
@@ -166,5 +179,90 @@ public class WeaponSelector : MonoBehaviour
         int rand = Random.Range(0, ps.Upgrades.Length);
 
         return ps.Upgrades[rand];
+    }
+
+    private void ShowWeaponSelection(string _weapon01, string _weapon02)
+    {
+        if(_weapon01 == "Canon (Canon)")
+        {
+            txtWeapon01.text = "Cannon";
+            iconWeapon01.sprite = icons[0];
+        }
+        else if (_weapon01 == "BigFuckingGun (BigFuckingGun)")
+        {
+            txtWeapon01.text = "BigFuckingGun";
+            iconWeapon01.sprite = icons[1];
+        }
+        else if (_weapon01 == "Mitraillette (Mitraillette)")
+        {
+            txtWeapon01.text = "Magic Gun";
+            iconWeapon01.sprite = icons[2];
+        }
+        else if (_weapon01 == "FusilPompe (FusilPompe)")
+        {
+            txtWeapon01.text = "Shotgun";
+            iconWeapon01.sprite = icons[3];
+        }
+        else if (_weapon01 == "Propulseur (Propulseur)")
+        {
+            txtWeapon01.text = "Propulsor";
+            iconWeapon01.sprite = icons[4];
+        }
+        else if (_weapon01 == "Shield (Shield)")
+        {
+            txtWeapon01.text = "Shield";
+            iconWeapon01.sprite = icons[5];
+        }
+        else if (_weapon01 == "Dash (Dash)")
+        {
+            txtWeapon01.text = "Dash";
+            iconWeapon01.sprite = icons[6];
+        }
+        else if (_weapon01 == "Totems (Totems)")
+        {
+            txtWeapon01.text = "Totems";
+            iconWeapon01.sprite = icons[7];
+        }
+
+        if (_weapon02 == "Canon (Canon)")
+        {
+            txtWeapon02.text = "Cannon";
+            iconWeapon02.sprite = icons[0];
+        }
+        else if (_weapon02 == "BigFuckingGun (BigFuckingGun)")
+        {
+            txtWeapon02.text = "BigFuckingGun";
+            iconWeapon02.sprite = icons[1];
+        }
+        else if (_weapon02 == "Mitraillette (Mitraillette)")
+        {
+            txtWeapon02.text = "Magic Gun";
+            iconWeapon02.sprite = icons[2];
+        }
+        else if (_weapon02 == "FusilPompe (FusilPompe)")
+        {
+            txtWeapon02.text = "Shotgun";
+            iconWeapon02.sprite = icons[3];
+        }
+        else if (_weapon02 == "Propulseur (Propulseur)")
+        {
+            txtWeapon02.text = "Propulsor";
+            iconWeapon02.sprite = icons[4];
+        }
+        else if (_weapon02 == "Shield (Shield)")
+        {
+            txtWeapon02.text = "Shield";
+            iconWeapon02.sprite = icons[5];
+        }
+        else if (_weapon02 == "Dash (Dash)")
+        {
+            txtWeapon02.text = "Dash";
+            iconWeapon02.sprite = icons[6];
+        }
+        else if (_weapon02 == "Totems (Totems)")
+        {
+            txtWeapon02.text = "Totems";
+            iconWeapon02.sprite = icons[7];
+        }
     }
 }
