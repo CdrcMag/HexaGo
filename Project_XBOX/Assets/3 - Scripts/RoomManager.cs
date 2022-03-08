@@ -16,6 +16,7 @@ public class RoomManager : MonoBehaviour
     public int killedEnemies = 0;
     public Transform enemyPool;
     public Transform player;
+    public AudioSource musicManager;
 
     private Level01[] currentRooms;
     private int numberRoom;
@@ -80,10 +81,12 @@ public class RoomManager : MonoBehaviour
         else if (currentNumberRoom < 6)
         {
             difficulty = mediumRooms;
+            musicManager.pitch = 1.2f;
         }
         else if (currentNumberRoom < 9)
         {
             difficulty = hardRooms;
+            musicManager.pitch = 1.4f;
         }
 
         return difficulty;

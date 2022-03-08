@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newScale: 0.5
-  canBounce: 0
+  canBounce: 1
   nbrOfBounceMax: 0
 --- !u!114 &-6272471552499321141
 MonoBehaviour:
@@ -181,4 +181,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 752d1169acbe6d34e98c2c10007e28f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 200
