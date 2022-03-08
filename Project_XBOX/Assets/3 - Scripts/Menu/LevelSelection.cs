@@ -16,6 +16,7 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] private Image selecterFlash;
     [SerializeField] private Transition transition;
     [SerializeField] private SoundManager soundManager;
+    [SerializeField] private RectTransform[] difficultyButtons;
 
     private Image selecterImage;
     private bool canSelectLevel = false;
@@ -43,20 +44,22 @@ public class LevelSelection : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A)) && canSelectLevel)
+        if (Input.GetKeyUp(KeyCode.A) && canSelectLevel)
         {
-            GoToLevel();
+            GoToLevelKeyboard();
+
+            PlayerPrefs.SetString("Difficulty", "Easy");
 
             soundManager.playAudioClip(0);
         }
     }
 
-    private void GoToLevel()
+    private void GoToLevelKeyboard()
     {
         selecter.gameObject.SetActive(false);
         selecterFlash.gameObject.SetActive(true);
 
-        StartCoroutine(IFlash());
+        StartCoroutine(IFlash(1));
     }
 
     private IEnumerator AnimateSelectALevel()
@@ -140,7 +143,7 @@ public class LevelSelection : MonoBehaviour
         canSelectLevel = true;
     }
 
-    private IEnumerator IFlash()
+    private IEnumerator IFlash(float level)
     {
         float a = 1f;
 
@@ -202,6 +205,78 @@ public class LevelSelection : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        SceneManager.LoadScene("Level01");
+        if(level == 1)
+        {
+            SceneManager.LoadScene("Level01");
+        }
+    }
+
+    public void GoToLevel(int level)
+    {
+        if(!canSelectLevel)
+        {
+            return;
+        }
+
+        if (level > PlayerPrefs.GetInt("LevelMax", 1))
+        {
+            return;
+        }
+
+        soundManager.playAudioClip(0);
+
+        selecter.gameObject.SetActive(false);
+        selecterFlash.gameObject.SetActive(true);
+
+        StartCoroutine(IFlash(level));
+    }
+
+    public void SetDifficulty(int difficulty)
+    {
+        if(difficulty == 1)
+        {
+            PlayerPrefs.SetString("Difficulty", "Easy");
+            print("difficulty is EASY");
+
+            StartCoroutine(GrowButton(0));
+            StartCoroutine(SubstractButton(1));
+            StartCoroutine(SubstractButton(2));
+        }
+        else if (difficulty == 2)
+        {
+            PlayerPrefs.SetString("Difficulty", "Normal");
+            print("difficulty is NORMAL");
+
+            StartCoroutine(GrowButton(1));
+            StartCoroutine(SubstractButton(0));
+            StartCoroutine(SubstractButton(2));
+        }
+        else if (difficulty == 3)
+        {
+            PlayerPrefs.SetString("Difficulty", "Hard");
+            print("difficulty is HARD");
+
+            StartCoroutine(GrowButton(2));
+            StartCoroutine(SubstractButton(1));
+            StartCoroutine(SubstractButton(0));
+        }
+    }
+
+    private IEnumerator SubstractButton(int i)
+    {
+        while(difficultyButtons[i].localScale.x > 1)
+        {
+            yield return new WaitForSeconds(0.05f);
+            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x - 0.05f, difficultyButtons[i].localScale.y - 0.05f);
+        }
+    }
+
+    private IEnumerator GrowButton(int i)
+    {
+        while (difficultyButtons[i].localScale.x < 1.2)
+        {
+            yield return new WaitForSeconds(0.05f);
+            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x + 0.05f, difficultyButtons[i].localScale.y + 0.05f);
+        }
     }
 }

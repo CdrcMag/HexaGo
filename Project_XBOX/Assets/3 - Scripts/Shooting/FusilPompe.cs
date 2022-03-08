@@ -8,11 +8,13 @@ public class FusilPompe : Weapon
     private SoundManager soundManager;
     private const float LIFETIME = 0.1f;
     private const float DELAY = 0.01f;
+    private Transform player;
 
     private void Awake()
     {
         this.projectilePrefab = Resources.Load<GameObject>("Projectiles/Fusil Pompe Projectile");
         soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+        player = GameObject.Find("Player").transform;
     }
 
     private void Update()
@@ -71,8 +73,10 @@ public class FusilPompe : Weapon
         Quaternion quat;
         GameObject projectileInstance;
         Vector2 dir;
+        float zRot;
 
-        rot = new Vector3(transform.parent.rotation.eulerAngles.x, transform.parent.rotation.y, transform.parent.rotation.z + _addRotation);
+        zRot = player.rotation.eulerAngles.z;
+        rot = new Vector3(transform.parent.rotation.eulerAngles.x, transform.parent.rotation.y, zRot + _addRotation);
         currentQuaternionRot.eulerAngles = rot;
         quat = currentQuaternionRot;
 
