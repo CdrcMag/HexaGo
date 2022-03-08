@@ -34,7 +34,7 @@ public class Totems : Upgrade
         }
 
 
-        if(Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Controller_LeftTrigger") > 0.9f)
+        if(Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Controller_LeftTrigger") > 0.9f)
         {
             if(totalTotemPlaced < TOTEM_MAX && canPlaceTotem)
             {
