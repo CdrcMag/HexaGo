@@ -69,7 +69,6 @@ public class Player_Movement : MonoBehaviour
                 float angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg + 180;
                 float newRotation = Mathf.SmoothDampAngle(transform.eulerAngles.z, angle, ref zVelocity, 0.1f);
                 transform.rotation = Quaternion.Euler(0,0, newRotation);
-                //_rb.MoveRotation(angle);
             }
            
 
@@ -108,41 +107,19 @@ public class Player_Movement : MonoBehaviour
 
         _rb.MovePosition(_rb.position + movement * speed * speedBoost * Time.deltaTime);
 
-        if(Input.GetAxisRaw("Input_Rotation") != 0)
-            _rb.MoveRotation(currentRotation * Time.deltaTime);
+        float rotationInput = Input.GetAxisRaw("Input_Rotation");
+
+        if (rotationInput != 0)
+        {
+            _rb.freezeRotation = false;
+            _rb.MoveRotation(_rb.rotation + 200 * -rotationInput * Time.deltaTime);
+        }
+        else
+        {
+            _rb.freezeRotation = true;
+        }
+           
      
-    }
-
-  
-    private void HandleRotationController()
-    {
-        ////Rotation
-        //h = Input.GetAxisRaw("Input_Rotation_Controller_Horizontal");
-        //v = Input.GetAxisRaw("Input_Rotation_Controller_Vertical");
-
-        //if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
-        //{
-        //    angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg;// + 180;
-
-        //    print(angle);
-        //    Vector3 newAngle = new Vector3(0, 0, angle);
-
-        //    Vector3 newDirection = Vector3.RotateTowards(transform.rotation.eulerAngles, newAngle, 0, rotationSpeed * Time.deltaTime);
-
-        //    transform.rotation = Quaternion.Euler(0, 0, newDirection.z);
-
-        //}
-        //else
-        //{
-        //    s = 0;
-        //}
-
-
-
-
-
-
-
     }
 
 
