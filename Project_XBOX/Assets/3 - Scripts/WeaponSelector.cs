@@ -28,11 +28,19 @@ public class WeaponSelector : MonoBehaviour
 
         weaponSelectionMenu.SetActive(true);
 
+       
+        
+    }
+
+    private void Start()
+    {
+        //firstMenu = weaponSelectionMenu.transform.GetChild(0).gameObject;
         firstMenu = weaponSelectionMenu.transform.GetChild(0).gameObject;
         mainMenu = weaponSelectionMenu.transform.GetChild(1).gameObject;
 
         firstMenu.SetActive(false);
         mainMenu.SetActive(false);
+
     }
 
 
@@ -52,11 +60,15 @@ public class WeaponSelector : MonoBehaviour
 
     private void SetStates(bool a, bool b)
     {
+        if (a) 
+            Time.timeScale = 0;
+        else 
+            Time.timeScale = 1;
+
         firstMenu.SetActive(a);
         mainMenu.SetActive(b);
 
-        if (a) Time.timeScale = 0;
-        else Time.timeScale = 1;
+       
     }
 
 
