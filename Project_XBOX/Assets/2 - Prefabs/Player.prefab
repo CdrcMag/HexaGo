@@ -372,6 +372,8 @@ MonoBehaviour:
   reduction: 0
   soundManager: {fileID: 0}
   transition: {fileID: 0}
+  bodies: []
+  lifeBar: {fileID: 0}
 --- !u!114 &139817739442116469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,6 +1031,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1779082050336205932}
     m_Modifications:
+    - target: {fileID: 2540710717375900165, guid: eb8ef4e9ebcac58469e15376188ca91d, type: 3}
+      propertyPath: ptcBFGPref
+      value: 
+      objectReference: {fileID: 4711247959922000704, guid: 5654c8f388ec55b42b411c193f80fcdf, type: 3}
     - target: {fileID: 2670995170902537776, guid: eb8ef4e9ebcac58469e15376188ca91d, type: 3}
       propertyPath: m_RootOrder
       value: 3

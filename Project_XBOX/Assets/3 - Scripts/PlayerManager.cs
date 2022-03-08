@@ -160,11 +160,16 @@ public class PlayerManager : MonoBehaviour
     {
         float scaleToReach = lifePoint / 100;
 
-        while(lifeBar.localScale.x > scaleToReach)
+        while(lifeBar.localScale.x > scaleToReach && lifeBar.localScale.x > 0f)
         {
             lifeBar.localScale = new Vector2(lifeBar.localScale.x - 0.025f, lifeBar.localScale.y);
 
             yield return new WaitForSeconds(0.05f);
+        }
+
+        if(lifeBar.localScale.x < 0f)
+        {
+            lifeBar.localScale = new Vector2(0f, lifeBar.localScale.y);
         }
     }
 }

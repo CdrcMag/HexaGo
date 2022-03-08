@@ -8,12 +8,14 @@ public class CollisionTrap : MonoBehaviour
 
     [SerializeField] private float damage = 0;
     private PlayerManager player;
+    private SoundManager soundManager;
 
     // =====================================================
 
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<PlayerManager>();
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -22,6 +24,7 @@ public class CollisionTrap : MonoBehaviour
         {
             float currentLifePoint = player.GetLifePoint();
             player.SetLifePoint(damage);
+            soundManager.playAudioClipWithPitch(5, 0.5f);
         }
     }
 }
