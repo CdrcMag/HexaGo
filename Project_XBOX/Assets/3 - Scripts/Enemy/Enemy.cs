@@ -119,7 +119,8 @@ public abstract class Enemy : MonoBehaviour
         }
         else
         {
-            cameraShake.Shake(0.1f, _damage / 8f);
+            //cameraShake.Shake(0.1f, _damage / 8f);
+            CameraShake.Instance.Shake(0.1f, 0.8f);
             float volume = _damage / 20;
             volume = Mathf.Clamp(volume, 0.5f, 1f);
             soundManager.playAudioClipWithVolume(5, volume);

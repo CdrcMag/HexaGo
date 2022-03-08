@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
 
         float damageToTake = _damage - (_damage * reduction);
 
+        CameraShake.Instance.Shake(0.2f, 1.2f);
+
         lifePoint -= damageToTake;
         isImmune = true;
 
