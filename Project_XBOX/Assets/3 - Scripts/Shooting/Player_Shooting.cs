@@ -72,6 +72,8 @@ public class Player_Shooting : MonoBehaviour
             currentWeaponsState.Remove(slotName);
 
         currentWeaponsState.Add(slotName, weaponName);
+
+        
         
 
     }
@@ -103,6 +105,7 @@ public class Player_Shooting : MonoBehaviour
             currentUpgradesState.Remove(slotName);
 
         currentUpgradesState.Add(slotName, upgrade);
+
     }
 
 
