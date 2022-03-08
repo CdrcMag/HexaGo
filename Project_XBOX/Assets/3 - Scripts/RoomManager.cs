@@ -17,6 +17,7 @@ public class RoomManager : MonoBehaviour
     public Transform enemyPool;
     public Transform player;
     public AudioSource musicManager;
+    public WeaponSelector weaponSelector;
 
     private Level01[] currentRooms;
     private int numberRoom;
@@ -156,6 +157,11 @@ public class RoomManager : MonoBehaviour
     {
         if(killedEnemies == currentRooms[numberRoom].killableEnemies)
         {
+            if(currentNumberRoom == 0 || currentNumberRoom == 5 || currentNumberRoom == 8)
+            {
+                //weaponSelector.ChooseNewItem();
+            }
+
             ClearScene();
 
             player.GetComponent<Player_Movement>().canMove = false;

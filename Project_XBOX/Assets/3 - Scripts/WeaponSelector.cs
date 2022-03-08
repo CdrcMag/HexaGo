@@ -44,8 +44,8 @@ public class WeaponSelector : MonoBehaviour
             SetStates(true, false);
 
             GenerateTwoAmongEverything();
-            
-            
+
+
 
         }
     }
@@ -114,20 +114,20 @@ public class WeaponSelector : MonoBehaviour
             print($"1 : {tempWeapon_1} - 2 : {tempUpgrade_1}");
         }
     }
-    
+
     IEnumerator IGenerateWeapons()
     {
         tempWeapon_1 = GetRandomWeapon();
         tempWeapon_2 = GetRandomWeapon();
 
-        while(tempWeapon_1 == tempWeapon_2)
+        while (tempWeapon_1 == tempWeapon_2)
         {
             tempWeapon_2 = GetRandomWeapon();
             yield return null;
         }
 
         print($"1 : {tempWeapon_1} - 2 : {tempWeapon_2}");
-        
+
     }
     IEnumerator IGenerateUpgrades()
     {
