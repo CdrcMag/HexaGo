@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: df933bee509d4e249b5065352765e785
+guid: 94c8f97936f0a224dbd1fccb18e6aa67
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -743976564481734589
-    second: PoulpyA_0
+      213: 709556723206987594
+    second: PoulpyB_0
   - first:
-      213: -2397885751291495890
-    second: PoulpyA_1
+      213: 1634223648687757837
+    second: PoulpyB_1
   - first:
-      213: 6299010466719907683
-    second: PoulpyA_2
+      213: -102759232962693590
+    second: PoulpyB_2
+  - first:
+      213: -9170410569101225415
+    second: PoulpyB_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,64 +103,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PoulpyA_0
+      name: PoulpyB_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 395
-        width: 983
-        height: 271
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 21
+        y: 280
+        width: 427
+        height: 146
+      alignment: 9
+      pivot: {x: 0.038107555, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 348c9d0a14ddca5f0800000000000000
-      internalID: -743976564481734589
+      spriteID: a4f1eb2941ad8d900800000000000000
+      internalID: 709556723206987594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoulpyA_1
+      name: PoulpyB_1
       rect:
         serializedVersion: 2
-        x: 99
-        y: 143
-        width: 233
-        height: 164
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 484
+        y: 282
+        width: 443
+        height: 139
+      alignment: 9
+      pivot: {x: 0.04129876, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2abc4e1d9ff8bed0800000000000000
-      internalID: -2397885751291495890
+      spriteID: d0a939fffbdeda610800000000000000
+      internalID: 1634223648687757837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoulpyA_2
+      name: PoulpyB_2
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 59
+        width: 377
+        height: 138
+      alignment: 9
+      pivot: {x: 0.038279284, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a26fdd5a50de29ef0800000000000000
+      internalID: -102759232962693590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PoulpyB_3
       rect:
         serializedVersion: 2
         x: 538
-        y: 169
-        width: 93
-        height: 79
+        y: 88
+        width: 78
+        height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36fbe4955a49a6750800000000000000
-      internalID: 6299010466719907683
+      spriteID: 932db30ac282cb080800000000000000
+      internalID: -9170410569101225415
       vertices: []
       indices: 
       edges: []
