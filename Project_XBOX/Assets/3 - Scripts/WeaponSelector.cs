@@ -417,7 +417,7 @@ public class WeaponSelector : MonoBehaviour
         if (x == -1 && y == 1) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
         if (x == 0 && y == 1) { SetSelector(SelectorRotation.Haut); selectedId = 5; }
 
-        if (Input.GetKeyDown(KeyCode.F) && mainMenu.activeSelf && selectedId != -1)//ou input A sur manette
+        if (Input.GetKeyDown(KeyCode.G) && mainMenu.activeSelf && selectedId != -1)//ou input A sur manette
         {
             switch (selectedId)
             {
