@@ -11,6 +11,14 @@ public class Poulpy : Enemy
     [Header("Components")]
     [SerializeField] private Transform body;
     [SerializeField] private Transform head;
+    [SerializeField] private Transform[] tentacles;
+    private Transform[][] tentaclesComponents = new Transform[4][];
+
+    private const float magnitude = 2f;
+
+    private float rot = 0;
+    private Vector3 currentRot;
+    private Quaternion currentQuaternionRot;
 
     // =====================================================
 
@@ -18,12 +26,19 @@ public class Poulpy : Enemy
     {
         base.SetTargetInStart();
         base.SetInitialSpeed(GetSpeed());
+
+        SetTentaclesComponents();
     }
 
     private void Start()
     {
         StartCoroutine(AnimateHead());
         StartCoroutine(AnimateBody());
+        
+        for(int i = 0; i < tentacles.Length; i++)
+        {
+            StartCoroutine(AnimateTentacle(i));
+        }
     }
 
     private void Update()
@@ -82,5 +97,53 @@ public class Poulpy : Enemy
         yield return new WaitForSeconds(0.4f);
 
         StartCoroutine(AnimateBody());
+    }
+
+    private void SetTentaclesComponents()
+    {
+        for(int i = 0; i < tentacles.Length; i++)
+        {
+            tentaclesComponents[i] = new Transform[6];
+
+            tentaclesComponents[i][0] = tentacles[i].GetChild(0);
+            tentaclesComponents[i][1] = tentaclesComponents[i][0].GetChild(1);
+            tentaclesComponents[i][2] = tentaclesComponents[i][1].GetChild(1);
+            tentaclesComponents[i][3] = tentaclesComponents[i][2].GetChild(1);
+            tentaclesComponents[i][4] = tentaclesComponents[i][3].GetChild(1);
+            tentaclesComponents[i][5] = tentaclesComponents[i][4].GetChild(1);
+        }
+    }
+
+    private IEnumerator AnimateTentacle(int _id)
+    {
+        while(rot < magnitude)
+        {
+            rot += 0.1f;
+            currentRot = new Vector3(0, 0, rot);
+            currentQuaternionRot.eulerAngles = currentRot;
+
+            for(int i = 0; i < 6; i++)
+            {
+                tentaclesComponents[_id][i].localRotation = currentQuaternionRot;
+            }
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        while (rot > magnitude * -1)
+        {
+            rot = rot - 0.15f;
+            currentRot = new Vector3(0, 0, rot);
+            currentQuaternionRot.eulerAngles = currentRot;
+
+            for (int i = 0; i < 6; i++)
+            {
+                tentaclesComponents[_id][i].localRotation = currentQuaternionRot;
+            }
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        StartCoroutine(AnimateTentacle(_id));
     }
 }
