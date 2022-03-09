@@ -169,6 +169,7 @@ MonoBehaviour:
   newScale: 0.5
   canBounce: 1
   nbrOfBounceMax: 0
+  id: 3
 --- !u!114 &-6272471552499321141
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ public class Eye : MonoBehaviour
 {
     public enum State { None, Blink, Angry };
 
-    private const int COEFF_SCALE = 5;
     private const float MIN_DELAY_BLINK = 4f;
     private const float MAX_DELAY_BLINK = 5f;
 
@@ -18,6 +17,7 @@ public class Eye : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform eyeIris;
     [SerializeField] private Enemy enemy;
+    [SerializeField] private int COEFF_SCALE = 5;
     private State state = State.None;
     private float scale;
     private Vector3 startPositionIris;
