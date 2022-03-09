@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -11,6 +12,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public const string NAME_PLAYER = "Player";
+    public const float DELAY_TO_START = 2f;
 
 
     // ===================== VARIABLES =====================
@@ -21,9 +23,12 @@ public abstract class Enemy : MonoBehaviour
     protected float initialSpeed = 10f;
     [SerializeField] protected float damageOnCollision = 10f;
     [SerializeField] protected Transform target;
+    [SerializeField] protected bool isActivated = false;
+    [SerializeField] protected bool isBoss = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
+    [SerializeField] private RectTransform bossLifeBar;
 
     [Header("Prefabs")]
     [SerializeField] protected GameObject ptcHitPref;
@@ -32,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
     private CameraShake cameraShake;
     private RoomManager roomManager;
     private bool hasUpdated = false;
+    private SoundManager soundManager;
 
     // =====================================================
 
@@ -59,6 +65,14 @@ public abstract class Enemy : MonoBehaviour
     {
         cameraShake = Camera.main.GetComponent<CameraShake>();
         roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+
+        if(isBoss)
+        {
+            bossLifeBar.parent.gameObject.SetActive(true);
+        }
+
+        StartCoroutine(ActivateEnemy());
 
         if (!IsTargetEmpty())
         {
@@ -75,6 +89,13 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    private IEnumerator ActivateEnemy()
+    {
+        yield return new WaitForSeconds(DELAY_TO_START);
+
+        isActivated = true;
+    }
+
     // Return TRUE if the variable "target" is null
     public virtual bool IsTargetEmpty()
     {
@@ -89,11 +110,17 @@ public abstract class Enemy : MonoBehaviour
     {
         PlayerManager player = target.GetComponent<PlayerManager>();
         player.SetLifePoint(damageOnCollision);
+        soundManager.playAudioClipWithPitch(5, 0.5f);
     }
 
     public virtual void TakeDamage(float _damage)
     {
         lifePoint -= _damage;
+
+        if(isBoss)
+        {
+            StartCoroutine(UpdateBossLifeBar());
+        }
 
         GameObject ptcHit;
         ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
@@ -105,20 +132,25 @@ public abstract class Enemy : MonoBehaviour
         }
         else
         {
-            cameraShake.Shake(0.1f, 0.8f);
+            //cameraShake.Shake(0.1f, _damage / 8f);
+            CameraShake.Instance.Shake(0.1f, 0.8f);
+            float volume = _damage / 20;
+            volume = Mathf.Clamp(volume, 0.5f, 1f);
+            soundManager.playAudioClipWithVolume(5, volume);
         }
     }
 
     public virtual void Die()
     {
-        GameObject ptcDie;
-        ptcDie = Instantiate(ptcDiePref, transform.position, Quaternion.identity);
-        Destroy(ptcDie, 8f);
-
-        cameraShake.Shake(0.3f, 1.5f);
-
         if (!hasUpdated)
         {
+            GameObject ptcDie;
+            ptcDie = Instantiate(ptcDiePref, transform.position, Quaternion.identity);
+            Destroy(ptcDie, 8f);
+
+            cameraShake.Shake(0.3f, 1.5f);
+            soundManager.playAudioClip(6);
+
             roomManager.UpdateState();
             hasUpdated = true;
         }
@@ -129,6 +161,9 @@ public abstract class Enemy : MonoBehaviour
     // Move toward the target
     public virtual void MoveToward()
     {
+        if (!isActivated)
+            return;
+
         float step = speed * Time.deltaTime;
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, step);
@@ -137,6 +172,9 @@ public abstract class Enemy : MonoBehaviour
     // Rotate toward the target
     public virtual void RotateToward(float _speed, Transform _objToRotate)
     {
+        if (!isActivated)
+            return;
+
         // Determine which direction to rotate towards
         Vector2 targetDirection = target.position - transform.position;
 
@@ -147,6 +185,9 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void MoveToBeInRange(float _range)
     {
+        if (!isActivated)
+            return;
+
         float dist = Vector3.Distance(target.position, transform.position);
         float step = speed * Time.deltaTime;
 
@@ -158,9 +199,29 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Shoot(GameObject _bulletPref, Transform _posToShoot, Transform _canon, float _speed)
     {
+        if (!isActivated)
+            return;
+
         GameObject bullet;
         bullet = Instantiate(_bulletPref, _posToShoot.position, _canon.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * _speed;
         Destroy(bullet, 10f);
+    }
+
+    private IEnumerator UpdateBossLifeBar()
+    {
+        float scaleToReach = lifePoint / 2000;
+
+        while (bossLifeBar.localScale.x > scaleToReach && bossLifeBar.localScale.x > 0f)
+        {
+            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.001f, bossLifeBar.localScale.y);
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        if (bossLifeBar.localScale.x < 0f)
+        {
+            bossLifeBar.localScale = new Vector2(0f, bossLifeBar.localScale.y);
+        }
     }
 }

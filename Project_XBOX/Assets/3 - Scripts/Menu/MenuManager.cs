@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject levelSelectionMenu;
     [SerializeField] private GameObject levelSelectionMenuCanvas;
     [SerializeField] private LevelSelection levelSelection;
+    [SerializeField] private SoundManager soundManager;
 
     private bool isIntro = true;
 
@@ -26,6 +27,8 @@ public class MenuManager : MonoBehaviour
         if((Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A)) && isIntro)
         {
             GoToLevelSelection();
+
+            soundManager.playAudioClip(0);
 
             isIntro = false;
         }

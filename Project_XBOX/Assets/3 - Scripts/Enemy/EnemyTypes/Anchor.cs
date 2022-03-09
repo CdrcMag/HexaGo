@@ -81,16 +81,20 @@ public class Anchor : Enemy
     {
         isGrowingBuoy = true;
 
-        while (buoy.localScale.x < 0.7f)
+        while (buoy != null && buoy.localScale.x < 0.7f)
         {
             yield return new WaitForSeconds(0.005f);
-            buoy.localScale = new Vector2(buoy.localScale.x + ADDSCALE, buoy.localScale.y + ADDSCALE);
+
+            if(buoy != null)
+                buoy.localScale = new Vector2(buoy.localScale.x + ADDSCALE, buoy.localScale.y + ADDSCALE);
         }
 
-        while (buoy.localScale.x > 0.5f)
+        while (buoy != null && buoy.localScale.x > 0.5f)
         {
             yield return new WaitForSeconds(0.005f);
-            buoy.localScale = new Vector2(buoy.localScale.x - ADDSCALE, buoy.localScale.y - ADDSCALE);
+
+            if (buoy != null)
+                buoy.localScale = new Vector2(buoy.localScale.x - ADDSCALE, buoy.localScale.y - ADDSCALE);
         }
 
         isGrowingBuoy = false;

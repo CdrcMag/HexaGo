@@ -11,6 +11,8 @@ public class Mine : MonoBehaviour
     // ===================== VARIABLES =====================
 
     [SerializeField] private Light2D lightMine;
+    [SerializeField] private GameObject ptcMinePref;
+    private SoundManager soundManager;
 
     private float startScale = 0f;
 
@@ -19,6 +21,13 @@ public class Mine : MonoBehaviour
 
     private void Start()
     {
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+        StartCoroutine(StartAnimateMine());
+    }
+
+    private IEnumerator StartAnimateMine()
+    {
+        yield return new WaitForSeconds(2f);
         startScale = transform.localScale.x;
         StartCoroutine(AnimateMine());
     }
@@ -54,6 +63,12 @@ public class Mine : MonoBehaviour
 
     private IEnumerator Explode()
     {
+        GameObject ptcMine;
+        ptcMine = Instantiate(ptcMinePref, transform.position, Quaternion.identity);
+        Destroy(ptcMine, 4f);
+
+        soundManager.playAudioClip(9);
+
         yield return new WaitForSeconds(0.2f);
 
         Destroy(gameObject);

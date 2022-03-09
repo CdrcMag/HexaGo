@@ -5,10 +5,16 @@ using UnityEngine;
 public class FusilPompe : Weapon
 {
     private float cpt = 0;
+    private SoundManager soundManager;
+    private const float LIFETIME = 0.1f;
+    private const float DELAY = 0.01f;
+    private Transform player;
 
     private void Awake()
     {
         this.projectilePrefab = Resources.Load<GameObject>("Projectiles/Fusil Pompe Projectile");
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+        player = GameObject.Find("Player").transform;
     }
 
     private void Update()
@@ -38,14 +44,45 @@ public class FusilPompe : Weapon
     {
         base.Shoot();
 
-        //Spawns a bullet
-        GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, transform.parent.rotation);
+        soundManager.playAudioClip(4);
 
-        //Sets direction vector and applies it
-        Vector2 dir = projectileInstance.transform.up * bulletSpeed;
+        StartCoroutine(ShootShotgun());
+    }
+
+    private IEnumerator ShootShotgun()
+    {
+        ShootProjectile(-30f);
+
+        yield return new WaitForSeconds(DELAY);
+
+        ShootProjectile(-10f);
+
+        yield return new WaitForSeconds(DELAY);
+
+        ShootProjectile(10f);
+
+        yield return new WaitForSeconds(DELAY);
+
+        ShootProjectile(30f);
+    }
+
+    private void ShootProjectile(float _addRotation)
+    {
+        Vector3 rot;
+        Quaternion currentQuaternionRot = Quaternion.identity;
+        Quaternion quat;
+        GameObject projectileInstance;
+        Vector2 dir;
+        float zRot;
+
+        zRot = player.rotation.eulerAngles.z;
+        rot = new Vector3(transform.parent.rotation.eulerAngles.x, transform.parent.rotation.y, zRot + _addRotation);
+        currentQuaternionRot.eulerAngles = rot;
+        quat = currentQuaternionRot;
+
+        projectileInstance = Instantiate(projectilePrefab, transform.position, quat);
+        dir = projectileInstance.transform.up * bulletSpeed;
         projectileInstance.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
-
-        //Destroys instance if not destroyed before
-        Destroy(projectileInstance, 10f);
+        Destroy(projectileInstance, LIFETIME);
     }
 }
