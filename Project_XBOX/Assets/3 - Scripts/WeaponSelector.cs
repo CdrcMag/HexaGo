@@ -62,6 +62,17 @@ public class WeaponSelector : MonoBehaviour
 
             GenerateTwoAmongEverything();
         }
+
+
+        if(firstMenu.activeSelf)
+        {
+            HandleFirstMenuInputs();
+        }
+
+        if(mainMenu.activeSelf)
+        {
+            HandleMainMenuInputs();
+        }
     }
 
     public void ChooseNewItem()
@@ -117,6 +128,8 @@ public class WeaponSelector : MonoBehaviour
 
         firstMenu.SetActive(false);
         mainMenu.SetActive(true);
+
+        selectedId = 0;
 
         ShowWeaponOnSlot();
     }
@@ -276,6 +289,8 @@ public class WeaponSelector : MonoBehaviour
             txtWeapon02.text = "Totems";
             iconWeapon02.sprite = icons[7];
         }
+
+        SetSelector(SelectorRotation.Left);
     }
 
     private void ShowWeaponOnSlot()
@@ -318,5 +333,115 @@ public class WeaponSelector : MonoBehaviour
                 }
             }
         }
+    }
+
+    public enum SelectorRotation { Left, Right, HautDroite, HautGauche, BasDroite, BasGauche, Haut, Bas };
+    private int selectedId = 0;
+    public RectTransform selector;
+    public RectTransform selector2;
+
+    //-122/122
+    private void SetSelector(SelectorRotation rot)
+    {
+        if (firstMenu.activeSelf) { selector.gameObject.SetActive(true); selector2.gameObject.SetActive(false); }
+        else if (mainMenu.activeSelf) { selector2.gameObject.SetActive(true); selector.gameObject.SetActive(false); }
+
+
+        selectedId = 0;//Selectionne le choix de gauche par défaut
+
+        selector.localPosition = new Vector2(0, 0);
+        selector2.localPosition = new Vector2(0, -70);
+
+        if(firstMenu.activeSelf)
+        {
+            if (rot == SelectorRotation.Left)
+                selector.localRotation = Quaternion.Euler(0, 0, 180);
+
+            if (rot == SelectorRotation.Right)
+                selector.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        if(mainMenu.activeSelf)
+        {
+            if (rot == SelectorRotation.Haut) selector2.localRotation = Quaternion.Euler(0, 0, 90);
+            if (rot == SelectorRotation.Bas) selector2.localRotation = Quaternion.Euler(0, 0, -90);
+            if (rot == SelectorRotation.HautDroite) selector2.localRotation = Quaternion.Euler(0, 0, 30);
+            if (rot == SelectorRotation.BasDroite) selector2.localRotation = Quaternion.Euler(0, 0, -30);
+            if (rot == SelectorRotation.HautGauche) selector2.localRotation = Quaternion.Euler(0, 0, -210);
+            if (rot == SelectorRotation.BasGauche) selector2.localRotation = Quaternion.Euler(0, 0, -150);
+        }
+
+    }        //90 Haut
+             //30 haut droite
+             //-30 bas droite
+             //-90 bas 
+             //-150 bas gauche
+             //-210 haut gauche
+
+    private void HandleFirstMenuInputs()
+    {
+        //float x = Input.GetAxisRaw("Input_Rotation_Controller_Horizontal");//+ gérer retour joystick au centre
+        float x = Input.GetAxisRaw("Horizontal");
+
+        if (x > 0) { SetSelector(SelectorRotation.Right); selectedId = 0; } 
+        if (x < 0) { SetSelector(SelectorRotation.Left); selectedId = 1; }
+
+
+        if(Input.GetKeyDown(KeyCode.F))//ou input A sur manette
+        {
+            switch (selectedId)
+            {
+                case 0:
+                    SetWeaponToButton(0);
+                    break;
+                case 1:
+                    SetWeaponToButton(1);
+                    break;
+            }
+        }
+        
+    
+    }
+
+    private void HandleMainMenuInputs()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+
+        //print($"x: {x} / y: {y}");
+
+        if (x == 1 && y == 1) { SetSelector(SelectorRotation.HautDroite); selectedId = 0; }
+        if (x == 1 && y == -1) { SetSelector(SelectorRotation.BasDroite); selectedId = 1; }
+        if (x == 0 && y == -1) { SetSelector(SelectorRotation.Bas); selectedId = 2; }
+        if (x == -1 && y == -1) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
+        if (x == -1 && y == 1) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
+        if (x == 0 && y == 1) { SetSelector(SelectorRotation.Haut); selectedId = 5; }
+
+        if (Input.GetKeyDown(KeyCode.F) && mainMenu.activeSelf && selectedId != -1)//ou input A sur manette
+        {
+            switch (selectedId)
+            {
+                case 0:
+                    SetWeaponOnSlot("FrontRight");
+                    break;
+                case 1:
+                    SetWeaponOnSlot("BackRight");
+                    break;
+                case 2:
+                    SetWeaponOnSlot("Back");
+                    break;
+                case 3:
+                    SetWeaponOnSlot("BackLeft");
+                    break;
+                case 4:
+                    SetWeaponOnSlot("FrontLeft");
+                    break;
+                case 5:
+                    SetWeaponOnSlot("Front");
+                    break;
+            }
+        }
+
+
     }
 }
