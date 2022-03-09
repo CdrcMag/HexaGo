@@ -19,6 +19,10 @@ public class RoomManager : MonoBehaviour
     public AudioSource musicManager;
     public WeaponSelector weaponSelector;
 
+    // BOSS
+    public GameObject poulpy;
+    public AudioClip poulpyTheme;
+
     private Level01[] currentRooms;
     private int numberRoom;
     private bool[] validedRooms = { true, true, true, true, true, true, true, true, true, true, true, true };
@@ -34,16 +38,29 @@ public class RoomManager : MonoBehaviour
 
     private void PrepareRoom()
     {
-        currentRooms = ChooseDifficulty();
-        numberRoom = ChooseRoom(currentRooms);
-
-        player.position = currentRooms[numberRoom].startPosPlayer;
-
-        for (int i = 0; i < currentRooms[numberRoom].enemies.Length; i++)
+        if(currentNumberRoom != 9)
         {
-            GameObject enemy = Instantiate(currentRooms[numberRoom].enemies[i], currentRooms[numberRoom].positions[i], Quaternion.identity, enemyPool);
+            currentRooms = ChooseDifficulty();
+            numberRoom = ChooseRoom(currentRooms);
+            player.position = currentRooms[numberRoom].startPosPlayer;
+        }
+        else
+        {
+            player.position = new Vector2(0f, 2f);
+        }
 
-            StartCoroutine(IGrowEnemy(enemy, i));
+        if(currentNumberRoom != 9)
+        {
+            for (int i = 0; i < currentRooms[numberRoom].enemies.Length; i++)
+            {
+                GameObject enemy = Instantiate(currentRooms[numberRoom].enemies[i], currentRooms[numberRoom].positions[i], Quaternion.identity, enemyPool);
+
+                StartCoroutine(IGrowEnemy(enemy, i));
+            }
+        }
+        else
+        {
+            SpawnBoss();
         }
 
         StartCoroutine(IActivatePlayer());
@@ -157,9 +174,9 @@ public class RoomManager : MonoBehaviour
     {
         if(killedEnemies == currentRooms[numberRoom].killableEnemies)
         {
-            if(currentNumberRoom == 0 || currentNumberRoom == 5 || currentNumberRoom == 8)
+            if(currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
             {
-                //weaponSelector.ChooseNewItem();
+                weaponSelector.ChooseNewItem();
             }
 
             ClearScene();
@@ -181,5 +198,15 @@ public class RoomManager : MonoBehaviour
         {
             Destroy(enemyPool.GetChild(i).gameObject);
         }
+    }
+
+    private void SpawnBoss()
+    {
+        musicManager.Stop();
+        musicManager.clip = poulpyTheme;
+        musicManager.Play();
+
+        GameObject boss;
+        boss = Instantiate(poulpy, new Vector2(0f, 0f), Quaternion.identity);
     }
 }

@@ -169,6 +169,7 @@ MonoBehaviour:
   newScale: 1
   canBounce: 1
   nbrOfBounceMax: 0
+  id: 2
 --- !u!1 &8562571881659260561
 GameObject:
   m_ObjectHideFlags: 0

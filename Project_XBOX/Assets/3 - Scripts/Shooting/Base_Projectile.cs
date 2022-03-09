@@ -15,6 +15,7 @@ public class Base_Projectile : MonoBehaviour
     [SerializeField]
     protected int nbrOfBounceMax;
     private int nbrOfBounce = 0;
+    public int id;
 
     private void Start()
     {

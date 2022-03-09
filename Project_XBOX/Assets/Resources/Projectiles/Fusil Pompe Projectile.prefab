@@ -307,3 +307,4 @@ MonoBehaviour:
   newScale: 1
   canBounce: 1
   nbrOfBounceMax: 0
+  id: 1

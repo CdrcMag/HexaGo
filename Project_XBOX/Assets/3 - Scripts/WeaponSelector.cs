@@ -56,14 +56,22 @@ public class WeaponSelector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T) && firstMenu.activeSelf == false)
         {
-
             SetStates(true, false);
 
             GenerateTwoAmongEverything();
-
-
-
         }
+    }
+
+    public void ChooseNewItem()
+    {
+        if(firstMenu.activeSelf)
+        {
+            return;
+        }
+
+        SetStates(true, false);
+
+        GenerateTwoAmongEverything();
     }
 
     private void SetStates(bool a, bool b)

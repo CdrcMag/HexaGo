@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -23,9 +24,11 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float damageOnCollision = 10f;
     [SerializeField] protected Transform target;
     [SerializeField] protected bool isActivated = false;
+    [SerializeField] protected bool isBoss = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
+    [SerializeField] private RectTransform bossLifeBar;
 
     [Header("Prefabs")]
     [SerializeField] protected GameObject ptcHitPref;
@@ -63,6 +66,11 @@ public abstract class Enemy : MonoBehaviour
         cameraShake = Camera.main.GetComponent<CameraShake>();
         roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
         soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+
+        if(isBoss)
+        {
+            bossLifeBar.parent.gameObject.SetActive(true);
+        }
 
         StartCoroutine(ActivateEnemy());
 
@@ -108,6 +116,11 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TakeDamage(float _damage)
     {
         lifePoint -= _damage;
+
+        if(isBoss)
+        {
+            StartCoroutine(UpdateBossLifeBar());
+        }
 
         GameObject ptcHit;
         ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
@@ -193,5 +206,22 @@ public abstract class Enemy : MonoBehaviour
         bullet = Instantiate(_bulletPref, _posToShoot.position, _canon.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * _speed;
         Destroy(bullet, 10f);
+    }
+
+    private IEnumerator UpdateBossLifeBar()
+    {
+        float scaleToReach = lifePoint / 2000;
+
+        while (bossLifeBar.localScale.x > scaleToReach && bossLifeBar.localScale.x > 0f)
+        {
+            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.001f, bossLifeBar.localScale.y);
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        if (bossLifeBar.localScale.x < 0f)
+        {
+            bossLifeBar.localScale = new Vector2(0f, bossLifeBar.localScale.y);
+        }
     }
 }
