@@ -29,6 +29,8 @@ public class WeaponSelector : MonoBehaviour
     public Image iconWeapon02;
     public TextMeshProUGUI txtWeapon01;
     public TextMeshProUGUI txtWeapon02;
+    public Image[] iconWeaponSlot;
+    public Transform slots;
 
     private void Awake()
     {
@@ -115,6 +117,8 @@ public class WeaponSelector : MonoBehaviour
 
         firstMenu.SetActive(false);
         mainMenu.SetActive(true);
+
+        ShowWeaponOnSlot();
     }
 
 
@@ -271,6 +275,48 @@ public class WeaponSelector : MonoBehaviour
         {
             txtWeapon02.text = "Totems";
             iconWeapon02.sprite = icons[7];
+        }
+    }
+
+    private void ShowWeaponOnSlot()
+    {
+        for(int i = 0; i < slots.childCount; i++)
+        {
+            if(slots.GetChild(i).childCount == 1)
+            {
+                if (slots.GetChild(i).GetChild(0).name == "Canon(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[0];
+                }
+                else if (slots.GetChild(i).GetChild(0).name == "BigFuckingGun(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[1];
+                }
+                else if (slots.GetChild(i).GetChild(0).name == "Mitraillette(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[2];
+                }
+                else if (slots.GetChild(i).GetChild(0).name == "FusilPompe(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[3];
+                }
+                else if (slots.GetChild(i).GetChild(0).name == "Propulseur(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[4];
+                }
+                else if (slots.GetChild(i).GetChild(0).name == "Shield(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[5];
+                }
+                else if (slots.GetChild(i).GetChild(0).name == "Dash(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[6];
+                }
+                else if (slots.GetChild(i).GetChild(0).name == "Totems(Clone)")
+                {
+                    iconWeaponSlot[i].sprite = icons[7];
+                }
+            }
         }
     }
 }
