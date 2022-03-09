@@ -4691,7 +4691,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d5f3b7e4963f3f45a8c690fa5a01a30, type: 2}
   - {fileID: 11400000, guid: fad616ca8d497cb4fb3c013f8a706d50, type: 2}
   - {fileID: 11400000, guid: 8dc5a5ec6e35c46409c0506da4e7e56f, type: 2}
-  currentNumberRoom: 0
+  currentNumberRoom: 9
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
   player: {fileID: 1488635426}
