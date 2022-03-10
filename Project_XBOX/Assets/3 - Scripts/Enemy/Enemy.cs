@@ -113,7 +113,7 @@ public abstract class Enemy : MonoBehaviour
         soundManager.playAudioClipWithPitch(5, 0.5f);
     }
 
-    public virtual void TakeDamage(float _damage)
+    public virtual void TakeDamage(float _damage, bool _isSelf)
     {
         lifePoint -= _damage;
 
@@ -122,11 +122,41 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(UpdateBossLifeBar());
         }
 
+        if(!_isSelf)
+        {
+            GameObject ptcHit;
+            ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
+            Destroy(ptcHit, 4f);
+        }
+
+        if(lifePoint <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            //cameraShake.Shake(0.1f, _damage / 8f);
+            CameraShake.Instance.Shake(0.1f, 0.8f);
+            float volume = _damage / 20;
+            volume = Mathf.Clamp(volume, 0.5f, 1f);
+            soundManager.playAudioClipWithVolume(5, volume);
+        }
+    }
+
+    public virtual void TakeDamage(float _damage)
+    {
+        lifePoint -= _damage;
+
+        if (isBoss)
+        {
+            StartCoroutine(UpdateBossLifeBar());
+        }
+
         GameObject ptcHit;
         ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
         Destroy(ptcHit, 4f);
 
-        if(lifePoint <= 0)
+        if (lifePoint <= 0)
         {
             Die();
         }
