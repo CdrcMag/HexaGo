@@ -25,6 +25,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected Transform target;
     [SerializeField] protected bool isActivated = false;
     [SerializeField] protected bool isBoss = false;
+    [SerializeField] protected bool isSummoned = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
@@ -181,7 +182,16 @@ public abstract class Enemy : MonoBehaviour
             cameraShake.Shake(0.3f, 1.5f);
             soundManager.playAudioClip(6);
 
-            roomManager.UpdateState();
+            if(!isSummoned)
+            {
+                roomManager.UpdateState();
+            }
+
+            if(isBoss)
+            {
+                roomManager.FinishLevel();
+            }
+
             hasUpdated = true;
         }
 

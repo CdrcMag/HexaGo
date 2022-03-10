@@ -5,6 +5,7 @@ using UnityEngine;
 public class Poulpy : Enemy
 {
     private const float DELAY = 0.01f;
+    private const float ADDSCALE = 0.05f;
 
     // ===================== VARIABLES =====================
 
@@ -16,6 +17,8 @@ public class Poulpy : Enemy
     [SerializeField] private SpriteRenderer[] signsMine;
     [SerializeField] private GameObject minePref;
     [SerializeField] private GameObject anchor;
+    [SerializeField] private SpriteRenderer[] signsAnchor;
+    [SerializeField] private Transform[] posAnchor;
 
     private Transform[][] tentaclesComponents = new Transform[4][];
     private Transform[][] signsComponents = new Transform[4][];
@@ -144,6 +147,12 @@ public class Poulpy : Enemy
             Color color = new Color(1f, 1f, 1f, 0f);
             signsMine[k].color = color;
         }
+
+        for (int l = 0; l < signsAnchor.Length; l++)
+        {
+            Color color = new Color(1f, 1f, 1f, 0f);
+            signsAnchor[l].color = color;
+        }
     }
 
     private IEnumerator AnimateTentacle(int _id)
@@ -185,26 +194,48 @@ public class Poulpy : Enemy
 
         phase = Random.Range(0, maxPhase);
 
-        if (phase == 0)
+        if(maxPhase == 3)
+        {
+            delayPhase = 20f;
+            maxPhase = 2;
+
+            for(int i = 0; i < signsAnchor.Length; i++)
+            {
+                StartCoroutine(AlertAnchor(i));
+            }
+
+            yield return new WaitForSeconds(2f);
+
+            for (int j = 0; j < posAnchor.Length; j++)
+            {
+                StartCoroutine(SpawnAnchor(posAnchor[j]));
+            }
+        }
+        else if (phase == 0 && maxPhase != 3)
         {
             ResetSigns();
             StartCoroutine(ThrowTentacles());
             delayPhase = 12f;
         }
-        else if(phase == 1)
+        else if(phase == 1 && maxPhase != 3)
         {
-            int pattern = Random.Range(0, 1);
+            int pattern = Random.Range(0, 3);
 
             if(pattern == 0)
             {
+                delayPhase = 7f;
                 StartCoroutine(Pattern01());
             }
             else if (pattern == 1)
             {
+                delayPhase = 4f;
                 StartCoroutine(Pattern02());
             }
-
-            delayPhase = 7f;
+            else if (pattern == 2)
+            {
+                delayPhase = 7f;
+                StartCoroutine(Pattern03());
+            }
         }
 
         UnlockPhase();
@@ -219,10 +250,10 @@ public class Poulpy : Enemy
             maxPhase = 2;
         }
 
-        if(lifePoint < 700f && !hasSummon)
+        if(lifePoint < 700f && !hasSummon && maxPhase == 2)
         {
             hasSummon = true;
-            StartCoroutine(SpawnAnchor());
+            maxPhase = 3;
         }
     }
 
@@ -398,9 +429,46 @@ public class Poulpy : Enemy
         }
     }
 
-    private IEnumerator SpawnAnchor()
+    private IEnumerator AlertAnchor(int _id)
     {
-        yield return new WaitForSeconds(0.1f);
+        float a = 1f;
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            signsAnchor[_id].color = color;
+
+            a -= 0.04f;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        a = 1f;
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            signsAnchor[_id].color = color;
+
+            a -= 0.04f;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    private IEnumerator SpawnAnchor(Transform _t)
+    {
+        GameObject enemy = Instantiate(anchor, _t.position, Quaternion.identity);
+
+        enemy.transform.localScale = new Vector2(0f, 0f);
+
+        while (enemy != null && enemy.transform.localScale.x < 1)
+        {
+            yield return new WaitForSeconds(DELAY);
+
+            if (enemy != null)
+                enemy.transform.localScale = new Vector2(enemy.transform.localScale.x + ADDSCALE, enemy.transform.localScale.y + ADDSCALE);
+        }
     }
 
     private IEnumerator Pattern01()
@@ -414,7 +482,7 @@ public class Poulpy : Enemy
         {
             while(cpt02 < 2)
             {
-                StartCoroutine(AlertMine(ReturnValidSpot()));
+                StartCoroutine(AlertMine(ReturnValidSpot(), 1));
 
                 cpt02++;
             }
@@ -428,7 +496,40 @@ public class Poulpy : Enemy
 
     private IEnumerator Pattern02()
     {
-        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(AlertMine(0, 0.8f));
+        StartCoroutine(AlertMine(1, 0.8f));
+        StartCoroutine(AlertMine(4, 0.8f));
+        StartCoroutine(AlertMine(5, 0.8f));
+        StartCoroutine(AlertMine(9, 0.8f));
+        StartCoroutine(AlertMine(10, 0.8f));
+        StartCoroutine(AlertMine(13, 0.8f));
+        StartCoroutine(AlertMine(14, 0.8f));
+
+        yield return new WaitForSeconds(2f);
+
+        StartCoroutine(AlertMine(2, 0.8f));
+        StartCoroutine(AlertMine(3, 0.8f));
+        StartCoroutine(AlertMine(6, 0.8f));
+        StartCoroutine(AlertMine(7, 0.8f));
+        StartCoroutine(AlertMine(11, 0.8f));
+        StartCoroutine(AlertMine(12, 0.8f));
+        StartCoroutine(AlertMine(15, 0.8f));
+        StartCoroutine(AlertMine(16, 0.8f));
+    }
+
+    private IEnumerator Pattern03()
+    {
+        for(int i = 0; i < Mathf.Floor(signsMine.Length / 2) - 1; i++)
+        {
+            StartCoroutine(AlertMine(i, 1f));
+            StartCoroutine(AlertMine(signsMine.Length - 1 - i, 1f));
+
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        StartCoroutine(AlertMine(8, 2f));
     }
 
     private void ResetSpotMineChecked()
@@ -453,7 +554,7 @@ public class Poulpy : Enemy
         return idSpot;
     }
 
-    private IEnumerator AlertMine(int _id)
+    private IEnumerator AlertMine(int _id, float _scale)
     {
         float a = 1f;
 
@@ -478,15 +579,15 @@ public class Poulpy : Enemy
 
             yield return new WaitForSeconds(0.01f);
         }
-        ShotMine(_id);
+        ShotMine(_id, _scale);
     }
 
-    private void ShotMine(int _id)
+    private void ShotMine(int _id, float _scale)
     {
         GameObject mine;
         mine = Instantiate(minePref, signsMine[_id].transform.parent.position, Quaternion.identity);
-        mine.transform.localScale = new Vector2(mine.transform.localScale.x * 2, mine.transform.localScale.y * 2);
-        Vector2 dir = mine.transform.up * 10f;
+        mine.transform.localScale = new Vector2(_scale, _scale);
+        Vector2 dir = mine.transform.up * 15f;
         mine.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
     }
 }
