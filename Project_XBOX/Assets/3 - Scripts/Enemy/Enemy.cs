@@ -25,6 +25,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected Transform target;
     [SerializeField] protected bool isActivated = false;
     [SerializeField] protected bool isBoss = false;
+    [SerializeField] protected bool isSummoned = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
@@ -113,7 +114,7 @@ public abstract class Enemy : MonoBehaviour
         soundManager.playAudioClipWithPitch(5, 0.5f);
     }
 
-    public virtual void TakeDamage(float _damage)
+    public virtual void TakeDamage(float _damage, bool _isSelf)
     {
         lifePoint -= _damage;
 
@@ -122,11 +123,41 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(UpdateBossLifeBar());
         }
 
+        if(!_isSelf)
+        {
+            GameObject ptcHit;
+            ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
+            Destroy(ptcHit, 4f);
+        }
+
+        if(lifePoint <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            //cameraShake.Shake(0.1f, _damage / 8f);
+            CameraShake.Instance.Shake(0.1f, 0.8f);
+            float volume = _damage / 20;
+            volume = Mathf.Clamp(volume, 0.5f, 1f);
+            soundManager.playAudioClipWithVolume(5, volume);
+        }
+    }
+
+    public virtual void TakeDamage(float _damage)
+    {
+        lifePoint -= _damage;
+
+        if (isBoss)
+        {
+            StartCoroutine(UpdateBossLifeBar());
+        }
+
         GameObject ptcHit;
         ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
         Destroy(ptcHit, 4f);
 
-        if(lifePoint <= 0)
+        if (lifePoint <= 0)
         {
             Die();
         }
@@ -151,7 +182,16 @@ public abstract class Enemy : MonoBehaviour
             cameraShake.Shake(0.3f, 1.5f);
             soundManager.playAudioClip(6);
 
-            roomManager.UpdateState();
+            if(!isSummoned)
+            {
+                roomManager.UpdateState();
+            }
+
+            if(isBoss)
+            {
+                roomManager.FinishLevel();
+            }
+
             hasUpdated = true;
         }
 

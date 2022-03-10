@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class RoomManager : MonoBehaviour
     public Transform player;
     public AudioSource musicManager;
     public WeaponSelector weaponSelector;
+    [SerializeField] private Transition transition;
 
     // BOSS
     public GameObject poulpy;
@@ -205,8 +208,28 @@ public class RoomManager : MonoBehaviour
         musicManager.Stop();
         musicManager.clip = poulpyTheme;
         musicManager.Play();
+        musicManager.pitch = 1f;
 
         GameObject boss;
         boss = Instantiate(poulpy, new Vector2(0f, 0f), Quaternion.identity);
+    }
+
+    public void FinishLevel()
+    {
+        StartCoroutine(IFinishLevel());
+    }
+
+    private IEnumerator IFinishLevel()
+    {
+        if(transition == null)
+        {
+            print("Eh mon con, mets dans le SceneManager la variable transition dans l'inpecteur !");
+        }
+
+        transition.StartAugment();
+
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene("Menu");
     }
 }
