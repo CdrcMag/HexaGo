@@ -41,11 +41,11 @@ public class Anchor : Enemy
         base.RotateToward(ROTATE_SPEED_CANON, canon);
     }
 
-    public override void TakeDamage(float _damage)
+    public override void TakeDamage(float _damage, bool _b)
     {
         base.TakeDamage(_damage);
 
-        if(GetLifePoint() <= 100 && hasBuoy)
+        if (GetLifePoint() <= 100 && hasBuoy)
         {
             hasBuoy = false;
             Destroy(buoy.gameObject);
