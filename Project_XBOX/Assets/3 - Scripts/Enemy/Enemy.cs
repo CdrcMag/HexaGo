@@ -254,9 +254,9 @@ public abstract class Enemy : MonoBehaviour
 
         while (bossLifeBar.localScale.x > scaleToReach && bossLifeBar.localScale.x > 0f)
         {
-            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.001f, bossLifeBar.localScale.y);
+            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.002f, bossLifeBar.localScale.y);
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
 
         if (bossLifeBar.localScale.x < 0f)
