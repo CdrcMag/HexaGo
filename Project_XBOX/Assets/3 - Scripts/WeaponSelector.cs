@@ -32,6 +32,8 @@ public class WeaponSelector : MonoBehaviour
     public Image[] iconWeaponSlot;
     public Transform slots;
 
+    private float cpt = 0;
+
     private void Awake()
     {
         ps = GameObject.Find("Player").GetComponent<Player_Shooting>();
@@ -66,12 +68,24 @@ public class WeaponSelector : MonoBehaviour
 
         if(firstMenu.activeSelf)
         {
+            
             HandleFirstMenuInputs();
         }
 
         if(mainMenu.activeSelf)
         {
             HandleMainMenuInputs();
+        }
+
+        if(!canSelect)
+        {
+            print(cpt);
+            cpt += Time.fixedDeltaTime;
+            if(cpt >= 1f)
+            {
+                cpt = 0;
+                canSelect = true;
+            }
         }
     }
 
@@ -126,8 +140,7 @@ public class WeaponSelector : MonoBehaviour
     {
         selectedWeapon = id;
 
-        firstMenu.SetActive(false);
-        mainMenu.SetActive(true);
+      
 
         selectedId = 0;
 
@@ -146,6 +159,9 @@ public class WeaponSelector : MonoBehaviour
         //0 = 2 armes
         //1 = 2 upgrades
         //2 = 1 de chaque
+
+        selector.gameObject.SetActive(true);
+        selector2.gameObject.SetActive(false);
 
         pattern = Random.Range(0, 3);
 
@@ -210,7 +226,7 @@ public class WeaponSelector : MonoBehaviour
     {
         if(_weapon01 == "Canon (Canon)")
         {
-            txtWeapon01.text = "Cannon";
+            txtWeapon01.text = "Canon";
             iconWeapon01.sprite = icons[0];
         }
         else if (_weapon01 == "BigFuckingGun (BigFuckingGun)")
@@ -343,11 +359,6 @@ public class WeaponSelector : MonoBehaviour
     //-122/122
     private void SetSelector(SelectorRotation rot)
     {
-        if (firstMenu.activeSelf) { selector.gameObject.SetActive(true); selector2.gameObject.SetActive(false); }
-        else if (mainMenu.activeSelf) { selector2.gameObject.SetActive(true); selector.gameObject.SetActive(false); }
-
-
-        selectedId = 0;//Selectionne le choix de gauche par défaut
 
         selector.localPosition = new Vector2(0, 0);
         selector2.localPosition = new Vector2(0, -70);
@@ -387,8 +398,10 @@ public class WeaponSelector : MonoBehaviour
         if (x < 0) { SetSelector(SelectorRotation.Left); selectedId = 1; }
 
 
-        if(Input.GetKeyDown(KeyCode.F))//ou input A sur manette
+        if(Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)//ou input A sur manette
         {
+            canSelect = false;
+
             switch (selectedId)
             {
                 case 0:
@@ -398,10 +411,20 @@ public class WeaponSelector : MonoBehaviour
                     SetWeaponToButton(1);
                     break;
             }
+
+
+            selector.gameObject.SetActive(false); 
+            selector2.gameObject.SetActive(true);
+
+            firstMenu.SetActive(false);
+            mainMenu.SetActive(true);
         }
         
     
     }
+
+
+    private bool canSelect = true;
 
     private void HandleMainMenuInputs()
     {
@@ -410,15 +433,30 @@ public class WeaponSelector : MonoBehaviour
 
         //print($"x: {x} / y: {y}");
 
-        if (x == 1 && y == 1) { SetSelector(SelectorRotation.HautDroite); selectedId = 0; }
-        if (x == 1 && y == -1) { SetSelector(SelectorRotation.BasDroite); selectedId = 1; }
+        //Keyboard
+        //if (x == 1 && y < 1) { SetSelector(SelectorRotation.HautDroite); selectedId = 0; }
+        //if (x == 1 && y > -1) { SetSelector(SelectorRotation.BasDroite); selectedId = 1; }
+        //if (x == 0 && y == -1) { SetSelector(SelectorRotation.Bas); selectedId = 2; }
+        //if (x == -1 && y == -1) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
+        //if (x == -1 && y == 1) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
+        //if (x == 0 && y == 1) { SetSelector(SelectorRotation.Haut); selectedId = 5; }
+
+        if (x > 0.5f && y > 0) { SetSelector(SelectorRotation.HautDroite); selectedId = 0; }
+        if (x > 0.5f && y < 0) { SetSelector(SelectorRotation.BasDroite); selectedId = 1; }
+
         if (x == 0 && y == -1) { SetSelector(SelectorRotation.Bas); selectedId = 2; }
-        if (x == -1 && y == -1) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
-        if (x == -1 && y == 1) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
         if (x == 0 && y == 1) { SetSelector(SelectorRotation.Haut); selectedId = 5; }
 
-        if (Input.GetKeyDown(KeyCode.G) && mainMenu.activeSelf && selectedId != -1)//ou input A sur manette
+        if (x < -0.5f && y < 0) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
+        if (x < -0.5f && y > 0) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
+
+        print(canSelect);
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)//input A sur manette
         {
+
+            canSelect = false;
+
             switch (selectedId)
             {
                 case 0:
@@ -440,6 +478,9 @@ public class WeaponSelector : MonoBehaviour
                     SetWeaponOnSlot("Front");
                     break;
             }
+
+            
+
         }
 
 
