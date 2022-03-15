@@ -2034,6 +2034,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 189963310}
     m_Modifications:
     - target: {fileID: 127231869672874285, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 127231869672874285, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -2516,6 +2520,10 @@ PrefabInstance:
     - target: {fileID: 8134316548489525895, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8188985966930735194, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8188985966930735194, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -4787,6 +4795,7 @@ MonoBehaviour:
   player: {fileID: 1488635426}
   musicManager: {fileID: 958224260}
   weaponSelector: {fileID: 624194228}
+  transition: {fileID: 0}
   poulpy: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}
   poulpyTheme: {fileID: 8300000, guid: 8a864a57208920649b9c50ecd095453a, type: 3}
 --- !u!1 &1873467585
