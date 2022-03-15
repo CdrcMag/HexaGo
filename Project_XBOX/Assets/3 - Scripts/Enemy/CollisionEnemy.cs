@@ -65,7 +65,7 @@ public class CollisionEnemy : MonoBehaviour
 
                 if(lifePoint <= 0)
                 {
-                    enemy.TakeDamage(100f, true);
+                    enemy.TakeDamage(130f, true);
                     Destroy(gameObject);
                 }
                 else
