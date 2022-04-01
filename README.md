@@ -10,11 +10,11 @@ HexaGo est un jeu d'arcade aux composantes rogue-like. Vous devrez vous débarra
 
 <table>
 	<tr>
-		<td><img src="img/1.PNG" width="300"></td>
-		<td><img src="img/2.PNG" width="300"></td>
+		<td><img src="img/1.PNG" width="500"></td>
+		<td><img src="img/2.PNG" width="500"></td>
 	</tr>
 	<tr>
-		<td><img src="img/3.PNG" width="300"></td>
-		<td><img src="img/4.PNG" width="300"></td>
+		<td><img src="img/3.PNG" width="500"></td>
+		<td><img src="img/4.PNG" width="500"></td>
 	</tr>
 </table>
