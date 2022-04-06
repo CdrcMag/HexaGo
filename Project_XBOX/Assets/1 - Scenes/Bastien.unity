@@ -695,49 +695,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1439411331}
     - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 682f9294f6db60142a048e5b260274c3, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 2e3d3f7f9864e48419bcbec91bb92a8a, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0c6d24f7b3248e142ad5dac180c9cd46, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: 56b66db43d1e69e438e6f0f2f2fb1ec3, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf19a0ac78703d148a008bd1d26a4463, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: cbcc7953bb6fe5544859a2d59d2f5962, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: 7dd739f65c8e1ed44b5af1ee8da4f759, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: icons.Array.data[7]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf2afd95f32f12740b04d5e5e268760f, type: 3}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
       propertyPath: weaponSelectionMenu
       value: 
       objectReference: {fileID: 1336168316}
-    - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
-      propertyPath: iconWeaponSlot.Array.size
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8925310274186721630, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
       propertyPath: iconWeaponSlot.Array.data[0]
       value: 
