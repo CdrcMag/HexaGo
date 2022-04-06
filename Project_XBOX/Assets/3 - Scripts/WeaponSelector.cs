@@ -22,6 +22,7 @@ public class WeaponSelector : MonoBehaviour
     private Upgrade tempUpgrade_1;
     private Upgrade tempUpgrade_2;
 
+
     public int pattern = -1;
     public int selectedWeapon = -1;
 
@@ -137,8 +138,6 @@ public class WeaponSelector : MonoBehaviour
 
     }
 
-    
-
     public void SetWeaponToButton(int id)
     {
         selectedWeapon = id;
@@ -146,7 +145,6 @@ public class WeaponSelector : MonoBehaviour
 
         ShowWeaponOnSlot();
     }
-
 
     private void GenerateTwoRandomWeapons() => StartCoroutine(IGenerateWeapons());
     private void GenerateTwoRandomUpgrades() => StartCoroutine(IGenerateUpgrades());
@@ -380,6 +378,23 @@ public class WeaponSelector : MonoBehaviour
 
         }
 
+
+    }
+
+    private void Reset()
+    {
+        pattern = -1;
+        selectedWeapon = -1;
+        selectedId = 0;
+        canSelect = true;
+        weaponSelectionMenu = GameObject.Find("Weapon selection menu");
+        iconWeapon01 = GameObject.Find("IconWeapon1").GetComponent<Image>();
+        iconWeapon02 = GameObject.Find("IconWeapon2").GetComponent<Image>();
+        txtWeapon01 = GameObject.Find("TxtWeapon1").GetComponent<TextMeshProUGUI>();
+        txtWeapon02 = GameObject.Find("TxtWeapon2").GetComponent<TextMeshProUGUI>();
+        slots = GameObject.Find("SLOTS").transform;
+        selector = GameObject.Find("SELECTOR").GetComponent<RectTransform>();
+        selector = GameObject.Find("SELECTOR 2").GetComponent<RectTransform>();
 
     }
 }
