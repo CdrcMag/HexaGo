@@ -2893,6 +2893,10 @@ PrefabInstance:
       propertyPath: bulletDamage
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1859249418786991146, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: movementSpeedBoost
+      value: 0.114
+      objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackStartUpgrade
       value: 0
@@ -4789,13 +4793,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d5f3b7e4963f3f45a8c690fa5a01a30, type: 2}
   - {fileID: 11400000, guid: fad616ca8d497cb4fb3c013f8a706d50, type: 2}
   - {fileID: 11400000, guid: 8dc5a5ec6e35c46409c0506da4e7e56f, type: 2}
-  currentNumberRoom: 0
+  currentNumberRoom: 1
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
   player: {fileID: 1488635426}
   musicManager: {fileID: 958224260}
   weaponSelector: {fileID: 624194228}
-  transition: {fileID: 0}
+  transition: {fileID: 1887012115}
   poulpy: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}
   poulpyTheme: {fileID: 8300000, guid: 8a864a57208920649b9c50ecd095453a, type: 3}
 --- !u!1 &1873467585
