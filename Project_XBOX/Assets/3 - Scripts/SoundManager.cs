@@ -17,6 +17,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clips[index] != null)
         {
+            audioSource.volume = 0.5f;
             audioSource.pitch = 1;
             audioSource.PlayOneShot(clips[index]);
         }
@@ -28,6 +29,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clips[index] != null)
         {
+            audioSource.volume = 0.5f;
             audioSource.pitch = pitch;
             audioSource.PlayOneShot(clips[index]);
         }
@@ -35,23 +37,12 @@ public class SoundManager : MonoBehaviour
             Debug.Log("Attention, clip vide.");
     }
 
-    public void playAudioClipWithStop(int index)
+    public void playAudioClipWithVolume(int index, float volume)
     {
-        audioSource.Stop();
-
         if (clips[index] != null)
         {
+            audioSource.volume = volume;
             audioSource.pitch = 1;
-            audioSource.PlayOneShot(clips[index]);
-        }
-        else
-            Debug.Log("Attention, clip vide.");
-    }
-
-    public void playAudioClipJump(int index)
-    {
-        if (clips[index] != null)
-        {
             audioSource.PlayOneShot(clips[index]);
         }
         else

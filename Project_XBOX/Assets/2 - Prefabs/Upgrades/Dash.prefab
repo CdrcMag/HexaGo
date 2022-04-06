@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenDashs: 1
-  dashForce: 50
+  dashForceKeyboard: 30
+  dashForceController: 30
   dashTime: 0.1

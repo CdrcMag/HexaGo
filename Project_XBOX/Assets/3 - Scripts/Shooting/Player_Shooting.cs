@@ -32,7 +32,7 @@ public class Player_Shooting : MonoBehaviour
 
     //Nom des slots et noms des armes
     public enum SlotName { Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
-    public enum WeaponName { None, Canon, BigFuckingGun, Mitraillette, Shotgun };
+    public enum WeaponName { None = 0, Canon = 1, BigFuckingGun = 2, Mitraillette = 3, Shotgun = 4 };
     public enum UpgradeName { None, Propulseur, Dash, Totems, Shield };
 
     private void Start()
@@ -72,7 +72,32 @@ public class Player_Shooting : MonoBehaviour
             currentWeaponsState.Remove(slotName);
 
         currentWeaponsState.Add(slotName, weaponName);
-        
+ 
+
+    }
+
+    public void SetWeapon(SlotName slotName, Weapon w)
+    {
+        Transform currentSlot = GetSlot(slotName);
+
+        if (currentSlot.childCount != 0)
+            Destroy(currentSlot.GetChild(0).gameObject);
+
+        //Copies the weapon from the storage
+        GameObject weaponInstance = Instantiate(w.gameObject, currentSlot.position, currentSlot.rotation, currentSlot);
+
+        //And activates it
+        weaponInstance.SetActive(true);
+
+        //Updates the dictionnary
+        if (currentWeaponsState.ContainsKey(slotName))
+            currentWeaponsState.Remove(slotName);
+
+        if (w.GetType() == typeof(Canon)) currentWeaponsState.Add(slotName, WeaponName.Canon);
+        if (w.GetType() == typeof(BigFuckingGun)) currentWeaponsState.Add(slotName, WeaponName.BigFuckingGun);
+        if (w.GetType() == typeof(Mitraillette)) currentWeaponsState.Add(slotName, WeaponName.Mitraillette);
+        if (w.GetType() == typeof(FusilPompe)) currentWeaponsState.Add(slotName, WeaponName.Shotgun);
+
 
     }
 
@@ -84,6 +109,9 @@ public class Player_Shooting : MonoBehaviour
         //if no weapons are selected
         if (currentUpgrade == null)
             return;
+
+        if (currentSlot.childCount != 0)
+            Destroy(currentSlot.GetChild(0).gameObject);
 
         //Copies the weapon from the storage
         GameObject upgradeInstance = Instantiate(currentUpgrade.gameObject, transform.position, Quaternion.identity);
@@ -103,8 +131,38 @@ public class Player_Shooting : MonoBehaviour
             currentUpgradesState.Remove(slotName);
 
         currentUpgradesState.Add(slotName, upgrade);
+
     }
 
+    public void SetUpgrade(SlotName slotName, Upgrade u)
+    {
+        Transform currentSlot = GetSlot(slotName);
+
+        if (currentSlot.childCount != 0)
+            Destroy(currentSlot.GetChild(0).gameObject);
+
+        //Copies the weapon from the storage
+        GameObject upgradeInstance = Instantiate(u.gameObject, transform.position, Quaternion.identity);
+
+        //Sets position and rotation
+        upgradeInstance.transform.localRotation = currentSlot.localRotation;
+        upgradeInstance.transform.localPosition = currentSlot.localPosition;
+
+        //Assigns the weapon to the parent
+        upgradeInstance.transform.SetParent(currentSlot);
+
+        //And activates it
+        upgradeInstance.SetActive(true);
+
+        //Updates the dictionnary
+        if (currentUpgradesState.ContainsKey(slotName))
+            currentUpgradesState.Remove(slotName);
+
+        if (u.GetType() == typeof(Dash)) currentUpgradesState.Add(slotName, UpgradeName.Dash);
+        if (u.GetType() == typeof(Propulseur)) currentUpgradesState.Add(slotName, UpgradeName.Propulseur);
+        if (u.GetType() == typeof(Shield)) currentUpgradesState.Add(slotName, UpgradeName.Shield);
+        if (u.GetType() == typeof(Totems)) currentUpgradesState.Add(slotName, UpgradeName.Totems);
+    }
 
     private Transform GetSlot(SlotName s)    
     {
@@ -128,7 +186,7 @@ public class Player_Shooting : MonoBehaviour
         }
     }
 
-    private Weapon GetWeapon(WeaponName w)
+    public Weapon GetWeapon(WeaponName w)
     {
 
         switch (w)

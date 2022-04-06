@@ -15,6 +15,7 @@ public class Base_Projectile : MonoBehaviour
     [SerializeField]
     protected int nbrOfBounceMax;
     private int nbrOfBounce = 0;
+    public int id;
 
     private void Start()
     {
@@ -34,7 +35,7 @@ public class Base_Projectile : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" && canBounce)
+        if (((collision.gameObject.tag == "Enemy") || (collision.gameObject.tag == "Block")) && canBounce)
         {
             BounceCheck();
         }

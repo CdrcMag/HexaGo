@@ -11,8 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     protected float bulletSpeed;
 
-    [SerializeField]
-    protected float bulletDamage;
+    public float bulletDamage;
 
     [SerializeField]
     protected float minIntervalBetweenShots;
