@@ -4595,7 +4595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.5
+  coeffDamage: 0.3
   isSelf: 0
   ptcHitPref: {fileID: 0}
   lifePoint: 60

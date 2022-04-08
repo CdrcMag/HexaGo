@@ -264,7 +264,7 @@ public class LevelSelection : MonoBehaviour
 
     private IEnumerator SubstractButton(int i)
     {
-        while(difficultyButtons[i].localScale.x > 1)
+        while(difficultyButtons[i].localScale.x > 0.75f)
         {
             yield return new WaitForSeconds(0.05f);
             difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x - 0.05f, difficultyButtons[i].localScale.y - 0.05f);
@@ -273,7 +273,7 @@ public class LevelSelection : MonoBehaviour
 
     private IEnumerator GrowButton(int i)
     {
-        while (difficultyButtons[i].localScale.x < 1.2)
+        while (difficultyButtons[i].localScale.x < 1f)
         {
             yield return new WaitForSeconds(0.05f);
             difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x + 0.05f, difficultyButtons[i].localScale.y + 0.05f);

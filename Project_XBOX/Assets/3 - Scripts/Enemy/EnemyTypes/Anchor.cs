@@ -10,7 +10,7 @@ public class Anchor : Enemy
     // ===================== VARIABLES =====================
 
     private float delay = 4f;
-    private float bulletSpeed = 12f;
+    private float bulletSpeed = 11f;
     private bool isGrowingBody = false;
     private bool isGrowingBuoy = false;
     private bool hasBuoy = true;
