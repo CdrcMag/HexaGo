@@ -2052,6 +2052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Choice02
       objectReference: {fileID: 0}
+    - target: {fileID: 810352298402086211, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1089398062799182847, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_Color.a
       value: 0.5882353
@@ -2076,9 +2080,29 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 1433710367838175321, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438524684022832093, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1528894611413274308, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2326605907740419354, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293478366983765356, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813838086350346578, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3894165314877569366, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2088,6 +2112,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 4736844326685482591, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5134517921719627891, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2095,6 +2123,10 @@ PrefabInstance:
     - target: {fileID: 6021389929401591418, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_Name
       value: Choice01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724069537088725009, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7953721870410280913, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4671,8 +4703,8 @@ MonoBehaviour:
   musicManager: {fileID: 958224260}
   weaponSelector: {fileID: 624194228}
   transition: {fileID: 1887012115}
-  poulpy: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}
-  poulpyTheme: {fileID: 8300000, guid: 8a864a57208920649b9c50ecd095453a, type: 3}
+  bossPrefab: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}
+  bossTheme: {fileID: 8300000, guid: 8a864a57208920649b9c50ecd095453a, type: 3}
 --- !u!1 &1873467585
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,10 +21,11 @@ public class RoomManager : MonoBehaviour
     public AudioSource musicManager;
     public WeaponSelector weaponSelector;
     [SerializeField] private Transition transition;
+    public Tutorial tutorial;
 
     // BOSS
-    public GameObject poulpy;
-    public AudioClip poulpyTheme;
+    public GameObject bossPrefab;
+    public AudioClip bossTheme;
 
     private Level01[] currentRooms;
     private int numberRoom;
@@ -41,6 +42,16 @@ public class RoomManager : MonoBehaviour
 
     private void PrepareRoom()
     {
+        //if(PlayerPrefs.GetInt("PlayedTutorial", 0) == 0)
+        if(true)
+        {
+            PrepareTutorial();
+
+            PlayerPrefs.SetInt("PlayedTutorial", 1);
+
+            return;
+        }
+
         if(currentNumberRoom != 9)
         {
             currentRooms = ChooseDifficulty();
@@ -206,12 +217,12 @@ public class RoomManager : MonoBehaviour
     private void SpawnBoss()
     {
         musicManager.Stop();
-        musicManager.clip = poulpyTheme;
+        musicManager.clip = bossTheme;
         musicManager.Play();
         musicManager.pitch = 1f;
 
         GameObject boss;
-        boss = Instantiate(poulpy, new Vector2(0f, 0f), Quaternion.identity);
+        boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity);
     }
 
     public void FinishLevel()
@@ -231,5 +242,10 @@ public class RoomManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("Menu");
+    }
+
+    private void PrepareTutorial()
+    {
+        tutorial.LoadTutorial();
     }
 }
