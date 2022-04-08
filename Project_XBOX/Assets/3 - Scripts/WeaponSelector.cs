@@ -22,7 +22,9 @@ public class WeaponSelector : MonoBehaviour
     private Upgrade tempUpgrade_1;
     private Upgrade tempUpgrade_2;
 
-    int pattern = -1;
+
+    public int pattern = -1;
+    public int selectedWeapon = -1;
 
     public Sprite[] icons;
     public Image iconWeapon01;
@@ -32,25 +34,32 @@ public class WeaponSelector : MonoBehaviour
     public Image[] iconWeaponSlot;
     public Transform slots;
 
+    private float cpt = 0;
+
+    public enum SelectorRotation { Left, Right, HautDroite, HautGauche, BasDroite, BasGauche, Haut, Bas };
+    public int selectedId = 0;
+    public RectTransform selector;
+    public RectTransform selector2;
+
+
+
+    public bool canSelect = true;
+
     private void Awake()
     {
         ps = GameObject.Find("Player").GetComponent<Player_Shooting>();
 
         weaponSelectionMenu.SetActive(true);
 
-       
-        
     }
 
     private void Start()
     {
-        //firstMenu = weaponSelectionMenu.transform.GetChild(0).gameObject;
         firstMenu = weaponSelectionMenu.transform.GetChild(0).gameObject;
         mainMenu = weaponSelectionMenu.transform.GetChild(1).gameObject;
 
         firstMenu.SetActive(false);
         mainMenu.SetActive(false);
-
     }
 
 
@@ -59,7 +68,6 @@ public class WeaponSelector : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T) && firstMenu.activeSelf == false)
         {
             SetStates(true, false);
-
             GenerateTwoAmongEverything();
         }
 
@@ -72,6 +80,16 @@ public class WeaponSelector : MonoBehaviour
         if(mainMenu.activeSelf)
         {
             HandleMainMenuInputs();
+        }
+
+        if(!canSelect)
+        {
+            cpt += Time.fixedDeltaTime;
+            if(cpt >= 1f)
+            {
+                cpt = 0;
+                canSelect = true;
+            }
         }
     }
 
@@ -120,22 +138,13 @@ public class WeaponSelector : MonoBehaviour
 
     }
 
-    private int selectedWeapon = -1;
-
     public void SetWeaponToButton(int id)
     {
         selectedWeapon = id;
-
-        firstMenu.SetActive(false);
-        mainMenu.SetActive(true);
-
         selectedId = 0;
 
         ShowWeaponOnSlot();
     }
-
-
-
 
     private void GenerateTwoRandomWeapons() => StartCoroutine(IGenerateWeapons());
     private void GenerateTwoRandomUpgrades() => StartCoroutine(IGenerateUpgrades());
@@ -146,6 +155,9 @@ public class WeaponSelector : MonoBehaviour
         //0 = 2 armes
         //1 = 2 upgrades
         //2 = 1 de chaque
+
+        selector.gameObject.SetActive(true);
+        selector2.gameObject.SetActive(false);
 
         pattern = Random.Range(0, 3);
 
@@ -208,87 +220,23 @@ public class WeaponSelector : MonoBehaviour
 
     private void ShowWeaponSelection(string _weapon01, string _weapon02)
     {
-        if(_weapon01 == "Canon (Canon)")
-        {
-            txtWeapon01.text = "Cannon";
-            iconWeapon01.sprite = icons[0];
-        }
-        else if (_weapon01 == "BigFuckingGun (BigFuckingGun)")
-        {
-            txtWeapon01.text = "BigFuckingGun";
-            iconWeapon01.sprite = icons[1];
-        }
-        else if (_weapon01 == "Mitraillette (Mitraillette)")
-        {
-            txtWeapon01.text = "Magic Gun";
-            iconWeapon01.sprite = icons[2];
-        }
-        else if (_weapon01 == "FusilPompe (FusilPompe)")
-        {
-            txtWeapon01.text = "Shotgun";
-            iconWeapon01.sprite = icons[3];
-        }
-        else if (_weapon01 == "Propulseur (Propulseur)")
-        {
-            txtWeapon01.text = "Propulsor";
-            iconWeapon01.sprite = icons[4];
-        }
-        else if (_weapon01 == "Shield (Shield)")
-        {
-            txtWeapon01.text = "Shield";
-            iconWeapon01.sprite = icons[5];
-        }
-        else if (_weapon01 == "Dash (Dash)")
-        {
-            txtWeapon01.text = "Dash";
-            iconWeapon01.sprite = icons[6];
-        }
-        else if (_weapon01 == "Totems (Totems)")
-        {
-            txtWeapon01.text = "Totems";
-            iconWeapon01.sprite = icons[7];
-        }
+        if      (_weapon01 == "Canon (Canon)") {txtWeapon01.text = "Canon"; iconWeapon01.sprite = icons[0];}
+        else if (_weapon01 == "BigFuckingGun (BigFuckingGun)"){txtWeapon01.text = "BigFuckingGun";iconWeapon01.sprite = icons[1];}
+        else if (_weapon01 == "Mitraillette (Mitraillette)"){txtWeapon01.text = "Magic Gun";iconWeapon01.sprite = icons[2];}
+        else if (_weapon01 == "FusilPompe (FusilPompe)"){txtWeapon01.text = "Shotgun";iconWeapon01.sprite = icons[3];}
+        else if (_weapon01 == "Propulseur (Propulseur)"){txtWeapon01.text = "Propulsor";iconWeapon01.sprite = icons[4];}
+        else if (_weapon01 == "Shield (Shield)"){txtWeapon01.text = "Shield";iconWeapon01.sprite = icons[5];}
+        else if (_weapon01 == "Dash (Dash)"){txtWeapon01.text = "Dash";iconWeapon01.sprite = icons[6];}
+        else if (_weapon01 == "Totems (Totems)"){txtWeapon01.text = "Totems";iconWeapon01.sprite = icons[7];}
 
-        if (_weapon02 == "Canon (Canon)")
-        {
-            txtWeapon02.text = "Cannon";
-            iconWeapon02.sprite = icons[0];
-        }
-        else if (_weapon02 == "BigFuckingGun (BigFuckingGun)")
-        {
-            txtWeapon02.text = "BigFuckingGun";
-            iconWeapon02.sprite = icons[1];
-        }
-        else if (_weapon02 == "Mitraillette (Mitraillette)")
-        {
-            txtWeapon02.text = "Magic Gun";
-            iconWeapon02.sprite = icons[2];
-        }
-        else if (_weapon02 == "FusilPompe (FusilPompe)")
-        {
-            txtWeapon02.text = "Shotgun";
-            iconWeapon02.sprite = icons[3];
-        }
-        else if (_weapon02 == "Propulseur (Propulseur)")
-        {
-            txtWeapon02.text = "Propulsor";
-            iconWeapon02.sprite = icons[4];
-        }
-        else if (_weapon02 == "Shield (Shield)")
-        {
-            txtWeapon02.text = "Shield";
-            iconWeapon02.sprite = icons[5];
-        }
-        else if (_weapon02 == "Dash (Dash)")
-        {
-            txtWeapon02.text = "Dash";
-            iconWeapon02.sprite = icons[6];
-        }
-        else if (_weapon02 == "Totems (Totems)")
-        {
-            txtWeapon02.text = "Totems";
-            iconWeapon02.sprite = icons[7];
-        }
+        if      (_weapon02 == "Canon (Canon)"){txtWeapon02.text = "Canon";iconWeapon02.sprite = icons[0];}
+        else if (_weapon02 == "BigFuckingGun (BigFuckingGun)"){txtWeapon02.text = "BigFuckingGun";iconWeapon02.sprite = icons[1];}
+        else if (_weapon02 == "Mitraillette (Mitraillette)"){txtWeapon02.text = "Magic Gun";iconWeapon02.sprite = icons[2];}
+        else if (_weapon02 == "FusilPompe (FusilPompe)"){txtWeapon02.text = "Shotgun";iconWeapon02.sprite = icons[3];}
+        else if (_weapon02 == "Propulseur (Propulseur)"){txtWeapon02.text = "Propulsor";iconWeapon02.sprite = icons[4];}
+        else if (_weapon02 == "Shield (Shield)"){txtWeapon02.text = "Shield";iconWeapon02.sprite = icons[5];}
+        else if (_weapon02 == "Dash (Dash)"){txtWeapon02.text = "Dash";iconWeapon02.sprite = icons[6];}
+        else if (_weapon02 == "Totems (Totems)"){txtWeapon02.text = "Totems";iconWeapon02.sprite = icons[7];}
 
         SetSelector(SelectorRotation.Left);
     }
@@ -299,55 +247,20 @@ public class WeaponSelector : MonoBehaviour
         {
             if(slots.GetChild(i).childCount == 1)
             {
-                if (slots.GetChild(i).GetChild(0).name == "Canon(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[0];
-                }
-                else if (slots.GetChild(i).GetChild(0).name == "BigFuckingGun(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[1];
-                }
-                else if (slots.GetChild(i).GetChild(0).name == "Mitraillette(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[2];
-                }
-                else if (slots.GetChild(i).GetChild(0).name == "FusilPompe(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[3];
-                }
-                else if (slots.GetChild(i).GetChild(0).name == "Propulseur(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[4];
-                }
-                else if (slots.GetChild(i).GetChild(0).name == "Shield(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[5];
-                }
-                else if (slots.GetChild(i).GetChild(0).name == "Dash(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[6];
-                }
-                else if (slots.GetChild(i).GetChild(0).name == "Totems(Clone)")
-                {
-                    iconWeaponSlot[i].sprite = icons[7];
-                }
+                if (slots.GetChild(i).GetChild(0).name == "Canon(Clone)") iconWeaponSlot[i].sprite = icons[0];
+                else if (slots.GetChild(i).GetChild(0).name == "BigFuckingGun(Clone)") iconWeaponSlot[i].sprite = icons[1];
+                else if (slots.GetChild(i).GetChild(0).name == "Mitraillette(Clone)") iconWeaponSlot[i].sprite = icons[2];
+                else if (slots.GetChild(i).GetChild(0).name == "FusilPompe(Clone)") iconWeaponSlot[i].sprite = icons[3];
+                else if (slots.GetChild(i).GetChild(0).name == "Propulseur(Clone)") iconWeaponSlot[i].sprite = icons[4];
+                else if (slots.GetChild(i).GetChild(0).name == "Shield(Clone)") iconWeaponSlot[i].sprite = icons[5];
+                else if (slots.GetChild(i).GetChild(0).name == "Dash(Clone)") iconWeaponSlot[i].sprite = icons[6];
+                else if (slots.GetChild(i).GetChild(0).name == "Totems(Clone)") iconWeaponSlot[i].sprite = icons[7];
             }
         }
     }
 
-    public enum SelectorRotation { Left, Right, HautDroite, HautGauche, BasDroite, BasGauche, Haut, Bas };
-    private int selectedId = 0;
-    public RectTransform selector;
-    public RectTransform selector2;
-
-    //-122/122
     private void SetSelector(SelectorRotation rot)
     {
-        if (firstMenu.activeSelf) { selector.gameObject.SetActive(true); selector2.gameObject.SetActive(false); }
-        else if (mainMenu.activeSelf) { selector2.gameObject.SetActive(true); selector.gameObject.SetActive(false); }
-
-
-        selectedId = 0;//Selectionne le choix de gauche par défaut
 
         selector.localPosition = new Vector2(0, 0);
         selector2.localPosition = new Vector2(0, -70);
@@ -355,10 +268,17 @@ public class WeaponSelector : MonoBehaviour
         if(firstMenu.activeSelf)
         {
             if (rot == SelectorRotation.Left)
+            {
                 selector.localRotation = Quaternion.Euler(0, 0, 180);
-
+                selectedId = 0;
+            }
+                
             if (rot == SelectorRotation.Right)
+            {
                 selector.localRotation = Quaternion.Euler(0, 0, 0);
+                selectedId = 1;
+            }
+                
         }
 
         if(mainMenu.activeSelf)
@@ -371,24 +291,20 @@ public class WeaponSelector : MonoBehaviour
             if (rot == SelectorRotation.BasGauche) selector2.localRotation = Quaternion.Euler(0, 0, -150);
         }
 
-    }        //90 Haut
-             //30 haut droite
-             //-30 bas droite
-             //-90 bas 
-             //-150 bas gauche
-             //-210 haut gauche
+    }       
 
     private void HandleFirstMenuInputs()
     {
-        //float x = Input.GetAxisRaw("Input_Rotation_Controller_Horizontal");//+ gérer retour joystick au centre
         float x = Input.GetAxisRaw("Horizontal");
 
-        if (x > 0) { SetSelector(SelectorRotation.Right); selectedId = 0; } 
-        if (x < 0) { SetSelector(SelectorRotation.Left); selectedId = 1; }
+        if (x > 0) { SetSelector(SelectorRotation.Right); } 
+        if (x < 0) { SetSelector(SelectorRotation.Left); }
 
 
-        if(Input.GetKeyDown(KeyCode.F))//ou input A sur manette
+        if(Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)
         {
+            canSelect = false;
+
             switch (selectedId)
             {
                 case 0:
@@ -397,11 +313,22 @@ public class WeaponSelector : MonoBehaviour
                 case 1:
                     SetWeaponToButton(1);
                     break;
+
+                default:
+                    break;
             }
+
+
+            selector.gameObject.SetActive(false); 
+            selector2.gameObject.SetActive(true);
+
+            firstMenu.SetActive(false);
+            mainMenu.SetActive(true);
         }
         
     
     }
+
 
     private void HandleMainMenuInputs()
     {
@@ -410,15 +337,21 @@ public class WeaponSelector : MonoBehaviour
 
         //print($"x: {x} / y: {y}");
 
-        if (x == 1 && y == 1) { SetSelector(SelectorRotation.HautDroite); selectedId = 0; }
-        if (x == 1 && y == -1) { SetSelector(SelectorRotation.BasDroite); selectedId = 1; }
+        if (x > 0.5f && y > 0) { SetSelector(SelectorRotation.HautDroite); selectedId = 0; }
+        if (x > 0.5f && y < 0) { SetSelector(SelectorRotation.BasDroite); selectedId = 1; }
+
         if (x == 0 && y == -1) { SetSelector(SelectorRotation.Bas); selectedId = 2; }
-        if (x == -1 && y == -1) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
-        if (x == -1 && y == 1) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
         if (x == 0 && y == 1) { SetSelector(SelectorRotation.Haut); selectedId = 5; }
 
-        if (Input.GetKeyDown(KeyCode.G) && mainMenu.activeSelf && selectedId != -1)//ou input A sur manette
+        if (x < -0.5f && y < 0) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
+        if (x < -0.5f && y > 0) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
+
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)//input A sur manette
         {
+
+            canSelect = false;
+
             switch (selectedId)
             {
                 case 0:
@@ -440,8 +373,28 @@ public class WeaponSelector : MonoBehaviour
                     SetWeaponOnSlot("Front");
                     break;
             }
+
+            
+
         }
 
+
+    }
+
+    private void Reset()
+    {
+        pattern = -1;
+        selectedWeapon = -1;
+        selectedId = 0;
+        canSelect = true;
+        weaponSelectionMenu = GameObject.Find("Weapon selection menu");
+        iconWeapon01 = GameObject.Find("IconWeapon1").GetComponent<Image>();
+        iconWeapon02 = GameObject.Find("IconWeapon2").GetComponent<Image>();
+        txtWeapon01 = GameObject.Find("TxtWeapon1").GetComponent<TextMeshProUGUI>();
+        txtWeapon02 = GameObject.Find("TxtWeapon2").GetComponent<TextMeshProUGUI>();
+        slots = GameObject.Find("SLOTS").transform;
+        selector = GameObject.Find("SELECTOR").GetComponent<RectTransform>();
+        selector = GameObject.Find("SELECTOR 2").GetComponent<RectTransform>();
 
     }
 }
