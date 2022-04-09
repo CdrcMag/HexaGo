@@ -174,4 +174,10 @@ public class PlayerManager : MonoBehaviour
             lifeBar.localScale = new Vector2(0f, lifeBar.localScale.y);
         }
     }
+
+    public void ResetLifePoint()
+    {
+        lifePoint = 100;
+        lifeBar.localScale = new Vector2(1, 1);
+    }
 }

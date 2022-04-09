@@ -17,6 +17,7 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] private Transition transition;
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private RectTransform[] difficultyButtons;
+    [SerializeField] private GameObject[] visors;
 
     private Image selecterImage;
     private bool canSelectLevel = false;
@@ -241,6 +242,10 @@ public class LevelSelection : MonoBehaviour
             StartCoroutine(GrowButton(0));
             StartCoroutine(SubstractButton(1));
             StartCoroutine(SubstractButton(2));
+
+            visors[0].SetActive(true);
+            visors[1].SetActive(false);
+            visors[2].SetActive(false);
         }
         else if (difficulty == 2)
         {
@@ -250,6 +255,10 @@ public class LevelSelection : MonoBehaviour
             StartCoroutine(GrowButton(1));
             StartCoroutine(SubstractButton(0));
             StartCoroutine(SubstractButton(2));
+
+            visors[0].SetActive(false);
+            visors[1].SetActive(true);
+            visors[2].SetActive(false);
         }
         else if (difficulty == 3)
         {
@@ -259,6 +268,10 @@ public class LevelSelection : MonoBehaviour
             StartCoroutine(GrowButton(2));
             StartCoroutine(SubstractButton(1));
             StartCoroutine(SubstractButton(0));
+
+            visors[0].SetActive(false);
+            visors[1].SetActive(false);
+            visors[2].SetActive(true);
         }
     }
 
@@ -267,7 +280,7 @@ public class LevelSelection : MonoBehaviour
         while(difficultyButtons[i].localScale.x > 0.75f)
         {
             yield return new WaitForSeconds(0.05f);
-            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x - 0.05f, difficultyButtons[i].localScale.y - 0.05f);
+            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x - 0.1f, difficultyButtons[i].localScale.y - 0.1f);
         }
     }
 
@@ -276,7 +289,7 @@ public class LevelSelection : MonoBehaviour
         while (difficultyButtons[i].localScale.x < 1f)
         {
             yield return new WaitForSeconds(0.05f);
-            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x + 0.05f, difficultyButtons[i].localScale.y + 0.05f);
+            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x + 0.1f, difficultyButtons[i].localScale.y + 0.1f);
         }
     }
 }

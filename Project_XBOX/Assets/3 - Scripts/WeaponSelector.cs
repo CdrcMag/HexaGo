@@ -227,7 +227,7 @@ public class WeaponSelector : MonoBehaviour
         else if (_weapon01 == "Propulseur (Propulseur)"){txtWeapon01.text = "Propulsor";iconWeapon01.sprite = icons[4];}
         else if (_weapon01 == "Shield (Shield)"){txtWeapon01.text = "Shield";iconWeapon01.sprite = icons[5];}
         else if (_weapon01 == "Dash (Dash)"){txtWeapon01.text = "Dash";iconWeapon01.sprite = icons[6];}
-        else if (_weapon01 == "Totems (Totems)"){txtWeapon01.text = "Totems";iconWeapon01.sprite = icons[7];}
+        else if (_weapon01 == "Totems (Totems)"){txtWeapon01.text = "Bombs";iconWeapon01.sprite = icons[7];}
 
         if      (_weapon02 == "Canon (Canon)"){txtWeapon02.text = "Canon";iconWeapon02.sprite = icons[0];}
         else if (_weapon02 == "BigFuckingGun (BigFuckingGun)"){txtWeapon02.text = "BigFuckingGun";iconWeapon02.sprite = icons[1];}
@@ -236,7 +236,7 @@ public class WeaponSelector : MonoBehaviour
         else if (_weapon02 == "Propulseur (Propulseur)"){txtWeapon02.text = "Propulsor";iconWeapon02.sprite = icons[4];}
         else if (_weapon02 == "Shield (Shield)"){txtWeapon02.text = "Shield";iconWeapon02.sprite = icons[5];}
         else if (_weapon02 == "Dash (Dash)"){txtWeapon02.text = "Dash";iconWeapon02.sprite = icons[6];}
-        else if (_weapon02 == "Totems (Totems)"){txtWeapon02.text = "Totems";iconWeapon02.sprite = icons[7];}
+        else if (_weapon02 == "Totems (Totems)"){txtWeapon02.text = "Bombs";iconWeapon02.sprite = icons[7];}
 
         SetSelector(SelectorRotation.Left);
     }
