@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
     {
         if((Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A)) && isIntro)
         {
-            PlayerPrefs.SetInt("PlayedTutorial", 0); //The player will need to do the tuto
+            PlayerPrefs.SetInt("PlayedTutorial", 0);
 
             GoToLevelSelection();
 

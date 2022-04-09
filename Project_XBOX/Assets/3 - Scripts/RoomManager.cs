@@ -30,6 +30,7 @@ public class RoomManager : MonoBehaviour
     private Level01[] currentRooms;
     private int numberRoom;
     private bool[] validedRooms = { true, true, true, true, true, true, true, true, true, true, true, true };
+    private bool isTutorial = false;
 
     // =====================================================
 
@@ -42,12 +43,11 @@ public class RoomManager : MonoBehaviour
 
     private void PrepareRoom()
     {
-        //if(PlayerPrefs.GetInt("PlayedTutorial", 0) == 0)
-        if(true)
+        if(PlayerPrefs.GetString("Difficulty", "Easy") == "Easy" && PlayerPrefs.GetInt("PlayedTutorial", 0) == 0)
         {
             PrepareTutorial();
 
-            PlayerPrefs.SetInt("PlayedTutorial", 1);
+            isTutorial = true;
 
             return;
         }
@@ -179,6 +179,17 @@ public class RoomManager : MonoBehaviour
 
     public void UpdateState()
     {
+        if(isTutorial)
+        {
+            isTutorial = false;
+
+            tutorial.EndTutorial();
+
+            PrepareRoom();
+
+            return;
+        }
+
         killedEnemies++;
 
         CheckState();
@@ -234,7 +245,7 @@ public class RoomManager : MonoBehaviour
     {
         if(transition == null)
         {
-            print("Eh mon con, mets dans le SceneManager la variable transition dans l'inpecteur !");
+            print("The script TRANSITION.cs is missing !!");
         }
 
         transition.StartAugment();

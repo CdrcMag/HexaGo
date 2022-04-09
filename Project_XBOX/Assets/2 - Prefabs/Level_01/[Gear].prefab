@@ -401,6 +401,7 @@ MonoBehaviour:
   animator: {fileID: 5464234886575677839}
   eyeIris: {fileID: 5464234887224674407}
   enemy: {fileID: 0}
+  COEFF_SCALE: 5
 --- !u!95 &5464234886575677839
 Animator:
   serializedVersion: 3
@@ -466,13 +467,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea37f03ba9cd1547bfe9348cce7d766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoint: 100
+  lifePoint: 80
   speed: 1.5
   damageOnCollision: 10
   target: {fileID: 0}
   isActivated: 0
+  isBoss: 0
+  isSummoned: 0
   eyes:
   - {fileID: 5464234886575677832}
+  bossLifeBar: {fileID: 0}
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   ptcDiePref: {fileID: 4717575583263620708, guid: 8c62902af13479c42af0f0a06a3852d1, type: 3}
   body: {fileID: 5464234887624532129}
@@ -704,3 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 5464234886984820916}
+  coeffDamage: 1
+  isSelf: 0
+  ptcHitPref: {fileID: 0}
+  lifePoint: 60
