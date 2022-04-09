@@ -27,6 +27,7 @@ public class XboxControllerBoss : Enemy
     {
         base.SetTargetInStart();
         base.SetInitialSpeed(GetSpeed());
+        base.SetMaxLifePoint();
     }
 
     private void Start()

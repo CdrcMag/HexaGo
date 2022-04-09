@@ -41,6 +41,7 @@ public class Poulpy : Enemy
     {
         base.SetTargetInStart();
         base.SetInitialSpeed(GetSpeed());
+        base.SetMaxLifePoint();
 
         SetTentaclesComponents();
         SetSignsComponents();

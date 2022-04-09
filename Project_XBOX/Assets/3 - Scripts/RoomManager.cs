@@ -77,6 +77,8 @@ public class RoomManager : MonoBehaviour
             SpawnBoss();
         }
 
+        killedEnemies = 0;
+
         StartCoroutine(IActivatePlayer());
     }
 
@@ -181,15 +183,15 @@ public class RoomManager : MonoBehaviour
     {
         if(isTutorial)
         {
-            isTutorial = false;
-
             tutorial.EndTutorial();
 
             PrepareRoom();
 
+            isTutorial = false;
+
             return;
         }
-
+     
         killedEnemies++;
 
         CheckState();
@@ -208,7 +210,6 @@ public class RoomManager : MonoBehaviour
 
             player.GetComponent<Player_Movement>().canMove = false;
             player.GetComponent<Rigidbody2D>().isKinematic = true;
-            //player.position = currentRooms[numberRoom].startPosPlayer;
 
             currentNumberRoom++;
             killedEnemies = 0;
@@ -237,8 +238,11 @@ public class RoomManager : MonoBehaviour
     }
 
     public void FinishLevel()
-    {
-        StartCoroutine(IFinishLevel());
+    {   
+        if(!isTutorial)
+        {
+            StartCoroutine(IFinishLevel());
+        }
     }
 
     private IEnumerator IFinishLevel()

@@ -29,15 +29,20 @@ public class Tutorial : MonoBehaviour
     public AudioClip tutoTheme;
     public GameObject targetPrefab;
     public AudioClip level01Theme;
+    public GameObject infoDashPref;
+    public GameObject infoBombsPref;
 
     private int state = 0;
     private int cptTarget = 0;
     private Player_Shooting ps;
+    private bool isActive = false;
 
     // =====================================================
 
     public void LoadTutorial()
     {
+        isActive = true;
+
         player.GetComponent<Rigidbody2D>().isKinematic = false;
         player.GetComponent<Player_Movement>().canMove = true;
 
@@ -57,6 +62,18 @@ public class Tutorial : MonoBehaviour
 
     private void Update()
     {
+        if(!isActive)
+        {
+            return;
+        }
+
+        if (Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A))
+        {
+            // Skip Tutorial
+            roomManager.UpdateState();
+        }
+
+        // Check conditions for the current state
         if (state == 6) { return; }
         else if (state == 0) { CheckState00(); }
         else if(state == 1) { CheckState01(); }
@@ -117,6 +134,8 @@ public class Tutorial : MonoBehaviour
             ps.SetUpgrade(Player_Shooting.SlotName.BackLeft, ps.Upgrades[1]);
             ps.SetUpgrade(Player_Shooting.SlotName.BackRight, ps.Upgrades[2]);
 
+            StartCoroutine(ShowInfoUpgrades());
+
             state++;
         }
     }
@@ -144,7 +163,7 @@ public class Tutorial : MonoBehaviour
     private void SpawnTarget(Vector2 pos)
     {
         GameObject target;
-        target = Instantiate(targetPrefab, pos, Quaternion.identity);
+        target = Instantiate(targetPrefab, pos, Quaternion.identity, tutorialRoot);
 
         StartCoroutine(IGrowTarget(target.transform));
     }
@@ -168,6 +187,40 @@ public class Tutorial : MonoBehaviour
 
             yield return new WaitForSeconds(DELAY);
         }
+    }
+
+    private IEnumerator ShowInfoUpgrades()
+    {
+        GameObject infoDash;
+        infoDash = Instantiate(infoDashPref, new Vector2(player.position.x, player.position.y + 1f), Quaternion.identity);
+        Destroy(infoDash, 5f);
+        StartCoroutine(FadeInfo(infoDash));
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject infoBombs;
+        infoBombs = Instantiate(infoBombsPref, new Vector2(player.position.x, player.position.y + 1f), Quaternion.identity);
+        Destroy(infoBombs, 5f);
+        StartCoroutine(FadeInfo(infoBombs));
+    }
+
+    private IEnumerator FadeInfo(GameObject _info)
+    {
+        float a = 1f;
+        SpriteRenderer rd = _info.GetComponent<SpriteRenderer>();
+        Color color;
+
+        while (a > 0f)
+        {
+            color = new Color(1f, 1f, 1f, a);
+            rd.color = color;
+            a -= 0.05f;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        color = new Color(1f, 1f, 1f, 0);
+        rd.color = color;
     }
 
     private void SpawnMiniBoss()
@@ -196,6 +249,8 @@ public class Tutorial : MonoBehaviour
 
     public void EndTutorial()
     {
+        isActive = false;
+
         PlayerPrefs.SetInt("PlayedTutorial", 1);
 
         player.GetComponent<Rigidbody2D>().isKinematic = true;
