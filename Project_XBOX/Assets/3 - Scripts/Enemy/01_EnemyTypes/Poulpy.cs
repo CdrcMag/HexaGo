@@ -68,7 +68,7 @@ public class Poulpy : Enemy
 
     private IEnumerator AnimateHead()
     {
-        while(head.localPosition.y > -0.8f)
+        while(head.localPosition.y > -0.7f)
         {
             yield return new WaitForSeconds(DELAY);
 
@@ -93,7 +93,7 @@ public class Poulpy : Enemy
     {
         yield return new WaitForSeconds(0.5f);
 
-        while (body.localPosition.y > -4f)
+        while (body.localPosition.y > -3.9f)
         {
             yield return new WaitForSeconds(DELAY);
 

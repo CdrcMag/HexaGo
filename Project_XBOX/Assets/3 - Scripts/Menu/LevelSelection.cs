@@ -47,6 +47,8 @@ public class LevelSelection : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.A) && canSelectLevel)
         {
+            canSelectLevel = false;
+
             GoToLevelKeyboard();
 
             PlayerPrefs.SetString("Difficulty", "Easy");
@@ -223,6 +225,8 @@ public class LevelSelection : MonoBehaviour
         {
             return;
         }
+
+        canSelectLevel = false;
 
         soundManager.playAudioClip(0);
 

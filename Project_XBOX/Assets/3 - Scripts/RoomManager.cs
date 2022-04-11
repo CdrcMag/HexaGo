@@ -69,6 +69,11 @@ public class RoomManager : MonoBehaviour
             {
                 GameObject enemy = Instantiate(currentRooms[numberRoom].enemies[i], currentRooms[numberRoom].positions[i], Quaternion.identity, enemyPool);
 
+                if(currentRooms[numberRoom].multiplicatorLife[i] != 0)
+                {
+                    enemy.GetComponent<Enemy>().SetLifePoint(enemy.GetComponent<Enemy>().GetLifePoint() * currentRooms[numberRoom].multiplicatorLife[i]);
+                }
+
                 StartCoroutine(IGrowEnemy(enemy, i));
             }
         }
