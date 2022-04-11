@@ -4347,10 +4347,10 @@ MonoBehaviour:
   lifePoint: 2000
   speed: 0
   damageOnCollision: 10
-  target: {fileID: 0}
   isActivated: 0
   isBoss: 1
   isSummoned: 1
+  isTuto: 0
   eyes:
   - {fileID: 4311243662561008531}
   bossLifeBar: {fileID: 2506672853526202581}
@@ -4693,6 +4693,7 @@ GameObject:
   - component: {fileID: 4311243662430804229}
   - component: {fileID: 6484389279630550459}
   - component: {fileID: 270838465642191429}
+  - component: {fileID: 6701956530247235674}
   m_Layer: 0
   m_Name: Body
   m_TagString: Enemy
@@ -4871,6 +4872,25 @@ MonoBehaviour:
   isSelf: 0
   ptcHitPref: {fileID: 0}
   lifePoint: 60
+--- !u!95 &6701956530247235674
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311243662430804231}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b81d5858926fb1f499da6ba3253b7312, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4311243662561008532
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,11 +16,22 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private LevelSelection levelSelection;
     [SerializeField] private SoundManager soundManager;
 
-    private bool isIntro = true;
+    private bool isIntro = false;
 
     // =====================================================
 
 
+    private void Awake()
+    {
+        StartCoroutine(ILoadIntro());
+    }
+
+    private IEnumerator ILoadIntro()
+    {
+        yield return new WaitForSeconds(1.2f);
+
+        isIntro = true;
+    }
 
     private void Update()
     {

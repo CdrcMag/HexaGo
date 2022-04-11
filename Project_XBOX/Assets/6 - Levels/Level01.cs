@@ -11,4 +11,5 @@ public class Level01 : ScriptableObject
     public Vector2[] positions;
     public float[] multiplicatorScale;
     public Vector2 startPosPlayer = new Vector2(0f, 0f);
+    public float[] multiplicatorLife;
 }

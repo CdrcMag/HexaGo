@@ -467,13 +467,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea37f03ba9cd1547bfe9348cce7d766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoint: 80
+  lifePoint: 70
   speed: 1.5
   damageOnCollision: 10
-  target: {fileID: 0}
   isActivated: 0
   isBoss: 0
   isSummoned: 0
+  isTuto: 0
   eyes:
   - {fileID: 5464234886575677832}
   bossLifeBar: {fileID: 0}
