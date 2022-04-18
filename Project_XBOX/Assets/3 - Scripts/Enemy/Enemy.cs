@@ -20,12 +20,13 @@ public abstract class Enemy : MonoBehaviour
     [Header("Properties")]
     [SerializeField] protected float lifePoint = 50f;
     [SerializeField] protected float speed = 10f;
-    protected float initialSpeed = 10f;
     [SerializeField] protected float damageOnCollision = 10f;
-    [SerializeField] protected Transform target;
+
+    [Header("Roles")]
     [SerializeField] protected bool isActivated = false;
     [SerializeField] protected bool isBoss = false;
     [SerializeField] protected bool isSummoned = false;
+    [SerializeField] protected bool isTuto = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
@@ -39,6 +40,9 @@ public abstract class Enemy : MonoBehaviour
     private RoomManager roomManager;
     private bool hasUpdated = false;
     private SoundManager soundManager;
+    private float maxLifePoint = 0;
+    protected float initialSpeed = 10f;
+    protected Transform target;
 
     // =====================================================
 
@@ -187,7 +191,7 @@ public abstract class Enemy : MonoBehaviour
                 roomManager.UpdateState();
             }
 
-            if(isBoss)
+            if(isBoss && !isTuto)
             {
                 roomManager.FinishLevel();
             }
@@ -248,15 +252,21 @@ public abstract class Enemy : MonoBehaviour
         Destroy(bullet, 10f);
     }
 
+    public virtual void SetMaxLifePoint()
+    {
+        maxLifePoint = lifePoint;
+    }
+
     private IEnumerator UpdateBossLifeBar()
     {
-        float scaleToReach = lifePoint / 2000;
+        // Modification : 2000 -> maxLifePoint
+        float scaleToReach = lifePoint / maxLifePoint;
 
         while (bossLifeBar.localScale.x > scaleToReach && bossLifeBar.localScale.x > 0f)
         {
-            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.001f, bossLifeBar.localScale.y);
+            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.002f, bossLifeBar.localScale.y);
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
 
         if (bossLifeBar.localScale.x < 0f)
