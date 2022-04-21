@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private RectTransform lifeBar;
 
     public int ChanceToSpawnHealthPotion = 50;//Pourcentage
+    public int HealAmount = 20;//Pourcentage
 
     // =====================================================
 

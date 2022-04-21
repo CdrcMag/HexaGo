@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class HealthPotion : Collectable
 {
-    public int healAmount = 0;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            PlayerManager.Instance.AddHealthPoint(healAmount);
+            PlayerManager.Instance.AddHealthPoint(PlayerManager.Instance.HealAmount);
             Destroy(gameObject);
         }
             
