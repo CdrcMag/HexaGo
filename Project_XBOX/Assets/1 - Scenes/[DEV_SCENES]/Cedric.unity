@@ -2256,6 +2256,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 701158639}
     - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: HealAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1887012115}
