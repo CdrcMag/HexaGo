@@ -44,6 +44,8 @@ public abstract class Enemy : MonoBehaviour
     protected float initialSpeed = 10f;
     protected Transform target;
 
+    private GameObject healthPotionPrefab;
+
     // =====================================================
 
     // =================== [ SET - GET ] ===================
@@ -62,8 +64,6 @@ public abstract class Enemy : MonoBehaviour
     public Eye GetEye(int _index) { return eyes[_index]; }
 
     // =====================================================
-
-
 
     // Set the variable "target" with the player in the scene
     public virtual void SetTargetInStart()
@@ -177,6 +177,8 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        healthPotionPrefab = Resources.Load<GameObject>("Health Potion");
+
         if (!hasUpdated)
         {
             GameObject ptcDie;
@@ -197,6 +199,11 @@ public abstract class Enemy : MonoBehaviour
             }
 
             hasUpdated = true;
+        }
+
+        if (Random.Range(1, 101) <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
+        {
+            if (healthPotionPrefab != null) Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
         }
 
         Destroy(gameObject);
