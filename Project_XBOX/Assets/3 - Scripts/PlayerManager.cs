@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance;
+
     // ===================== VARIABLES =====================
 
     [SerializeField] private float lifePoint = 100;
@@ -16,7 +18,15 @@ public class PlayerManager : MonoBehaviour
     private bool isImmune = false;
     [SerializeField] private RectTransform lifeBar;
 
+    public int ChanceToSpawnHealthPotion = 50;//Pourcentage
+    public int HealAmount = 20;//Pourcentage
+
     // =====================================================
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
     // =================== [ SET - GET ] ===================
 
@@ -175,9 +185,40 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private IEnumerator UpdateLifeBarUp()
+    {
+        float scaleToReach = lifePoint / 100;
+
+        while (lifeBar.localScale.x < scaleToReach && lifeBar.localScale.x > 0f)
+        {
+            lifeBar.localScale = new Vector2(lifeBar.localScale.x + 0.025f, lifeBar.localScale.y);
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        if (lifeBar.localScale.x < 0f)
+        {
+            lifeBar.localScale = new Vector2(0f, lifeBar.localScale.y);
+        }
+    }
+
     public void ResetLifePoint()
     {
         lifePoint = 100;
         lifeBar.localScale = new Vector2(1, 1);
+    }
+
+    public void AddHealthPoint(int points)
+    {
+        if(lifePoint + points >= 100)
+        {
+            lifePoint = 100;
+        }
+        else
+        {
+            lifePoint += points;
+        }
+
+        StartCoroutine(UpdateLifeBarUp());
     }
 }
