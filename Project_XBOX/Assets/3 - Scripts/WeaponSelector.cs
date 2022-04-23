@@ -42,7 +42,6 @@ public class WeaponSelector : MonoBehaviour
     public RectTransform selector2;
 
 
-
     public bool canSelect = true;
 
     private void Awake()
