@@ -42,7 +42,6 @@ public class WeaponSelector : MonoBehaviour
     public RectTransform selector2;
 
 
-
     public bool canSelect = true;
 
     private void Awake()
@@ -65,6 +64,11 @@ public class WeaponSelector : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            print(ps.currentWeaponsState.Count);
+        }
+
         if (Input.GetKeyDown(KeyCode.T) && firstMenu.activeSelf == false)
         {
             SetStates(true, false);
@@ -349,6 +353,13 @@ public class WeaponSelector : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)//input A sur manette
         {
+            if(HowMuchGuns() == 1)
+            {
+                if (IsAWeaponOnTheSelectedSlot() == true)
+                {
+                    return;
+                }
+            }
 
             canSelect = false;
 
@@ -378,6 +389,70 @@ public class WeaponSelector : MonoBehaviour
 
         }
 
+
+    }
+
+
+
+    bool IsAWeaponOnTheSelectedSlot()
+    {
+        Player_Shooting.SlotName sTemp = Player_Shooting.SlotName.None;
+
+        switch (selectedId)
+        {
+            case 0:
+                sTemp = Player_Shooting.SlotName.FrontRight;
+                break;
+            case 1:
+                sTemp = Player_Shooting.SlotName.BackRight;
+                break;
+            case 2:
+                sTemp = Player_Shooting.SlotName.Back;
+                break;
+            case 3:
+                sTemp = Player_Shooting.SlotName.BackLeft;
+                break;
+            case 4:
+                sTemp = Player_Shooting.SlotName.FrontLeft;
+                break;
+            case 5:
+                sTemp = Player_Shooting.SlotName.Front;
+                break;
+        }
+
+        foreach (KeyValuePair<Player_Shooting.SlotName, Player_Shooting.WeaponName> pair in ps.currentWeaponsState)
+        {
+            if(sTemp == pair.Key)
+            {
+                if (pair.Value == Player_Shooting.WeaponName.BigFuckingGun ||
+                pair.Value == Player_Shooting.WeaponName.Canon ||
+                pair.Value == Player_Shooting.WeaponName.Mitraillette ||
+                pair.Value == Player_Shooting.WeaponName.Shotgun)
+                {
+                    return true;
+                }
+            }
+
+            
+        }
+
+        return false;
+    }
+
+
+    int HowMuchGuns()
+    {
+        int total = 0;
+
+        foreach (KeyValuePair<Player_Shooting.SlotName, Player_Shooting.WeaponName> pair in ps.currentWeaponsState)
+        {
+            if (pair.Value == Player_Shooting.WeaponName.BigFuckingGun) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Canon) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Mitraillette) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Shotgun) total++;
+        }
+
+        return total;
 
     }
 

@@ -31,7 +31,7 @@ public class Player_Shooting : MonoBehaviour
 
 
     //Nom des slots et noms des armes
-    public enum SlotName { Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
+    public enum SlotName { None, Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
     public enum WeaponName { None = 0, Canon = 1, BigFuckingGun = 2, Mitraillette = 3, Shotgun = 4 };
     public enum UpgradeName { None, Propulseur, Dash, Totems, Shield };
 
