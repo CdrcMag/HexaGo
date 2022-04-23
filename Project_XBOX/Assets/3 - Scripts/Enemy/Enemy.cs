@@ -20,11 +20,13 @@ public abstract class Enemy : MonoBehaviour
     [Header("Properties")]
     [SerializeField] protected float lifePoint = 50f;
     [SerializeField] protected float speed = 10f;
-    protected float initialSpeed = 10f;
     [SerializeField] protected float damageOnCollision = 10f;
-    [SerializeField] protected Transform target;
+
+    [Header("Roles")]
     [SerializeField] protected bool isActivated = false;
     [SerializeField] protected bool isBoss = false;
+    [SerializeField] protected bool isSummoned = false;
+    [SerializeField] protected bool isTuto = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
@@ -38,6 +40,11 @@ public abstract class Enemy : MonoBehaviour
     private RoomManager roomManager;
     private bool hasUpdated = false;
     private SoundManager soundManager;
+    private float maxLifePoint = 0;
+    protected float initialSpeed = 10f;
+    protected Transform target;
+
+    private GameObject healthPotionPrefab;
 
     // =====================================================
 
@@ -57,8 +64,6 @@ public abstract class Enemy : MonoBehaviour
     public Eye GetEye(int _index) { return eyes[_index]; }
 
     // =====================================================
-
-
 
     // Set the variable "target" with the player in the scene
     public virtual void SetTargetInStart()
@@ -113,7 +118,7 @@ public abstract class Enemy : MonoBehaviour
         soundManager.playAudioClipWithPitch(5, 0.5f);
     }
 
-    public virtual void TakeDamage(float _damage)
+    public virtual void TakeDamage(float _damage, bool _isSelf)
     {
         lifePoint -= _damage;
 
@@ -122,9 +127,12 @@ public abstract class Enemy : MonoBehaviour
             StartCoroutine(UpdateBossLifeBar());
         }
 
-        GameObject ptcHit;
-        ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
-        Destroy(ptcHit, 4f);
+        if(!_isSelf)
+        {
+            GameObject ptcHit;
+            ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
+            Destroy(ptcHit, 4f);
+        }
 
         if(lifePoint <= 0)
         {
@@ -140,8 +148,37 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public virtual void TakeDamage(float _damage)
+    {
+        lifePoint -= _damage;
+
+        if (isBoss)
+        {
+            StartCoroutine(UpdateBossLifeBar());
+        }
+
+        GameObject ptcHit;
+        ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
+        Destroy(ptcHit, 4f);
+
+        if (lifePoint <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            //cameraShake.Shake(0.1f, _damage / 8f);
+            CameraShake.Instance.Shake(0.1f, 0.8f);
+            float volume = _damage / 20;
+            volume = Mathf.Clamp(volume, 0.5f, 1f);
+            soundManager.playAudioClipWithVolume(5, volume);
+        }
+    }
+
     public virtual void Die()
     {
+        healthPotionPrefab = Resources.Load<GameObject>("Health Potion");
+
         if (!hasUpdated)
         {
             GameObject ptcDie;
@@ -151,8 +188,22 @@ public abstract class Enemy : MonoBehaviour
             cameraShake.Shake(0.3f, 1.5f);
             soundManager.playAudioClip(6);
 
-            roomManager.UpdateState();
+            if(!isSummoned)
+            {
+                roomManager.UpdateState();
+            }
+
+            if(isBoss && !isTuto)
+            {
+                roomManager.FinishLevel();
+            }
+
             hasUpdated = true;
+        }
+
+        if (Random.Range(1, 101) <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
+        {
+            if (healthPotionPrefab != null) Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
         }
 
         Destroy(gameObject);
@@ -208,15 +259,21 @@ public abstract class Enemy : MonoBehaviour
         Destroy(bullet, 10f);
     }
 
+    public virtual void SetMaxLifePoint()
+    {
+        maxLifePoint = lifePoint;
+    }
+
     private IEnumerator UpdateBossLifeBar()
     {
-        float scaleToReach = lifePoint / 2000;
+        // Modification : 2000 -> maxLifePoint
+        float scaleToReach = lifePoint / maxLifePoint;
 
         while (bossLifeBar.localScale.x > scaleToReach && bossLifeBar.localScale.x > 0f)
         {
-            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.001f, bossLifeBar.localScale.y);
+            bossLifeBar.localScale = new Vector2(bossLifeBar.localScale.x - 0.002f, bossLifeBar.localScale.y);
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
 
         if (bossLifeBar.localScale.x < 0f)

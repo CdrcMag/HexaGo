@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
@@ -18,14 +20,17 @@ public class RoomManager : MonoBehaviour
     public Transform player;
     public AudioSource musicManager;
     public WeaponSelector weaponSelector;
+    [SerializeField] private Transition transition;
+    public Tutorial tutorial;
 
     // BOSS
-    public GameObject poulpy;
-    public AudioClip poulpyTheme;
+    public GameObject bossPrefab;
+    public AudioClip bossTheme;
 
     private Level01[] currentRooms;
     private int numberRoom;
     private bool[] validedRooms = { true, true, true, true, true, true, true, true, true, true, true, true };
+    private bool isTutorial = false;
 
     // =====================================================
 
@@ -38,6 +43,15 @@ public class RoomManager : MonoBehaviour
 
     private void PrepareRoom()
     {
+        if(PlayerPrefs.GetString("Difficulty", "Easy") == "Easy" && PlayerPrefs.GetInt("PlayedTutorial", 0) == 0)
+        {
+            PrepareTutorial();
+
+            isTutorial = true;
+
+            return;
+        }
+
         if(currentNumberRoom != 9)
         {
             currentRooms = ChooseDifficulty();
@@ -55,6 +69,11 @@ public class RoomManager : MonoBehaviour
             {
                 GameObject enemy = Instantiate(currentRooms[numberRoom].enemies[i], currentRooms[numberRoom].positions[i], Quaternion.identity, enemyPool);
 
+                if(currentRooms[numberRoom].multiplicatorLife[i] != 0)
+                {
+                    enemy.GetComponent<Enemy>().SetLifePoint(enemy.GetComponent<Enemy>().GetLifePoint() * currentRooms[numberRoom].multiplicatorLife[i]);
+                }
+
                 StartCoroutine(IGrowEnemy(enemy, i));
             }
         }
@@ -62,6 +81,8 @@ public class RoomManager : MonoBehaviour
         {
             SpawnBoss();
         }
+
+        killedEnemies = 0;
 
         StartCoroutine(IActivatePlayer());
     }
@@ -165,6 +186,17 @@ public class RoomManager : MonoBehaviour
 
     public void UpdateState()
     {
+        if(isTutorial)
+        {
+            tutorial.EndTutorial();
+
+            PrepareRoom();
+
+            isTutorial = false;
+
+            return;
+        }
+     
         killedEnemies++;
 
         CheckState();
@@ -183,7 +215,6 @@ public class RoomManager : MonoBehaviour
 
             player.GetComponent<Player_Movement>().canMove = false;
             player.GetComponent<Rigidbody2D>().isKinematic = true;
-            //player.position = currentRooms[numberRoom].startPosPlayer;
 
             currentNumberRoom++;
             killedEnemies = 0;
@@ -203,10 +234,38 @@ public class RoomManager : MonoBehaviour
     private void SpawnBoss()
     {
         musicManager.Stop();
-        musicManager.clip = poulpyTheme;
+        musicManager.clip = bossTheme;
         musicManager.Play();
+        musicManager.pitch = 1f;
 
         GameObject boss;
-        boss = Instantiate(poulpy, new Vector2(0f, 0f), Quaternion.identity);
+        boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity);
+    }
+
+    public void FinishLevel()
+    {   
+        if(!isTutorial)
+        {
+            StartCoroutine(IFinishLevel());
+        }
+    }
+
+    private IEnumerator IFinishLevel()
+    {
+        if(transition == null)
+        {
+            print("The script TRANSITION.cs is missing !!");
+        }
+
+        transition.StartAugment();
+
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene("Menu");
+    }
+
+    private void PrepareTutorial()
+    {
+        tutorial.LoadTutorial();
     }
 }
