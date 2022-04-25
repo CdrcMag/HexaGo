@@ -2256,6 +2256,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 701158639}
     - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: HealAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: transition
       value: 
       objectReference: {fileID: 1887012115}
@@ -2279,6 +2283,10 @@ PrefabInstance:
       propertyPath: bodies.Array.data[2]
       value: 
       objectReference: {fileID: 174281625}
+    - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: ChanceToSpawnHealthPotion
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5732632517162932791, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: ptcBFGPref
       value: 
@@ -3628,8 +3636,9 @@ MonoBehaviour:
   musicManager: {fileID: 958224260}
   weaponSelector: {fileID: 0}
   transition: {fileID: 0}
-  poulpy: {fileID: 0}
-  poulpyTheme: {fileID: 0}
+  tutorial: {fileID: 0}
+  bossPrefab: {fileID: 0}
+  bossTheme: {fileID: 0}
 --- !u!114 &1796437903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3642,7 +3651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb726aeb3250b824b94095bbebf44078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPause: 0
 --- !u!114 &1887012115 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1303917045093369732, guid: 1f2ae643c35f0ab47b5b28e61d2031b8, type: 3}
@@ -3822,6 +3830,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 189963310}
     m_Modifications:
+    - target: {fileID: 377416645087331560, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 377416645356523194, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
       propertyPath: m_Name
       value: Pause
