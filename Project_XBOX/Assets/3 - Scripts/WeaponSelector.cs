@@ -43,6 +43,7 @@ public class WeaponSelector : MonoBehaviour
 
 
     public bool canSelect = true;
+    private bool aGunHasBeenSelected = false;
 
     private void Awake()
     {
@@ -141,6 +142,8 @@ public class WeaponSelector : MonoBehaviour
         SetStates(false, false);
 
     }
+
+
 
     public void SetWeaponToButton(int id)
     {
@@ -350,16 +353,21 @@ public class WeaponSelector : MonoBehaviour
         if (x < -0.5f && y < 0) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
         if (x < -0.5f && y > 0) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
 
-
         if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)//input A sur manette
         {
-            if(HowMuchGuns() == 1)
+
+            if(AGunIsSelected() == false)
             {
-                if (IsAWeaponOnTheSelectedSlot() == true)
+                if (HowMuchGuns() == 1)
                 {
-                    return;
+                    if (IsAWeaponOnTheSelectedSlot() == true)
+                    {
+                        //print("Une arme n'était pas selectionnée, le joueur n'a qu'une arme, et tu as choisi le slot avec une arme");
+                        return;
+                    }
                 }
             }
+            
 
             canSelect = false;
 
@@ -392,6 +400,16 @@ public class WeaponSelector : MonoBehaviour
 
     }
 
+
+    private bool AGunIsSelected()
+    {
+        if (pattern == 0 && selectedWeapon == 0) return true; 
+        if (pattern == 0 && selectedWeapon == 1) return true;
+        if (pattern == 2 && selectedWeapon == 0) return true;
+
+        return false;
+    }
+    
 
 
     bool IsAWeaponOnTheSelectedSlot()
