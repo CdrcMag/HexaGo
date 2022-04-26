@@ -18,10 +18,14 @@ public class Dash : Upgrade
     private Player_Movement pm;
     private Rigidbody2D rb;
 
+    //dashh sound
+    private SoundManager soundManager;
+
     private void Awake()
     {
         pm = GetComponentInParent<Player_Movement>();
         rb = GetComponentInParent<Rigidbody2D>();
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
     }
 
 
@@ -70,6 +74,8 @@ public class Dash : Upgrade
             if(Input.GetAxis("Controller_LeftTrigger") > 0.9f)
             {
                 pm.movement.Normalize();
+
+                soundManager.playAudioClip(11);
 
                 //Disallow movement
                 pm.canMove = false;
