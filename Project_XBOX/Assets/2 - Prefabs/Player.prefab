@@ -371,10 +371,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifePoint: 100
   reduction: 0
-  soundManager: {fileID: 0}
+  soundManager: {fileID: 3966284630450607951, guid: c0f1daa28b740b044b26dca277ebc81b, type: 3}
   transition: {fileID: 0}
   bodies: []
   lifeBar: {fileID: 0}
+  ChanceToSpawnHealthPotion: 50
+  HealAmount: 20
 --- !u!114 &139817739442116469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,6 +971,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1483721241765063274, guid: faa32ece19ab5af4cba542282d25217b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483721241765063274, guid: faa32ece19ab5af4cba542282d25217b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403758969861026042, guid: faa32ece19ab5af4cba542282d25217b, type: 3}
+      propertyPath: imgTotem
+      value: 
+      objectReference: {fileID: 21300000, guid: c73643c8baf715e448a49b19ec5f6909, type: 3}
     - target: {fileID: 2403758969861026042, guid: faa32ece19ab5af4cba542282d25217b, type: 3}
       propertyPath: totemPrefab
       value: 

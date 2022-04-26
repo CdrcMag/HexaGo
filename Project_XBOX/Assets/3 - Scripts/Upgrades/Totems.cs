@@ -6,6 +6,8 @@ public class Totems : Upgrade
 {
     public GameObject totemPrefab;
 
+    public Sprite imgTotem;
+
     private Transform player;
 
     const int TOTEM_MAX = 3;
@@ -39,6 +41,7 @@ public class Totems : Upgrade
             if(totalTotemPlaced < TOTEM_MAX && canPlaceTotem)
             {
                 GameObject totemInstance = Instantiate(totemPrefab, player.position, Quaternion.identity);
+                totemInstance.GetComponent<SpriteRenderer>().sprite = imgTotem;
                 totalTotemPlaced += 1;
                 totemInstance.GetComponent<TotemInstance>().totemMain = this;
                 canPlaceTotem = false;
