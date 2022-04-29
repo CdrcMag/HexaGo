@@ -42,8 +42,8 @@ public class WeaponSelector : MonoBehaviour
     public RectTransform selector2;
 
 
-
     public bool canSelect = true;
+    private bool aGunHasBeenSelected = false;
 
     private void Awake()
     {
@@ -65,6 +65,11 @@ public class WeaponSelector : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            print(ps.currentWeaponsState.Count);
+        }
+
         if (Input.GetKeyDown(KeyCode.T) && firstMenu.activeSelf == false)
         {
             SetStates(true, false);
@@ -137,6 +142,8 @@ public class WeaponSelector : MonoBehaviour
         SetStates(false, false);
 
     }
+
+
 
     public void SetWeaponToButton(int id)
     {
@@ -227,7 +234,7 @@ public class WeaponSelector : MonoBehaviour
         else if (_weapon01 == "Propulseur (Propulseur)"){txtWeapon01.text = "Propulsor";iconWeapon01.sprite = icons[4];}
         else if (_weapon01 == "Shield (Shield)"){txtWeapon01.text = "Shield";iconWeapon01.sprite = icons[5];}
         else if (_weapon01 == "Dash (Dash)"){txtWeapon01.text = "Dash";iconWeapon01.sprite = icons[6];}
-        else if (_weapon01 == "Totems (Totems)"){txtWeapon01.text = "Totems";iconWeapon01.sprite = icons[7];}
+        else if (_weapon01 == "Totems (Totems)"){txtWeapon01.text = "Bombs";iconWeapon01.sprite = icons[7];}
 
         if      (_weapon02 == "Canon (Canon)"){txtWeapon02.text = "Canon";iconWeapon02.sprite = icons[0];}
         else if (_weapon02 == "BigFuckingGun (BigFuckingGun)"){txtWeapon02.text = "BigFuckingGun";iconWeapon02.sprite = icons[1];}
@@ -236,7 +243,7 @@ public class WeaponSelector : MonoBehaviour
         else if (_weapon02 == "Propulseur (Propulseur)"){txtWeapon02.text = "Propulsor";iconWeapon02.sprite = icons[4];}
         else if (_weapon02 == "Shield (Shield)"){txtWeapon02.text = "Shield";iconWeapon02.sprite = icons[5];}
         else if (_weapon02 == "Dash (Dash)"){txtWeapon02.text = "Dash";iconWeapon02.sprite = icons[6];}
-        else if (_weapon02 == "Totems (Totems)"){txtWeapon02.text = "Totems";iconWeapon02.sprite = icons[7];}
+        else if (_weapon02 == "Totems (Totems)"){txtWeapon02.text = "Bombs";iconWeapon02.sprite = icons[7];}
 
         SetSelector(SelectorRotation.Left);
     }
@@ -346,9 +353,21 @@ public class WeaponSelector : MonoBehaviour
         if (x < -0.5f && y < 0) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
         if (x < -0.5f && y > 0) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
 
-
         if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)//input A sur manette
         {
+
+            if(AGunIsSelected() == false)
+            {
+                if (HowMuchGuns() == 1)
+                {
+                    if (IsAWeaponOnTheSelectedSlot() == true)
+                    {
+                        //print("Une arme n'était pas selectionnée, le joueur n'a qu'une arme, et tu as choisi le slot avec une arme");
+                        return;
+                    }
+                }
+            }
+            
 
             canSelect = false;
 
@@ -378,6 +397,80 @@ public class WeaponSelector : MonoBehaviour
 
         }
 
+
+    }
+
+
+    private bool AGunIsSelected()
+    {
+        if (pattern == 0 && selectedWeapon == 0) return true; 
+        if (pattern == 0 && selectedWeapon == 1) return true;
+        if (pattern == 2 && selectedWeapon == 0) return true;
+
+        return false;
+    }
+    
+
+
+    bool IsAWeaponOnTheSelectedSlot()
+    {
+        Player_Shooting.SlotName sTemp = Player_Shooting.SlotName.None;
+
+        switch (selectedId)
+        {
+            case 0:
+                sTemp = Player_Shooting.SlotName.FrontRight;
+                break;
+            case 1:
+                sTemp = Player_Shooting.SlotName.BackRight;
+                break;
+            case 2:
+                sTemp = Player_Shooting.SlotName.Back;
+                break;
+            case 3:
+                sTemp = Player_Shooting.SlotName.BackLeft;
+                break;
+            case 4:
+                sTemp = Player_Shooting.SlotName.FrontLeft;
+                break;
+            case 5:
+                sTemp = Player_Shooting.SlotName.Front;
+                break;
+        }
+
+        foreach (KeyValuePair<Player_Shooting.SlotName, Player_Shooting.WeaponName> pair in ps.currentWeaponsState)
+        {
+            if(sTemp == pair.Key)
+            {
+                if (pair.Value == Player_Shooting.WeaponName.BigFuckingGun ||
+                pair.Value == Player_Shooting.WeaponName.Canon ||
+                pair.Value == Player_Shooting.WeaponName.Mitraillette ||
+                pair.Value == Player_Shooting.WeaponName.Shotgun)
+                {
+                    return true;
+                }
+            }
+
+            
+        }
+
+        return false;
+    }
+
+
+    int HowMuchGuns()
+    {
+        int total = 0;
+
+        foreach (KeyValuePair<Player_Shooting.SlotName, Player_Shooting.WeaponName> pair in ps.currentWeaponsState)
+        {
+            if (pair.Value == Player_Shooting.WeaponName.BigFuckingGun) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Canon) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Mitraillette) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Shotgun) total++;
+        }
+
+        return total;
 
     }
 

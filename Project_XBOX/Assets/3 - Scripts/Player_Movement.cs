@@ -64,7 +64,7 @@ public class Player_Movement : MonoBehaviour
             movement.Normalize();
             _rb.MovePosition(_rb.position + movement * speed * speedBoost * Time.deltaTime);
 
-            if (h > 0.8f || v > 0.8f || h < -0.8f || v < -0.8f)
+            if (h > sensitivity || v > sensitivity || h < -sensitivity || v < -sensitivity)
             {
                 float angle = Mathf.Atan2(v, h) * Mathf.Rad2Deg + 180;
                 float newRotation = Mathf.SmoothDampAngle(transform.eulerAngles.z, angle, ref zVelocity, 0.1f);
@@ -77,6 +77,8 @@ public class Player_Movement : MonoBehaviour
 
 
     }
+
+    float sensitivity = 0.8f;
 
     float zVelocity = 0.0f;
 

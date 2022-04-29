@@ -20,12 +20,13 @@ public abstract class Enemy : MonoBehaviour
     [Header("Properties")]
     [SerializeField] protected float lifePoint = 50f;
     [SerializeField] protected float speed = 10f;
-    protected float initialSpeed = 10f;
     [SerializeField] protected float damageOnCollision = 10f;
-    [SerializeField] protected Transform target;
+
+    [Header("Roles")]
     [SerializeField] protected bool isActivated = false;
     [SerializeField] protected bool isBoss = false;
     [SerializeField] protected bool isSummoned = false;
+    [SerializeField] protected bool isTuto = false;
 
     [Header("Components")]
     [SerializeField] protected Eye[] eyes;
@@ -39,6 +40,11 @@ public abstract class Enemy : MonoBehaviour
     private RoomManager roomManager;
     private bool hasUpdated = false;
     private SoundManager soundManager;
+    private float maxLifePoint = 0;
+    protected float initialSpeed = 10f;
+    protected Transform target;
+
+    private GameObject healthPotionPrefab;
 
     // =====================================================
 
@@ -58,8 +64,6 @@ public abstract class Enemy : MonoBehaviour
     public Eye GetEye(int _index) { return eyes[_index]; }
 
     // =====================================================
-
-
 
     // Set the variable "target" with the player in the scene
     public virtual void SetTargetInStart()
@@ -173,6 +177,8 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        healthPotionPrefab = Resources.Load<GameObject>("Health Potion");
+
         if (!hasUpdated)
         {
             GameObject ptcDie;
@@ -187,9 +193,14 @@ public abstract class Enemy : MonoBehaviour
                 roomManager.UpdateState();
             }
 
-            if(isBoss)
+            if(isBoss && !isTuto)
             {
                 roomManager.FinishLevel();
+            }
+
+            if (Random.Range(1, 101) <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
+            {
+                if (healthPotionPrefab != null) Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
             }
 
             hasUpdated = true;
@@ -248,9 +259,15 @@ public abstract class Enemy : MonoBehaviour
         Destroy(bullet, 10f);
     }
 
+    public virtual void SetMaxLifePoint()
+    {
+        maxLifePoint = lifePoint;
+    }
+
     private IEnumerator UpdateBossLifeBar()
     {
-        float scaleToReach = lifePoint / 2000;
+        // Modification : 2000 -> maxLifePoint
+        float scaleToReach = lifePoint / maxLifePoint;
 
         while (bossLifeBar.localScale.x > scaleToReach && bossLifeBar.localScale.x > 0f)
         {
