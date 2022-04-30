@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -3280,7 +3280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -5468,7 +5468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -5668,7 +5668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -5786,7 +5786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -6900,7 +6900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -7018,7 +7018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -7454,7 +7454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -7572,7 +7572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -7854,7 +7854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -8167,7 +8167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -8480,7 +8480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -9244,7 +9244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -9526,7 +9526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -10334,7 +10334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -11024,7 +11024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -11415,7 +11415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -11533,7 +11533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -11887,7 +11887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100
@@ -12005,7 +12005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4311243661235980673}
-  coeffDamage: 0.9
+  coeffDamage: 1
   isSelf: 1
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   lifePoint: 100

@@ -200,7 +200,7 @@ public class Poulpy : Enemy
         else
         {
             int ratePhase = Random.Range(1, 101);
-            if(ratePhase < 30) { phase = 0; }
+            if(ratePhase < 35) { phase = 0; }
             else { phase = 1; }
         }
         //phase = Random.Range(0, maxPhase);

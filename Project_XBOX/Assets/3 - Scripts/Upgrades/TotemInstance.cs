@@ -14,7 +14,7 @@ public class TotemInstance : MonoBehaviour
 
     public GameObject bombCollider;
 
-    private GameObject ptcExplosionPref;
+    [SerializeField] private GameObject ptcExplosionPref;
     private float startScaleX;
     private float maxScaleX;
     private float addScale;
@@ -48,7 +48,10 @@ public class TotemInstance : MonoBehaviour
 
     private void OnDestroy()
     {
-        //Ajouter explosion ici
+        GameObject ptcExplosion;
+        ptcExplosion = Instantiate(ptcExplosionPref, transform.position, Quaternion.identity);
+        Destroy(ptcExplosion, 4f);
+
         totemMain.totalTotemPlaced -= 1;
     }
 
