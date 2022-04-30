@@ -198,7 +198,9 @@ public abstract class Enemy : MonoBehaviour
                 roomManager.FinishLevel();
             }
 
-            if (Random.Range(1, 101) <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
+            int randomRate = Random.Range(1, 101);
+
+            if (randomRate <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
             {
                 if (healthPotionPrefab != null) Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
             }

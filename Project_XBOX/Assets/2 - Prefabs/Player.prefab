@@ -376,7 +376,7 @@ MonoBehaviour:
   transition: {fileID: 0}
   bodies: []
   lifeBar: {fileID: 0}
-  ChanceToSpawnHealthPotion: 50
+  ChanceToSpawnHealthPotion: 12
   HealAmount: 20
 --- !u!114 &139817739442116469
 MonoBehaviour:
