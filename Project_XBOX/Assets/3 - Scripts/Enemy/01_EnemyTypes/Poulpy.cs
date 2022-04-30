@@ -193,11 +193,21 @@ public class Poulpy : Enemy
     {
         yield return new WaitForSeconds(delayPhase);
 
-        phase = Random.Range(0, maxPhase);
+        if(maxPhase == 1)
+        {
+            phase = 0;
+        }
+        else
+        {
+            int ratePhase = Random.Range(1, 101);
+            if(ratePhase < 30) { phase = 0; }
+            else { phase = 1; }
+        }
+        //phase = Random.Range(0, maxPhase);
 
         if(maxPhase == 3)
         {
-            delayPhase = 20f;
+            delayPhase = 10f;
             maxPhase = 2;
 
             for(int i = 0; i < signsAnchor.Length; i++)
