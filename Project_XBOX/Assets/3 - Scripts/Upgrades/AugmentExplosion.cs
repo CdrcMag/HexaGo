@@ -21,8 +21,25 @@ public class AugmentExplosion : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
+            Enemy e = null;
+
             //Applique les dégâts sur l'ennemi
-            collision.transform.parent.GetComponent<Enemy>().TakeDamage(Totems.Instance.DamageOnExplosion);
+            if(collision.gameObject.name.Contains("spin"))
+            {
+                e = collision.transform.parent.parent.GetComponent<Enemy>();
+            }
+            else
+            {
+                e = collision.transform.parent.GetComponent<Enemy>();
+            }
+
+            if (e != null)
+            {
+                e.TakeDamage(Totems.Instance.DamageOnExplosion);
+            }
+                
+
+
         }
     }
     
