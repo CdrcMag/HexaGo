@@ -18,7 +18,7 @@ public class Totems : Upgrade
     private float timer = 0;
     private bool canPlaceTotem = true;
 
-    public float DamageOnExplosion = 10;
+    public float DamageOnExplosion = 20;
 
     public static Totems Instance;
 
