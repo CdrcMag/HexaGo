@@ -11,6 +11,7 @@ public class CollisionEnemy : MonoBehaviour
     [SerializeField] private bool isSelf = false;
     [SerializeField] private GameObject ptcHitPref;
     [SerializeField] private float lifePoint = 60;
+    [SerializeField] private float enemyParentDamageToken = 0;
 
     private Transform weaponStorage;
     private Weapon weapon;
@@ -65,7 +66,7 @@ public class CollisionEnemy : MonoBehaviour
 
                 if(lifePoint <= 0)
                 {
-                    enemy.TakeDamage(130f, true);
+                    enemy.TakeDamage(enemyParentDamageToken, true);
                     Destroy(gameObject);
                 }
                 else
