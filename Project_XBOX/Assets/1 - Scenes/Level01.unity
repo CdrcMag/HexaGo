@@ -1321,9 +1321,11 @@ MonoBehaviour:
   enemy: {fileID: 500802071}
   coeffDamage: 1
   isSelf: 0
-  ptcHitPref: {fileID: 0}
   lifePoint: 60
   enemyParentDamageToken: 0
+  ptcHitPref: {fileID: 0}
+  canPassivelyDamageParent: 1
+  otherObjectToDestroy: {fileID: 0}
 --- !u!212 &500802070
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4791,7 +4793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackRightStartUpgrade
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontRightStartWeapon
@@ -6519,6 +6521,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d5f3b7e4963f3f45a8c690fa5a01a30, type: 2}
   - {fileID: 11400000, guid: fad616ca8d497cb4fb3c013f8a706d50, type: 2}
   - {fileID: 11400000, guid: 8dc5a5ec6e35c46409c0506da4e7e56f, type: 2}
+  eventRooms:
+  - {fileID: 11400000, guid: 212d4895d223ef04a8dbb4652de39821, type: 2}
   currentNumberRoom: 0
   killedEnemies: 0
   enemyPool: {fileID: 740949448}

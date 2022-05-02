@@ -14,6 +14,8 @@ public class CollisionEnemy : MonoBehaviour
     [SerializeField] private float lifePoint = 60;
     [SerializeField] private float enemyParentDamageToken = 0;
     [SerializeField] private GameObject ptcHitPref; // For Self Enemy only
+    [SerializeField] private bool canPassivelyDamageParent = true;
+    [SerializeField] private GameObject otherObjectToDestroy;
 
     private Transform weaponStorage;
     private Weapon weapon;
@@ -25,6 +27,8 @@ public class CollisionEnemy : MonoBehaviour
     private float magnitudeScale = 1.05f;
     private bool isGrowing = false;
 
+    private SoundManager soundManager;
+
     // =====================================================
 
     private void Awake()
@@ -32,7 +36,9 @@ public class CollisionEnemy : MonoBehaviour
         enemy = GetComponentInParent<Enemy>();
         weaponStorage = GameObject.Find("Player").transform.GetChild(2);
 
-        if(isSelf)
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+
+        if (isSelf)
         {
             setSelfScale();
         }
@@ -47,7 +53,14 @@ public class CollisionEnemy : MonoBehaviour
 
             if(damage != 0)
             {
-                enemy.TakeDamage(damage * coeffDamage, isSelf);
+                if(isSelf)
+                {
+                    if (canPassivelyDamageParent) { enemy.TakeDamage(damage * coeffDamage, isSelf); }
+                }
+                else
+                {
+                    enemy.TakeDamage(damage * coeffDamage, isSelf);
+                }      
             }
 
             if(isSelf)
@@ -120,11 +133,18 @@ public class CollisionEnemy : MonoBehaviour
         ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
         Destroy(ptcHit, 4f);
 
+        soundManager.playAudioClip(5);
+
         lifePoint -= _damage;
 
         if (lifePoint <= 0)
         {
+            soundManager.playAudioClip(6);
+
             enemy.TakeDamage(enemyParentDamageToken, true);
+
+            if(otherObjectToDestroy != null) { Destroy(otherObjectToDestroy); }
+
             Destroy(gameObject);
         }
         else
