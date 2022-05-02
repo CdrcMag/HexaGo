@@ -79,6 +79,7 @@ public class WeaponSelector : MonoBehaviour
 
         if(firstMenu.activeSelf)
         {
+            Pause_System.Instance.canPause = false;
             HandleFirstMenuInputs();
         }
 
@@ -140,6 +141,7 @@ public class WeaponSelector : MonoBehaviour
         if (pattern == 2 && selectedWeapon == 1) ps.SetUpgrade(enumState, tempUpgrade_1);
 
         SetStates(false, false);
+        Pause_System.Instance.canPause = true;
 
     }
 

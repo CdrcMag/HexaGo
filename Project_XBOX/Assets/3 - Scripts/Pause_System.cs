@@ -9,10 +9,11 @@ public class Pause_System : MonoBehaviour
     private GameObject PauseMenu;
 
     private bool OnPause = false;//Not on pause
+    [HideInInspector] public bool canPause = true;
 
     private void Awake()
     {
-        if(Instance != null)
+        if(Instance == null)
             Instance = this;
 
         PauseMenu = GameObject.Find("Pause").GetComponent<RectTransform>().GetChild(0).gameObject;
@@ -26,7 +27,7 @@ public class Pause_System : MonoBehaviour
     {
         while(true)
         {
-            if (Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape))
+            if ((Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape)) && canPause)
             {
                 if (OnPause) SetPauseOff();
                 else if (!OnPause) SetPauseOn();
@@ -42,7 +43,7 @@ public class Pause_System : MonoBehaviour
         Time.timeScale = 0;
         PauseMenu.SetActive(true);
         OnPause = true;
-
+        
     }
 
     public void SetPauseOff()
