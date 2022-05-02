@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : UpgradesAndWeapons
 {
     //Loaded in child
     protected GameObject projectilePrefab;

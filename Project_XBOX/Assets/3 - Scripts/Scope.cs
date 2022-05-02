@@ -14,7 +14,7 @@ public class Scope : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetAxis("Controller_LeftTrigger") > 0.6f)
+        if(Input.GetAxisRaw("Controller_LeftTrigger") == 1 && spriteRenderer.isVisible == false)
         {
             spriteRenderer.enabled ^= true;
         }
