@@ -1323,6 +1323,7 @@ MonoBehaviour:
   isSelf: 0
   ptcHitPref: {fileID: 0}
   lifePoint: 60
+  enemyParentDamageToken: 0
 --- !u!212 &500802070
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3770,11 +3771,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6357912565582971554, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 126.23
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 6357912565582971554, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 62.41
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 6357912565582971554, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_LocalRotation.w

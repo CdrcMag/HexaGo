@@ -4982,6 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombCollider: {fileID: 967000674876146409}
+  ptcExplosionPref: {fileID: 4711247959922000704, guid: b877ce6e167c11645a5933710ad26511, type: 3}
   totemMain: {fileID: 0}
   explosion: {fileID: 5009856852992284467, guid: 0d9640e48f1c8734588e9c23bca45409, type: 3}
 --- !u!50 &2606536729682107660

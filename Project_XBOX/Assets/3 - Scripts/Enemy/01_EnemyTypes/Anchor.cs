@@ -148,7 +148,13 @@ public class Anchor : Enemy
 
     public override void Shoot(GameObject _bulletPref, Transform _posToShoot, Transform _canon, float _speed)
     {
-        base.Shoot(_bulletPref, _posToShoot, _canon, _speed);
+        //base.Shoot(_bulletPref, _posToShoot, _canon, _speed); // Ancienne méthode de tir
+
+        GameObject bullet;
+        bullet = Instantiate(_bulletPref, _posToShoot.position, _canon.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * _speed;
+        Destroy(bullet, 10f);
+        bullet.transform.localScale = new Vector2(transform.localScale.x / 1.1f, transform.localScale.y / 1.1f); // La taille de l'ancre lancé dépend de la taille de l'ennemi "Anchor"
 
         StartCoroutine(GrowCanon());
     }
