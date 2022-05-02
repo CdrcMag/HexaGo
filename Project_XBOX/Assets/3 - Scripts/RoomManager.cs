@@ -14,6 +14,7 @@ public class RoomManager : MonoBehaviour
     public Level01[] easyRooms;
     public Level01[] mediumRooms;
     public Level01[] hardRooms;
+    public Level01[] eventRooms;
     public int currentNumberRoom = 0;
     public int killedEnemies = 0;
     public Transform enemyPool;
@@ -54,9 +55,23 @@ public class RoomManager : MonoBehaviour
 
         if(currentNumberRoom != 9)
         {
-            currentRooms = ChooseDifficulty();
-            numberRoom = ChooseRoom(currentRooms);
-            player.position = currentRooms[numberRoom].startPosPlayer;
+            if(currentNumberRoom < 3)
+            {
+                PrepareNormalRoom();
+            }
+            else
+            {
+                int eventRate = Random.Range(1, 11);
+
+                if(eventRate < 3) // < 3
+                {
+                    PrepareEventRoom();
+                }
+                else
+                {
+                    PrepareNormalRoom();
+                }
+            }
         }
         else
         {
@@ -85,6 +100,20 @@ public class RoomManager : MonoBehaviour
         killedEnemies = 0;
 
         StartCoroutine(IActivatePlayer());
+    }
+
+    private void PrepareNormalRoom()
+    {
+        currentRooms = ChooseDifficulty();
+        numberRoom = ChooseRoom(currentRooms);
+        player.position = currentRooms[numberRoom].startPosPlayer;
+    }
+
+    private void PrepareEventRoom()
+    {
+        currentRooms = eventRooms;
+        numberRoom = Random.Range(0, eventRooms.Length);
+        player.position = currentRooms[numberRoom].startPosPlayer;
     }
 
     private IEnumerator IActivatePlayer()

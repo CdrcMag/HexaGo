@@ -1324,6 +1324,8 @@ MonoBehaviour:
   lifePoint: 60
   enemyParentDamageToken: 0
   ptcHitPref: {fileID: 0}
+  canPassivelyDamageParent: 1
+  otherObjectToDestroy: {fileID: 0}
 --- !u!212 &500802070
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6504,6 +6506,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d5f3b7e4963f3f45a8c690fa5a01a30, type: 2}
   - {fileID: 11400000, guid: fad616ca8d497cb4fb3c013f8a706d50, type: 2}
   - {fileID: 11400000, guid: 8dc5a5ec6e35c46409c0506da4e7e56f, type: 2}
+  eventRooms:
+  - {fileID: 11400000, guid: 212d4895d223ef04a8dbb4652de39821, type: 2}
   currentNumberRoom: 0
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
@@ -7165,7 +7169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002996604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.96, y: 2.936, z: 0}
+  m_LocalPosition: {x: 2.65, y: 2.936, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 234394489}
