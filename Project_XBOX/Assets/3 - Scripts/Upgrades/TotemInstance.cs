@@ -40,6 +40,10 @@ public class TotemInstance : MonoBehaviour
     {
         if (collision.gameObject.tag == "Projectile")
         {
+            GameObject ptcExplosion;
+            ptcExplosion = Instantiate(ptcExplosionPref, transform.position, Quaternion.identity);
+            Destroy(ptcExplosion, 4f);
+
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
             Destroy(gameObject);
@@ -48,10 +52,6 @@ public class TotemInstance : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameObject ptcExplosion;
-        ptcExplosion = Instantiate(ptcExplosionPref, transform.position, Quaternion.identity);
-        Destroy(ptcExplosion, 4f);
-
         totemMain.totalTotemPlaced -= 1;
     }
 
