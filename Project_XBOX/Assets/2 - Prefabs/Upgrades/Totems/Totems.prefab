@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totemPrefab: {fileID: 2960874620631610689, guid: a35639483229d9e4e9141cb392a6c83f, type: 3}
-  imgTotem: {fileID: 0}
+  imgTotem: {fileID: 21300000, guid: c73643c8baf715e448a49b19ec5f6909, type: 3}
   totalTotemPlaced: 0
 --- !u!212 &1483721241765063274
 SpriteRenderer:

@@ -1323,6 +1323,7 @@ MonoBehaviour:
   isSelf: 0
   ptcHitPref: {fileID: 0}
   lifePoint: 60
+  enemyParentDamageToken: 0
 --- !u!212 &500802070
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3770,11 +3771,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6357912565582971554, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 126.23
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 6357912565582971554, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 62.41
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 6357912565582971554, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4790,7 +4791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackRightStartUpgrade
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontRightStartWeapon
@@ -4811,6 +4812,10 @@ PrefabInstance:
     - target: {fileID: 2554643747354750453, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: minIntervalBetweenShots
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2943333146328349930, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3311145808247207236, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: bulletSpeed
@@ -4968,8 +4973,17 @@ PrefabInstance:
       propertyPath: minIntervalBetweenShots
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7255140967043588728, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: shieldEffect
+      value: 
+      objectReference: {fileID: 1438968436}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+--- !u!1 &1438968436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2943333146328349930, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1439411331 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}

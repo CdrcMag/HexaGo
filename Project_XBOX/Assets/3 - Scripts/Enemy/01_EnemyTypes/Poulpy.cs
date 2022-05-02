@@ -19,6 +19,7 @@ public class Poulpy : Enemy
     [SerializeField] private GameObject anchor;
     [SerializeField] private SpriteRenderer[] signsAnchor;
     [SerializeField] private Transform[] posAnchor;
+    [SerializeField] private GameObject angryPoulpy;
 
     private Transform[][] tentaclesComponents = new Transform[4][];
     private Transform[][] signsComponents = new Transform[4][];
@@ -59,6 +60,8 @@ public class Poulpy : Enemy
 
         ResetSigns();
         StartCoroutine(UpdatePhase());
+
+        StartCoroutine(IPlayBellSound());
     }
 
     public override void TakeDamage(float _damage)
@@ -193,12 +196,27 @@ public class Poulpy : Enemy
     {
         yield return new WaitForSeconds(delayPhase);
 
-        phase = Random.Range(0, maxPhase);
+        if(maxPhase == 1)
+        {
+            phase = 0;
+        }
+        else
+        {
+            int ratePhase = Random.Range(1, 101);
+            if(ratePhase < 35) { phase = 0; }
+            else { phase = 1; }
+        }
+        //phase = Random.Range(0, maxPhase);
 
         if(maxPhase == 3)
         {
-            delayPhase = 20f;
+            delayPhase = 10f;
             maxPhase = 2;
+
+            base.cameraShake.callPoulpyShake();
+            base.soundManager.playAudioClipWithPitch(12, 2f);
+
+            angryPoulpy.SetActive(true);
 
             for(int i = 0; i < signsAnchor.Length; i++)
             {
@@ -590,5 +608,12 @@ public class Poulpy : Enemy
         mine.transform.localScale = new Vector2(_scale, _scale);
         Vector2 dir = mine.transform.up * 15f;
         mine.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
+    }
+
+    private IEnumerator IPlayBellSound()
+    {
+        yield return new WaitForSeconds(2f);
+
+        base.soundManager.playAudioClipWithPitch(12, 2f);
     }
 }

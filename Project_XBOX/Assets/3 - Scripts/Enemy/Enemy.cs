@@ -36,10 +36,11 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameObject ptcHitPref;
     [SerializeField] protected GameObject ptcDiePref;
 
-    private CameraShake cameraShake;
+    protected CameraShake cameraShake;
+    protected SoundManager soundManager;
+
     private RoomManager roomManager;
     private bool hasUpdated = false;
-    private SoundManager soundManager;
     private float maxLifePoint = 0;
     protected float initialSpeed = 10f;
     protected Transform target;
@@ -198,12 +199,14 @@ public abstract class Enemy : MonoBehaviour
                 roomManager.FinishLevel();
             }
 
-            hasUpdated = true;
-        }
+            int randomRate = Random.Range(1, 101);
 
-        if (Random.Range(1, 101) <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
-        {
-            if (healthPotionPrefab != null) Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
+            if (randomRate <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
+            {
+                if (healthPotionPrefab != null) Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
+            }
+
+            hasUpdated = true;
         }
 
         Destroy(gameObject);
