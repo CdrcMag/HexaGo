@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour
     public Transform enemyPool;
     public Transform player;
     public AudioSource musicManager;
-    public WeaponSelector weaponSelector;
+    public WeaponSelectorRemake weaponSelector;
     [SerializeField] private Transition transition;
     public Tutorial tutorial;
 
@@ -237,7 +237,7 @@ public class RoomManager : MonoBehaviour
         {
             if(currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
             {
-                weaponSelector.ChooseNewItem();
+                weaponSelector.Initialisation();
             }
 
             ClearScene();

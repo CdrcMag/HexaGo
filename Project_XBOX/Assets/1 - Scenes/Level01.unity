@@ -1895,6 +1895,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701158638}
   m_CullTransparentMesh: 1
+--- !u!114 &706926759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4420795889310917921, guid: 75e68b9edaab1b24ba5d00120737f1ce, type: 3}
+  m_PrefabInstance: {fileID: 1500314631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6f880a18912a164681f75372dd4bc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &740949447
 GameObject:
   m_ObjectHideFlags: 0
@@ -6513,7 +6524,7 @@ MonoBehaviour:
   enemyPool: {fileID: 740949448}
   player: {fileID: 1488635426}
   musicManager: {fileID: 958224260}
-  weaponSelector: {fileID: 0}
+  weaponSelector: {fileID: 706926759}
   transition: {fileID: 1887012115}
   tutorial: {fileID: 1796437904}
   bossPrefab: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}
