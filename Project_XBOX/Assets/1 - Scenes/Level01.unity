@@ -4783,7 +4783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackLeftStartUpgrade
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontLeftStartWeapon
@@ -4791,11 +4791,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackRightStartUpgrade
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontRightStartWeapon
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2484943203076207409, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
@@ -4880,6 +4880,10 @@ PrefabInstance:
     - target: {fileID: 3595298784982048917, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
       value: 0.02987045
+      objectReference: {fileID: 0}
+    - target: {fileID: 3795165561323688015, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2029.056
       objectReference: {fileID: 0}
     - target: {fileID: 4140688664508643299, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
