@@ -141,7 +141,10 @@ public class WeaponSelectorRemake : MonoBehaviour
                 else if (selectedSlotX == 2 && selectedSlotY == 2) slotName = "Front";
                 else if (selectedSlotX == 3 && selectedSlotY == 2) slotName = "FrontRight";
 
-                if(slotName != "")
+                if (HowMuchGuns() == 1 && isAWeaponOnTheSelectedSlot() == true)
+                    return;
+
+                if(slotName != "" )
                 {
                     //Récupère l'enum depuis un string passé en argument dans chaque bouton
                     Player_Shooting.SlotName enumState = (Player_Shooting.SlotName)System.Enum.Parse(typeof(Player_Shooting.SlotName), slotName);
@@ -151,6 +154,10 @@ public class WeaponSelectorRemake : MonoBehaviour
                     if (finalWeaponOrUpgrade.isWeapon == false) PlayerShooting.SetUpgrade(enumState, (Upgrade)finalWeaponOrUpgrade);
 
                     StartCoroutine(BlockInput(0.1f));
+
+                    selectedID = -1;
+                    selectedSlotX = 2;
+                    selectedSlotY = 2;
 
                     SetMenusStates(false, false);
                     Pause_System.Instance.canPause = true;
@@ -265,4 +272,50 @@ public class WeaponSelectorRemake : MonoBehaviour
         SlotSelectionMenu.SetActive(SlotSelectionMenuState);
     }
 
+    int HowMuchGuns()
+    {
+        int total = 0;
+
+        foreach (KeyValuePair<Player_Shooting.SlotName, Player_Shooting.WeaponName> pair in PlayerShooting.currentWeaponsState)
+        {
+            if (pair.Value == Player_Shooting.WeaponName.BigFuckingGun) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Canon) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Mitraillette) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Shotgun) total++;
+        }
+
+        return total;
+
+    }
+
+    private bool isAWeaponOnTheSelectedSlot()
+    {
+        Player_Shooting.SlotName sTemp = Player_Shooting.SlotName.None;
+
+        if (selectedSlotX == 1 && selectedSlotY == 1) sTemp = Player_Shooting.SlotName.BackLeft;
+        else if (selectedSlotX == 2 && selectedSlotY == 1) sTemp = Player_Shooting.SlotName.Back;
+        else if (selectedSlotX == 3 && selectedSlotY == 1) sTemp = Player_Shooting.SlotName.BackRight;
+        else if (selectedSlotX == 1 && selectedSlotY == 2) sTemp = Player_Shooting.SlotName.FrontLeft;
+        else if (selectedSlotX == 2 && selectedSlotY == 2) sTemp = Player_Shooting.SlotName.Front;
+        else if (selectedSlotX == 3 && selectedSlotY == 2) sTemp = Player_Shooting.SlotName.FrontRight;
+
+        foreach (KeyValuePair<Player_Shooting.SlotName, Player_Shooting.WeaponName> pair in PlayerShooting.currentWeaponsState)
+        {
+            if (sTemp == pair.Key)
+            {
+                if (pair.Value == Player_Shooting.WeaponName.BigFuckingGun ||
+                pair.Value == Player_Shooting.WeaponName.Canon ||
+                pair.Value == Player_Shooting.WeaponName.Mitraillette ||
+                pair.Value == Player_Shooting.WeaponName.Shotgun)
+                {
+                    return true;
+                }
+            }
+
+
+        }
+
+        return false;
+
+    }
 }
