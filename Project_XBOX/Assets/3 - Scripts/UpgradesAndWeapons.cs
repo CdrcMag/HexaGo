@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class UpgradesAndWeapons : MonoBehaviour
 {
-   
+    public bool isWeapon = false;
 }
