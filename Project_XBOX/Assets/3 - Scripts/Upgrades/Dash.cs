@@ -71,7 +71,7 @@ public class Dash : Upgrade
 
         if(pm.UseControllerSettings && canDash)
         {
-            if(Input.GetAxis("Controller_LeftTrigger") > 0.9f)
+            if(Input.GetAxis("Xbox_RB") > 0.9f)
             {
                 pm.movement.Normalize();
 
