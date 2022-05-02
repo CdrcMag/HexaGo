@@ -5,13 +5,15 @@ using UnityEngine;
 public class CollisionEnemy : MonoBehaviour
 {
     // ===================== VARIABLES =====================
-
+    [Header("Enemy Properties")]
     [SerializeField] private Enemy enemy;
     [SerializeField] private float coeffDamage = 1;
+
+    [Header("For Self Enemy")]
     [SerializeField] private bool isSelf = false;
-    [SerializeField] private GameObject ptcHitPref;
     [SerializeField] private float lifePoint = 60;
     [SerializeField] private float enemyParentDamageToken = 0;
+    [SerializeField] private GameObject ptcHitPref; // For Self Enemy only
 
     private Transform weaponStorage;
     private Weapon weapon;
@@ -32,11 +34,7 @@ public class CollisionEnemy : MonoBehaviour
 
         if(isSelf)
         {
-            startScaleX = transform.localScale.x;
-            startScaleY = transform.localScale.y;
-
-            incrScaleX = startScaleX * magnitudeScale / 40;
-            incrScaleY = startScaleY * magnitudeScale / 40;
+            setSelfScale();
         }
     }
 
@@ -45,11 +43,7 @@ public class CollisionEnemy : MonoBehaviour
     {
         if (other.CompareTag("Projectile"))
         {
-            int idProjectile = other.GetComponent<Base_Projectile>().id;
-
-            weapon = weaponStorage.GetChild(idProjectile - 1).GetComponent<Weapon>();
-            float damage = weapon.bulletDamage;
-            damage *= coeffDamage;
+            float damage = calculateDamage(other);
 
             if(damage != 0)
             {
@@ -58,22 +52,7 @@ public class CollisionEnemy : MonoBehaviour
 
             if(isSelf)
             {
-                GameObject ptcHit;
-                ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
-                Destroy(ptcHit, 4f);
-
-                lifePoint -= damage;
-
-                if(lifePoint <= 0)
-                {
-                    enemy.TakeDamage(enemyParentDamageToken, true);
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    if (!isGrowing)
-                        StartCoroutine(GrowBody());
-                }
+                damageSelf(damage);
             }
 
             Destroy(other.gameObject);
@@ -113,5 +92,45 @@ public class CollisionEnemy : MonoBehaviour
         }
 
         isGrowing = false;
+    }
+
+    private void setSelfScale()
+    {
+        startScaleX = transform.localScale.x;
+        startScaleY = transform.localScale.y;
+
+        incrScaleX = startScaleX * magnitudeScale / 40;
+        incrScaleY = startScaleY * magnitudeScale / 40;
+    }
+
+    private float calculateDamage(Collider2D _bullet)
+    {
+        int idProjectile = _bullet.GetComponent<Base_Projectile>().id;
+
+        weapon = weaponStorage.GetChild(idProjectile - 1).GetComponent<Weapon>();
+        float damage = weapon.bulletDamage;
+        damage *= coeffDamage;
+
+        return damage;
+    }
+
+    private void damageSelf(float _damage)
+    {
+        GameObject ptcHit;
+        ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
+        Destroy(ptcHit, 4f);
+
+        lifePoint -= _damage;
+
+        if (lifePoint <= 0)
+        {
+            enemy.TakeDamage(enemyParentDamageToken, true);
+            Destroy(gameObject);
+        }
+        else
+        {
+            if (!isGrowing)
+                StartCoroutine(GrowBody());
+        }
     }
 }
