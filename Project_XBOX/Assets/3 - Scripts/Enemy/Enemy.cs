@@ -36,10 +36,11 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected GameObject ptcHitPref;
     [SerializeField] protected GameObject ptcDiePref;
 
-    private CameraShake cameraShake;
+    protected CameraShake cameraShake;
+    protected SoundManager soundManager;
+
     private RoomManager roomManager;
     private bool hasUpdated = false;
-    private SoundManager soundManager;
     private float maxLifePoint = 0;
     protected float initialSpeed = 10f;
     protected Transform target;
