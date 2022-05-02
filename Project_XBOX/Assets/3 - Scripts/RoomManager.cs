@@ -63,7 +63,7 @@ public class RoomManager : MonoBehaviour
             {
                 int eventRate = Random.Range(1, 11);
 
-                if(eventRate < 10) // < 3
+                if(eventRate < 3) // < 3
                 {
                     PrepareEventRoom();
                 }
