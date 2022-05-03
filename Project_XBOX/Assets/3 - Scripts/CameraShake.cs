@@ -8,6 +8,8 @@ public class CameraShake : MonoBehaviour
     public static CameraShake Instance;
     public bool isShaking = false;
 
+    private bool forcedShaking = false;
+
     private Camera cam;
 
     private void Awake()
@@ -31,7 +33,7 @@ public class CameraShake : MonoBehaviour
 
         float cpt = 0;
 
-        while (cpt <= _duration)
+        while (cpt <= _duration && !forcedShaking)
         {
             float x = Random.Range(-_intensity, _intensity);
             float y = Random.Range(-_intensity, _intensity);
@@ -92,6 +94,8 @@ public class CameraShake : MonoBehaviour
 
     private IEnumerator IPoulpyShake()
     {
+        forcedShaking = true;
+
         StartCoroutine(IZoom(8f, 3.5f));
         StartCoroutine(ITranslate(10f, 0f, -1f));
 
@@ -103,5 +107,13 @@ public class CameraShake : MonoBehaviour
 
         StartCoroutine(ITranslate(10f, 0f, 0f));
         StartCoroutine(IUnzoom(8f, 5f));
+
+        yield return new WaitForSeconds(1f);
+
+        Vector3 rotDeg = new Vector3(0f, 0f, 0f);
+        Quaternion rot =  new Quaternion();
+        rot.eulerAngles = rotDeg;
+        cam.transform.localRotation = rot;
+        forcedShaking = false;
     }
 }
