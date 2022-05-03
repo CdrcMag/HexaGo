@@ -40,6 +40,8 @@ public class Pause_System : MonoBehaviour
 
     public void SetPauseOn()
     {
+        Camera.main.GetComponent<CameraShake>().StopShaking();
+
         Time.timeScale = 0;
         PauseMenu.SetActive(true);
         OnPause = true;

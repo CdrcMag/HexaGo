@@ -5,10 +5,17 @@ using UnityEngine;
 //2D CAMERA SHAKE
 public class CameraShake : MonoBehaviour
 {
+    // ===================== VARIABLES =====================
+
     public static CameraShake Instance;
     public bool isShaking = false;
+    [HideInInspector] public Coroutine shakeCoroutine;
+
+    private bool forcedShaking = false;
 
     private Camera cam;
+
+    // ====================================================
 
     private void Awake()
     {
@@ -20,7 +27,7 @@ public class CameraShake : MonoBehaviour
     {
         if(!isShaking)
         {
-            StartCoroutine(IShake(_duration, _intensity));
+            shakeCoroutine = StartCoroutine(IShake(_duration, _intensity));
         }
     }
 
@@ -31,7 +38,7 @@ public class CameraShake : MonoBehaviour
 
         float cpt = 0;
 
-        while (cpt <= _duration)
+        while (cpt <= _duration && !forcedShaking)
         {
             float x = Random.Range(-_intensity, _intensity);
             float y = Random.Range(-_intensity, _intensity);
@@ -45,6 +52,11 @@ public class CameraShake : MonoBehaviour
 
         cam.transform.localRotation = originalRotation;
         isShaking = false;
+    }
+
+    public void StopShaking()
+    {
+        StopCoroutine(shakeCoroutine);
     }
 
     private IEnumerator IZoom(float _speedZoom, float _value)
@@ -92,6 +104,8 @@ public class CameraShake : MonoBehaviour
 
     private IEnumerator IPoulpyShake()
     {
+        forcedShaking = true;
+
         StartCoroutine(IZoom(8f, 3.5f));
         StartCoroutine(ITranslate(10f, 0f, -1f));
 
@@ -103,5 +117,13 @@ public class CameraShake : MonoBehaviour
 
         StartCoroutine(ITranslate(10f, 0f, 0f));
         StartCoroutine(IUnzoom(8f, 5f));
+
+        yield return new WaitForSeconds(1f);
+
+        Vector3 rotDeg = new Vector3(0f, 0f, 0f);
+        Quaternion rot =  new Quaternion();
+        rot.eulerAngles = rotDeg;
+        cam.transform.localRotation = rot;
+        forcedShaking = false;
     }
 }

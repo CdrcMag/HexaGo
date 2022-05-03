@@ -179,6 +179,8 @@ public class WeaponSelectorRemake : MonoBehaviour
 
     public void Initialisation()
     {
+        Camera.main.GetComponent<CameraShake>().StopShaking();
+
         Pause_System.Instance.canPause = false;
         Time.timeScale = 0;
 
