@@ -33,6 +33,8 @@ public class RoomManager : MonoBehaviour
     private bool[] validedRooms = { true, true, true, true, true, true, true, true, true, true, true, true };
     private bool isTutorial = false;
 
+    private int maxRangeEventRate = 11;
+
     // =====================================================
 
 
@@ -61,7 +63,7 @@ public class RoomManager : MonoBehaviour
             }
             else
             {
-                int eventRate = Random.Range(1, 11);
+                int eventRate = Random.Range(1, maxRangeEventRate);
 
                 if(eventRate < 3) // < 3
                 {
@@ -114,6 +116,8 @@ public class RoomManager : MonoBehaviour
         currentRooms = eventRooms;
         numberRoom = Random.Range(0, eventRooms.Length);
         player.position = currentRooms[numberRoom].startPosPlayer;
+
+        maxRangeEventRate += 4;
     }
 
     private IEnumerator IActivatePlayer()
