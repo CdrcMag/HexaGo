@@ -56,7 +56,8 @@ public class CameraShake : MonoBehaviour
 
     public void StopShaking()
     {
-        StopCoroutine(shakeCoroutine);
+        if(shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
     }
 
     private IEnumerator IZoom(float _speedZoom, float _value)
