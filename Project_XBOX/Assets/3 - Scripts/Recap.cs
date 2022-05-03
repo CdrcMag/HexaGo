@@ -84,12 +84,12 @@ public class Recap : MonoBehaviour
 
     private void OnDisable()
     {
-        Destroy(SlotFront.GetChild(0).gameObject);
-        Destroy(SlotFrontLeft.GetChild(0).gameObject);
-        Destroy(SlotFrontRight.GetChild(0).gameObject);
-        Destroy(SlotBack.GetChild(0).gameObject);
-        Destroy(SlotBackLeft.GetChild(0).gameObject);
-        Destroy(SlotBackRight.GetChild(0).gameObject);
+        if (SlotFront.childCount > 0) Destroy(SlotFront.GetChild(0).gameObject);
+        if (SlotFrontLeft.childCount > 0) Destroy(SlotFrontLeft.GetChild(0).gameObject);
+        if (SlotFrontRight.childCount > 0) Destroy(SlotFrontRight.GetChild(0).gameObject);
+        if (SlotBack.childCount > 0) Destroy(SlotBack.GetChild(0).gameObject);
+        if (SlotBackLeft.childCount > 0) Destroy(SlotBackLeft.GetChild(0).gameObject);
+        if (SlotBackRight.childCount > 0) Destroy(SlotBackRight.GetChild(0).gameObject);
     }
 
 
