@@ -247,7 +247,11 @@ public class WeaponSelectorRemake : MonoBehaviour
 
         UpgradesAndWeapons a = newUpgradeAndWeapons[Random.Range(0, newUpgradeAndWeapons.Count)];
 
-        if(a.GetType() == typeof(Canon) || a.GetType() == typeof(Mitraillette) || a.GetType() == typeof(BigFuckingGun) || a.GetType() == typeof(FusilPompe))
+        if(a.GetType() == typeof(Canon) || 
+            a.GetType() == typeof(Mitraillette) || 
+            a.GetType() == typeof(BigFuckingGun) || 
+            a.GetType() == typeof(FusilPompe))
+            //ici rajouter votre arme en faisant attention de ne pas oublier le " || ".
         {
             a.isWeapon = true;
         }
@@ -314,11 +318,11 @@ public class WeaponSelectorRemake : MonoBehaviour
                 pair.Value == Player_Shooting.WeaponName.Canon ||
                 pair.Value == Player_Shooting.WeaponName.Mitraillette ||
                 pair.Value == Player_Shooting.WeaponName.Shotgun)
+                //rajouter votre arme ici, ne pas oublier " || "
                 {
                     return true;
                 }
             }
-
 
         }
 

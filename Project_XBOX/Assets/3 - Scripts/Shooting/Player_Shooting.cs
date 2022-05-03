@@ -97,6 +97,7 @@ public class Player_Shooting : MonoBehaviour
         if (w.GetType() == typeof(BigFuckingGun)) currentWeaponsState.Add(slotName, WeaponName.BigFuckingGun);
         if (w.GetType() == typeof(Mitraillette)) currentWeaponsState.Add(slotName, WeaponName.Mitraillette);
         if (w.GetType() == typeof(FusilPompe)) currentWeaponsState.Add(slotName, WeaponName.Shotgun);
+        //ici rajouter des armes en suivant la structure ci-dessus
 
 
     }
@@ -199,7 +200,7 @@ public class Player_Shooting : MonoBehaviour
                 return ArmesFront[2];//Mitraillette
             case WeaponName.BigFuckingGun:
                 return ArmesFront[3];//Big fucking gun
-
+            //Ici rajouter votre arme
 
             default:
                 return null;
