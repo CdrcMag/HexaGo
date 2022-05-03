@@ -79,12 +79,19 @@ public class WeaponSelector : MonoBehaviour
 
         if(firstMenu.activeSelf)
         {
+            Pause_System.Instance.canPause = false;
             HandleFirstMenuInputs();
         }
 
         if(mainMenu.activeSelf)
         {
             HandleMainMenuInputs();
+            if (selector2.localRotation.eulerAngles.z == 90) selectedId = 5;
+            if (selector2.localRotation.eulerAngles.z == 270) selectedId = 2;
+            if (selector2.localRotation.eulerAngles.z == 30) selectedId = 0;
+            if (selector2.localRotation.eulerAngles.z == 330) selectedId = 1;
+            if (selector2.localRotation.eulerAngles.z == 150) selectedId = 4;
+            if (selector2.localRotation.eulerAngles.z == 210) selectedId = 3;
         }
 
         if(!canSelect)
@@ -140,6 +147,7 @@ public class WeaponSelector : MonoBehaviour
         if (pattern == 2 && selectedWeapon == 1) ps.SetUpgrade(enumState, tempUpgrade_1);
 
         SetStates(false, false);
+        Pause_System.Instance.canPause = true;
 
     }
 
@@ -296,6 +304,8 @@ public class WeaponSelector : MonoBehaviour
             if (rot == SelectorRotation.BasDroite) selector2.localRotation = Quaternion.Euler(0, 0, -30);
             if (rot == SelectorRotation.HautGauche) selector2.localRotation = Quaternion.Euler(0, 0, -210);
             if (rot == SelectorRotation.BasGauche) selector2.localRotation = Quaternion.Euler(0, 0, -150);
+
+
         }
 
     }       
@@ -344,14 +354,14 @@ public class WeaponSelector : MonoBehaviour
 
         //print($"x: {x} / y: {y}");
 
-        if (x > 0.5f && y > 0) { SetSelector(SelectorRotation.HautDroite); selectedId = 0; }
-        if (x > 0.5f && y < 0) { SetSelector(SelectorRotation.BasDroite); selectedId = 1; }
+        if (x > 0.5f && y > 0) { SetSelector(SelectorRotation.HautDroite);  }
+        if (x > 0.5f && y < 0) { SetSelector(SelectorRotation.BasDroite);  }
 
-        if (x == 0 && y == -1) { SetSelector(SelectorRotation.Bas); selectedId = 2; }
-        if (x == 0 && y == 1) { SetSelector(SelectorRotation.Haut); selectedId = 5; }
+        if (x == 0 && y == -1) { SetSelector(SelectorRotation.Bas);  }
+        if (x == 0 && y == 1) { SetSelector(SelectorRotation.Haut); }
 
-        if (x < -0.5f && y < 0) { SetSelector(SelectorRotation.BasGauche); selectedId = 3; }
-        if (x < -0.5f && y > 0) { SetSelector(SelectorRotation.HautGauche); selectedId = 4; }
+        if (x < -0.5f && y < 0) { SetSelector(SelectorRotation.BasGauche); }
+        if (x < -0.5f && y > 0) { SetSelector(SelectorRotation.HautGauche); }
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Xbox_Validation") && canSelect)//input A sur manette
         {

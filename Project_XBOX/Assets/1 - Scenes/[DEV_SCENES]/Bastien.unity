@@ -379,7 +379,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &399325819
 GameObject:
@@ -728,7 +728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8925310274186721633, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8925310274186721633, guid: 79c923dc70e6a8d428685010fe6f3026, type: 3}
       propertyPath: m_LocalScale.x
@@ -4613,7 +4613,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d5f3b7e4963f3f45a8c690fa5a01a30, type: 2}
   - {fileID: 11400000, guid: fad616ca8d497cb4fb3c013f8a706d50, type: 2}
   - {fileID: 11400000, guid: 8dc5a5ec6e35c46409c0506da4e7e56f, type: 2}
-  currentNumberRoom: 9
+  currentNumberRoom: 1
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
   player: {fileID: 1488635426}

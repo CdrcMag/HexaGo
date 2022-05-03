@@ -142,7 +142,7 @@ public class Tutorial : MonoBehaviour
 
     private void CheckState05()
     {
-        if (Input.GetAxis("Controller_LeftTrigger") > 0.9f)
+        if (Input.GetAxis("Xbox_RB") > 0.9f)
         {
             tutorialRoot.GetChild(0).gameObject.SetActive(false);
             tutorialRoot.GetChild(3).gameObject.SetActive(false);
