@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private SoundManager soundManager;
 
     private bool isIntro = false;
+    private bool isReloading = false;
 
     // =====================================================
 
@@ -35,6 +37,9 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
+        if (isReloading)
+            return;
+
         if((Input.GetButtonUp("Start") || Input.GetKeyUp(KeyCode.A)) && isIntro)
         {
             PlayerPrefs.SetInt("PlayedTutorial", 0);
@@ -45,7 +50,22 @@ public class MenuManager : MonoBehaviour
 
             isIntro = false;
         }
+
+        if(Input.GetButtonDown("Xbox_B"))
+        {
+            isReloading = true;
+            transition.Augment();
+            StartCoroutine(WaitAndReload());
+        }
     }
+
+    IEnumerator WaitAndReload()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+
+
 
     private void GoToLevelSelection()
     {
