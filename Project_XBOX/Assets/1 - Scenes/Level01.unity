@@ -4660,7 +4660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontStartWeapon
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackLeftStartUpgrade
@@ -4704,7 +4704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3311145808247207236, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: bulletDamage
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3311145808247207236, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: minIntervalBetweenShots
@@ -4852,7 +4852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5732632517162932791, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: bulletDamage
-      value: 50
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 5732632517162932791, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: minIntervalBetweenShots
