@@ -6,7 +6,7 @@ public class Pause_System : MonoBehaviour
 {
     public static Pause_System Instance = null;
 
-    private GameObject PauseMenu;
+    public GameObject PauseMenu;
 
     private bool OnPause = false;//Not on pause
     [HideInInspector] public bool canPause = true;
@@ -44,9 +44,20 @@ public class Pause_System : MonoBehaviour
 
         Time.timeScale = 0;
         PauseMenu.SetActive(true);
+        StartCoroutine(WaitFor());
         OnPause = true;
         
     }
+
+    IEnumerator WaitFor()
+    {
+        yield return new WaitForSecondsRealtime(0.01f);
+        a = PauseMenu.transform.GetChild(0).gameObject;
+        a.GetComponent<Recap>().GenerateIcons();
+
+    }
+
+    public GameObject a;
 
     public void SetPauseOff()
     {
