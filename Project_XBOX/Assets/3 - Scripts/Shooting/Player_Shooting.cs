@@ -226,6 +226,30 @@ public class Player_Shooting : MonoBehaviour
         return null;
     }
 
+    public string GetWeaponOnSlot(SlotName s)
+    {
+        string final = "";
+
+        if (currentWeaponsState.ContainsKey(s))
+        {
+            if (currentWeaponsState[s] == WeaponName.Canon)  return "Canon"; // return (Canon)final;
+            if (currentWeaponsState[s] == WeaponName.BigFuckingGun) return  "BFG";
+            if (currentWeaponsState[s] == WeaponName.Mitraillette) return "Mitraillette";
+            if (currentWeaponsState[s] == WeaponName.Shotgun) return "Shotgun";
+        }
+
+        if (currentUpgradesState.ContainsKey(s))
+        {
+            if (currentUpgradesState[s] == UpgradeName.Dash) return "Dash";
+            if (currentUpgradesState[s] == UpgradeName.Propulseur) return "Propulseur";
+            if (currentUpgradesState[s] == UpgradeName.Shield) return "Shield";
+            if (currentUpgradesState[s] == UpgradeName.Totems) return "Totems";
+
+        }
+
+        return final;
+    }
+
 
     private void Update()
     {
