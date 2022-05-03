@@ -39,6 +39,8 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
+        GetDifficulty();
+
         StartCoroutine(AnimateSelectALevel());
         StartCoroutine(AnimateSelecter());
     }
@@ -294,6 +296,40 @@ public class LevelSelection : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
             difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x + 0.1f, difficultyButtons[i].localScale.y + 0.1f);
+        }
+    }
+
+    private void GetDifficulty()
+    {
+        if(PlayerPrefs.GetString("Difficulty", "Easy") == "Easy")
+        {
+            visors[0].SetActive(true);
+            visors[1].SetActive(false);
+            visors[2].SetActive(false);
+
+            difficultyButtons[0].localScale = new Vector2(1f, 1f);
+            difficultyButtons[1].localScale = new Vector2(0.75f, 0.75f);
+            difficultyButtons[2].localScale = new Vector2(0.75f, 0.75f);
+        }
+        else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Normal")
+        {
+            visors[0].SetActive(false);
+            visors[1].SetActive(true);
+            visors[2].SetActive(false);
+
+            difficultyButtons[0].localScale = new Vector2(0.75f, 0.75f);
+            difficultyButtons[1].localScale = new Vector2(1f, 1f);
+            difficultyButtons[2].localScale = new Vector2(0.75f, 0.75f);
+        }
+        else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Hard")
+        {
+            visors[0].SetActive(false);
+            visors[1].SetActive(false);
+            visors[2].SetActive(true);
+
+            difficultyButtons[0].localScale = new Vector2(0.75f, 0.75f);
+            difficultyButtons[1].localScale = new Vector2(0.75f, 0.75f);
+            difficultyButtons[2].localScale = new Vector2(1f, 1f);
         }
     }
 }
