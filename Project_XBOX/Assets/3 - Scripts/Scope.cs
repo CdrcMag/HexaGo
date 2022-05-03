@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Scope : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    private GameObject childOne;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        childOne = transform.GetChild(0).gameObject;
+        childOne.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetAxisRaw("Controller_LeftTrigger") == 1 && spriteRenderer.isVisible == false)
+        if(Input.GetAxisRaw("Controller_LeftTrigger") == 1)
         {
-            spriteRenderer.enabled ^= true;
+            childOne.SetActive(true);
         }
         else
         {
-            spriteRenderer.enabled = false;
+            childOne.SetActive(false);
         }
     }
 }
