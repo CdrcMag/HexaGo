@@ -20,12 +20,22 @@ public class Dash : Upgrade
 
     //dashh sound
     private SoundManager soundManager;
+    private TempTrail Temp;
+    private GameObject DashTrail;
 
     private void Awake()
     {
         pm = GetComponentInParent<Player_Movement>();
         rb = GetComponentInParent<Rigidbody2D>();
         soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+        Temp = GameObject.Find("TempTrail").GetComponent<TempTrail>();
+    }
+
+    private void Start()
+    {
+        Temp.ActiveTrail();
+        DashTrail = GameObject.Find("DashTrail");
+        DashTrail.SetActive(false);
     }
 
 
@@ -88,6 +98,8 @@ public class Dash : Upgrade
 
                 //Timer to allow movement again
                 StartCoroutine(DashTempo(dashTime));
+
+                DashTrail.SetActive(true);
             }
         }
         
@@ -98,6 +110,7 @@ public class Dash : Upgrade
         yield return new WaitForSeconds(t);
         rb.velocity = Vector2.zero;
         pm.canMove = true;
+        DashTrail.SetActive(false);
     }
 
 
