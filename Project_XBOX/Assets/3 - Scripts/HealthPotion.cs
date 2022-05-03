@@ -14,15 +14,20 @@ public class HealthPotion : Collectable
     // ======================= VARIABLES =======================
 
     private GameObject HealthPotionParticles;
+
     private float startScaleX;
     private float maxScaleX;
     private float addScale;
+
+    private SoundManager soundManager;
 
     // =========================================================
 
     private void Awake()
     {
         HealthPotionParticles = Resources.Load<GameObject>("Health Potion Particles");
+
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
     }
 
     private void Start()
@@ -38,6 +43,8 @@ public class HealthPotion : Collectable
     {
         if(collision.gameObject.tag == "Player")
         {
+            soundManager.playAudioClip(14);
+
             PlayerManager.Instance.AddHealthPoint(PlayerManager.Instance.HealAmount);
 
             GameObject particles_instance = Instantiate(HealthPotionParticles, transform.position, Quaternion.identity);

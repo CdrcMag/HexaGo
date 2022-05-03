@@ -5,12 +5,17 @@ using UnityEngine;
 //2D CAMERA SHAKE
 public class CameraShake : MonoBehaviour
 {
+    // ===================== VARIABLES =====================
+
     public static CameraShake Instance;
     public bool isShaking = false;
+    [HideInInspector] public Coroutine shakeCoroutine;
 
     private bool forcedShaking = false;
 
     private Camera cam;
+
+    // ====================================================
 
     private void Awake()
     {
@@ -22,7 +27,7 @@ public class CameraShake : MonoBehaviour
     {
         if(!isShaking)
         {
-            StartCoroutine(IShake(_duration, _intensity));
+            shakeCoroutine = StartCoroutine(IShake(_duration, _intensity));
         }
     }
 
@@ -47,6 +52,12 @@ public class CameraShake : MonoBehaviour
 
         cam.transform.localRotation = originalRotation;
         isShaking = false;
+    }
+
+    public void StopShaking()
+    {
+        if(shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
     }
 
     private IEnumerator IZoom(float _speedZoom, float _value)
