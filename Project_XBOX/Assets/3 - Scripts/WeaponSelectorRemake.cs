@@ -141,10 +141,15 @@ public class WeaponSelectorRemake : MonoBehaviour
                 else if (selectedSlotX == 2 && selectedSlotY == 2) slotName = "Front";
                 else if (selectedSlotX == 3 && selectedSlotY == 2) slotName = "FrontRight";
 
-                if (HowMuchGuns() == 1 && isAWeaponOnTheSelectedSlot() == true)
-                    return;
+                if(finalWeaponOrUpgrade.isWeapon == false)
+                {
+                    if (HowMuchGuns() == 1 && isAWeaponOnTheSelectedSlot() == true)
+                        return;
+                }
 
-                if(slotName != "" )
+                
+
+                if(slotName != "")
                 {
                     //Récupère l'enum depuis un string passé en argument dans chaque bouton
                     Player_Shooting.SlotName enumState = (Player_Shooting.SlotName)System.Enum.Parse(typeof(Player_Shooting.SlotName), slotName);
