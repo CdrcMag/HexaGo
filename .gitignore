@@ -5,8 +5,8 @@
 Project_XBOX/[Ll]ibrary/
 Project_XBOX/[Tt]emp/
 Project_XBOX/[Oo]bj/
-Project_XBOX/[Bb]uild/
-Project_XBOX/[Bb]uilds/
+#Project_XBOX/[Bb]uild/
+#Project_XBOX/[Bb]uilds/
 Project_XBOX/[Ll]ogs/
 Project_XBOX/[Mm]emoryCaptures/
 
