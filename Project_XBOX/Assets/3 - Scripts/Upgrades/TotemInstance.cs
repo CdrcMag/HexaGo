@@ -13,20 +13,29 @@ public class TotemInstance : MonoBehaviour
     // ======================= VARIABLES =======================
 
     public GameObject bombCollider;
+    public GameObject ptcExplosionPref;
+    public GameObject explosion;
+    public GameObject craterPref;
 
-    [SerializeField] private GameObject ptcExplosionPref;
+    [HideInInspector] public Totems totemMain;
+
     private float startScaleX;
     private float maxScaleX;
     private float addScale;
 
-    [HideInInspector] public Totems totemMain;
-    public GameObject explosion;
+    private SoundManager soundManager;
 
     // =========================================================
 
+    private void Awake()
+    {
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+    }
 
     private void Start()
     {
+        soundManager.playAudioClip(16);
+
         startScaleX = transform.localScale.x;
         maxScaleX = startScaleX * MULTIPLICATOR_SCALE;
         addScale = (maxScaleX - startScaleX) / TICK_DELAY;
@@ -40,9 +49,15 @@ public class TotemInstance : MonoBehaviour
     {
         if (collision.gameObject.tag == "Projectile")
         {
+            soundManager.playAudioClip(17);
+
             GameObject ptcExplosion;
             ptcExplosion = Instantiate(ptcExplosionPref, transform.position, Quaternion.identity);
             Destroy(ptcExplosion, 4f);
+
+            GameObject crater;
+            crater = Instantiate(craterPref, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0.0f, 360.0f)));
+            Destroy(crater, 5f);
 
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
