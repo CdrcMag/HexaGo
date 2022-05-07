@@ -65,7 +65,7 @@ public class RoomManager : MonoBehaviour
             {
                 int eventRate = Random.Range(1, maxRangeEventRate);
 
-                if(eventRate < 3) // < 3
+                if(eventRate < 3)
                 {
                     PrepareEventRoom();
                 }
@@ -91,7 +91,7 @@ public class RoomManager : MonoBehaviour
                     enemy.GetComponent<Enemy>().SetLifePoint(enemy.GetComponent<Enemy>().GetLifePoint() * currentRooms[numberRoom].multiplicatorLife[i]);
                 }
 
-                StartCoroutine(IGrowEnemy(enemy, i));
+                if(enemy.transform.localScale.x < 2) { StartCoroutine(IGrowEnemy(enemy, i)); }
             }
         }
         else
