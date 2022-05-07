@@ -8,60 +8,68 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
 
+    private float MAX_HEALTHPOINT = 100f;
+    private float ADD_SCALE = 0.025f;
+
+    private Vector2 DIE_POS = new Vector2(100f, 100f);
+
     // ===================== VARIABLES =====================
 
-    [SerializeField] private float lifePoint = 100;
-    public float reduction = 0;//Percentage ( 0 - 1 )
+    [Header("Objects in Scene")]
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private Transition transition;
     [SerializeField] private SpriteRenderer[] bodies;
-    private bool isImmune = false;
     [SerializeField] private RectTransform lifeBar;
+    [SerializeField] private Transform borderRoot;
 
-    public int ChanceToSpawnHealthPotion = 50;//Pourcentage
-    public int HealAmount = 15;//Pourcentage
+    [Header("Life Properties")]
+    [SerializeField] private float lifePoint = 100;
+    public float reduction = 0; // Pourcentage ( 0 - 1 )
+
+    [Header("Potions Properties")]
+    public int ChanceToSpawnHealthPotion = 20; // Pourcentage
+    public int HealAmount = 20; // Pourcentage
+
+    private bool isImmune = false;
+    private SpriteRenderer[] borders = new SpriteRenderer[4];
 
     // =====================================================
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
+
+        if(borderRoot != null) { SetBorderSprites(); }
     }
 
-    // =================== [ SET - GET ] ===================
 
     public void SetLifePoint(float _damage) 
     {
-        if(isImmune)
-        {
-            return;
-        }
+        if(isImmune) { return; }
 
         float damageToTake = _damage - (_damage * reduction);
-
-        CameraShake.Instance.Shake(0.2f, 1.2f);
 
         lifePoint -= damageToTake;
         isImmune = true;
 
-        StartCoroutine(AnimationHit());
-        StartCoroutine(UpdateLifeBar());
-        
-        if(lifePoint <= 0)
-        {
-            Die();
-        }
+        CameraShake.Instance.Shake(0.2f, 1.2f);
+
+        soundManager.playAudioClip(15);
+
+        StartCoroutine(IUpdateLifeBarDown());
+        StartCoroutine(IAnimationHit(bodies, true));
+        if (borderRoot != null) { StartCoroutine(IAnimationHit(borders, false)); }
+
+        if (lifePoint <= 0) { Die(); }
     }
 
     public float GetLifePoint() { return lifePoint; }
 
-    // =====================================================
-
-
     private void Die()
     {
         soundManager.playAudioClip(7);
-        transform.position = new Vector2(100f, 100f);
+
+        transform.position = DIE_POS;
 
         StartCoroutine(ILoadMenu());
     }
@@ -77,17 +85,17 @@ public class PlayerManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    private IEnumerator AnimationHit()
+    private IEnumerator IAnimationHit(SpriteRenderer[] _spr, bool _isVisibleAtEnd)
     {
         float a = 1f;
 
-        while (a > 0.1f)
+        while (a > 0f)
         {
             Color color = new Color(1f, 1f, 1f, a);
 
-            for(int i = 0; i < bodies.Length; i++)
+            for(int i = 0; i < _spr.Length; i++)
             {
-                bodies[i].color = color;
+                _spr[i].color = color;
             }
 
             a -= 0.1f;
@@ -99,9 +107,9 @@ public class PlayerManager : MonoBehaviour
         {
             Color color = new Color(1f, 1f, 1f, a);
 
-            for (int i = 0; i < bodies.Length; i++)
+            for (int i = 0; i < _spr.Length; i++)
             {
-                bodies[i].color = color;
+                _spr[i].color = color;
             }
 
             a += 0.1f;
@@ -109,13 +117,13 @@ public class PlayerManager : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
-        while (a > 0.1f)
+        while (a > 0f)
         {
             Color color = new Color(1f, 1f, 1f, a);
 
-            for (int i = 0; i < bodies.Length; i++)
+            for (int i = 0; i < _spr.Length; i++)
             {
-                bodies[i].color = color;
+                _spr[i].color = color;
             }
 
             a -= 0.1f;
@@ -127,9 +135,9 @@ public class PlayerManager : MonoBehaviour
         {
             Color color = new Color(1f, 1f, 1f, a);
 
-            for (int i = 0; i < bodies.Length; i++)
+            for (int i = 0; i < _spr.Length; i++)
             {
-                bodies[i].color = color;
+                _spr[i].color = color;
             }
 
             a += 0.1f;
@@ -137,13 +145,13 @@ public class PlayerManager : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
-        while (a > 0.1f)
+        while (a > 0f)
         {
             Color color = new Color(1f, 1f, 1f, a);
 
-            for (int i = 0; i < bodies.Length; i++)
+            for (int i = 0; i < _spr.Length; i++)
             {
-                bodies[i].color = color;
+                _spr[i].color = color;
             }
 
             a -= 0.1f;
@@ -155,9 +163,9 @@ public class PlayerManager : MonoBehaviour
         {
             Color color = new Color(1f, 1f, 1f, a);
 
-            for (int i = 0; i < bodies.Length; i++)
+            for (int i = 0; i < _spr.Length; i++)
             {
-                bodies[i].color = color;
+                _spr[i].color = color;
             }
 
             a += 0.1f;
@@ -166,15 +174,32 @@ public class PlayerManager : MonoBehaviour
         }
 
         isImmune = false;
+
+        if(!_isVisibleAtEnd)
+        {
+            while (a > 0f)
+            {
+                Color color = new Color(1f, 1f, 1f, a);
+
+                for (int i = 0; i < _spr.Length; i++)
+                {
+                    _spr[i].color = color;
+                }
+
+                a -= 0.1f;
+
+                yield return new WaitForSeconds(0.005f);
+            }
+        }
     }
 
-    private IEnumerator UpdateLifeBar()
+    private IEnumerator IUpdateLifeBarDown()
     {
-        float scaleToReach = lifePoint / 100;
+        float scaleToReach = lifePoint / MAX_HEALTHPOINT;
 
         while(lifeBar.localScale.x > scaleToReach && lifeBar.localScale.x > 0f)
         {
-            lifeBar.localScale = new Vector2(lifeBar.localScale.x - 0.025f, lifeBar.localScale.y);
+            lifeBar.localScale = new Vector2(lifeBar.localScale.x - ADD_SCALE, lifeBar.localScale.y);
 
             yield return new WaitForSeconds(0.05f);
         }
@@ -185,13 +210,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateLifeBarUp()
+    private IEnumerator IUpdateLifeBarUp()
     {
-        float scaleToReach = lifePoint / 100;
+        float scaleToReach = lifePoint / MAX_HEALTHPOINT;
 
         while (lifeBar.localScale.x < scaleToReach && lifeBar.localScale.x > 0f)
         {
-            lifeBar.localScale = new Vector2(lifeBar.localScale.x + 0.025f, lifeBar.localScale.y);
+            lifeBar.localScale = new Vector2(lifeBar.localScale.x + ADD_SCALE, lifeBar.localScale.y);
 
             yield return new WaitForSeconds(0.05f);
         }
@@ -204,21 +229,29 @@ public class PlayerManager : MonoBehaviour
 
     public void ResetLifePoint()
     {
-        lifePoint = 100;
+        lifePoint = MAX_HEALTHPOINT;
         lifeBar.localScale = new Vector2(1, 1);
     }
 
     public void AddHealthPoint(int points)
     {
-        if(lifePoint + points >= 100)
+        if(lifePoint + points >= MAX_HEALTHPOINT)
         {
-            lifePoint = 100;
+            lifePoint = MAX_HEALTHPOINT;
         }
         else
         {
             lifePoint += points;
         }
 
-        StartCoroutine(UpdateLifeBarUp());
+        StartCoroutine(IUpdateLifeBarUp());
+    }
+
+    private void SetBorderSprites()
+    {
+        for(int i = 0; i < borderRoot.childCount; i++)
+        {
+            borders[i] = borderRoot.GetChild(i).GetComponent<SpriteRenderer>();
+        }
     }
 }

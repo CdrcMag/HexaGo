@@ -141,7 +141,5 @@ public class MenuManager : MonoBehaviour
         introMenu.SetActive(false);
         levelSelectionMenu.SetActive(true);
         levelSelectionMenuCanvas.SetActive(true);
-
-        levelSelection.AnimateStart();
     }
 }
