@@ -4613,12 +4613,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d5f3b7e4963f3f45a8c690fa5a01a30, type: 2}
   - {fileID: 11400000, guid: fad616ca8d497cb4fb3c013f8a706d50, type: 2}
   - {fileID: 11400000, guid: 8dc5a5ec6e35c46409c0506da4e7e56f, type: 2}
-  currentNumberRoom: 1
+  eventRooms: []
+  currentNumberRoom: 9
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
   player: {fileID: 1488635426}
   musicManager: {fileID: 958224260}
-  weaponSelector: {fileID: 624194228}
+  weaponSelector: {fileID: 0}
   transition: {fileID: 1887012115}
   tutorial: {fileID: 0}
   bossPrefab: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}

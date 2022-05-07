@@ -20,6 +20,11 @@ public class Poulpy : Enemy
     [SerializeField] private SpriteRenderer[] signsAnchor;
     [SerializeField] private Transform[] posAnchor;
     [SerializeField] private GameObject angryPoulpy;
+    [SerializeField] private GameObject headbandPref;
+
+    [Header("Particles")]
+    [SerializeField] private GameObject bubbleCurtainPref;
+    [SerializeField] private GameObject bubbleDropPref;
 
     private Transform[][] tentaclesComponents = new Transform[4][];
     private Transform[][] signsComponents = new Transform[4][];
@@ -27,7 +32,7 @@ public class Poulpy : Enemy
     private bool[] spotMineChecked = { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
 
     private float magnitude = 2f;
-    private float delayPhase = 5f;
+    private float delayPhase = 7f;
     private int phase;
     private int maxPhase = 1;
     private bool hasSummon = false;
@@ -46,6 +51,10 @@ public class Poulpy : Enemy
 
         SetTentaclesComponents();
         SetSignsComponents();
+
+        StartCoroutine(IAnimateHandband());
+
+        spawnParticleAtBottom(bubbleCurtainPref, false);
     }
 
     private void Start()
@@ -196,7 +205,9 @@ public class Poulpy : Enemy
     {
         yield return new WaitForSeconds(delayPhase);
 
-        if(maxPhase == 1)
+        spawnParticleAtBottom(bubbleDropPref, true);
+
+        if (maxPhase == 1)
         {
             phase = 0;
         }
@@ -615,5 +626,91 @@ public class Poulpy : Enemy
         yield return new WaitForSeconds(2f);
 
         base.soundManager.playAudioClipWithPitch(12, 2f);
+    }
+
+    private void spawnParticleAtBottom(GameObject _ptcPref, bool _mustDestroy)
+    {
+        GameObject ptc;
+        ptc = Instantiate(_ptcPref, new Vector2(0f, -6.2f), Quaternion.identity);
+
+        if(_mustDestroy) { Destroy(ptc, 21f); }
+    }
+
+    private IEnumerator IAnimateHandband()
+    {
+        GameObject headband;
+        headband = Instantiate(headbandPref, new Vector2(0f, 3.2f), Quaternion.identity);
+        SpriteRenderer sprHeadband = headband.GetComponent<SpriteRenderer>();
+        SpriteRenderer sprName = headband.transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        yield return new WaitForSeconds(3f);
+
+        float a = 1f;
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            sprName.color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a < 1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            sprName.color = color;
+            a += 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            sprName.color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a < 1f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            sprName.color = color;
+            a += 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            sprName.color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        Color colorEnd = new Color(1f, 1f, 1f, 0);
+        sprName.color = colorEnd;
+
+        yield return new WaitForSeconds(1.5f);
+        a = 1f;
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            sprHeadband.color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        sprHeadband.color = colorEnd;
+
+        yield return new WaitForSeconds(1.5f);
+
+        Destroy(headband);
     }
 }
