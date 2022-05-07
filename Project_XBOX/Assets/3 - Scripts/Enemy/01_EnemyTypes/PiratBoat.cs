@@ -6,8 +6,14 @@ public class PiratBoat : Enemy
 {
     // ===================== VARIABLES =====================
 
+    [Header("Boat Properties")]
     [SerializeField] private float boatSpeed = 4f;
     [SerializeField] private float endPosY = 0f;
+
+    [Header("Boat Component")]
+    [SerializeField] private Transform foamRoot;
+    [SerializeField] private SpriteRenderer[] signComponents;
+    [SerializeField] private GameObject[] canons;
 
     // =====================================================
 
@@ -18,15 +24,22 @@ public class PiratBoat : Enemy
 
     private void Start()
     {
-        StartCoroutine(ILoadSoundBoat());
-
-        StartCoroutine(moveForward());
+        StartCoroutine(IGlowSigns());
+        StartCoroutine(IMoveForward());
     }
 
-    private IEnumerator moveForward()
+    private IEnumerator IMoveForward()
     {
+        yield return new WaitForSeconds(4f);
+
+        base.soundManager.playAudioClip(13);
         float endPosX = transform.position.x;
         Vector2 target = new Vector2(endPosX, endPosY);
+
+        for(int i = 0; i < canons.Length; i++)
+        {
+            canons[i].SetActive(true);
+        }
  
         while (Vector2.Distance(transform.position, target) > 0.01f)
         {
@@ -34,12 +47,54 @@ public class PiratBoat : Enemy
 
             yield return null;
         }
+
+        for(int i = 0; i < foamRoot.childCount; i++)
+        {
+            foamRoot.GetChild(i).GetComponent<ParticleSystem>().Stop();
+        }
     }
 
-    private IEnumerator ILoadSoundBoat()
+    private IEnumerator IGlowSigns()
     {
-        yield return new WaitForSeconds(0.5f);
+        int cpt = 0;
 
-        base.soundManager.playAudioClip(13);
+        while (cpt < 4)
+        {
+            StartCoroutine(IGlowSignComponent(cpt));
+
+            yield return new WaitForSeconds(0.2f);
+
+            cpt++;
+        }
+
+        cpt = 0;
+        yield return new WaitForSeconds(1f);
+
+        while (cpt < 4)
+        {
+            StartCoroutine(IGlowSignComponent(cpt));
+
+            yield return new WaitForSeconds(0.2f);
+
+            cpt++;
+        }
+    }
+
+    private IEnumerator IGlowSignComponent(int _component)
+    {
+        float a = 1f;
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+
+            SpriteRenderer spRd;
+            spRd = signComponents[_component].GetComponent<SpriteRenderer>();
+            spRd.color = color;
+
+            a -= 0.01f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
     }
 }
