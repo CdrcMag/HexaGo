@@ -1,7 +1,31 @@
 fileFormatVersion: 2
 guid: 23b92efedb7651341a046d5731ec0443
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -6346830666606193825
+    second: EventB_0
+  - first:
+      213: -3989119033811219986
+    second: EventB_1
+  - first:
+      213: -8460007451601135387
+    second: EventB_2
+  - first:
+      213: 8049663124763514261
+    second: EventB_3
+  - first:
+      213: -1399377252884459032
+    second: EventB_4
+  - first:
+      213: -8829334257501728352
+    second: EventB_5
+  - first:
+      213: 728180960607563573
+    second: EventB_6
+  - first:
+      213: -5879177578885693836
+    second: EventB_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +65,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +99,189 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: EventB_0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 555
+        width: 504
+        height: 195
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f53d16bb2278be7a0800000000000000
+      internalID: -6346830666606193825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EventB_1
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 634
+        width: 87
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee9ceeebf5dc3a8c0800000000000000
+      internalID: -3989119033811219986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EventB_2
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 212
+        width: 502
+        height: 232
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e8182abb04089a80800000000000000
+      internalID: -8460007451601135387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EventB_3
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 415
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 595171986f526bf60800000000000000
+      internalID: 8049663124763514261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EventB_4
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 184
+        width: 131
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e15f0f7dc9649ce0800000000000000
+      internalID: -1399377252884459032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EventB_5
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 195
+        width: 131
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a11c6ac547e77580800000000000000
+      internalID: -8829334257501728352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EventB_6
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 26
+        width: 208
+        height: 91
+      alignment: 9
+      pivot: {x: 0.5, y: 0.9}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53f6731c9b40b1a00800000000000000
+      internalID: 728180960607563573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EventB_7
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 61
+        width: 130
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47eb3172427f86ea0800000000000000
+      internalID: -5879177578885693836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

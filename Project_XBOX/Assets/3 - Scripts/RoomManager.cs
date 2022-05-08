@@ -8,6 +8,8 @@ public class RoomManager : MonoBehaviour
 {
     private const float DELAY = 0.05f;
     private const float ADDSCALE = 0.05f;
+    private const float START_EVENT_RATE = 3f; // Push to 20f to have only event room, 3f is base
+    private const float LIMIT_SPAWN_EVENT = 3f; // Push to 0f to have only event room, 3f is base
 
     // ===================== VARIABLES =====================
 
@@ -57,7 +59,7 @@ public class RoomManager : MonoBehaviour
 
         if(currentNumberRoom != 9)
         {
-            if(currentNumberRoom < 3)
+            if(currentNumberRoom < LIMIT_SPAWN_EVENT)
             {
                 PrepareNormalRoom();
             }
@@ -65,7 +67,7 @@ public class RoomManager : MonoBehaviour
             {
                 int eventRate = Random.Range(1, maxRangeEventRate);
 
-                if(eventRate < 3) // < 3
+                if(eventRate < START_EVENT_RATE)
                 {
                     PrepareEventRoom();
                 }
@@ -91,7 +93,7 @@ public class RoomManager : MonoBehaviour
                     enemy.GetComponent<Enemy>().SetLifePoint(enemy.GetComponent<Enemy>().GetLifePoint() * currentRooms[numberRoom].multiplicatorLife[i]);
                 }
 
-                StartCoroutine(IGrowEnemy(enemy, i));
+                if(enemy.transform.localScale.x < 2) { StartCoroutine(IGrowEnemy(enemy, i)); }
             }
         }
         else

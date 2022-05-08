@@ -51,7 +51,7 @@ public class Eye : MonoBehaviour
         }
 
         scale = transform.lossyScale.x;
-        startPositionIris = eyeIris.position;
+        startPositionIris = eyeIris.localPosition;
         startLocalPosition = transform.localPosition;
 
         StartCoroutine(BlinkEye());

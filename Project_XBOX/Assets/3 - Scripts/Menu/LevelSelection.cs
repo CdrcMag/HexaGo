@@ -7,20 +7,27 @@ using UnityEngine.SceneManagement;
 public class LevelSelection : MonoBehaviour
 {
     private const float DELAY = 0.01f;
+    private const float ADD_SCALE = 0.03f;
+    private const float MIN_ALPHA = 0.6f;
+    private const float MAX_ALPHA = 1f;
+    private const float MIN_SCALE = 0.75f;
+    private const float MAX_SCALE = 1f;
 
     // ===================== VARIABLES =====================
 
     [SerializeField] private SpriteRenderer selectALevel;
     [SerializeField] private Transform selecter;
-    [SerializeField] private RectTransform[] levelIcons;
     [SerializeField] private Image selecterFlash;
     [SerializeField] private Transition transition;
     [SerializeField] private SoundManager soundManager;
     [SerializeField] private RectTransform[] difficultyButtons;
     [SerializeField] private GameObject[] visors;
+    [SerializeField] private GameObject levelIconsRoot;
+    [SerializeField] private SpriteRenderer selectADifficulty;
 
     private Image selecterImage;
     private bool canSelectLevel = false;
+    private Coroutine animatedSelectADifficulty;
 
     // =====================================================4
 
@@ -29,18 +36,12 @@ public class LevelSelection : MonoBehaviour
     {
         selecterImage = selecter.GetComponent<Image>();
 
-        selecter.gameObject.SetActive(false);
-
-        for (int i = 0; i < levelIcons.Length; i++)
-        {
-            levelIcons[i].localScale = new Vector2(0f, 0f);
-        }
+        canSelectLevel = true;
     }
 
     private void Start()
     {
-        GetDifficulty();
-
+        animatedSelectADifficulty = StartCoroutine(AnimateSelectADifficulty());
         StartCoroutine(AnimateSelectALevel());
         StartCoroutine(AnimateSelecter());
     }
@@ -71,7 +72,7 @@ public class LevelSelection : MonoBehaviour
     {
         float a = 1f;
 
-        while (a > 0.6f)
+        while (a > MIN_ALPHA)
         {
             Color color = new Color(1f, 1f, 1f, a);
             selectALevel.color = color;
@@ -80,7 +81,7 @@ public class LevelSelection : MonoBehaviour
             yield return new WaitForSeconds(DELAY);
         }
 
-        while (a < 1f)
+        while (a < MAX_ALPHA)
         {
             Color color = new Color(1f, 1f, 1f, a);
             selectALevel.color = color;
@@ -92,11 +93,36 @@ public class LevelSelection : MonoBehaviour
         StartCoroutine(AnimateSelectALevel());
     }
 
+    private IEnumerator AnimateSelectADifficulty()
+    {
+        float a = 1f;
+
+        while (a > MIN_ALPHA)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selectADifficulty.color = color;
+            a -= 0.01f;
+
+            yield return new WaitForSeconds(DELAY);
+        }
+
+        while (a < MAX_ALPHA)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            selectADifficulty.color = color;
+            a += 0.02f;
+
+            yield return new WaitForSeconds(DELAY);
+        }
+
+        animatedSelectADifficulty = StartCoroutine(AnimateSelectADifficulty());
+    }
+
     private IEnumerator AnimateSelecter()
     {
         float a = 1f;
 
-        while (a > 0.6f)
+        while (a > MIN_ALPHA)
         {
             Color color = new Color(1f, 1f, 1f, a);
             selecterImage.color = color;
@@ -105,7 +131,7 @@ public class LevelSelection : MonoBehaviour
             yield return new WaitForSeconds(DELAY);
         }
 
-        while (a < 1f)
+        while (a < MAX_ALPHA)
         {
             Color color = new Color(1f, 1f, 1f, a);
             selecterImage.color = color;
@@ -115,37 +141,6 @@ public class LevelSelection : MonoBehaviour
         }
 
         StartCoroutine(AnimateSelecter());
-    }
-
-    public void AnimateStart()
-    {
-        StartCoroutine(IAnimateStart());
-    }
-
-    private IEnumerator IAnimateStart()
-    {
-        yield return new WaitForSeconds(2f);
-
-        int cpt = 0;
-
-        while(cpt < levelIcons.Length)
-        {
-            while (levelIcons[cpt].localScale.x < 1)
-            {
-                levelIcons[cpt].localScale = new Vector2(levelIcons[cpt].localScale.x + 0.15f, levelIcons[cpt].localScale.y + 0.15f);
-
-                yield return new WaitForSeconds(0.001f);
-            }
-
-            yield return new WaitForSeconds(0.001f);
-
-            cpt++;
-        }
-
-        yield return new WaitForSeconds(0.2f);
-
-        selecter.gameObject.SetActive(true);
-        canSelectLevel = true;
     }
 
     private IEnumerator IFlash(float level)
@@ -225,6 +220,7 @@ public class LevelSelection : MonoBehaviour
 
         if (level > PlayerPrefs.GetInt("LevelMax", 1))
         {
+            soundManager.playAudioClip(2);
             return;
         }
 
@@ -240,96 +236,58 @@ public class LevelSelection : MonoBehaviour
 
     public void SetDifficulty(int difficulty)
     {
-        if(difficulty == 1)
+        if (difficulty == 1) { PlayerPrefs.SetString("Difficulty", "Easy"); }
+        else if (difficulty == 2) { PlayerPrefs.SetString("Difficulty", "Normal"); }
+        else if (difficulty == 3) { PlayerPrefs.SetString("Difficulty", "Hard"); }
+
+        CallScaleButton(difficulty);
+        CallActivateVisor(difficulty);
+
+        soundManager.playAudioClip(1);
+
+        levelIconsRoot.SetActive(true);
+
+        StopCoroutine(animatedSelectADifficulty);
+
+        Color color = new Color(1f, 1f, 1f, MIN_ALPHA / 2);
+        selectADifficulty.color = color;
+
+        selectALevel.gameObject.SetActive(true);
+    }
+
+    private void CallScaleButton(int _id)
+    {
+        for(int i = 1; i <= 3; i++)
         {
-            PlayerPrefs.SetString("Difficulty", "Easy");
-            print("difficulty is EASY");
-
-            StartCoroutine(GrowButton(0));
-            StartCoroutine(SubstractButton(1));
-            StartCoroutine(SubstractButton(2));
-
-            visors[0].SetActive(true);
-            visors[1].SetActive(false);
-            visors[2].SetActive(false);
+            if(i == _id) { StartCoroutine(GrowButton(i - 1)); }
+            else { StartCoroutine(SubstractButton(i - 1)); }
         }
-        else if (difficulty == 2)
+    }
+
+    private void CallActivateVisor(int _id)
+    {
+        for (int i = 1; i <= 3; i++)
         {
-            PlayerPrefs.SetString("Difficulty", "Normal");
-            print("difficulty is NORMAL");
-
-            StartCoroutine(GrowButton(1));
-            StartCoroutine(SubstractButton(0));
-            StartCoroutine(SubstractButton(2));
-
-            visors[0].SetActive(false);
-            visors[1].SetActive(true);
-            visors[2].SetActive(false);
-        }
-        else if (difficulty == 3)
-        {
-            PlayerPrefs.SetString("Difficulty", "Hard");
-            print("difficulty is HARD");
-
-            StartCoroutine(GrowButton(2));
-            StartCoroutine(SubstractButton(1));
-            StartCoroutine(SubstractButton(0));
-
-            visors[0].SetActive(false);
-            visors[1].SetActive(false);
-            visors[2].SetActive(true);
+            if (i == _id) { visors[i - 1].SetActive(true); }
+            else { visors[i - 1].SetActive(false); }
         }
     }
 
     private IEnumerator SubstractButton(int i)
     {
-        while(difficultyButtons[i].localScale.x > 0.75f)
+        while(difficultyButtons[i].localScale.x > MIN_SCALE)
         {
-            yield return new WaitForSeconds(0.05f);
-            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x - 0.1f, difficultyButtons[i].localScale.y - 0.1f);
+            yield return new WaitForSeconds(0.01f);
+            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x - ADD_SCALE, difficultyButtons[i].localScale.y - ADD_SCALE);
         }
     }
 
     private IEnumerator GrowButton(int i)
     {
-        while (difficultyButtons[i].localScale.x < 1f)
+        while (difficultyButtons[i].localScale.x < MAX_SCALE)
         {
-            yield return new WaitForSeconds(0.05f);
-            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x + 0.1f, difficultyButtons[i].localScale.y + 0.1f);
-        }
-    }
-
-    private void GetDifficulty()
-    {
-        if(PlayerPrefs.GetString("Difficulty", "Easy") == "Easy")
-        {
-            visors[0].SetActive(true);
-            visors[1].SetActive(false);
-            visors[2].SetActive(false);
-
-            difficultyButtons[0].localScale = new Vector2(1f, 1f);
-            difficultyButtons[1].localScale = new Vector2(0.75f, 0.75f);
-            difficultyButtons[2].localScale = new Vector2(0.75f, 0.75f);
-        }
-        else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Normal")
-        {
-            visors[0].SetActive(false);
-            visors[1].SetActive(true);
-            visors[2].SetActive(false);
-
-            difficultyButtons[0].localScale = new Vector2(0.75f, 0.75f);
-            difficultyButtons[1].localScale = new Vector2(1f, 1f);
-            difficultyButtons[2].localScale = new Vector2(0.75f, 0.75f);
-        }
-        else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Hard")
-        {
-            visors[0].SetActive(false);
-            visors[1].SetActive(false);
-            visors[2].SetActive(true);
-
-            difficultyButtons[0].localScale = new Vector2(0.75f, 0.75f);
-            difficultyButtons[1].localScale = new Vector2(0.75f, 0.75f);
-            difficultyButtons[2].localScale = new Vector2(1f, 1f);
+            yield return new WaitForSeconds(0.01f);
+            difficultyButtons[i].localScale = new Vector2(difficultyButtons[i].localScale.x + ADD_SCALE, difficultyButtons[i].localScale.y + ADD_SCALE);
         }
     }
 }

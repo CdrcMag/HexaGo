@@ -25,7 +25,7 @@ public class CameraShake : MonoBehaviour
 
     public void Shake(float _duration, float _intensity)
     {
-        if(!isShaking)
+        if (!isShaking)
         {
             shakeCoroutine = StartCoroutine(IShake(_duration, _intensity));
         }
@@ -57,7 +57,14 @@ public class CameraShake : MonoBehaviour
     public void StopShaking()
     {
         if(shakeCoroutine != null)
+        {
             StopCoroutine(shakeCoroutine);
+            isShaking = false;
+            Vector3 rotDeg = new Vector3(0f, 0f, 0f);
+            Quaternion rot = new Quaternion();
+            rot.eulerAngles = rotDeg;
+            cam.transform.localRotation = rot;
+        }
     }
 
     private IEnumerator IZoom(float _speedZoom, float _value)
