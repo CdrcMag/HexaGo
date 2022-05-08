@@ -220,6 +220,7 @@ public class LevelSelection : MonoBehaviour
 
         if (level > PlayerPrefs.GetInt("LevelMax", 1))
         {
+            soundManager.playAudioClip(2);
             return;
         }
 
@@ -241,6 +242,8 @@ public class LevelSelection : MonoBehaviour
 
         CallScaleButton(difficulty);
         CallActivateVisor(difficulty);
+
+        soundManager.playAudioClip(1);
 
         levelIconsRoot.SetActive(true);
 

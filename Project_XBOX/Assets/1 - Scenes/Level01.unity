@@ -4209,6 +4209,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8dc5a5ec6e35c46409c0506da4e7e56f, type: 2}
   eventRooms:
   - {fileID: 11400000, guid: 212d4895d223ef04a8dbb4652de39821, type: 2}
+  - {fileID: 11400000, guid: ca4e77f119e208b498d76fa30809ea90, type: 2}
   currentNumberRoom: 0
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
