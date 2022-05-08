@@ -983,6 +983,78 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &830346720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1438968437}
+    m_Modifications:
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827912, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827913, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_Name
+      value: Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378032210059827913, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+--- !u!114 &830346721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7378032210059827915, guid: a431ff84fe79db24b9ce31badc65ca14, type: 3}
+  m_PrefabInstance: {fileID: 830346720}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a157de63a1700a46999213b808d6617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &924366729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,7 +2672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontStartWeapon
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackLeftStartUpgrade
@@ -2611,6 +2683,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: ArmesFront.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackRightStartUpgrade
       value: 0
       objectReference: {fileID: 0}
@@ -2618,6 +2694,10 @@ PrefabInstance:
       propertyPath: FrontRightStartWeapon
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: ArmesFront.Array.data[4]
+      value: 
+      objectReference: {fileID: 830346721}
     - target: {fileID: 2484943203076207409, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -2821,6 +2901,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2943333146328349930, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
   m_PrefabInstance: {fileID: 1438968435}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1438968437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1779082050336205932, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1469850169 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4844163993673373354, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
@@ -2969,6 +3054,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1879427}
     - target: {fileID: 4420795889310917921, guid: 75e68b9edaab1b24ba5d00120737f1ce, type: 3}
+      propertyPath: icons.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420795889310917921, guid: 75e68b9edaab1b24ba5d00120737f1ce, type: 3}
       propertyPath: SlotSelectionMenu
       value: 
       objectReference: {fileID: 1027367943}
@@ -2976,6 +3065,10 @@ PrefabInstance:
       propertyPath: WeaponSelectionMenu
       value: 
       objectReference: {fileID: 1999204260}
+    - target: {fileID: 4420795889310917921, guid: 75e68b9edaab1b24ba5d00120737f1ce, type: 3}
+      propertyPath: icons.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300000, guid: cf2afd95f32f12740b04d5e5e268760f, type: 3}
     - target: {fileID: 4420795889310917921, guid: 75e68b9edaab1b24ba5d00120737f1ce, type: 3}
       propertyPath: iconWeaponSlot.Array.data[0]
       value: 
@@ -3189,6 +3282,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1670622648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8369505292090992777, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+  m_PrefabInstance: {fileID: 1870405274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1724775122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4440,6 +4538,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8625572317274635262, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+      propertyPath: img_Drone
+      value: 
+      objectReference: {fileID: 1670622648}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
 --- !u!224 &1870405275 stripped
