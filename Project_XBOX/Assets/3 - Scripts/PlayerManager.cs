@@ -26,10 +26,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float lifePoint = 100;
     public float reduction = 0; // Pourcentage ( 0 - 1 )
 
-    [Header("Potions Properties")]
-    public int ChanceToSpawnHealthPotion = 20; // Pourcentage
-    public int HealAmount = 20; // Pourcentage
-
     private bool isImmune = false;
     private SpriteRenderer[] borders = new SpriteRenderer[4];
 

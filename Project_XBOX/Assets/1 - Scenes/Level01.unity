@@ -2663,7 +2663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3311145808247207236, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: bulletDamage
-      value: 20
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3311145808247207236, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: minIntervalBetweenShots
@@ -4166,6 +4166,7 @@ GameObject:
   - component: {fileID: 1796437902}
   - component: {fileID: 1796437903}
   - component: {fileID: 1796437904}
+  - component: {fileID: 1796437905}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -4292,6 +4293,18 @@ MonoBehaviour:
   level01Theme: {fileID: 8300000, guid: 3fbeea76f124d8c4085366e0f23ad19e, type: 3}
   infoDashPref: {fileID: 226007728788264104, guid: 2e304aa823bf48f46aa753184caeb980, type: 3}
   infoBombsPref: {fileID: 1678856056399505923, guid: 23d9b2ffc7cfd0249b3f2fa528725543, type: 3}
+--- !u!114 &1796437905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796437900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdaebdf790e80942b3124650a280e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1859166751
 GameObject:
   m_ObjectHideFlags: 0

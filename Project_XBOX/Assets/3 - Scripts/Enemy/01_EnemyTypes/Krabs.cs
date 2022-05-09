@@ -190,7 +190,7 @@ public class Krabs : Enemy
 
     private IEnumerator AnimateClamp()
     {
-        delay = Random.Range(3f, 4f);
+        delay = Random.Range(2f, 3.5f);
 
         yield return new WaitForSeconds(delay);
 

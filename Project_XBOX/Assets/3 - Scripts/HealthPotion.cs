@@ -20,6 +20,7 @@ public class HealthPotion : Collectable
     private float addScale;
 
     private SoundManager soundManager;
+    private HealthManager healthManager;
 
     // =========================================================
 
@@ -28,6 +29,8 @@ public class HealthPotion : Collectable
         HealthPotionParticles = Resources.Load<GameObject>("Health Potion Particles");
 
         soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+
+        if(GameObject.Find("SceneManager").GetComponent<HealthManager>() != null) { healthManager = GameObject.Find("SceneManager").GetComponent<HealthManager>(); }
     }
 
     private void Start()
@@ -45,7 +48,7 @@ public class HealthPotion : Collectable
         {
             soundManager.playAudioClip(14);
 
-            PlayerManager.Instance.AddHealthPoint(PlayerManager.Instance.HealAmount);
+            PlayerManager.Instance.AddHealthPoint(healthManager.getHealthAmount());
 
             GameObject particles_instance = Instantiate(HealthPotionParticles, transform.position, Quaternion.identity);
             Destroy(particles_instance, 1f);
