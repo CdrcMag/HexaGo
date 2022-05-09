@@ -761,6 +761,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f880a18912a164681f75372dd4bc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &713195489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 249110426770980663, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a157de63a1700a46999213b808d6617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &740949447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,7 +2636,7 @@ PrefabInstance:
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: ArmesFront.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 713195489}
     - target: {fileID: 2484943203076207409, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
