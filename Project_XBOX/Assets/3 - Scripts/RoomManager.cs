@@ -8,8 +8,11 @@ public class RoomManager : MonoBehaviour
 {
     private const float DELAY = 0.05f;
     private const float ADDSCALE = 0.05f;
-    private const float START_EVENT_RATE = 3f; // Push to 20f to have only event room, 3f is base
-    private const float LIMIT_SPAWN_EVENT = 3f; // Push to 0f to have only event room, 3f is base
+
+    // CONST TO TEST SCENES EVENT
+    private const float START_EVENT_RATE = 3f; // Write 20f to test event room, 3f for basic game
+    private const float LIMIT_SPAWN_EVENT = 3f; // Write 0f to test event room, 3f for basic game
+    private const int SCENE_EVENT = -1; // Write the number of the scene event to test, -1 for basic game
 
     // ===================== VARIABLES =====================
 
@@ -116,7 +119,11 @@ public class RoomManager : MonoBehaviour
     private void PrepareEventRoom()
     {
         currentRooms = eventRooms;
-        numberRoom = Random.Range(0, eventRooms.Length);
+        int choiceEvent = SCENE_EVENT;
+
+        if(choiceEvent == -1) { numberRoom = Random.Range(0, eventRooms.Length); }
+        else { numberRoom = choiceEvent; }
+
         player.position = currentRooms[numberRoom].startPosPlayer;
 
         maxRangeEventRate += 4;
@@ -241,21 +248,28 @@ public class RoomManager : MonoBehaviour
     {
         if(killedEnemies == currentRooms[numberRoom].killableEnemies)
         {
-            if(currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
+            ClearScene();
+
+            if (currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
             {
                 weaponSelector.Initialisation();
             }
-
-            ClearScene();
-
-            player.GetComponent<Player_Movement>().canMove = false;
-            player.GetComponent<Rigidbody2D>().isKinematic = true;
-
-            currentNumberRoom++;
-            killedEnemies = 0;
-
-            PrepareRoom();
+            else
+            {
+                ResetRoom();
+            }
         }
+    }
+
+    public void ResetRoom()
+    {
+        player.GetComponent<Player_Movement>().canMove = false;
+        player.GetComponent<Rigidbody2D>().isKinematic = true;
+
+        currentNumberRoom++;
+        killedEnemies = 0;
+
+        PrepareRoom();
     }
 
     private void ClearScene()
