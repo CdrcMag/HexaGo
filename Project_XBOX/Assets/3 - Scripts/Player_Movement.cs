@@ -57,11 +57,19 @@ public class Player_Movement : MonoBehaviour
 
             float h = Input.GetAxis("Input_Rotation_Controller_Horizontal");
             float v = Input.GetAxis("Input_Rotation_Controller_Vertical");
+            if (Input.GetAxisRaw("Controller_LeftTrigger") == 1)
+            {
+                speed = 7;
+            }
+            else
+            {
+                speed = 10;
+            }
 
-            //print($"H : {h} / V : {v}");
+                //print($"H : {h} / V : {v}");
 
-            //Movement
-            movement.Normalize();
+                //Movement
+                movement.Normalize();
             _rb.MovePosition(_rb.position + movement * speed * speedBoost * Time.deltaTime);
 
             if (h > sensitivity || v > sensitivity || h < -sensitivity || v < -sensitivity)
