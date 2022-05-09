@@ -4452,6 +4452,9 @@ MonoBehaviour:
   - {fileID: 8227509433967010929}
   - {fileID: 3287383288840634194}
   angryPoulpy: {fileID: 6752766297440347905}
+  headbandPref: {fileID: 4555128716328394710, guid: dcea00299018d6648b1aad69d820660b, type: 3}
+  bubbleCurtainPref: {fileID: 8655604751304032082, guid: 5b3bc86bb714a6045a8aa88c3514cd09, type: 3}
+  bubbleDropPref: {fileID: 6090125145245759146, guid: e2a6c650501f72c4aacf4181d3c8301c, type: 3}
 --- !u!1 &4311243661711206988
 GameObject:
   m_ObjectHideFlags: 0
