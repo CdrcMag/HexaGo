@@ -39,6 +39,8 @@ public class WeaponSelectorRemake : MonoBehaviour
     private UpgradesAndWeapons finalWeaponOrUpgrade;
     //Slots parent
     public Transform slots;
+    // Room Manager
+    private RoomManager roomManager;
 
     //1. Afficher premier menu
     //2. Générer armes et upgrades
@@ -57,6 +59,8 @@ public class WeaponSelectorRemake : MonoBehaviour
         //Get player shooting system
         PlayerShooting = GameObject.Find("Player").GetComponent<Player_Shooting>();
 
+        // Get the current RoomManager if exist
+        if(GameObject.Find("SceneManager") != null) { roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>(); }
     }
 
     private void Update()
@@ -164,6 +168,7 @@ public class WeaponSelectorRemake : MonoBehaviour
                     selectedSlotX = 2;
                     selectedSlotY = 2;
 
+                    roomManager.ResetRoom();
                     SetMenusStates(false, false);
                     Pause_System.Instance.canPause = true;
                     Time.timeScale = 1;

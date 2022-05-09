@@ -71,10 +71,6 @@ public class PiratCoin : MonoBehaviour
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         transform.localScale = new Vector2(1.5f, 1.5f);
 
-        //GameObject ptcQuake;
-        //ptcQuake = Instantiate(ptcQuakePref, transform.position, Quaternion.identity);
-        //Destroy(ptcQuake, 3f);
-
         soundManager.playAudioClip(9);
 
         GameObject ptcExplode;
