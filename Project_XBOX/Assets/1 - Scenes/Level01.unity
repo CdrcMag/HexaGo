@@ -2625,7 +2625,7 @@ PrefabInstance:
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: ArmesFront.Array.data[4]
       value: 
-      objectReference: {fileID: 830346721}
+      objectReference: {fileID: 0}
     - target: {fileID: 2484943203076207409, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -4273,7 +4273,7 @@ MonoBehaviour:
   background: {fileID: 2115403502}
   musicManager: {fileID: 958224260}
   tutorialRoot: {fileID: 234394489}
-  soundManager: {fileID: 0}
+  soundManager: {fileID: 1158944428}
   enemyPool: {fileID: 740949448}
   tutoTheme: {fileID: 8300000, guid: 6f5e1aaad7448f6498974465d30da5c4, type: 3}
   targetPrefab: {fileID: 4350536055129777735, guid: 622fb41b9f2d1c44cbe4946d93297f6e, type: 3}
