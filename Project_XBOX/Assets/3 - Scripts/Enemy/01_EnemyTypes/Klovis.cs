@@ -146,7 +146,7 @@ public class Klovis : Enemy
 
         if(phase == 1)
         {
-            delayPhase = Random.Range(3f, 4.5f);
+            delayPhase = Random.Range(2f, 3f);
 
             StartCoroutine(AnimateHead());
         }
@@ -192,6 +192,8 @@ public class Klovis : Enemy
 
     private void chooseAttack()
     {
+        soundManager.playAudioClip(18);
+
         int choice = Random.Range(0, 2);
 
         if(choice == 0) { throwJewels(); }

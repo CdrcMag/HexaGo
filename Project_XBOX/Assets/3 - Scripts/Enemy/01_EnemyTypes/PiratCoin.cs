@@ -14,12 +14,15 @@ public class PiratCoin : MonoBehaviour
     [SerializeField] private GameObject ptcExplodePref;
 
     private bool canSpin = true;
+    private SoundManager soundManager;
 
     // =====================================================
 
 
     private void Start()
     {
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+
         StartCoroutine(Explode());
     }
 
@@ -71,6 +74,8 @@ public class PiratCoin : MonoBehaviour
         //GameObject ptcQuake;
         //ptcQuake = Instantiate(ptcQuakePref, transform.position, Quaternion.identity);
         //Destroy(ptcQuake, 3f);
+
+        soundManager.playAudioClip(9);
 
         GameObject ptcExplode;
         ptcExplode = Instantiate(ptcExplodePref, transform.position, Quaternion.identity);
