@@ -9,6 +9,7 @@ TagManager:
   - Trap
   - Block
   - Totem
+  - Portal
   layers:
   - Default
   - TransparentFX

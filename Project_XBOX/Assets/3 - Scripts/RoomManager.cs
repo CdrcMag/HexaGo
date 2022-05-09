@@ -40,6 +40,10 @@ public class RoomManager : MonoBehaviour
 
     private int maxRangeEventRate = 11;
 
+    // Upgrade Portal
+    [SerializeField] private GameObject upgradePortalPref;
+    private GameObject upgradePortal;
+
     // =====================================================
 
 
@@ -252,7 +256,10 @@ public class RoomManager : MonoBehaviour
 
             if (currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
             {
-                weaponSelector.Initialisation();
+                // Spawn du portail permettant de choisir une nouvelle arme
+                if(upgradePortalPref == null) { Debug.Log("Ajouter le prefab de UpgradePortal dans SceneManager -> RoomManager.cs"); }
+                Vector2 nextSpawnPos = new Vector2(0f, 0f);
+                upgradePortal = Instantiate(upgradePortalPref, nextSpawnPos, Quaternion.identity);
             }
             else
             {
@@ -263,6 +270,9 @@ public class RoomManager : MonoBehaviour
 
     public void ResetRoom()
     {
+        // Destroy Upgrade Portal if exist
+        if(upgradePortal != null) { Destroy(upgradePortal); }
+
         player.GetComponent<Player_Movement>().canMove = false;
         player.GetComponent<Rigidbody2D>().isKinematic = true;
 
