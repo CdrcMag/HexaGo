@@ -34,6 +34,7 @@ public class Klovis : Enemy
     private int xPosChecker = 0;
 
     private GameObject crossTreasure;
+    private GameObject bubbleCurtain;
 
     // =====================================================
 
@@ -43,7 +44,7 @@ public class Klovis : Enemy
         base.SetInitialSpeed(GetSpeed());
         base.SetMaxLifePoint();
 
-        spawnParticleAtBottom(bubbleCurtainPref, false);
+        bubbleCurtain = Instantiate(bubbleCurtainPref, new Vector2(0f, -6.2f), Quaternion.identity);
     }
 
     private void Start()
@@ -170,6 +171,7 @@ public class Klovis : Enemy
     private void OnDestroy()
     {
         Destroy(crossTreasure);
+        Destroy(bubbleCurtain);
     }
 
     private void setPhase01()

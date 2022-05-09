@@ -4252,6 +4252,7 @@ MonoBehaviour:
   tutorial: {fileID: 1796437904}
   bossPrefab: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}
   bossTheme: {fileID: 8300000, guid: 8a864a57208920649b9c50ecd095453a, type: 3}
+  upgradePortalPref: {fileID: 5421871123991960473, guid: a3216c45051515f4abf599fa2c83c976, type: 3}
 --- !u!114 &1796437903
 MonoBehaviour:
   m_ObjectHideFlags: 0
