@@ -168,7 +168,7 @@ public class WeaponSelectorRemake : MonoBehaviour
                     selectedSlotX = 2;
                     selectedSlotY = 2;
 
-                    roomManager.ResetRoom();
+                    roomManager.ResetRoomWithMute();
                     SetMenusStates(false, false);
                     Pause_System.Instance.canPause = true;
                     Time.timeScale = 1;

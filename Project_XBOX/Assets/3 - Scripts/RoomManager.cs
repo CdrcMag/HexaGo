@@ -25,6 +25,7 @@ public class RoomManager : MonoBehaviour
     public Transform enemyPool;
     public Transform player;
     public AudioSource musicManager;
+    public AudioSource menuMusicManager;
     public WeaponSelectorRemake weaponSelector;
     [SerializeField] private Transition transition;
     public Tutorial tutorial;
@@ -43,6 +44,7 @@ public class RoomManager : MonoBehaviour
     // Upgrade Portal
     [SerializeField] private GameObject upgradePortalPref;
     private GameObject upgradePortal;
+    private float pitchBuffer = 0f;
 
     // =====================================================
 
@@ -207,6 +209,8 @@ public class RoomManager : MonoBehaviour
             }
         }
 
+        pitchBuffer = musicManager.pitch;
+
         return difficulty;
     }
 
@@ -260,12 +264,24 @@ public class RoomManager : MonoBehaviour
                 if(upgradePortalPref == null) { Debug.Log("Ajouter le prefab de UpgradePortal dans SceneManager -> RoomManager.cs"); }
                 Vector2 nextSpawnPos = new Vector2(0f, 0f);
                 upgradePortal = Instantiate(upgradePortalPref, nextSpawnPos, Quaternion.identity);
+                // Music change
+                menuMusicManager.enabled = true;
+                menuMusicManager.Play();
+                menuMusicManager.mute = false;
+                musicManager.mute = true;
             }
             else
             {
                 ResetRoom();
             }
         }
+    }
+
+    public void ResetRoomWithMute()
+    {
+        menuMusicManager.mute = true;
+        musicManager.mute = false;
+        ResetRoom();
     }
 
     public void ResetRoom()
