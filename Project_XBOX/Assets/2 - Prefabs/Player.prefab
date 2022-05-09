@@ -378,7 +378,7 @@ MonoBehaviour:
   borderRoot: {fileID: 0}
   lifePoint: 100
   reduction: 0
-  ChanceToSpawnHealthPotion: 20
+  ChanceToSpawnHealthPotion: 15
   HealAmount: 20
 --- !u!114 &139817739442116469
 MonoBehaviour:
