@@ -48,7 +48,7 @@ public class Drone : Weapon
     {
         base.Shoot();
 
-        soundManager.playAudioClip(1);
+        soundManager.playAudioClip(20);
 
         
         Vector2[] targetPoints = new Vector2[5];
