@@ -20,15 +20,13 @@ public class Tutorial : MonoBehaviour
     public RoomManager roomManager;
     public Transform player;
     public Transform background;
-    public AudioSource musicManager;
+    public MusicManager musicManager;
     public Transform tutorialRoot;
     public SoundManager soundManager;
     public Transform enemyPool;
 
     [Header("Drag from Assets")]
-    public AudioClip tutoTheme;
     public GameObject targetPrefab;
-    public AudioClip level01Theme;
     public GameObject infoDashPref;
     public GameObject infoBombsPref;
 
@@ -53,9 +51,7 @@ public class Tutorial : MonoBehaviour
             background.GetChild(i).gameObject.SetActive(false);
         }
 
-        musicManager.Stop();
-        musicManager.clip = tutoTheme;
-        musicManager.Play();
+        musicManager.setTutoTheme();
 
         tutorialRoot.gameObject.SetActive(true);
     }
@@ -267,9 +263,7 @@ public class Tutorial : MonoBehaviour
             Destroy(enemyPool.GetChild(j).gameObject);
         }
 
-        musicManager.Stop();
-        musicManager.clip = level01Theme;
-        musicManager.Play();
+        musicManager.setGameTheme();
 
         tutorialRoot.gameObject.SetActive(false);
     }
