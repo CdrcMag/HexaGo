@@ -6,6 +6,8 @@ public class Projectile_Drone : Base_Projectile
 {
     [SerializeField] private SpriteRenderer shuriken01;
     [SerializeField] private SpriteRenderer shuriken02;
+    [SerializeField] private Rotate rotShuriken01;
+    [SerializeField] private Rotate rotShuriken02;
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -14,6 +16,12 @@ public class Projectile_Drone : Base_Projectile
 
 
     [HideInInspector] public float damageOnHit = 0;
+
+    private void Start()
+    {
+        StartCoroutine(IAddSpeed(rotShuriken01));
+        StartCoroutine(IAddSpeed(rotShuriken02));
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,11 +49,22 @@ public class Projectile_Drone : Base_Projectile
             GetComponent<CircleCollider2D>().enabled = false;
             Destroy(transform.GetChild(0).gameObject);
 
+        }  
+    }
+
+    private IEnumerator IAddSpeed(Rotate _rot)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if(_rot.speed < 0)
+        {
+            _rot.speed -= 75;
+        }
+        else
+        {
+            _rot.speed += 75;
         }
 
-        
-
-
-        
+        StartCoroutine(IAddSpeed(_rot));
     }
 }
