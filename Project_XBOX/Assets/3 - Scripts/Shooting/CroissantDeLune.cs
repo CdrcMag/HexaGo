@@ -9,7 +9,6 @@ public class CroissantDeLune : Weapon
     private float cpt = 0;
 
     [Header("Croissant de lune stats")]
-    public float BulletTimeAlive = 0.2f;
     private GameObject rotator;
     public int nbrOfProjectile = 3;
 
@@ -59,20 +58,23 @@ public class CroissantDeLune : Weapon
 
         Vector2 playerPosition = transform.parent.parent.parent.position;
 
-        for(int i = 0; i < nbrOfProjectile; i++)
+        for (int i = 0; i < nbrOfProjectile; i++)
         {
             targets.Add((Vector2)transform.position + (Vector2)transform.up *  (i+1));
+
             Vector2 midPoint = Vector2.Lerp(playerPosition, targets[i], 0.5f);
             GameObject rotatorInstance = Instantiate(rotator, midPoint, transform.rotation);
             GameObject a = Instantiate(projectilePrefab, playerPosition, transform.parent.rotation, rotatorInstance.transform);
             a.GetComponent<Projectile_Croissant>().damageOnHit = bulletDamage;
-            StartCoroutine(IRotate(rotatorInstance.transform, bulletSpeed));
+
+            StartCoroutine(IRotate(rotatorInstance.transform, bulletSpeed, 0.2f));
         }
+
 
     }
 
     
-    IEnumerator IRotate(Transform t, float speed)
+    IEnumerator IRotate(Transform t, float speed, float BulletTimeAlive)
     {
         float cpt = 0;
         while(cpt < BulletTimeAlive)
@@ -84,8 +86,8 @@ public class CroissantDeLune : Weapon
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.35f);
-        Destroy(t.gameObject);
+        yield return new WaitForSeconds(0.25f);
+        //Destroy(t.gameObject);
 
         
     }
