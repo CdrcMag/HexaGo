@@ -631,7 +631,7 @@ MonoBehaviour:
   bulletDamage: 15
   minIntervalBetweenShots: 0.5
   BulletTimeAlive: 0.2
-  nbrOfProjectile: 100
+  nbrOfProjectile: 12
 --- !u!1 &701158638
 GameObject:
   m_ObjectHideFlags: 0
