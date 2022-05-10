@@ -8,8 +8,11 @@ public class RoomManager : MonoBehaviour
 {
     private const float DELAY = 0.05f;
     private const float ADDSCALE = 0.05f;
-    private const float START_EVENT_RATE = 3f; // Push to 20f to have only event room, 3f is base
-    private const float LIMIT_SPAWN_EVENT = 3f; // Push to 0f to have only event room, 3f is base
+
+    // CONST TO TEST SCENES EVENT
+    private const float START_EVENT_RATE = 3f; // Write 20f to test event room, 3f for basic game
+    private const float LIMIT_SPAWN_EVENT = 3f; // Write 0f to test event room, 3f for basic game
+    private const int SCENE_EVENT = -1; // Write the number of the scene event to test, -1 for basic game
 
     // ===================== VARIABLES =====================
 
@@ -21,14 +24,13 @@ public class RoomManager : MonoBehaviour
     public int killedEnemies = 0;
     public Transform enemyPool;
     public Transform player;
-    public AudioSource musicManager;
+    public MusicManager musicManager;
     public WeaponSelectorRemake weaponSelector;
     [SerializeField] private Transition transition;
     public Tutorial tutorial;
 
     // BOSS
     public GameObject bossPrefab;
-    public AudioClip bossTheme;
 
     private Level01[] currentRooms;
     private int numberRoom;
@@ -37,12 +39,21 @@ public class RoomManager : MonoBehaviour
 
     private int maxRangeEventRate = 11;
 
+    // Upgrade Portal
+    [SerializeField] private GameObject upgradePortalPref;
+    private GameObject upgradePortal;
+    [SerializeField] private GameObject exitPortalPref;
+    private GameObject exitPortal;
+    private bool mustSpawnPortal = false;
+
     // =====================================================
 
 
 
     private void Awake()
     {
+        if(GameObject.Find("MusicManager") != null) { musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>(); }
+
         PrepareRoom();
     }
 
@@ -111,15 +122,31 @@ public class RoomManager : MonoBehaviour
         currentRooms = ChooseDifficulty();
         numberRoom = ChooseRoom(currentRooms);
         player.position = currentRooms[numberRoom].startPosPlayer;
+
+        if(mustSpawnPortal)
+        {
+            StartCoroutine(ISpawnExitPortal());
+            mustSpawnPortal = false;
+        }
     }
 
     private void PrepareEventRoom()
     {
         currentRooms = eventRooms;
-        numberRoom = Random.Range(0, eventRooms.Length);
+        int choiceEvent = SCENE_EVENT;
+
+        if(choiceEvent == -1) { numberRoom = Random.Range(0, eventRooms.Length); }
+        else { numberRoom = choiceEvent; }
+
         player.position = currentRooms[numberRoom].startPosPlayer;
 
         maxRangeEventRate += 4;
+
+        if (mustSpawnPortal)
+        {
+            StartCoroutine(ISpawnExitPortal());
+            mustSpawnPortal = false;
+        }
     }
 
     private IEnumerator IActivatePlayer()
@@ -157,12 +184,10 @@ public class RoomManager : MonoBehaviour
             else if (currentNumberRoom < 6)
             {
                 difficulty = mediumRooms;
-                musicManager.pitch = 1.15f;
             }
             else if (currentNumberRoom < 9)
             {
                 difficulty = hardRooms;
-                musicManager.pitch = 1.3f;
             }
         }
         else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Normal")
@@ -174,12 +199,10 @@ public class RoomManager : MonoBehaviour
             else if (currentNumberRoom < 5)
             {
                 difficulty = mediumRooms;
-                musicManager.pitch = 1.15f;
             }
             else if (currentNumberRoom < 9)
             {
                 difficulty = hardRooms;
-                musicManager.pitch = 1.3f;
             }
         }
         else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Hard")
@@ -187,14 +210,13 @@ public class RoomManager : MonoBehaviour
             if (currentNumberRoom < 3)
             {
                 difficulty = mediumRooms;
-                musicManager.pitch = 1.15f;
             }
             else if (currentNumberRoom < 9)
             {
                 difficulty = hardRooms;
-                musicManager.pitch = 1.3f;
             }
         }
+
 
         return difficulty;
     }
@@ -241,21 +263,47 @@ public class RoomManager : MonoBehaviour
     {
         if(killedEnemies == currentRooms[numberRoom].killableEnemies)
         {
-            if(currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
-            {
-                weaponSelector.Initialisation();
-            }
-
             ClearScene();
 
-            player.GetComponent<Player_Movement>().canMove = false;
-            player.GetComponent<Rigidbody2D>().isKinematic = true;
+            if (currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
+            {
+                // Spawn du portail permettant de choisir une nouvelle arme
+                if(upgradePortalPref == null) { Debug.Log("Ajouter le prefab de UpgradePortal dans SceneManager -> RoomManager.cs"); }
+                Vector2 nextSpawnPos = new Vector2(0f, 0f);
+                upgradePortal = Instantiate(upgradePortalPref, nextSpawnPos, Quaternion.identity);
 
-            currentNumberRoom++;
-            killedEnemies = 0;
-
-            PrepareRoom();
+                // Music change
+                musicManager.activateMenuThread();
+                musicManager.desactivateGameThread();
+            }
+            else
+            {
+                ResetRoom();
+            }
         }
+    }
+
+    public void ResetRoomWithMute()
+    {
+        mustSpawnPortal = true;
+
+        musicManager.desactivateMenuThread();
+        musicManager.activateGameThread();
+        ResetRoom();
+    }
+
+    public void ResetRoom()
+    {
+        // Destroy Upgrade Portal if exist
+        if(upgradePortal != null) { Destroy(upgradePortal); }
+
+        player.GetComponent<Player_Movement>().canMove = false;
+        player.GetComponent<Rigidbody2D>().isKinematic = true;
+
+        currentNumberRoom++;
+        killedEnemies = 0;
+
+        PrepareRoom();
     }
 
     private void ClearScene()
@@ -268,10 +316,7 @@ public class RoomManager : MonoBehaviour
 
     private void SpawnBoss()
     {
-        musicManager.Stop();
-        musicManager.clip = bossTheme;
-        musicManager.Play();
-        musicManager.pitch = 1f;
+        musicManager.setBossTheme();
 
         GameObject boss;
         boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity);
@@ -302,5 +347,40 @@ public class RoomManager : MonoBehaviour
     private void PrepareTutorial()
     {
         tutorial.LoadTutorial();
+    }
+
+    private IEnumerator ISpawnExitPortal()
+    {
+        exitPortal = Instantiate(exitPortalPref, player.transform.position, Quaternion.identity);
+        Transform tr = exitPortal.transform;
+
+        for (int i = 0; i < tr.childCount; i++)
+        {
+            tr.GetChild(i).localScale = new Vector2(0f, 0f);
+        }
+
+        while (tr.GetChild(0).localScale.x < 1f)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            for (int i = 0; i < tr.childCount; i++)
+            {
+                tr.GetChild(i).localScale = new Vector2(tr.GetChild(i).localScale.x + 0.05f, tr.GetChild(i).localScale.y + 0.05f);
+            }
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        while (tr.GetChild(0).localScale.x > 0f)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            for (int i = 0; i < tr.childCount; i++)
+            {
+                tr.GetChild(i).localScale = new Vector2(tr.GetChild(i).localScale.x - 0.1f, tr.GetChild(i).localScale.y - 0.1f);
+            }
+        }
+
+        Destroy(exitPortal);
     }
 }

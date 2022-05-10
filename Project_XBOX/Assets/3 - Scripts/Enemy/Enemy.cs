@@ -45,7 +45,7 @@ public abstract class Enemy : MonoBehaviour
     protected float initialSpeed = 10f;
     protected Transform target;
 
-    private GameObject healthPotionPrefab;
+    private HealthManager healthManager;
 
     // =====================================================
 
@@ -69,6 +69,7 @@ public abstract class Enemy : MonoBehaviour
     // Set the variable "target" with the player in the scene
     public virtual void SetTargetInStart()
     {
+        if (GameObject.Find("SceneManager").GetComponent<HealthManager>() != null) { healthManager = GameObject.Find("SceneManager").GetComponent<HealthManager>(); }
         cameraShake = Camera.main.GetComponent<CameraShake>();
         roomManager = GameObject.Find("SceneManager").GetComponent<RoomManager>();
         soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
@@ -178,8 +179,6 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        healthPotionPrefab = Resources.Load<GameObject>("Health Potion");
-
         if (!hasUpdated)
         {
             GameObject ptcDie;
@@ -199,12 +198,7 @@ public abstract class Enemy : MonoBehaviour
                 roomManager.FinishLevel();
             }
 
-            int randomRate = Random.Range(1, 101);
-
-            if (randomRate <= PlayerManager.Instance.ChanceToSpawnHealthPotion)
-            {
-                if (healthPotionPrefab != null) Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
-            }
+            healthManager.callToSpawnHeal(transform.position);
 
             hasUpdated = true;
         }
