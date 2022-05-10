@@ -24,15 +24,13 @@ public class RoomManager : MonoBehaviour
     public int killedEnemies = 0;
     public Transform enemyPool;
     public Transform player;
-    public AudioSource musicManager;
-    public AudioSource menuMusicManager;
+    public MusicManager musicManager;
     public WeaponSelectorRemake weaponSelector;
     [SerializeField] private Transition transition;
     public Tutorial tutorial;
 
     // BOSS
     public GameObject bossPrefab;
-    public AudioClip bossTheme;
 
     private Level01[] currentRooms;
     private int numberRoom;
@@ -44,7 +42,6 @@ public class RoomManager : MonoBehaviour
     // Upgrade Portal
     [SerializeField] private GameObject upgradePortalPref;
     private GameObject upgradePortal;
-    private float pitchBuffer = 0f;
 
     // =====================================================
 
@@ -52,6 +49,8 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
+        if(GameObject.Find("MusicManager") != null) { musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>(); }
+
         PrepareRoom();
     }
 
@@ -170,12 +169,10 @@ public class RoomManager : MonoBehaviour
             else if (currentNumberRoom < 6)
             {
                 difficulty = mediumRooms;
-                musicManager.pitch = 1.15f;
             }
             else if (currentNumberRoom < 9)
             {
                 difficulty = hardRooms;
-                musicManager.pitch = 1.3f;
             }
         }
         else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Normal")
@@ -187,12 +184,10 @@ public class RoomManager : MonoBehaviour
             else if (currentNumberRoom < 5)
             {
                 difficulty = mediumRooms;
-                musicManager.pitch = 1.15f;
             }
             else if (currentNumberRoom < 9)
             {
                 difficulty = hardRooms;
-                musicManager.pitch = 1.3f;
             }
         }
         else if (PlayerPrefs.GetString("Difficulty", "Easy") == "Hard")
@@ -200,16 +195,13 @@ public class RoomManager : MonoBehaviour
             if (currentNumberRoom < 3)
             {
                 difficulty = mediumRooms;
-                musicManager.pitch = 1.15f;
             }
             else if (currentNumberRoom < 9)
             {
                 difficulty = hardRooms;
-                musicManager.pitch = 1.3f;
             }
         }
 
-        pitchBuffer = musicManager.pitch;
 
         return difficulty;
     }
@@ -264,11 +256,10 @@ public class RoomManager : MonoBehaviour
                 if(upgradePortalPref == null) { Debug.Log("Ajouter le prefab de UpgradePortal dans SceneManager -> RoomManager.cs"); }
                 Vector2 nextSpawnPos = new Vector2(0f, 0f);
                 upgradePortal = Instantiate(upgradePortalPref, nextSpawnPos, Quaternion.identity);
+
                 // Music change
-                menuMusicManager.enabled = true;
-                menuMusicManager.Play();
-                menuMusicManager.mute = false;
-                musicManager.mute = true;
+                musicManager.activateMenuThread();
+                musicManager.desactivateGameThread();
             }
             else
             {
@@ -279,8 +270,8 @@ public class RoomManager : MonoBehaviour
 
     public void ResetRoomWithMute()
     {
-        menuMusicManager.mute = true;
-        musicManager.mute = false;
+        musicManager.desactivateMenuThread();
+        musicManager.activateGameThread();
         ResetRoom();
     }
 
@@ -308,10 +299,7 @@ public class RoomManager : MonoBehaviour
 
     private void SpawnBoss()
     {
-        musicManager.Stop();
-        musicManager.clip = bossTheme;
-        musicManager.Play();
-        musicManager.pitch = 1f;
+        musicManager.setBossTheme();
 
         GameObject boss;
         boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity);
