@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class UpgradePortal : MonoBehaviour
 {
+    private SoundManager soundManager;
+
+
+    private void Awake()
+    {
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             if(GameObject.Find("Weapon Selector 2") != null)
             {
+                soundManager.playAudioClip(19);
                 StartCoroutine(IAnimationPortal(other.gameObject));
             }
             else

@@ -179,24 +179,29 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        GameObject ptcDie;
-        ptcDie = Instantiate(ptcDiePref, transform.position, Quaternion.identity);
-        Destroy(ptcDie, 8f);
-
-        cameraShake.Shake(0.3f, 1.5f);
-        soundManager.playAudioClip(6);
-
-        if(!isSummoned)
+        if (!hasUpdated)
         {
-            roomManager.UpdateState();
-        }
+            GameObject ptcDie;
+            ptcDie = Instantiate(ptcDiePref, transform.position, Quaternion.identity);
+            Destroy(ptcDie, 8f);
 
-        if(isBoss && !isTuto)
-        {
-            roomManager.FinishLevel();
-        }
+            cameraShake.Shake(0.3f, 1.5f);
+            soundManager.playAudioClip(6);
 
-        healthManager.callToSpawnHeal(transform.position);
+            if(!isSummoned)
+            {
+                roomManager.UpdateState();
+            }
+
+            if(isBoss && !isTuto)
+            {
+                roomManager.FinishLevel();
+            }
+
+            healthManager.callToSpawnHeal(transform.position);
+
+            hasUpdated = true;
+        }
 
         Destroy(gameObject);
     }
