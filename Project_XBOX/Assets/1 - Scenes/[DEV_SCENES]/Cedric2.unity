@@ -611,7 +611,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
-  m_Father: {fileID: 965802358}
+  m_Father: {fileID: 2009131536}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &686942957
@@ -627,10 +627,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWeapon: 0
-  bulletSpeed: 0
-  bulletDamage: 0
-  minIntervalBetweenShots: 0
-  temp: 
+  bulletSpeed: 15
+  bulletDamage: 15
+  minIntervalBetweenShots: 0.5
+  BulletTimeAlive: 0.2
+  nbrOfProjectile: 100
 --- !u!1 &701158638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,11 +1125,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &965802358 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 139817739610243222, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
-  m_PrefabInstance: {fileID: 1438968435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &995831751 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2936894398838400108, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
@@ -2373,7 +2369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontStartWeapon
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackLeftStartUpgrade
@@ -4255,6 +4251,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1528894611413274308, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
   m_PrefabInstance: {fileID: 1336168314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2009131536 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 139817739756286568, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2115403500
 GameObject:

@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CroissantDeLune : Weapon
 {
@@ -7,8 +9,10 @@ public class CroissantDeLune : Weapon
     private float cpt = 0;
 
     [Header("Croissant de lune stats")]
-    public string temp = "";
+    public float BulletTimeAlive = 0.2f;
     private GameObject rotator;
+    public int nbrOfProjectile = 3;
+
 
     private void Awake()
     {
@@ -46,29 +50,43 @@ public class CroissantDeLune : Weapon
 
         soundManager.playAudioClip(3);
 
-        Vector2[] targets = new Vector2[3];
+        //Vector2[] targets = new Vector2[3];
 
-        targets[0] = (Vector2)transform.position + (Vector2)transform.up * 2f;
-        targets[1] = (Vector2)transform.position + (Vector2)transform.up * 3f;
-        targets[2] = (Vector2)transform.position + (Vector2)transform.up * 4f;
-
-        //GameObject a = Instantiate(projectilePrefab, targets[0], transform.parent.rotation);
-        //Instantiate(projectilePrefab, targets[1], transform.parent.rotation);
-        //Instantiate(projectilePrefab, targets[2], transform.parent.rotation);
+        //targets[0] = (Vector2)transform.position + (Vector2)transform.up * 2f;
+        //targets[1] = (Vector2)transform.position + (Vector2)transform.up * 3f;
+        //targets[2] = (Vector2)transform.position + (Vector2)transform.up * 4f;
+        List<Vector2> targets = new List<Vector2>();
 
         Vector2 playerPosition = transform.parent.parent.parent.position;
-        Quaternion playerRotation = transform.parent.parent.parent.rotation;
-        Vector2 midPoint = Vector2.Lerp(playerPosition, targets[0], 0.5f);
 
-        Quaternion newRotation = Quaternion.Euler(playerRotation.x, playerRotation.y, playerRotation.z - 180);
-
-        GameObject rotatorInstance = Instantiate(projectilePrefab, midPoint, newRotation);
-
-        GameObject a = Instantiate(projectilePrefab, playerPosition, transform.parent.rotation);
-        GameObject b = Instantiate(projectilePrefab, midPoint, transform.parent.rotation);
-        GameObject c = Instantiate(projectilePrefab, targets[0], transform.parent.rotation);
+        for(int i = 0; i < nbrOfProjectile; i++)
+        {
+            targets.Add((Vector2)transform.position + (Vector2)transform.up *  (i+1));
+            Vector2 midPoint = Vector2.Lerp(playerPosition, targets[i], 0.5f);
+            GameObject rotatorInstance = Instantiate(rotator, midPoint, transform.rotation);
+            GameObject a = Instantiate(projectilePrefab, playerPosition, transform.parent.rotation, rotatorInstance.transform);
+            a.GetComponent<Projectile_Croissant>().damageOnHit = bulletDamage;
+            StartCoroutine(IRotate(rotatorInstance.transform, bulletSpeed));
+        }
 
     }
 
+    
+    IEnumerator IRotate(Transform t, float speed)
+    {
+        float cpt = 0;
+        while(cpt < BulletTimeAlive)
+        {
+            t.Rotate(Vector3.forward, speed);
 
+
+            cpt += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.35f);
+        Destroy(t.gameObject);
+
+        
+    }
 }
