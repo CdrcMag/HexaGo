@@ -54,6 +54,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cbcc7953bb6fe5544859a2d59d2f5962, type: 3}
   - {fileID: 21300000, guid: 7dd739f65c8e1ed44b5af1ee8da4f759, type: 3}
   - {fileID: 21300000, guid: cf2afd95f32f12740b04d5e5e268760f, type: 3}
+  - {fileID: 21300000, guid: cf2afd95f32f12740b04d5e5e268760f, type: 3}
+  - {fileID: 21300000, guid: cf2afd95f32f12740b04d5e5e268760f, type: 3}
   iconWeaponSlot:
   - {fileID: 0}
   - {fileID: 0}
