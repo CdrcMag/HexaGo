@@ -8,7 +8,7 @@ public class Klovis : Enemy
     private const float FORCE = 100f;
     private const float TORQUE = 20f;
     private const float SPEED_JEWEL = 4f;
-    private const float SPEED_COIN = 5f;
+    private const float SPEED_COIN = 4f;
 
     private const float HEALTH_TO_PROC_PHASE_01 = 600f;
 
@@ -35,6 +35,7 @@ public class Klovis : Enemy
 
     private GameObject crossTreasure;
     private GameObject bubbleCurtain;
+    private GameObject coinPool;
 
     // =====================================================
 
@@ -43,6 +44,8 @@ public class Klovis : Enemy
         base.SetTargetInStart();
         base.SetInitialSpeed(GetSpeed());
         base.SetMaxLifePoint();
+
+        coinPool = Instantiate(crossTreasurePref, new Vector2(400f, 400f), Quaternion.identity);
 
         bubbleCurtain = Instantiate(bubbleCurtainPref, new Vector2(0f, -6.2f), Quaternion.identity);
     }
@@ -170,6 +173,7 @@ public class Klovis : Enemy
 
     private void OnDestroy()
     {
+        Destroy(coinPool);
         Destroy(crossTreasure);
         Destroy(bubbleCurtain);
     }
@@ -257,10 +261,10 @@ public class Klovis : Enemy
         quat = currentQuaternionRot;
 
         GameObject coin;
-        coin = Instantiate(piratCoinPref, transform.position, quat);
+        coin = Instantiate(piratCoinPref, transform.position, quat, coinPool.transform);
 
         float factorSpeed = Random.Range(1f, 2f);
-        dir = coin.transform.up * (SPEED_JEWEL * factorSpeed);
+        dir = coin.transform.up * (SPEED_COIN * factorSpeed);
         coin.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
     }
 }

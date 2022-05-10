@@ -42,6 +42,9 @@ public class RoomManager : MonoBehaviour
     // Upgrade Portal
     [SerializeField] private GameObject upgradePortalPref;
     private GameObject upgradePortal;
+    [SerializeField] private GameObject exitPortalPref;
+    private GameObject exitPortal;
+    private bool mustSpawnPortal = false;
 
     // =====================================================
 
@@ -119,6 +122,12 @@ public class RoomManager : MonoBehaviour
         currentRooms = ChooseDifficulty();
         numberRoom = ChooseRoom(currentRooms);
         player.position = currentRooms[numberRoom].startPosPlayer;
+
+        if(mustSpawnPortal)
+        {
+            StartCoroutine(ISpawnExitPortal());
+            mustSpawnPortal = false;
+        }
     }
 
     private void PrepareEventRoom()
@@ -132,6 +141,12 @@ public class RoomManager : MonoBehaviour
         player.position = currentRooms[numberRoom].startPosPlayer;
 
         maxRangeEventRate += 4;
+
+        if (mustSpawnPortal)
+        {
+            StartCoroutine(ISpawnExitPortal());
+            mustSpawnPortal = false;
+        }
     }
 
     private IEnumerator IActivatePlayer()
@@ -270,6 +285,8 @@ public class RoomManager : MonoBehaviour
 
     public void ResetRoomWithMute()
     {
+        mustSpawnPortal = true;
+
         musicManager.desactivateMenuThread();
         musicManager.activateGameThread();
         ResetRoom();
@@ -330,5 +347,40 @@ public class RoomManager : MonoBehaviour
     private void PrepareTutorial()
     {
         tutorial.LoadTutorial();
+    }
+
+    private IEnumerator ISpawnExitPortal()
+    {
+        exitPortal = Instantiate(exitPortalPref, player.transform.position, Quaternion.identity);
+        Transform tr = exitPortal.transform;
+
+        for (int i = 0; i < tr.childCount; i++)
+        {
+            tr.GetChild(i).localScale = new Vector2(0f, 0f);
+        }
+
+        while (tr.GetChild(0).localScale.x < 1f)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            for (int i = 0; i < tr.childCount; i++)
+            {
+                tr.GetChild(i).localScale = new Vector2(tr.GetChild(i).localScale.x + 0.05f, tr.GetChild(i).localScale.y + 0.05f);
+            }
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        while (tr.GetChild(0).localScale.x > 0f)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            for (int i = 0; i < tr.childCount; i++)
+            {
+                tr.GetChild(i).localScale = new Vector2(tr.GetChild(i).localScale.x - 0.1f, tr.GetChild(i).localScale.y - 0.1f);
+            }
+        }
+
+        Destroy(exitPortal);
     }
 }
