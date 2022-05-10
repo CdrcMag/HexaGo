@@ -1517,6 +1517,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164695300}
   m_CullTransparentMesh: 1
+--- !u!1 &1197011017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 164172855160441148, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+  m_PrefabInstance: {fileID: 1870405274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1245156939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,6 +1844,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1285744491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5353610525667501216, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+  m_PrefabInstance: {fileID: 1438968435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ddaaa3b5f904bb4eb6315f72ffd9660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1327004600 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1228756560403529454, guid: 8b5e81c8fe49e8342a01b2b20d47649b, type: 3}
@@ -2661,7 +2677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontStartWeapon
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackLeftStartUpgrade
@@ -2673,7 +2689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: ArmesFront.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackRightStartUpgrade
@@ -2687,6 +2703,10 @@ PrefabInstance:
       propertyPath: ArmesFront.Array.data[4]
       value: 
       objectReference: {fileID: 713195489}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: ArmesFront.Array.data[5]
+      value: 
+      objectReference: {fileID: 1285744491}
     - target: {fileID: 2484943203076207409, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -2822,6 +2842,14 @@ PrefabInstance:
     - target: {fileID: 5322493887590401538, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353610525667501216, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: nbrOfProjectile
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5353610525667501216, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: minIntervalBetweenShots
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5416219018007542680, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: border
@@ -3039,7 +3067,7 @@ PrefabInstance:
       objectReference: {fileID: 1879427}
     - target: {fileID: 4420795889310917921, guid: 75e68b9edaab1b24ba5d00120737f1ce, type: 3}
       propertyPath: icons.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4420795889310917921, guid: 75e68b9edaab1b24ba5d00120737f1ce, type: 3}
       propertyPath: SlotSelectionMenu
@@ -4538,6 +4566,10 @@ PrefabInstance:
       propertyPath: img_Drone
       value: 
       objectReference: {fileID: 1670622648}
+    - target: {fileID: 8625572317274635262, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+      propertyPath: img_Croissant
+      value: 
+      objectReference: {fileID: 1197011017}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
 --- !u!224 &1870405275 stripped

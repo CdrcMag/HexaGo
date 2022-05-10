@@ -32,7 +32,7 @@ public class Player_Shooting : MonoBehaviour
 
     //Nom des slots et noms des armes
     public enum SlotName { None, Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
-    public enum WeaponName { None = 0, Canon = 1, BigFuckingGun = 2, Mitraillette = 3, Shotgun = 4, Drone = 5 };
+    public enum WeaponName { None = 0, Canon = 1, BigFuckingGun = 2, Mitraillette = 3, Shotgun = 4, Drone = 5, Croissant = 6 };
     public enum UpgradeName { None, Propulseur, Dash, Totems, Shield };
 
     private void Start()
@@ -98,6 +98,7 @@ public class Player_Shooting : MonoBehaviour
         if (w.GetType() == typeof(Mitraillette)) currentWeaponsState.Add(slotName, WeaponName.Mitraillette);
         if (w.GetType() == typeof(FusilPompe)) currentWeaponsState.Add(slotName, WeaponName.Shotgun);
         if (w.GetType() == typeof(Drone)) currentWeaponsState.Add(slotName, WeaponName.Drone);
+        if (w.GetType() == typeof(CroissantDeLune)) currentWeaponsState.Add(slotName, WeaponName.Croissant);
         //ici rajouter des armes en suivant la structure ci-dessus
 
 
@@ -204,6 +205,8 @@ public class Player_Shooting : MonoBehaviour
             //Ici rajouter votre arme
             case WeaponName.Drone:
                 return ArmesFront[4];
+            case WeaponName.Croissant:
+                return ArmesFront[5];
 
             default:
                 return null;
@@ -241,6 +244,7 @@ public class Player_Shooting : MonoBehaviour
             if (currentWeaponsState[s] == WeaponName.Mitraillette) return "Mitraillette";
             if (currentWeaponsState[s] == WeaponName.Shotgun) return "Shotgun";
             if (currentWeaponsState[s] == WeaponName.Drone) return "Drone";
+            if (currentWeaponsState[s] == WeaponName.Croissant) return "Croissant";
         }
 
         if (currentUpgradesState.ContainsKey(s))

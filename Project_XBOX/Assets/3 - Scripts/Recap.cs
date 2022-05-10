@@ -24,6 +24,7 @@ public class Recap : MonoBehaviour
     public GameObject img_Shotgun;
     public GameObject img_Totem;
     public GameObject img_Drone;
+    public GameObject img_Croissant;
 
     //Player's shooting system
     private Player_Shooting ps;
@@ -68,6 +69,7 @@ public class Recap : MonoBehaviour
                 if (i == "Propulseur") Spawn(img_Propulsor, slots[place].position, slots[place]);
                 if (i == "Dash") Spawn(img_Dash, slots[place].position, slots[place]);
                 if (i == "Drone") Spawn(img_Drone, slots[place].position, slots[place]);
+                if (i == "Croissant") Spawn(img_Croissant, slots[place].position, slots[place]);
             }
 
             place++;

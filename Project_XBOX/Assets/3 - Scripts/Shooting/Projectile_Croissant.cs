@@ -2,22 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_Drone : Base_Projectile
+public class Projectile_Croissant : Base_Projectile
 {
-    [SerializeField] private SpriteRenderer shuriken01;
-    [SerializeField] private SpriteRenderer shuriken02;
-
-    public override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
-    }
-
 
     [HideInInspector] public float damageOnHit = 0;
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
             Enemy e = null;
 
@@ -31,21 +24,20 @@ public class Projectile_Drone : Base_Projectile
                 e = collision.transform.parent.GetComponent<Enemy>();
             }
 
-            if(e != null)
+            if (e != null)
             {
                 e.TakeDamage(damageOnHit);
             }
 
-            shuriken01.enabled = false;
-            shuriken02.enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
             Destroy(transform.GetChild(0).gameObject);
 
         }
 
-        
 
 
-        
+
+
     }
 }

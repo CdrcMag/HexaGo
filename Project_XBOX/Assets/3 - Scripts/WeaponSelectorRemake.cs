@@ -232,6 +232,7 @@ public class WeaponSelectorRemake : MonoBehaviour
                 else if (slots.GetChild(i).GetChild(0).name == "Dash(Clone)") iconWeaponSlot[i].sprite = icons[6];
                 else if (slots.GetChild(i).GetChild(0).name == "Totems(Clone)") iconWeaponSlot[i].sprite = icons[7];
                 else if (slots.GetChild(i).GetChild(0).name == "Drone(Clone)") iconWeaponSlot[i].sprite = icons[8];
+                else if (slots.GetChild(i).GetChild(0).name == "CroissantDeLune(Clone)") iconWeaponSlot[i].sprite = icons[9];
             }
         }
     }
@@ -257,7 +258,8 @@ public class WeaponSelectorRemake : MonoBehaviour
             a.GetType() == typeof(Mitraillette) || 
             a.GetType() == typeof(BigFuckingGun) || 
             a.GetType() == typeof(FusilPompe) ||
-            a.GetType() == typeof(Drone)) 
+            a.GetType() == typeof(Drone) ||
+            a.GetType() == typeof(CroissantDeLune)) 
             //ici rajouter votre arme en faisant attention de ne pas oublier le " || ".
         {
             a.isWeapon = true;
@@ -279,6 +281,7 @@ public class WeaponSelectorRemake : MonoBehaviour
         else if (i.name == "Dash") img.sprite = icons[6]; 
         else if (i.name == "Totems") img.sprite = icons[7]; 
         else if (i.name == "Drone") img.sprite = icons[8]; 
+        else if (i.name == "Croissant") img.sprite = icons[9]; 
 
 
     }
@@ -302,6 +305,7 @@ public class WeaponSelectorRemake : MonoBehaviour
             if (pair.Value == Player_Shooting.WeaponName.Mitraillette) total++;
             if (pair.Value == Player_Shooting.WeaponName.Shotgun) total++;
             if (pair.Value == Player_Shooting.WeaponName.Drone) total++;
+            if (pair.Value == Player_Shooting.WeaponName.Croissant) total++;
         }
 
         return total;
@@ -327,7 +331,8 @@ public class WeaponSelectorRemake : MonoBehaviour
                 pair.Value == Player_Shooting.WeaponName.Canon ||
                 pair.Value == Player_Shooting.WeaponName.Mitraillette ||
                 pair.Value == Player_Shooting.WeaponName.Shotgun ||
-                pair.Value == Player_Shooting.WeaponName.Drone)
+                pair.Value == Player_Shooting.WeaponName.Drone ||
+                pair.Value == Player_Shooting.WeaponName.Croissant)
                 //rajouter votre arme ici, ne pas oublier " || "
                 {
                     return true;
