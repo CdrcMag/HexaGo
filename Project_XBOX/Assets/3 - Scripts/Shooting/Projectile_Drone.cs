@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile_Drone : Base_Projectile
 {
+    [SerializeField] private SpriteRenderer shuriken01;
+    [SerializeField] private SpriteRenderer shuriken02;
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -34,7 +36,8 @@ public class Projectile_Drone : Base_Projectile
                 e.TakeDamage(damageOnHit);
             }
 
-            GetComponent<SpriteRenderer>().enabled = false;
+            shuriken01.enabled = false;
+            shuriken02.enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
             Destroy(transform.GetChild(0).gameObject);
 
