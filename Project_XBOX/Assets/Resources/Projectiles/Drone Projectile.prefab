@@ -92,6 +92,8 @@ MonoBehaviour:
   id: 0
   shuriken01: {fileID: 1899342244313557250}
   shuriken02: {fileID: 2904276572384004588}
+  rotShuriken01: {fileID: 3483821338426498383}
+  rotShuriken02: {fileID: 1789341413964908353}
   damageOnHit: 20
 --- !u!212 &570827181547130464
 SpriteRenderer:
