@@ -37,10 +37,15 @@ public class Recap : MonoBehaviour
     private Player_Shooting ps;
     private Transform enemyPool;
 
+    private void OnEnable()
+    {
+        enemyPool = GameObject.Find("EnemyPool").transform;
+    }
+
     private void Start()
     {
         ps = GameObject.Find("Player").GetComponent<Player_Shooting>();
-        enemyPool = GameObject.Find("EnemyPool").transform;
+        
     }
 
     public void GenerateIcons()
@@ -122,7 +127,7 @@ public class Recap : MonoBehaviour
         TotalTemps.text = PlayerPrefs.GetInt("Nbr_EnemiesKilled").ToString();
     }
 
-    private void SetMineLightsStates(bool state)
+    public void SetMineLightsStates(bool state)
     {
         foreach(Transform t in enemyPool)
         {
@@ -132,5 +137,7 @@ public class Recap : MonoBehaviour
             }
         }
     }
+
+    
 
 }
