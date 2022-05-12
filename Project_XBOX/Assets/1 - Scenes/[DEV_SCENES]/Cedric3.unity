@@ -576,6 +576,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &452833240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5975896262913144635, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+  m_PrefabInstance: {fileID: 1870405274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &456023370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2644,6 +2649,26 @@ PrefabInstance:
       propertyPath: movementSpeedBoost
       value: 0.114
       objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: BackStartUpgrade
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: BackLeftStartUpgrade
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: FrontLeftStartWeapon
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: BackRightStartUpgrade
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: FrontRightStartWeapon
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2484943203076207409, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -4393,7 +4418,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 377416645087331560, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 377416645356523194, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
       propertyPath: m_Name
@@ -4483,10 +4508,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5415436813747787939, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+      propertyPath: m_SortingOrder
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 8625572317274635262, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
       propertyPath: img_Drone
       value: 
       objectReference: {fileID: 1670622648}
+    - target: {fileID: 8625572317274635262, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
+      propertyPath: img_Croissant
+      value: 
+      objectReference: {fileID: 452833240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85112fb8e53373b4a92bd308e89d61ef, type: 3}
 --- !u!224 &1870405275 stripped

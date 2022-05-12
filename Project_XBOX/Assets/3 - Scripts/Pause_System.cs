@@ -52,7 +52,7 @@ public class Pause_System : MonoBehaviour
     IEnumerator WaitFor()
     {
         yield return new WaitForSecondsRealtime(0.01f);
-        a = PauseMenu.transform.GetChild(0).gameObject;
+        a = PauseMenu.transform.GetChild(1).gameObject;
         a.GetComponent<Recap>().GenerateIcons();
 
     }
