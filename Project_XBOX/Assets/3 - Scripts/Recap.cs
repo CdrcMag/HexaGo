@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class Recap : MonoBehaviour
 {
 
@@ -26,6 +26,13 @@ public class Recap : MonoBehaviour
     public GameObject img_Drone;
     public GameObject img_Croissant;
 
+    [Header("Textes recap")]
+    public TextMeshProUGUI TotalEnnemis;
+    public TextMeshProUGUI TotalSalles;
+    public TextMeshProUGUI HealRamasses;
+    public TextMeshProUGUI TotalTemps;
+    public TextMeshProUGUI Morts;
+
     //Player's shooting system
     private Player_Shooting ps;
 
@@ -36,6 +43,9 @@ public class Recap : MonoBehaviour
 
     public void GenerateIcons()
     {
+        UpdateStats();
+
+
         List<RectTransform> slots = new List<RectTransform>();
         slots.Add(SlotFront);
         slots.Add(SlotFrontLeft);
@@ -96,5 +106,15 @@ public class Recap : MonoBehaviour
         if (SlotBackRight.childCount > 0) Destroy(SlotBackRight.GetChild(0).gameObject);
     }
 
+    private void UpdateStats()
+    {
+        TotalEnnemis.text = PlayerPrefs.GetInt("Nbr_EnnemisTues").ToString();
+        TotalSalles.text = PlayerPrefs.GetInt("Nbr_TotalSalles").ToString();
+        HealRamasses.text = PlayerPrefs.GetInt("Nbr_HealRamasses").ToString();
+        Morts.text = PlayerPrefs.GetInt("Nbr_Morts").ToString();
+
+        //Temps
+        TotalTemps.text = PlayerPrefs.GetInt("Nbr_EnemiesKilled").ToString();
+    }
 
 }

@@ -264,6 +264,7 @@ public class RoomManager : MonoBehaviour
         if(killedEnemies == currentRooms[numberRoom].killableEnemies)
         {
             ClearScene();
+            PlayerPrefs.SetInt("Nbr_TotalSalles", PlayerPrefs.GetInt("Nbr_TotalSalles") + 1);
 
             if (currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
             {

@@ -53,6 +53,8 @@ public class HealthPotion : Collectable
             GameObject particles_instance = Instantiate(HealthPotionParticles, transform.position, Quaternion.identity);
             Destroy(particles_instance, 1f);
 
+            PlayerPrefs.SetInt("Nbr_HealRamasses", PlayerPrefs.GetInt("Nbr_HealRamasses") + 1);
+
             Destroy(gameObject);
         }    
     }
