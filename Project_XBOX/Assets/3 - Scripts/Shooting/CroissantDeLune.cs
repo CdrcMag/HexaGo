@@ -87,7 +87,7 @@ public class CroissantDeLune : Weapon
         }
 
         yield return new WaitForSeconds(0.25f);
-        //Destroy(t.gameObject);
+        Destroy(t.gameObject);
 
         
     }
