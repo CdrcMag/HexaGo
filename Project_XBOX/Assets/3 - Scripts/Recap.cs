@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class Recap : MonoBehaviour
 {
 
@@ -35,15 +37,23 @@ public class Recap : MonoBehaviour
 
     //Player's shooting system
     private Player_Shooting ps;
+    private Transform enemyPool;
+
+    private void OnEnable()
+    {
+        enemyPool = GameObject.Find("EnemyPool").transform;
+    }
 
     private void Start()
     {
         ps = GameObject.Find("Player").GetComponent<Player_Shooting>();
+        
     }
 
     public void GenerateIcons()
     {
         UpdateStats();
+        SetMineLightsStates(false);
 
 
         List<RectTransform> slots = new List<RectTransform>();
@@ -104,6 +114,8 @@ public class Recap : MonoBehaviour
         if (SlotBack.childCount > 0) Destroy(SlotBack.GetChild(0).gameObject);
         if (SlotBackLeft.childCount > 0) Destroy(SlotBackLeft.GetChild(0).gameObject);
         if (SlotBackRight.childCount > 0) Destroy(SlotBackRight.GetChild(0).gameObject);
+
+        SetMineLightsStates(true);
     }
 
     private void UpdateStats()
@@ -114,7 +126,33 @@ public class Recap : MonoBehaviour
         Morts.text = PlayerPrefs.GetInt("Nbr_Morts").ToString();
 
         //Temps
-        TotalTemps.text = PlayerPrefs.GetInt("Nbr_EnemiesKilled").ToString();
+        float t = PlayerPrefs.GetFloat("TimePlayed");
+        t = (int)t;
+        TimeSpan a = TimeSpan.FromSeconds(t);
+        
+        if(a.Days>=1)
+            TotalTemps.text = $"{a.Days}d{a.Hours}h{a.Minutes}min{a.Seconds}s";
+        else
+            TotalTemps.text = $"{a.Hours}h{a.Minutes}min{a.Seconds}s";
+
+
     }
+
+    public void SetMineLightsStates(bool state)
+    {
+        if(enemyPool != null)
+        {
+            foreach (Transform t in enemyPool)
+            {
+                if (t.name.Contains("Mine"))
+                {
+                    t.GetChild(1).gameObject.SetActive(state);
+                }
+            }
+        }
+        
+    }
+
+    
 
 }
