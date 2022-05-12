@@ -35,15 +35,18 @@ public class Recap : MonoBehaviour
 
     //Player's shooting system
     private Player_Shooting ps;
+    private Transform enemyPool;
 
     private void Start()
     {
         ps = GameObject.Find("Player").GetComponent<Player_Shooting>();
+        enemyPool = GameObject.Find("EnemyPool").transform;
     }
 
     public void GenerateIcons()
     {
         UpdateStats();
+        SetMineLightsStates(false);
 
 
         List<RectTransform> slots = new List<RectTransform>();
@@ -104,6 +107,8 @@ public class Recap : MonoBehaviour
         if (SlotBack.childCount > 0) Destroy(SlotBack.GetChild(0).gameObject);
         if (SlotBackLeft.childCount > 0) Destroy(SlotBackLeft.GetChild(0).gameObject);
         if (SlotBackRight.childCount > 0) Destroy(SlotBackRight.GetChild(0).gameObject);
+
+        SetMineLightsStates(true);
     }
 
     private void UpdateStats()
@@ -115,6 +120,17 @@ public class Recap : MonoBehaviour
 
         //Temps
         TotalTemps.text = PlayerPrefs.GetInt("Nbr_EnemiesKilled").ToString();
+    }
+
+    private void SetMineLightsStates(bool state)
+    {
+        foreach(Transform t in enemyPool)
+        {
+            if(t.name.Contains("Mine"))
+            {
+                t.GetChild(1).gameObject.SetActive(state);
+            }
+        }
     }
 
 }
