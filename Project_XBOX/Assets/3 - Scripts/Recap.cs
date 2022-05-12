@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class Recap : MonoBehaviour
 {
 
@@ -124,18 +126,31 @@ public class Recap : MonoBehaviour
         Morts.text = PlayerPrefs.GetInt("Nbr_Morts").ToString();
 
         //Temps
-        TotalTemps.text = PlayerPrefs.GetInt("Nbr_EnemiesKilled").ToString();
+        float t = PlayerPrefs.GetFloat("TimePlayed");
+        t = (int)t;
+        TimeSpan a = TimeSpan.FromSeconds(t);
+        
+        if(a.Days>=1)
+            TotalTemps.text = $"{a.Days}d{a.Hours}h{a.Minutes}min{a.Seconds}s";
+        else
+            TotalTemps.text = $"{a.Hours}h{a.Minutes}min{a.Seconds}s";
+
+
     }
 
     public void SetMineLightsStates(bool state)
     {
-        foreach(Transform t in enemyPool)
+        if(enemyPool != null)
         {
-            if(t.name.Contains("Mine"))
+            foreach (Transform t in enemyPool)
             {
-                t.GetChild(1).gameObject.SetActive(state);
+                if (t.name.Contains("Mine"))
+                {
+                    t.GetChild(1).gameObject.SetActive(state);
+                }
             }
         }
+        
     }
 
     

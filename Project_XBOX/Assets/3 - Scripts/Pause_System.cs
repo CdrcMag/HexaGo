@@ -11,6 +11,8 @@ public class Pause_System : MonoBehaviour
     private bool OnPause = false;//Not on pause
     [HideInInspector] public bool canPause = true;
 
+    public float TimePlayed = 0;
+
     private void Awake()
     {
         if(Instance == null)
@@ -34,14 +36,21 @@ public class Pause_System : MonoBehaviour
             }
 
             yield return null;
+
+            
         }
     }
-    
+
+    private void Update()
+    {
+        TimePlayed += Time.deltaTime;
+    }
 
     public void SetPauseOn()
     {
         Camera.main.GetComponent<CameraShake>().StopShaking();
-
+        PlayerPrefs.SetFloat("TimePlayed", PlayerPrefs.GetFloat("TimePlayed") + TimePlayed);
+        TimePlayed = 0;
         Time.timeScale = 0;
         PauseMenu.SetActive(true);
         StartCoroutine(WaitFor());
