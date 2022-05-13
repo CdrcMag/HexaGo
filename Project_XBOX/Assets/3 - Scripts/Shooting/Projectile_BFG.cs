@@ -15,8 +15,8 @@ public class Projectile_BFG : Base_Projectile
             ptcExplode = Instantiate(ptcExplodePref, transform.position, Quaternion.identity);
             Destroy(ptcExplode, 4f);
 
-            GameObject damageZone;
-            damageZone = Instantiate(damageZonePref, transform.position, Quaternion.identity);
+            //GameObject damageZone;
+            //damageZone = Instantiate(damageZonePref, transform.position, Quaternion.identity);
         }
 
         base.OnCollisionEnter2D(collision);

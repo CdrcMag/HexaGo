@@ -76,7 +76,7 @@ public class CroissantDeLune : Weapon
         float cpt = 0;
         while(cpt < BulletTimeAlive)
         {
-            t.Rotate(Vector3.forward, speed);
+            if (t != null) { t.Rotate(Vector3.forward, speed); }
 
 
             cpt += Time.deltaTime;
