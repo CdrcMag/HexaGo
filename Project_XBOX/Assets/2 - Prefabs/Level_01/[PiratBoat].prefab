@@ -15094,7 +15094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7577e53fbb26ae2409a7afbda6aaa508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoint: 3
+  lifePoint: 60
   speed: 0
   damageOnCollision: 0
   isActivated: 0
@@ -15117,8 +15117,6 @@ MonoBehaviour:
   - {fileID: 8124769531693287781}
   - {fileID: 7072812405583486135}
   - {fileID: 2933487358039623316}
-  ptcSkullPref: {fileID: 4747011275537751316, guid: 9017a672badd7fd49ac56a5da760c488, type: 3}
-  ptcExplosionPref: {fileID: 4711247959922000704, guid: 3f5df5d04f8b7034ebdf7a15c5a25370, type: 3}
 --- !u!1 &4311243662430804231
 GameObject:
   m_ObjectHideFlags: 0
@@ -15645,10 +15643,11 @@ MonoBehaviour:
   coeffDamage: 1
   isSelf: 1
   lifePoint: 130
-  enemyParentDamageToken: 1
+  enemyParentDamageToken: 20
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   canPassivelyDamageParent: 0
   otherObjectToDestroy: {fileID: 8124769531693287781}
+  isCandy: 0
 --- !u!1 &5788019390389742449
 GameObject:
   m_ObjectHideFlags: 0
@@ -16012,10 +16011,11 @@ MonoBehaviour:
   coeffDamage: 1
   isSelf: 1
   lifePoint: 130
-  enemyParentDamageToken: 1
+  enemyParentDamageToken: 20
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   canPassivelyDamageParent: 0
   otherObjectToDestroy: {fileID: 7072812405583486135}
+  isCandy: 0
 --- !u!1 &6537337295540768471
 GameObject:
   m_ObjectHideFlags: 0
@@ -21436,10 +21436,11 @@ MonoBehaviour:
   coeffDamage: 1
   isSelf: 1
   lifePoint: 130
-  enemyParentDamageToken: 1
+  enemyParentDamageToken: 20
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   canPassivelyDamageParent: 0
   otherObjectToDestroy: {fileID: 2933487358039623316}
+  isCandy: 0
 --- !u!1 &7974518074078091266
 GameObject:
   m_ObjectHideFlags: 0
