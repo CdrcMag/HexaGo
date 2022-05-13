@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
         StartCoroutine(ILoadMenu());
     }
 
-    private IEnumerator ILoadMenu()
+    public IEnumerator ILoadMenu()
     {
         yield return new WaitForSeconds(1f);
 
