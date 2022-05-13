@@ -201,7 +201,11 @@ public abstract class Enemy : MonoBehaviour
             healthManager.callToSpawnHeal(transform.position);
 
             hasUpdated = true;
+
+            PlayerPrefs.SetInt("Nbr_EnnemisTues", PlayerPrefs.GetInt("Nbr_EnnemisTues") + 1);
         }
+
+        
 
         Destroy(gameObject);
     }

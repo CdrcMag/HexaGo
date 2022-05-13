@@ -65,12 +65,14 @@ public class PlayerManager : MonoBehaviour
     {
         soundManager.playAudioClip(7);
 
+        PlayerPrefs.SetInt("Nbr_Morts", PlayerPrefs.GetInt("Nbr_Morts") + 1);
+
         transform.position = DIE_POS;
 
         StartCoroutine(ILoadMenu());
     }
 
-    private IEnumerator ILoadMenu()
+    public IEnumerator ILoadMenu()
     {
         yield return new WaitForSeconds(1f);
 
