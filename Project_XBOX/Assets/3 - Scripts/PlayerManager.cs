@@ -26,6 +26,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float lifePoint = 100;
     public float reduction = 0; // Pourcentage ( 0 - 1 )
 
+    [Header("Candy")]
+    [SerializeField] private GameObject[] candyPref;
+
     private bool isImmune = false;
     private SpriteRenderer[] borders = new SpriteRenderer[4];
 
@@ -35,13 +38,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
 
-        if(borderRoot != null) { SetBorderSprites(); }
+        if (borderRoot != null) { SetBorderSprites(); }
     }
 
 
-    public void SetLifePoint(float _damage) 
+    public void SetLifePoint(float _damage)
     {
-        if(isImmune) { return; }
+        if (isImmune) { return; }
 
         float damageToTake = _damage - (_damage * reduction);
 
@@ -91,7 +94,7 @@ public class PlayerManager : MonoBehaviour
         {
             Color color = new Color(1f, 1f, 1f, a);
 
-            for(int i = 0; i < _spr.Length; i++)
+            for (int i = 0; i < _spr.Length; i++)
             {
                 _spr[i].color = color;
             }
@@ -173,7 +176,7 @@ public class PlayerManager : MonoBehaviour
 
         isImmune = false;
 
-        if(!_isVisibleAtEnd)
+        if (!_isVisibleAtEnd)
         {
             while (a > 0f)
             {
@@ -195,14 +198,14 @@ public class PlayerManager : MonoBehaviour
     {
         float scaleToReach = lifePoint / MAX_HEALTHPOINT;
 
-        while(lifeBar.localScale.x > scaleToReach && lifeBar.localScale.x > 0f)
+        while (lifeBar.localScale.x > scaleToReach && lifeBar.localScale.x > 0f)
         {
             lifeBar.localScale = new Vector2(lifeBar.localScale.x - ADD_SCALE, lifeBar.localScale.y);
 
             yield return new WaitForSeconds(0.05f);
         }
 
-        if(lifeBar.localScale.x < 0f)
+        if (lifeBar.localScale.x < 0f)
         {
             lifeBar.localScale = new Vector2(0f, lifeBar.localScale.y);
         }
@@ -233,7 +236,7 @@ public class PlayerManager : MonoBehaviour
 
     public void AddHealthPoint(int points)
     {
-        if(lifePoint + points >= MAX_HEALTHPOINT)
+        if (lifePoint + points >= MAX_HEALTHPOINT)
         {
             lifePoint = MAX_HEALTHPOINT;
         }
@@ -247,9 +250,17 @@ public class PlayerManager : MonoBehaviour
 
     private void SetBorderSprites()
     {
-        for(int i = 0; i < borderRoot.childCount; i++)
+        for (int i = 0; i < borderRoot.childCount; i++)
         {
             borders[i] = borderRoot.GetChild(i).GetComponent<SpriteRenderer>();
         }
+    }
+
+    public void SpawnCandyAtPos(Vector2 _pos)
+    {
+        int choice = Random.Range(0, candyPref.Length);
+        GameObject candy;
+        candy = Instantiate(candyPref[choice], _pos, Quaternion.identity);
+        soundManager.playAudioClip(23);
     }
 }
