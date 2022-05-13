@@ -50,7 +50,7 @@ public class Projectile_Croissant : Base_Projectile
             soundManager.playAudioClipWithPitch(22, pitch);
 
             StopCoroutine(cor);
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 
@@ -91,6 +91,6 @@ public class Projectile_Croissant : Base_Projectile
             yield return new WaitForSeconds(0.005f);
         }
 
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

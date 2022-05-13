@@ -68,7 +68,8 @@ public class CollisionEnemy : MonoBehaviour
                 damageSelf(damage);
             }
 
-            Destroy(other.gameObject);
+            if (other.name == "BFG Projectile(Clone)") { StartCoroutine(IDestroyProjectile(other.gameObject)); }
+            else { Destroy(other.gameObject); }
         }
 
         if (other.CompareTag("Player"))
@@ -152,5 +153,12 @@ public class CollisionEnemy : MonoBehaviour
             if (!isGrowing)
                 StartCoroutine(GrowBody());
         }
+    }
+
+    private IEnumerator IDestroyProjectile(GameObject _proj)
+    {
+        yield return null;
+
+        Destroy(_proj);
     }
 }
