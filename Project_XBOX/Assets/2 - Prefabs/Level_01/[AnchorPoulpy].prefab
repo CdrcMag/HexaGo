@@ -435,8 +435,11 @@ MonoBehaviour:
   enemy: {fileID: 6376209716472714548}
   coeffDamage: 1
   isSelf: 0
-  ptcHitPref: {fileID: 0}
   lifePoint: 60
+  enemyParentDamageToken: 0
+  ptcHitPref: {fileID: 0}
+  canPassivelyDamageParent: 1
+  otherObjectToDestroy: {fileID: 0}
 --- !u!1 &6376209716282921965
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,8 +656,11 @@ MonoBehaviour:
   enemy: {fileID: 6376209716472714548}
   coeffDamage: 1
   isSelf: 0
-  ptcHitPref: {fileID: 0}
   lifePoint: 60
+  enemyParentDamageToken: 0
+  ptcHitPref: {fileID: 0}
+  canPassivelyDamageParent: 1
+  otherObjectToDestroy: {fileID: 0}
 --- !u!1 &6376209716472714546
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,13 +708,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9e1f0cb89780e43a2c154fd88bcc93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoint: 200
+  lifePoint: 160
   speed: 0
   damageOnCollision: 10
-  target: {fileID: 0}
   isActivated: 0
   isBoss: 0
   isSummoned: 1
+  isTuto: 0
   eyes:
   - {fileID: 6376209715035164965}
   bossLifeBar: {fileID: 0}
@@ -866,5 +872,8 @@ MonoBehaviour:
   enemy: {fileID: 6376209716472714548}
   coeffDamage: 1
   isSelf: 0
-  ptcHitPref: {fileID: 0}
   lifePoint: 60
+  enemyParentDamageToken: 0
+  ptcHitPref: {fileID: 0}
+  canPassivelyDamageParent: 1
+  otherObjectToDestroy: {fileID: 0}
