@@ -32,7 +32,7 @@ public class CroissantDeLune : Weapon
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1_Controller") > 0.9f)
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1_Controller") > 0.9f && Pause_System.Instance.GetPauseState() == false)
         {
             if (canShoot)
             {
