@@ -6,7 +6,17 @@ public class Projectile_Croissant : Base_Projectile
 {
 
     [HideInInspector] public float damageOnHit = 0;
+    [SerializeField] private GameObject ptcSmileyPref;
 
+    private SoundManager soundManager;
+    private Coroutine cor;
+
+
+    private void Start()
+    {
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+        cor = StartCoroutine(IDestroyMine());
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,13 +41,56 @@ public class Projectile_Croissant : Base_Projectile
 
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
-            Destroy(transform.GetChild(0).gameObject);
 
+            GameObject ptcSmiley;
+            ptcSmiley = Instantiate(ptcSmileyPref, transform.position, Quaternion.identity);
+            Destroy(ptcSmiley, 3f);
+
+            float pitch = Random.Range(0.8f, 1.2f);
+            soundManager.playAudioClipWithPitch(22, pitch);
+
+            StopCoroutine(cor);
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator IDestroyMine()
+    {
+        yield return new WaitForSeconds(2.5f);
+
+        float a = 1f;
+
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            transform.GetChild(1).GetComponent<SpriteRenderer>().color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
         }
 
+        a = 1f;
 
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            transform.GetChild(2).GetComponent<SpriteRenderer>().color = color;
+            a -= 0.1f;
 
+            yield return new WaitForSeconds(0.005f);
+        }
 
+        a = 1f;
 
+        while (a > 0f)
+        {
+            Color color = new Color(1f, 1f, 1f, a);
+            transform.GetChild(3).GetComponent<SpriteRenderer>().color = color;
+            a -= 0.1f;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        Destroy(gameObject);
     }
 }
