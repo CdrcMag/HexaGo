@@ -6,12 +6,17 @@ public class Pause_System : MonoBehaviour
 {
     public static Pause_System Instance = null;
 
-    public GameObject PauseMenu;
-
     private bool OnPause = false;//Not on pause
-    [HideInInspector] public bool canPause = true;
+    private bool inputBlocked = false;
 
-    public float TimePlayed = 0;
+    [HideInInspector] public GameObject PauseMenu;
+    [HideInInspector] public bool canPause = true;
+    [HideInInspector] public float TimePlayed = 0;
+    [HideInInspector] public GameObject PauseMenuChild;
+
+    public int ButtonSelected = 1;
+
+    public GameObject[] buttons;
 
     private void Awake()
     {
@@ -44,6 +49,9 @@ public class Pause_System : MonoBehaviour
     private void Update()
     {
         TimePlayed += Time.deltaTime;
+
+        HandleControllerInputs();
+
     }
 
     public void SetPauseOn()
@@ -61,12 +69,10 @@ public class Pause_System : MonoBehaviour
     IEnumerator WaitFor()
     {
         yield return new WaitForSecondsRealtime(0.01f);
-        a = PauseMenu.transform.GetChild(1).gameObject;
-        a.GetComponent<Recap>().GenerateIcons();
+        PauseMenuChild = PauseMenu.transform.GetChild(1).gameObject;
+        PauseMenuChild.GetComponent<Recap>().GenerateIcons();
 
     }
-
-    public GameObject a;
 
     public void SetPauseOff()
     {
@@ -78,5 +84,76 @@ public class Pause_System : MonoBehaviour
     public bool GetPauseState()
     {
         return OnPause;
+    }
+
+    public void InputButtonPauseMenu(string s)
+    {
+        switch(s)
+        {
+            case "Reprendre":
+                SetPauseOff();
+                break;
+            case "Options":
+                break;
+            case "Quitter":
+                break;
+            default:
+                break;
+
+        }
+    }
+
+
+    private void HandleControllerInputs()
+    {
+        if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 1)
+        {
+            SetPauseOff();
+            StartCoroutine(BlockInput(.15f));
+        }
+
+        //Quitte le menu de pause
+        if (Input.GetButtonDown("Xbox_B") && OnPause)
+        {
+            SetPauseOff();
+            StartCoroutine(BlockInput(.15f));
+        }
+
+        //Monte dans la liste des boutons
+        if (Input.GetAxisRaw("Xbox_Vertical") == 1 && !inputBlocked && ButtonSelected - 1 > 0)
+        {
+            StartCoroutine(BlockInput(.15f));
+            ButtonSelected--;
+        }
+        //Descends dans la liste des boutons
+        if (Input.GetAxisRaw("Xbox_Vertical") == -1 && !inputBlocked && ButtonSelected + 1 < 4)
+        {
+            StartCoroutine(BlockInput(.15f));
+            ButtonSelected++;
+        }
+
+        //Ajoute le feedback sur les boutons
+        SetFeedbackOnButton();
+
+    }
+
+    private void SetFeedbackOnButton()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            buttons[i].transform.localPosition = new Vector2(-32, buttons[i].transform.localPosition.y);
+            buttons[i].transform.localScale = new Vector2(1, 1);
+        }
+
+        buttons[ButtonSelected - 1].transform.localPosition = new Vector2(-16, buttons[ButtonSelected - 1].transform.localPosition.y);
+        buttons[ButtonSelected - 1].transform.localScale = new Vector2(1.2f, 1.2f);
+    }
+
+
+    IEnumerator BlockInput(float s)
+    {
+        inputBlocked = true;
+        yield return new WaitForSecondsRealtime(s);
+        inputBlocked = false;
     }
 }
