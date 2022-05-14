@@ -84,8 +84,9 @@ public class Drone : Weapon
     IEnumerator IMoveToTarget(Transform what, Vector2 where, float speed)
     {
         Transform EnemyPool = GameObject.Find("EnemyPool").transform;
+        GameObject boss = GameObject.Find("[Poulpy](Clone)");
 
-        if (EnemyPool.childCount == 0)
+        if(boss == null && EnemyPool.childCount == 0)
         {
             Destroy(what.gameObject);
             yield break;
@@ -104,11 +105,11 @@ public class Drone : Weapon
 
         
 
-        GameObject boss = GameObject.Find("[Poulpy](Clone)");
+        
         if (boss) 
         {
             //print("There is a boss");
-            Vector2 target = new Vector2(0, -5);
+            Vector2 target = new Vector2(0, -2.5f);
             while(Vector2.Distance(what.position, target) > 0.1f)
             {
                 what.position = Vector2.LerpUnclamped(what.position, target, 10 * Time.deltaTime);
