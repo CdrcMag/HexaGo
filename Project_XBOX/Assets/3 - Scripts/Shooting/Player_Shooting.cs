@@ -32,7 +32,7 @@ public class Player_Shooting : MonoBehaviour
 
     //Nom des slots et noms des armes
     public enum SlotName { None, Front, Back, FrontRight, FrontLeft, BackRight, BackLeft };
-    public enum WeaponName { None = 0, Canon = 1, BigFuckingGun = 2, Mitraillette = 3, Shotgun = 4, Drone = 5, Croissant = 6 };
+    public enum WeaponName { None = 0, Canon = 1, BigFuckingGun = 2, Mitraillette = 3, Shotgun = 4, Drone = 5, Croissant = 6, LaTortuga = 7 };
     public enum UpgradeName { None, Propulseur, Dash, Totems, Shield };
 
     private void Start()
@@ -99,6 +99,7 @@ public class Player_Shooting : MonoBehaviour
         if (w.GetType() == typeof(FusilPompe)) currentWeaponsState.Add(slotName, WeaponName.Shotgun);
         if (w.GetType() == typeof(Drone)) currentWeaponsState.Add(slotName, WeaponName.Drone);
         if (w.GetType() == typeof(CroissantDeLune)) currentWeaponsState.Add(slotName, WeaponName.Croissant);
+        if (w.GetType() == typeof(LaTortuga)) currentWeaponsState.Add(slotName, WeaponName.LaTortuga);
         //ici rajouter des armes en suivant la structure ci-dessus
 
 
@@ -207,6 +208,8 @@ public class Player_Shooting : MonoBehaviour
                 return ArmesFront[4];
             case WeaponName.Croissant:
                 return ArmesFront[5];
+            case WeaponName.LaTortuga:
+                return ArmesFront[6];
 
             default:
                 return null;
@@ -245,6 +248,7 @@ public class Player_Shooting : MonoBehaviour
             if (currentWeaponsState[s] == WeaponName.Shotgun) return "Shotgun";
             if (currentWeaponsState[s] == WeaponName.Drone) return "Drone";
             if (currentWeaponsState[s] == WeaponName.Croissant) return "Croissant";
+            if (currentWeaponsState[s] == WeaponName.LaTortuga) return "Tortuga";
         }
 
         if (currentUpgradesState.ContainsKey(s))
