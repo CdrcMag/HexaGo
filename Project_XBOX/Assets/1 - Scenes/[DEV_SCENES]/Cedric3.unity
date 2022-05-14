@@ -4296,7 +4296,7 @@ MonoBehaviour:
   eventRooms:
   - {fileID: 11400000, guid: 212d4895d223ef04a8dbb4652de39821, type: 2}
   - {fileID: 11400000, guid: ca4e77f119e208b498d76fa30809ea90, type: 2}
-  currentNumberRoom: 2
+  currentNumberRoom: 0
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
   player: {fileID: 1488635426}
@@ -4304,6 +4304,7 @@ MonoBehaviour:
   weaponSelector: {fileID: 706926759}
   transition: {fileID: 1887012115}
   tutorial: {fileID: 1796437904}
+  crossPref: {fileID: 8569768249783225045, guid: bbbee10567cdb3444b17062960f23b2d, type: 3}
   bossPrefab: {fileID: 4311243661235980675, guid: 512ddd0e15d9a5c42be27335e9fc2a68, type: 3}
   upgradePortalPref: {fileID: 5421871123991960473, guid: a3216c45051515f4abf599fa2c83c976, type: 3}
   exitPortalPref: {fileID: 5421871123991960473, guid: eec51d6cbbc243b4b90c785191d26235, type: 3}
