@@ -2689,7 +2689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859249418786991146, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: movementSpeedBoost
-      value: 0.114
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackStartUpgrade
