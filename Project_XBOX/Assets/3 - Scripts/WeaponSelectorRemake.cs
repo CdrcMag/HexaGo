@@ -231,6 +231,7 @@ public class WeaponSelectorRemake : MonoBehaviour
             case "Totems":          return "Biggy Bombs";
             case "Drone":           return "Headhunter Shurikens";
             case "CroissantDeLune": return "Happy Mines Thrower";
+            case "LaTortuga":       return "La Tortuga";
             default: return "";
 
         }
@@ -253,6 +254,7 @@ public class WeaponSelectorRemake : MonoBehaviour
                 else if (slots.GetChild(i).GetChild(0).name == "Totems(Clone)") iconWeaponSlot[i].sprite = icons[7];
                 else if (slots.GetChild(i).GetChild(0).name == "Drone(Clone)") iconWeaponSlot[i].sprite = icons[8];
                 else if (slots.GetChild(i).GetChild(0).name == "CroissantDeLune(Clone)") iconWeaponSlot[i].sprite = icons[9];
+                else if (slots.GetChild(i).GetChild(0).name == "LaTortuga(Clone)") iconWeaponSlot[i].sprite = icons[10];
             }
         }
     }
@@ -279,7 +281,8 @@ public class WeaponSelectorRemake : MonoBehaviour
             a.GetType() == typeof(BigFuckingGun) || 
             a.GetType() == typeof(FusilPompe) ||
             a.GetType() == typeof(Drone) ||
-            a.GetType() == typeof(CroissantDeLune)) 
+            a.GetType() == typeof(CroissantDeLune) ||
+            a.GetType() == typeof(LaTortuga)) 
             //ici rajouter votre arme en faisant attention de ne pas oublier le " || ".
         {
             a.isWeapon = true;
@@ -302,6 +305,7 @@ public class WeaponSelectorRemake : MonoBehaviour
         else if (i.name == "Totems") img.sprite = icons[7]; 
         else if (i.name == "Drone") img.sprite = icons[8]; 
         else if (i.name == "CroissantDeLune") img.sprite = icons[9]; 
+        else if (i.name == "LaTortuga") img.sprite = icons[10]; 
 
 
     }
@@ -326,6 +330,7 @@ public class WeaponSelectorRemake : MonoBehaviour
             if (pair.Value == Player_Shooting.WeaponName.Shotgun) total++;
             if (pair.Value == Player_Shooting.WeaponName.Drone) total++;
             if (pair.Value == Player_Shooting.WeaponName.Croissant) total++;
+            if (pair.Value == Player_Shooting.WeaponName.LaTortuga) total++;
         }
 
         return total;
@@ -352,7 +357,8 @@ public class WeaponSelectorRemake : MonoBehaviour
                 pair.Value == Player_Shooting.WeaponName.Mitraillette ||
                 pair.Value == Player_Shooting.WeaponName.Shotgun ||
                 pair.Value == Player_Shooting.WeaponName.Drone ||
-                pair.Value == Player_Shooting.WeaponName.Croissant)
+                pair.Value == Player_Shooting.WeaponName.Croissant ||
+                pair.Value == Player_Shooting.WeaponName.LaTortuga)
                 //rajouter votre arme ici, ne pas oublier " || "
                 {
                     return true;
