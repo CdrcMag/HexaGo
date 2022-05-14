@@ -46,6 +46,8 @@ public class HealthPotion : Collectable
     {
         if(collision.gameObject.tag == "Player")
         {
+            if(!PlayerManager.Instance.canTakeHeal) { return; }
+
             soundManager.playAudioClip(14);
 
             PlayerManager.Instance.AddHealthPoint(healthManager.getHealthAmount());
