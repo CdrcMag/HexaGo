@@ -15642,7 +15642,7 @@ MonoBehaviour:
   enemy: {fileID: 2518127818466626848}
   coeffDamage: 1
   isSelf: 1
-  lifePoint: 130
+  lifePoint: 100
   enemyParentDamageToken: 20
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   canPassivelyDamageParent: 0
@@ -16010,7 +16010,7 @@ MonoBehaviour:
   enemy: {fileID: 2518127818466626848}
   coeffDamage: 1
   isSelf: 1
-  lifePoint: 130
+  lifePoint: 100
   enemyParentDamageToken: 20
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   canPassivelyDamageParent: 0
@@ -21435,7 +21435,7 @@ MonoBehaviour:
   enemy: {fileID: 2518127818466626848}
   coeffDamage: 1
   isSelf: 1
-  lifePoint: 130
+  lifePoint: 100
   enemyParentDamageToken: 20
   ptcHitPref: {fileID: 4711247959922000704, guid: b09af93822fef734cb76f29f775d3483, type: 3}
   canPassivelyDamageParent: 0

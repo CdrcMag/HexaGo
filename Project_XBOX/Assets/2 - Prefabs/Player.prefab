@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  speed: 10
+  speed: 7
   rotationSpeed: 100
   speedBoost: 1
   movement: {x: 0, y: 0}

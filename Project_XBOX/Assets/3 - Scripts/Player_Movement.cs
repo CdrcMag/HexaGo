@@ -59,11 +59,11 @@ public class Player_Movement : MonoBehaviour
             float v = Input.GetAxis("Input_Rotation_Controller_Vertical");
             if (Input.GetAxisRaw("Controller_LeftTrigger") == 1)
             {
-                speed = 7;
+                speed = 5;
             }
             else
             {
-                speed = 10;
+                speed = 7 * speedBoost;
             }
 
                 //print($"H : {h} / V : {v}");
