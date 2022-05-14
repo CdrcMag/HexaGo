@@ -16,6 +16,7 @@ public class CollisionEnemy : MonoBehaviour
     [SerializeField] private GameObject ptcHitPref; // For Self Enemy only
     [SerializeField] private bool canPassivelyDamageParent = true;
     [SerializeField] private GameObject otherObjectToDestroy;
+    [SerializeField] private bool isCandy = false;
 
     private Transform weaponStorage;
     private Weapon weapon;
@@ -26,6 +27,8 @@ public class CollisionEnemy : MonoBehaviour
     private float incrScaleY = 0f;
     private float magnitudeScale = 1.05f;
     private bool isGrowing = false;
+
+    private bool canSpawnCandy = false;
 
     private SoundManager soundManager;
 
@@ -69,6 +72,12 @@ public class CollisionEnemy : MonoBehaviour
             }
 
             if (other.name == "BFG Projectile(Clone)") { StartCoroutine(IDestroyProjectile(other.gameObject)); }
+            else if (other.name == "Mitraillette Projectile(Clone)") 
+            { 
+                StartCoroutine(IDestroyProjectile(other.gameObject));
+                if (enemy.GetLifePoint() <= 3 && !isCandy && canSpawnCandy) { spawnCandy(); }
+                if (enemy.GetLifePoint() <= 3 && !isCandy) { canSpawnCandy = true; } 
+            }
             else { Destroy(other.gameObject); }
         }
 
@@ -160,5 +169,10 @@ public class CollisionEnemy : MonoBehaviour
         yield return null;
 
         Destroy(_proj);
+    }
+
+    private void spawnCandy()
+    {
+        PlayerManager.Instance.SpawnCandyAtPos(transform.position);
     }
 }
