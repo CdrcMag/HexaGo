@@ -10,13 +10,22 @@ public class TORTUGA : MonoBehaviour
     [Header("Tortue Stats")]
     public float distanceToStop = 1f;
     public float movementSpeed = 1f;
+    public float clignement;
     private GameObject explosion;
+
+    SpriteRenderer bombRenderer;
+    public Color colorA;
+    public Color colorB;
 
     private void Start()
     {
         explosion = Resources.Load<GameObject>("ExplosionTortue");
-
+        bombRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         AquireTarget();
+
+        StartCoroutine(IChangeColor());
+
+        
     }
 
 
@@ -40,6 +49,10 @@ public class TORTUGA : MonoBehaviour
                 GoodByeTurtle();
             }
                 
+        }
+        else
+        {
+            GoodByeTurtle();
         }
     }
 
@@ -81,6 +94,17 @@ public class TORTUGA : MonoBehaviour
 
         if (enemyPool)
             target = enemyList[childToGet].gameObject;
+    }
+
+    IEnumerator IChangeColor()
+    {
+        while(gameObject)
+        {
+            bombRenderer.color = colorA;
+            yield return new WaitForSeconds(clignement);
+            bombRenderer.color = colorB;
+            yield return new WaitForSeconds(clignement);
+        }
     }
 
 }

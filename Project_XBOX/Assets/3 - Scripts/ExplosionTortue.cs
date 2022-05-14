@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplosionTortue : MonoBehaviour
 {
-    float augmentSpeed = 1.1f;
+    float augmentSpeed = 1.12f;
     private float timeToDestroy = 0.5f;
 
     private void Start()
