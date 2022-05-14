@@ -30,7 +30,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject[] candyPref;
     [SerializeField] private GameObject ptcCandyPref;
 
-    private bool isImmune = false;
+    [HideInInspector] public bool isImmune = false;
+    [HideInInspector] public bool canTakeHeal = true;
     private SpriteRenderer[] borders = new SpriteRenderer[4];
 
     // =====================================================
