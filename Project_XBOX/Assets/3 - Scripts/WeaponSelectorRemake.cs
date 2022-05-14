@@ -301,7 +301,7 @@ public class WeaponSelectorRemake : MonoBehaviour
         else if (i.name == "Dash") img.sprite = icons[6]; 
         else if (i.name == "Totems") img.sprite = icons[7]; 
         else if (i.name == "Drone") img.sprite = icons[8]; 
-        else if (i.name == "Croissant") img.sprite = icons[9]; 
+        else if (i.name == "CroissantDeLune") img.sprite = icons[9]; 
 
 
     }
