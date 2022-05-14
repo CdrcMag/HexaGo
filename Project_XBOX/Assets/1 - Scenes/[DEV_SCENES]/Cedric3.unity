@@ -2676,23 +2676,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackStartUpgrade
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
+      propertyPath: FrontStartWeapon
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackLeftStartUpgrade
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontLeftStartWeapon
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: BackRightStartUpgrade
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240052171100335974, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: FrontRightStartWeapon
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2484943203076207409, guid: 34fac3e55bafdf04b8baf7f485c579e8, type: 3}
       propertyPath: m_LocalScale.x
@@ -4292,7 +4296,7 @@ MonoBehaviour:
   eventRooms:
   - {fileID: 11400000, guid: 212d4895d223ef04a8dbb4652de39821, type: 2}
   - {fileID: 11400000, guid: ca4e77f119e208b498d76fa30809ea90, type: 2}
-  currentNumberRoom: 0
+  currentNumberRoom: 9
   killedEnemies: 0
   enemyPool: {fileID: 740949448}
   player: {fileID: 1488635426}
