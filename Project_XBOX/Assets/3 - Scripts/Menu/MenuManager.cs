@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject levelSelectionMenuCanvas;
     [SerializeField] private LevelSelection levelSelection;
     [SerializeField] private SoundManager soundManager;
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject focusedGameObject;
 
     private bool isIntro = false;
     private bool isReloading = false;
@@ -141,5 +144,6 @@ public class MenuManager : MonoBehaviour
         introMenu.SetActive(false);
         levelSelectionMenu.SetActive(true);
         levelSelectionMenuCanvas.SetActive(true);
+        eventSystem.SetSelectedGameObject(focusedGameObject);
     }
 }
