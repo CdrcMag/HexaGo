@@ -111,6 +111,7 @@ public class Drone : Weapon
             }
 
             Transform enemyTarget = enemyList[Random.Range(0, enemyList.Count)];
+            //Récupérer l'information de la room (s'il y a un boss)
 
 
             //Then, the projectile targets an enemy and moves towards it
