@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Candy")]
     [SerializeField] private GameObject[] candyPref;
+    [SerializeField] private GameObject ptcCandyPref;
 
     private bool isImmune = false;
     private SpriteRenderer[] borders = new SpriteRenderer[4];
@@ -262,5 +263,9 @@ public class PlayerManager : MonoBehaviour
         GameObject candy;
         candy = Instantiate(candyPref[choice], _pos, Quaternion.identity);
         soundManager.playAudioClip(23);
+
+        GameObject ptcCandy;
+        ptcCandy = Instantiate(ptcCandyPref, _pos, Quaternion.identity);
+        Destroy(ptcCandy, 3f);
     }
 }
