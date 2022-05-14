@@ -205,8 +205,8 @@ public class WeaponSelectorRemake : MonoBehaviour
         temporaryFirstWeaponOrUpgrade = firstWeapon;
         temporarySecondWeaponOrUpgrade = secondWeapon;
 
-        txtWeapon01.text = firstWeapon.name;
-        txtWeapon02.text = secondWeapon.name;
+        txtWeapon01.text = GetWeaponName(firstWeapon);
+        txtWeapon02.text = GetWeaponName(secondWeapon);
 
         SetIconOnImage(firstWeapon, iconWeapon01);
         SetIconOnImage(secondWeapon, iconWeapon02);
@@ -216,6 +216,26 @@ public class WeaponSelectorRemake : MonoBehaviour
         selector.rectTransform.localPosition = new Vector2(-120, 0);
         selectedID = 0;
     }
+
+    private string GetWeaponName(UpgradesAndWeapons s)
+    {
+        switch(s.name)
+        {
+            case "Canon":           return "Cannon";
+            case "BigFuckingGun":   return "P.A.U.L.";//Projectile d'Armement Ultra Lethal
+            case "Mitraillette":    return "The Candymaker";
+            case "FusilPompe":      return "The Vaporizer";
+            case "Propulseur":      return "Thruster";
+            case "Shield":          return "Shield";
+            case "Dash":            return "Dash";
+            case "Totems":          return "Biggy Bombs";
+            case "Drone":           return "Headhunter Shurikens";
+            case "CroissantDeLune": return "Happy Mines Thrower";
+            default: return "";
+
+        }
+    }
+
 
     private void ShowWeaponOnSlot()
     {
