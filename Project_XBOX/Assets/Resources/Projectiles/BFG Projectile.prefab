@@ -153,7 +153,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.17551315
+  m_Radius: 0.45584255
 --- !u!114 &-6528685535054588179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +170,8 @@ MonoBehaviour:
   canBounce: 1
   nbrOfBounceMax: 0
   id: 4
+  ptcExplodePref: {fileID: 4711247959922000704, guid: 3f5df5d04f8b7034ebdf7a15c5a25370, type: 3}
+  damageZonePref: {fileID: 5009856852992284467, guid: 0d9640e48f1c8734588e9c23bca45409, type: 3}
 --- !u!1 &7756158993082638217
 GameObject:
   m_ObjectHideFlags: 0

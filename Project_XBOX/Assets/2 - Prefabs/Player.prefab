@@ -378,6 +378,11 @@ MonoBehaviour:
   borderRoot: {fileID: 0}
   lifePoint: 100
   reduction: 0
+  candyPref:
+  - {fileID: 6376209716472714546, guid: d158b41844b2a874eaa0525bd18e201c, type: 3}
+  - {fileID: 3492779248256663673, guid: 775e921bfeb68df46866701b24390b90, type: 3}
+  - {fileID: 9038689517608842557, guid: ebe4ea9f00d71a3488f664c4092cccde, type: 3}
+  ptcCandyPref: {fileID: 4711247959922000704, guid: f2dada4d5068b8542842a5548f814e6b, type: 3}
 --- !u!114 &139817739442116469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
-  speed: 10
+  speed: 7
   rotationSpeed: 100
   speedBoost: 1
   movement: {x: 0, y: 0}

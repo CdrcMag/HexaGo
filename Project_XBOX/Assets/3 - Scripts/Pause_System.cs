@@ -6,10 +6,21 @@ public class Pause_System : MonoBehaviour
 {
     public static Pause_System Instance = null;
 
-    public GameObject PauseMenu;
-
     private bool OnPause = false;//Not on pause
+    private bool inputBlocked = false;
+
+    [HideInInspector] public GameObject PauseMenu;
     [HideInInspector] public bool canPause = true;
+    [HideInInspector] public float TimePlayed = 0;
+    [HideInInspector] public GameObject PauseMenuChild;
+
+    public int ButtonSelected = 1;
+
+    public GameObject[] buttons;
+    public GameObject pauseConfirmation;
+
+    private bool inMenu = false;
+    private bool inConfirmation = false;
 
     private void Awake()
     {
@@ -34,14 +45,25 @@ public class Pause_System : MonoBehaviour
             }
 
             yield return null;
+
+            
         }
     }
-    
+
+    private void Update()
+    {
+        TimePlayed += Time.deltaTime;
+
+        if(inMenu) HandleControllerInputs();
+        else if (inConfirmation) HandleControllerInputsConfirmation();
+    }
 
     public void SetPauseOn()
     {
+        inMenu = true;
         Camera.main.GetComponent<CameraShake>().StopShaking();
-
+        PlayerPrefs.SetFloat("TimePlayed", PlayerPrefs.GetFloat("TimePlayed") + TimePlayed);
+        TimePlayed = 0;
         Time.timeScale = 0;
         PauseMenu.SetActive(true);
         StartCoroutine(WaitFor());
@@ -52,12 +74,10 @@ public class Pause_System : MonoBehaviour
     IEnumerator WaitFor()
     {
         yield return new WaitForSecondsRealtime(0.01f);
-        a = PauseMenu.transform.GetChild(0).gameObject;
-        a.GetComponent<Recap>().GenerateIcons();
+        PauseMenuChild = PauseMenu.transform.GetChild(1).gameObject;
+        PauseMenuChild.GetComponent<Recap>().GenerateIcons();
 
     }
-
-    public GameObject a;
 
     public void SetPauseOff()
     {
@@ -69,5 +89,135 @@ public class Pause_System : MonoBehaviour
     public bool GetPauseState()
     {
         return OnPause;
+    }
+
+    public void InputButtonPauseMenu(string s)
+    {
+        switch(s)
+        {
+            case "Reprendre":
+                SetPauseOff();
+                break;
+            case "Options":
+                break;
+            case "Quitter":
+                QuitFirstStep();
+                break;
+            default:
+                break;
+
+        }
+    }
+    private void QuitFirstStep()
+    {
+        inConfirmation = true;
+        inMenu = false;
+        pauseConfirmation.SetActive(true);
+    }
+    private void ReverseFirstStep()
+    {
+        inConfirmation = false;
+        inMenu = true;
+        confirmationPosition = 1;
+        pauseConfirmation.SetActive(false);
+    }
+
+    private void HandleControllerInputs()
+    {
+        if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 1)
+        {
+            SetPauseOff();
+            StartCoroutine(BlockInput(.15f));
+        }
+        if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 3)
+        {
+            QuitFirstStep();
+            StartCoroutine(BlockInput(.15f));
+        }
+
+        //Quitte le menu de pause
+        if (Input.GetButtonDown("Xbox_B") && OnPause)
+        {
+            SetPauseOff();
+            StartCoroutine(BlockInput(.15f));
+        }
+
+        //Monte dans la liste des boutons
+        if (Input.GetAxisRaw("Xbox_Vertical") == 1 && !inputBlocked && ButtonSelected - 1 > 0)
+        {
+            StartCoroutine(BlockInput(.15f));
+            ButtonSelected--;
+        }
+        //Descends dans la liste des boutons
+        if (Input.GetAxisRaw("Xbox_Vertical") == -1 && !inputBlocked && ButtonSelected + 1 < 4)
+        {
+            StartCoroutine(BlockInput(.15f));
+            ButtonSelected++;
+        }
+
+        //Ajoute le feedback sur les boutons
+        SetFeedbackOnButton();
+
+    }
+
+    private void SetFeedbackOnButton()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            buttons[i].transform.localPosition = new Vector2(-32, buttons[i].transform.localPosition.y);
+            buttons[i].transform.localScale = new Vector2(1, 1);
+        }
+
+        buttons[ButtonSelected - 1].transform.localPosition = new Vector2(-16, buttons[ButtonSelected - 1].transform.localPosition.y);
+        buttons[ButtonSelected - 1].transform.localScale = new Vector2(1.2f, 1.2f);
+    }
+
+
+    IEnumerator BlockInput(float s)
+    {
+        inputBlocked = true;
+        yield return new WaitForSecondsRealtime(s);
+        inputBlocked = false;
+    }
+
+    public int confirmationPosition = 1;
+    private void HandleControllerInputsConfirmation()
+    {
+        
+        if (Input.GetAxisRaw("Xbox_Horizontal") == 1 && !inputBlocked && confirmationPosition + 1 < 3)
+        {
+            StartCoroutine(BlockInput(.15f));
+            confirmationPosition++;
+        }
+        if (Input.GetAxisRaw("Xbox_Horizontal") == -1 && !inputBlocked && confirmationPosition - 1 > 0)
+        {
+            StartCoroutine(BlockInput(.15f));
+            confirmationPosition--;
+        }
+
+        for (int i = 3; i < 5; i++)
+        {
+            buttons[i].transform.localScale = new Vector2(1, 1);
+        }
+
+        buttons[2 + confirmationPosition].transform.localScale = new Vector2(1.35f, 1.35f);
+
+
+        if (Input.GetButtonDown("Xbox_Validation") && confirmationPosition == 1)
+        {
+            //Quitter
+            GameObject player = GameObject.Find("Player");
+            StartCoroutine(player.GetComponent<PlayerManager>().ILoadMenu());
+            SetPauseOff();
+            player.transform.position = new Vector2(100, 100);
+            Time.timeScale = 1;
+            StartCoroutine(BlockInput(4f));
+        }
+        if (Input.GetButtonDown("Xbox_Validation") && confirmationPosition == 2)
+        {
+            //Retour en arrière
+            ReverseFirstStep();
+            StartCoroutine(BlockInput(.15f));
+        }
     }
 }

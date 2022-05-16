@@ -8,6 +8,7 @@ public class RoomManager : MonoBehaviour
 {
     private const float DELAY = 0.05f;
     private const float ADDSCALE = 0.05f;
+    private const float TRANSITION_SPEED = 8f;
 
     // CONST TO TEST SCENES EVENT
     private const float START_EVENT_RATE = 3f; // Write 20f to test event room, 3f for basic game
@@ -28,6 +29,7 @@ public class RoomManager : MonoBehaviour
     public WeaponSelectorRemake weaponSelector;
     [SerializeField] private Transition transition;
     public Tutorial tutorial;
+    [SerializeField] private GameObject crossPref;
 
     // BOSS
     public GameObject bossPrefab;
@@ -45,6 +47,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject exitPortalPref;
     private GameObject exitPortal;
     private bool mustSpawnPortal = false;
+    private bool hasTookPortal = false;
 
     // =====================================================
 
@@ -121,7 +124,10 @@ public class RoomManager : MonoBehaviour
     {
         currentRooms = ChooseDifficulty();
         numberRoom = ChooseRoom(currentRooms);
-        player.position = currentRooms[numberRoom].startPosPlayer;
+
+        // Set la position du player
+        if (!hasTookPortal) { StartCoroutine(ITranslatePlayerToStartPos(currentRooms[numberRoom].startPosPlayer)); }
+        else { player.position = currentRooms[numberRoom].startPosPlayer; hasTookPortal = false; }
 
         if(mustSpawnPortal)
         {
@@ -135,10 +141,12 @@ public class RoomManager : MonoBehaviour
         currentRooms = eventRooms;
         int choiceEvent = SCENE_EVENT;
 
-        if(choiceEvent == -1) { numberRoom = Random.Range(0, eventRooms.Length); }
+        if (choiceEvent == -1) { numberRoom = Random.Range(0, eventRooms.Length); }
         else { numberRoom = choiceEvent; }
 
-        player.position = currentRooms[numberRoom].startPosPlayer;
+        // Set la position du player
+        if (!hasTookPortal) { StartCoroutine(ITranslatePlayerToStartPos(currentRooms[numberRoom].startPosPlayer)); }
+        else {player.position = currentRooms[numberRoom].startPosPlayer; hasTookPortal = false; }
 
         maxRangeEventRate += 4;
 
@@ -264,9 +272,12 @@ public class RoomManager : MonoBehaviour
         if(killedEnemies == currentRooms[numberRoom].killableEnemies)
         {
             ClearScene();
+            PlayerPrefs.SetInt("Nbr_TotalSalles", PlayerPrefs.GetInt("Nbr_TotalSalles") + 1);
 
             if (currentNumberRoom == 2 || currentNumberRoom == 5 || currentNumberRoom == 8)
             {
+                hasTookPortal = true;
+
                 // Spawn du portail permettant de choisir une nouvelle arme
                 if(upgradePortalPref == null) { Debug.Log("Ajouter le prefab de UpgradePortal dans SceneManager -> RoomManager.cs"); }
                 Vector2 nextSpawnPos = new Vector2(0f, 0f);
@@ -382,5 +393,29 @@ public class RoomManager : MonoBehaviour
         }
 
         Destroy(exitPortal);
+    }
+
+    private IEnumerator ITranslatePlayerToStartPos(Vector2 _posToReach)
+    {
+        player.GetComponent<PlayerManager>().isImmune = true;
+        player.GetComponent<PlayerManager>().canTakeHeal = false;
+
+        GameObject cross;
+        cross = Instantiate(crossPref, player.position, Quaternion.identity);
+
+        while (Vector2.Distance(player.position, _posToReach) > 0.01f)
+        {
+            player.position = Vector2.MoveTowards(player.position, _posToReach, TRANSITION_SPEED * Time.deltaTime);
+            cross.transform.position = player.position;
+
+            yield return null;
+        }
+
+        Destroy(cross);
+
+        yield return new WaitForSeconds(1f);
+
+        player.GetComponent<PlayerManager>().isImmune = false;
+        player.GetComponent<PlayerManager>().canTakeHeal = true;
     }
 }

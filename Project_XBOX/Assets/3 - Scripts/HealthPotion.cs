@@ -46,12 +46,16 @@ public class HealthPotion : Collectable
     {
         if(collision.gameObject.tag == "Player")
         {
+            if(!PlayerManager.Instance.canTakeHeal) { return; }
+
             soundManager.playAudioClip(14);
 
             PlayerManager.Instance.AddHealthPoint(healthManager.getHealthAmount());
 
             GameObject particles_instance = Instantiate(HealthPotionParticles, transform.position, Quaternion.identity);
             Destroy(particles_instance, 1f);
+
+            PlayerPrefs.SetInt("Nbr_HealRamasses", PlayerPrefs.GetInt("Nbr_HealRamasses") + 1);
 
             Destroy(gameObject);
         }    

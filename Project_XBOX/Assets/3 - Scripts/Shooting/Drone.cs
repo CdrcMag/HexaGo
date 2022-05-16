@@ -48,7 +48,7 @@ public class Drone : Weapon
     {
         base.Shoot();
 
-        soundManager.playAudioClip(1);
+        soundManager.playAudioClip(20);
 
         
         Vector2[] targetPoints = new Vector2[5];
@@ -83,9 +83,18 @@ public class Drone : Weapon
 
     IEnumerator IMoveToTarget(Transform what, Vector2 where, float speed)
     {
+        Transform EnemyPool = GameObject.Find("EnemyPool").transform;
+        GameObject boss = GameObject.Find("[Poulpy](Clone)");
+
+        if(boss == null && EnemyPool.childCount == 0)
+        {
+            Destroy(what.gameObject);
+            yield break;
+            //Destroy(what.gameObject);
+        }
 
         //The projectile goes to the initial position
-        while(Vector2.Distance(what.position, where) >= 0.001f)
+        while (Vector2.Distance(what.position, where) >= 0.001f)
         {
             what.position = Vector2.Lerp(what.position, where, speed * Time.deltaTime);
 
@@ -94,11 +103,20 @@ public class Drone : Weapon
 
         what.position = where;
 
-        Transform EnemyPool = GameObject.Find("EnemyPool").transform;
-
         
 
-        if (EnemyPool.childCount > 0 )
+        
+        if (boss) 
+        {
+            //print("There is a boss");
+            Vector2 target = new Vector2(0, -2.5f);
+            while(Vector2.Distance(what.position, target) > 0.1f)
+            {
+                what.position = Vector2.LerpUnclamped(what.position, target, 10 * Time.deltaTime);
+                yield return null;
+            }
+        }
+        else if (EnemyPool.childCount > 0)
         {
 
             List<Transform> enemyList = new List<Transform>();
@@ -111,7 +129,7 @@ public class Drone : Weapon
             }
 
             Transform enemyTarget = enemyList[Random.Range(0, enemyList.Count)];
-
+            //Récupérer l'information de la room (s'il y a un boss)
 
             //Then, the projectile targets an enemy and moves towards it
             while (what != null && enemyTarget != null)
@@ -121,19 +139,22 @@ public class Drone : Weapon
                     if (Vector2.Distance(what.position, enemyTarget.position) > 0.1f)
                     {
                         what.position = Vector2.LerpUnclamped(what.position, enemyTarget.position, 10 * Time.deltaTime);
+                        if (enemyTarget == null) Destroy(what.gameObject);
+                        
                     }
                     else
                     {
                         Destroy(what.gameObject);
                     }
-
+                   
                     yield return null;
                 }
-                            
-
+                
             }
 
             if (what) Destroy(what.gameObject);
+            
+            
 
 
         }

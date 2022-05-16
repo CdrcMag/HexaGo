@@ -32,14 +32,13 @@ public class CroissantDeLune : Weapon
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1_Controller") > 0.9f)
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("Fire1_Controller") > 0.9f && Pause_System.Instance.GetPauseState() == false)
         {
             if (canShoot)
             {
                 this.Shoot();
                 canShoot = false;
             }
-
         }
     }
 
@@ -47,7 +46,7 @@ public class CroissantDeLune : Weapon
     {
         base.Shoot();
 
-        soundManager.playAudioClip(3);
+        soundManager.playAudioClip(21);
 
         //Vector2[] targets = new Vector2[3];
 
@@ -69,8 +68,6 @@ public class CroissantDeLune : Weapon
 
             StartCoroutine(IRotate(rotatorInstance.transform, bulletSpeed, 0.2f));
         }
-
-
     }
 
     
@@ -79,16 +76,11 @@ public class CroissantDeLune : Weapon
         float cpt = 0;
         while(cpt < BulletTimeAlive)
         {
-            t.Rotate(Vector3.forward, speed);
+            if (t != null) { t.Rotate(Vector3.forward, speed); }
 
 
             cpt += Time.deltaTime;
             yield return null;
-        }
-
-        yield return new WaitForSeconds(0.25f);
-        //Destroy(t.gameObject);
-
-        
+        }    
     }
 }

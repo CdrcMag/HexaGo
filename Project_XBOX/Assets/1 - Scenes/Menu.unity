@@ -2087,6 +2087,8 @@ MonoBehaviour:
   levelSelectionMenuCanvas: {fileID: 1279380029}
   levelSelection: {fileID: 147547553}
   soundManager: {fileID: 235494060}
+  eventSystem: {fileID: 667697396}
+  focusedGameObject: {fileID: 1883695929}
 --- !u!1 &564325061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3666,7 +3668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1146024122
 Transform:
   m_ObjectHideFlags: 0
