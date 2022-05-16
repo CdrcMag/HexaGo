@@ -330,7 +330,7 @@ public class RoomManager : MonoBehaviour
         musicManager.setBossTheme();
 
         GameObject boss;
-        boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity);
+        boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity, enemyPool);
     }
 
     public void FinishLevel()

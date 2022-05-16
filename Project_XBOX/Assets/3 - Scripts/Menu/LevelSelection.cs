@@ -25,6 +25,8 @@ public class LevelSelection : MonoBehaviour
     [SerializeField] private GameObject[] visors;
     [SerializeField] private GameObject levelIconsRoot;
     [SerializeField] private SpriteRenderer selectADifficulty;
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameObject focusedGameObject;
 
     private Image selecterImage;
     private bool canSelectLevel = false;
@@ -254,6 +256,7 @@ public class LevelSelection : MonoBehaviour
         selectADifficulty.color = color;
 
         selectALevel.gameObject.SetActive(true);
+        eventSystem.SetSelectedGameObject(focusedGameObject);
     }
 
     private void CallScaleButton(int _id)
