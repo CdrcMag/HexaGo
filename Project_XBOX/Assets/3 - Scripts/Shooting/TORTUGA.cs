@@ -16,6 +16,16 @@ public class TORTUGA : MonoBehaviour
     SpriteRenderer bombRenderer;
     public Color colorA;
     public Color colorB;
+    public GameObject ptcTortugaPref;
+
+    private bool checkedExplode = false;
+    [SerializeField] private SoundManager soundManager;
+
+
+    private void Awake()
+    {
+        soundManager = GameObject.Find("AudioManager").GetComponent<SoundManager>();
+    }
 
     private void Start()
     {
@@ -25,7 +35,8 @@ public class TORTUGA : MonoBehaviour
 
         StartCoroutine(IChangeColor());
 
-        
+        int choice = Random.Range(24, 26);
+        soundManager.playAudioClip(choice);
     }
 
 
@@ -58,9 +69,21 @@ public class TORTUGA : MonoBehaviour
 
     private void GoodByeTurtle()
     {
+        if(checkedExplode) { return; }
+
+        checkedExplode = true;
+
+        int choice = Random.Range(26, 28);
+        soundManager.playAudioClip(choice);
+
         //Destroy
         GameObject a = Instantiate(explosion, transform.position, Quaternion.identity, transform);
         Destroy(gameObject, 0.45f);
+
+        // Spawn des particules
+        GameObject ptcTortuga;
+        ptcTortuga = Instantiate(ptcTortugaPref, transform.position, Quaternion.identity);
+        Destroy(ptcTortuga, 3f);
 
     }
 

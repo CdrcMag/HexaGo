@@ -36,7 +36,7 @@ public class ExplosionTortue : MonoBehaviour
             if (e != null)
             {
                 //apply
-                e.TakeDamage(150);
+                e.TakeDamage(50);
             }
 
 

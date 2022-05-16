@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
 {
     private const float DELAY = 0.05f;
     private const float ADDSCALE = 0.05f;
-    private const float TRANSITION_SPEED = 10f;
+    private const float TRANSITION_SPEED = 8f;
 
     // CONST TO TEST SCENES EVENT
     private const float START_EVENT_RATE = 3f; // Write 20f to test event room, 3f for basic game
