@@ -115,7 +115,7 @@ public class TORTUGA : MonoBehaviour
 
         int childToGet = Random.Range(0, enemyList.Count);
 
-        if (enemyPool)
+        if (childToGet < enemyList.Count)
             target = enemyList[childToGet].gameObject;
     }
 
