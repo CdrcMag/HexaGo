@@ -14,7 +14,8 @@ public class ExplosionTortue : MonoBehaviour
 
     private void Update()
     {
-        transform.localScale = transform.localScale * augmentSpeed;
+        if(Pause_System.Instance.GetPauseState() == false)
+            transform.localScale = transform.localScale * augmentSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

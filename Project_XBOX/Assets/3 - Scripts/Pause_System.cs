@@ -18,9 +18,13 @@ public class Pause_System : MonoBehaviour
 
     public GameObject[] buttons;
     public GameObject pauseConfirmation;
+    public GameObject MenuOptions;
+    public GameObject MenuArmes;
+    public GameObject MenuStats;
 
     private bool inMenu = false;
     private bool inConfirmation = false;
+    private bool inOptions = false;
 
     private void Awake()
     {
@@ -32,6 +36,8 @@ public class Pause_System : MonoBehaviour
         SetPauseOff();
 
         StartCoroutine(LikeAnUpdate());
+
+        MenuOptions.SetActive(false);
     }
 
     IEnumerator LikeAnUpdate()
@@ -40,8 +46,7 @@ public class Pause_System : MonoBehaviour
         {
             if ((Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape)) && canPause)
             {
-                if (OnPause) SetPauseOff();
-                else if (!OnPause) SetPauseOn();
+                if (!OnPause) SetPauseOn();
             }
 
             yield return null;
@@ -54,8 +59,9 @@ public class Pause_System : MonoBehaviour
     {
         TimePlayed += Time.deltaTime;
 
-        if(inMenu) HandleControllerInputs();
+        if (inMenu) HandleControllerInputs();
         else if (inConfirmation) HandleControllerInputsConfirmation();
+        else if (inOptions) HandleControllerInputsOptions();
     }
 
     public void SetPauseOn()
@@ -99,6 +105,7 @@ public class Pause_System : MonoBehaviour
                 SetPauseOff();
                 break;
             case "Options":
+                SetOptionsOn();
                 break;
             case "Quitter":
                 QuitFirstStep();
@@ -108,6 +115,25 @@ public class Pause_System : MonoBehaviour
 
         }
     }
+
+    private void SetOptionsOn()
+    {
+        inMenu = false;
+        inOptions = true;
+        MenuArmes.SetActive(false);
+        MenuStats.SetActive(false);
+        MenuOptions.SetActive(true);
+    }
+    private void SetOptionsOff()
+    {
+        inMenu = true;
+        inOptions = false;
+        MenuArmes.SetActive(true);
+        MenuStats.SetActive(true);
+        MenuOptions.SetActive(false);
+
+    }
+
     private void QuitFirstStep()
     {
         inConfirmation = true;
@@ -127,6 +153,11 @@ public class Pause_System : MonoBehaviour
         if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 1)
         {
             SetPauseOff();
+            StartCoroutine(BlockInput(.15f));
+        }
+        if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 2)
+        {
+            SetOptionsOn();
             StartCoroutine(BlockInput(.15f));
         }
         if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 3)
@@ -217,6 +248,15 @@ public class Pause_System : MonoBehaviour
         {
             //Retour en arrière
             ReverseFirstStep();
+            StartCoroutine(BlockInput(.15f));
+        }
+    }
+
+    private void HandleControllerInputsOptions()
+    {
+        if (Input.GetButtonDown("Xbox_B"))
+        {
+            SetOptionsOff();
             StartCoroutine(BlockInput(.15f));
         }
     }
