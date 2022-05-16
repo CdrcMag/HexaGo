@@ -869,6 +869,8 @@ MonoBehaviour:
   - {fileID: 44518152}
   levelIconsRoot: {fileID: 211866740}
   selectADifficulty: {fileID: 1543621401}
+  eventSystem: {fileID: 667697396}
+  focusedGameObject: {fileID: 91658156}
 --- !u!1 &203262863
 GameObject:
   m_ObjectHideFlags: 0
@@ -4098,11 +4100,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1009740911424049429, guid: 4bbd8eb915da0d04c9db7d140451daf7, type: 3}
       propertyPath: TypeDeVision
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1009740911424049434, guid: 4bbd8eb915da0d04c9db7d140451daf7, type: 3}
       propertyPath: m_Name
       value: Daltonisme
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009740911424049434, guid: 4bbd8eb915da0d04c9db7d140451daf7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1009740911424049435, guid: 4bbd8eb915da0d04c9db7d140451daf7, type: 3}
       propertyPath: m_RootOrder
