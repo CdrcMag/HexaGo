@@ -91,7 +91,7 @@ public class Recap : MonoBehaviour
                 if (i == "Dash") Spawn(img_Dash, slots[place].position, slots[place]);
                 if (i == "Drone") Spawn(img_Drone, slots[place].position, slots[place]);
                 if (i == "Croissant") Spawn(img_Croissant, slots[place].position, slots[place]);
-                if (i == "LaTortuga") Spawn(img_Tortuga, slots[place].position, slots[place]);
+                if (i == "Tortuga") Spawn(img_Tortuga, slots[place].position, slots[place]);
             }
 
             place++;
