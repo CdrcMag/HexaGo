@@ -399,6 +399,7 @@ public class RoomManager : MonoBehaviour
     {
         player.GetComponent<PlayerManager>().isImmune = true;
         player.GetComponent<PlayerManager>().canTakeHeal = false;
+        player.GetComponent<Collider2D>().enabled = false;
 
         GameObject cross;
         cross = Instantiate(crossPref, player.position, Quaternion.identity);
@@ -417,5 +418,6 @@ public class RoomManager : MonoBehaviour
 
         player.GetComponent<PlayerManager>().isImmune = false;
         player.GetComponent<PlayerManager>().canTakeHeal = true;
+        player.GetComponent<Collider2D>().enabled = true;
     }
 }
