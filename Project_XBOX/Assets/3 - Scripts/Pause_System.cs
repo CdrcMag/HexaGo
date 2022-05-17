@@ -97,6 +97,8 @@ public class Pause_System : MonoBehaviour
         Time.timeScale = 1;
         PauseMenu.SetActive(false);
         OnPause = false;
+        ButtonSelected = 1;
+        confirmationPosition = 1;
     }
 
     public bool GetPauseState()
