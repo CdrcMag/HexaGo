@@ -6,11 +6,11 @@ public class CollisionEnemy : MonoBehaviour
 {
     // ===================== VARIABLES =====================
     [Header("Enemy Properties")]
-    [SerializeField] private Enemy enemy;
+    public Enemy enemy;
     [SerializeField] private float coeffDamage = 1;
 
     [Header("For Self Enemy")]
-    [SerializeField] private bool isSelf = false;
+    public bool isSelf = false;
     [SerializeField] private float lifePoint = 60;
     [SerializeField] private float enemyParentDamageToken = 0;
     [SerializeField] private GameObject ptcHitPref; // For Self Enemy only
@@ -137,7 +137,7 @@ public class CollisionEnemy : MonoBehaviour
         return damage;
     }
 
-    private void damageSelf(float _damage)
+    public void damageSelf(float _damage)
     {
         GameObject ptcHit;
         ptcHit = Instantiate(ptcHitPref, transform.position, Quaternion.identity);
