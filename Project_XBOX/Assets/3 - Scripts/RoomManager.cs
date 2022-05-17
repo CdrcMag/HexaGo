@@ -330,7 +330,7 @@ public class RoomManager : MonoBehaviour
         musicManager.setBossTheme();
 
         GameObject boss;
-        boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity);
+        boss = Instantiate(bossPrefab, new Vector2(0f, 0f), Quaternion.identity, enemyPool);
     }
 
     public void FinishLevel()
@@ -399,6 +399,7 @@ public class RoomManager : MonoBehaviour
     {
         player.GetComponent<PlayerManager>().isImmune = true;
         player.GetComponent<PlayerManager>().canTakeHeal = false;
+        player.GetComponent<Collider2D>().enabled = false;
 
         GameObject cross;
         cross = Instantiate(crossPref, player.position, Quaternion.identity);
@@ -417,5 +418,6 @@ public class RoomManager : MonoBehaviour
 
         player.GetComponent<PlayerManager>().isImmune = false;
         player.GetComponent<PlayerManager>().canTakeHeal = true;
+        player.GetComponent<Collider2D>().enabled = true;
     }
 }

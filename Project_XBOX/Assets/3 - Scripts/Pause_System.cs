@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Pause_System : MonoBehaviour
 {
     public static Pause_System Instance = null;
 
-    private bool OnPause = false;//Not on pause
-    private bool inputBlocked = false;
+    public TextMeshProUGUI volumeText;
+    public RectTransform boule;
+    
 
     [HideInInspector] public GameObject PauseMenu;
     [HideInInspector] public bool canPause = true;
@@ -18,9 +20,16 @@ public class Pause_System : MonoBehaviour
 
     public GameObject[] buttons;
     public GameObject pauseConfirmation;
+    public GameObject MenuOptions;
+    public GameObject MenuArmes;
+    public GameObject MenuStats;
 
+    private bool OnPause = false;//Not on pause
+    private bool inputBlocked = false;
     private bool inMenu = false;
     private bool inConfirmation = false;
+    private bool inOptions = false;
+    private bool inVolume = false;
 
     private void Awake()
     {
@@ -29,9 +38,13 @@ public class Pause_System : MonoBehaviour
 
         PauseMenu = GameObject.Find("Pause").GetComponent<RectTransform>().GetChild(0).gameObject;
 
+        
+
         SetPauseOff();
 
         StartCoroutine(LikeAnUpdate());
+
+        MenuOptions.SetActive(false);
     }
 
     IEnumerator LikeAnUpdate()
@@ -40,8 +53,7 @@ public class Pause_System : MonoBehaviour
         {
             if ((Input.GetButtonDown("Pause") || Input.GetKeyDown(KeyCode.Escape)) && canPause)
             {
-                if (OnPause) SetPauseOff();
-                else if (!OnPause) SetPauseOn();
+                if (!OnPause) SetPauseOn();
             }
 
             yield return null;
@@ -54,8 +66,9 @@ public class Pause_System : MonoBehaviour
     {
         TimePlayed += Time.deltaTime;
 
-        if(inMenu) HandleControllerInputs();
+        if (inMenu) HandleControllerInputs();
         else if (inConfirmation) HandleControllerInputsConfirmation();
+        else if (inOptions) HandleControllerInputsOptions();
     }
 
     public void SetPauseOn()
@@ -84,6 +97,8 @@ public class Pause_System : MonoBehaviour
         Time.timeScale = 1;
         PauseMenu.SetActive(false);
         OnPause = false;
+        ButtonSelected = 1;
+        confirmationPosition = 1;
     }
 
     public bool GetPauseState()
@@ -99,6 +114,7 @@ public class Pause_System : MonoBehaviour
                 SetPauseOff();
                 break;
             case "Options":
+                SetOptionsOn();
                 break;
             case "Quitter":
                 QuitFirstStep();
@@ -108,6 +124,29 @@ public class Pause_System : MonoBehaviour
 
         }
     }
+
+    private void SetOptionsOn()
+    {
+        inMenu = false;
+        inOptions = true;
+        MenuArmes.SetActive(false);
+        MenuStats.SetActive(false);
+        MenuOptions.SetActive(true);
+        HandleMines(false);
+        inVolume = true;
+    }
+    private void SetOptionsOff()
+    {
+        inMenu = true;
+        inOptions = false;
+        MenuArmes.SetActive(true);
+        MenuStats.SetActive(true);
+        MenuOptions.SetActive(false);
+        HandleMines(true);
+        inVolume = false;
+
+    }
+
     private void QuitFirstStep()
     {
         inConfirmation = true;
@@ -122,6 +161,19 @@ public class Pause_System : MonoBehaviour
         pauseConfirmation.SetActive(false);
     }
 
+    private void HandleMines(bool state)
+    {
+        GameObject pool = GameObject.Find("EnemyPool");
+
+        foreach(Transform t in pool.transform)
+        {
+            if(t.name.Contains("Mine"))
+            {
+                t.gameObject.SetActive(state);
+            }
+        }
+    }
+
     private void HandleControllerInputs()
     {
         if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 1)
@@ -129,6 +181,11 @@ public class Pause_System : MonoBehaviour
             SetPauseOff();
             StartCoroutine(BlockInput(.15f));
         }
+        //if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 2)
+        //{
+            //SetOptionsOn();
+            //StartCoroutine(BlockInput(.15f));
+        //}
         if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 3)
         {
             QuitFirstStep();
@@ -213,11 +270,74 @@ public class Pause_System : MonoBehaviour
             Time.timeScale = 1;
             StartCoroutine(BlockInput(4f));
         }
-        if (Input.GetButtonDown("Xbox_Validation") && confirmationPosition == 2)
+        if (Input.GetButtonDown("Xbox_Validation") && confirmationPosition == 2 || Input.GetButtonDown("Xbox_B"))
         {
             //Retour en arrière
             ReverseFirstStep();
             StartCoroutine(BlockInput(.15f));
         }
     }
+
+    private int volume = 5;
+
+    private void HandleControllerInputsOptions()
+    {
+        if (Input.GetButtonDown("Xbox_B"))
+        {
+            SetOptionsOff();
+            StartCoroutine(BlockInput(.15f));
+        }
+        //Volume = 0 à 10
+        if (Input.GetAxisRaw("Xbox_Horizontal") == 1 && !inputBlocked && volume + 1 < 11)
+        {
+            StartCoroutine(BlockInput(.15f));
+            volume++;
+            UpdateSound();
+        }
+        if (Input.GetAxisRaw("Xbox_Horizontal") == -1 && !inputBlocked && volume - 1 > -1)
+        {
+            StartCoroutine(BlockInput(.15f));
+            volume--;
+            UpdateSound();
+        }
+
+        
+        
+    }
+
+    public void UpdateSound()
+    {
+        AudioSource[] sources = new AudioSource[0];
+        sources = GameObject.FindObjectsOfType<AudioSource>();
+
+        //Bouge la boule sur la barre de volume
+        switch (volume)
+        {
+            case 0: boule.localPosition = new Vector2(-115, boule.localPosition.y); break;
+            case 1: boule.localPosition = new Vector2(-92, boule.localPosition.y); break;
+            case 2: boule.localPosition = new Vector2(-69, boule.localPosition.y); break;
+            case 3: boule.localPosition = new Vector2(-46, boule.localPosition.y); break;
+            case 4: boule.localPosition = new Vector2(-23, boule.localPosition.y); break;
+            case 5: boule.localPosition = new Vector2(0, boule.localPosition.y); break;
+            case 6: boule.localPosition = new Vector2(23, boule.localPosition.y); break;
+            case 7: boule.localPosition = new Vector2(46, boule.localPosition.y); break;
+            case 8: boule.localPosition = new Vector2(69, boule.localPosition.y); break;
+            case 9: boule.localPosition = new Vector2(92, boule.localPosition.y); break;
+            case 10: boule.localPosition = new Vector2(115, boule.localPosition.y); break;
+        }
+
+        //Update le texte à l'écran
+        volumeText.text = $"{volume}";
+
+        float FinalVolume = (float)volume / 10;
+        PlayerPrefs.SetFloat("Volume", FinalVolume);
+
+        for (int i = 0; i < sources.Length; i++)
+        {
+            sources[i].volume = FinalVolume;
+        }
+            
+        //Update son + feedback
+    }
+
 }

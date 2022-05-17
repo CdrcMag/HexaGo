@@ -111,6 +111,10 @@ public class TORTUGA : MonoBehaviour
             {
                 enemyList.Add(t);
             }
+            if(t.name.Contains("PiratBoat"))
+            {
+                enemyList.Add(t.GetChild(1));
+            }
         }
 
         int childToGet = Random.Range(0, enemyList.Count);

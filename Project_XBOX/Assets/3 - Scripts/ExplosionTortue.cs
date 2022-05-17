@@ -14,7 +14,8 @@ public class ExplosionTortue : MonoBehaviour
 
     private void Update()
     {
-        transform.localScale = transform.localScale * augmentSpeed;
+        if(Pause_System.Instance.GetPauseState() == false)
+            transform.localScale = transform.localScale * augmentSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,14 +34,20 @@ public class ExplosionTortue : MonoBehaviour
                 e = collision.transform.parent.GetComponent<Enemy>();
             }
 
+            // Ce morceau de code risque de poser des bugs
+            if(collision.gameObject.GetComponent<CollisionEnemy>() != null)
+            {
+                if(collision.gameObject.GetComponent<CollisionEnemy>().isSelf)
+                {
+                    collision.gameObject.GetComponent<CollisionEnemy>().damageSelf(50);
+                }
+            }
+
             if (e != null)
             {
                 //apply
                 e.TakeDamage(50);
             }
-
-
-
         }
     }
 }
