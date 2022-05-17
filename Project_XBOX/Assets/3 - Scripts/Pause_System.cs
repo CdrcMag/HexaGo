@@ -9,7 +9,7 @@ public class Pause_System : MonoBehaviour
 
     public TextMeshProUGUI volumeText;
     public RectTransform boule;
-    private AudioSource[] sources = new AudioSource[0];
+    
 
     [HideInInspector] public GameObject PauseMenu;
     [HideInInspector] public bool canPause = true;
@@ -38,7 +38,7 @@ public class Pause_System : MonoBehaviour
 
         PauseMenu = GameObject.Find("Pause").GetComponent<RectTransform>().GetChild(0).gameObject;
 
-        sources = GameObject.FindObjectsOfType<AudioSource>();
+        
 
         SetPauseOff();
 
@@ -181,11 +181,11 @@ public class Pause_System : MonoBehaviour
             SetPauseOff();
             StartCoroutine(BlockInput(.15f));
         }
-        if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 2)
-        {
-            SetOptionsOn();
-            StartCoroutine(BlockInput(.15f));
-        }
+        //if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 2)
+        //{
+            //SetOptionsOn();
+            //StartCoroutine(BlockInput(.15f));
+        //}
         if (Input.GetButtonDown("Xbox_Validation") && OnPause && ButtonSelected == 3)
         {
             QuitFirstStep();
@@ -307,6 +307,9 @@ public class Pause_System : MonoBehaviour
 
     public void UpdateSound()
     {
+        AudioSource[] sources = new AudioSource[0];
+        sources = GameObject.FindObjectsOfType<AudioSource>();
+
         //Bouge la boule sur la barre de volume
         switch (volume)
         {
