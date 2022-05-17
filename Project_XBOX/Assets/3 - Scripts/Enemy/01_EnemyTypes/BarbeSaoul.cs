@@ -51,7 +51,7 @@ public class BarbeSaoul : Enemy
         if (lifePoint <= 0)
         {
             base.Die();
-            base.soundManager.playAudioClipWithPitch(27, 5f);
+            base.soundManager.playAudioClipWithPitch(28, 5f);
         }
     }
 
@@ -135,7 +135,7 @@ public class BarbeSaoul : Enemy
 
         Sword1 = Instantiate(SwordPref, SpawnPos1.position , Quaternion.identity, SpawnPos1);
         Sword2 = Instantiate(SwordPref, SpawnPos2.position, Quaternion.identity, SpawnPos2);
-        base.soundManager.playAudioClipWithPitch(28, 2f);
+        base.soundManager.playAudioClipWithPitch(29, 2f);
 
     }
 
