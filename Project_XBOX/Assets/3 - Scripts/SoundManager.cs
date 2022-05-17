@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clips[index] != null)
         {
-            audioSource.volume = 0.5f;
+            audioSource.volume = PlayerPrefs.GetFloat("Volume");
             audioSource.pitch = 1;
             audioSource.PlayOneShot(clips[index]);
         }
@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clips[index] != null)
         {
-            audioSource.volume = 0.5f;
+            audioSource.volume = PlayerPrefs.GetFloat("Volume");
             audioSource.pitch = pitch;
             audioSource.PlayOneShot(clips[index]);
         }
@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clips[index] != null)
         {
-            audioSource.volume = volume;
+            audioSource.volume = PlayerPrefs.GetFloat("Volume");
             audioSource.pitch = 1;
             audioSource.PlayOneShot(clips[index]);
         }
