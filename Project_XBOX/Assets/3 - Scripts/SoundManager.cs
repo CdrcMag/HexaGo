@@ -15,9 +15,11 @@ public class SoundManager : MonoBehaviour
 
     public void playAudioClip(int index)
     {
+        Pause_System.Instance.UpdateSound();
+
         if (clips[index] != null)
         {
-            audioSource.volume = PlayerPrefs.GetFloat("Volume");
+            audioSource.volume = 0.5f;
             audioSource.pitch = 1;
             audioSource.PlayOneShot(clips[index]);
         }
@@ -27,9 +29,11 @@ public class SoundManager : MonoBehaviour
 
     public void playAudioClipWithPitch(int index, float pitch)
     {
+        Pause_System.Instance.UpdateSound();
+
         if (clips[index] != null)
         {
-            audioSource.volume = PlayerPrefs.GetFloat("Volume");
+            audioSource.volume = 0.5f;
             audioSource.pitch = pitch;
             audioSource.PlayOneShot(clips[index]);
         }
@@ -41,7 +45,7 @@ public class SoundManager : MonoBehaviour
     {
         if (clips[index] != null)
         {
-            audioSource.volume = PlayerPrefs.GetFloat("Volume");
+            audioSource.volume = volume;
             audioSource.pitch = 1;
             audioSource.PlayOneShot(clips[index]);
         }
