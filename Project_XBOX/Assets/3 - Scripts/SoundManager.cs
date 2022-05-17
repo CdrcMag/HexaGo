@@ -15,7 +15,6 @@ public class SoundManager : MonoBehaviour
 
     public void playAudioClip(int index)
     {
-        Pause_System.Instance.UpdateSound();
 
         if (clips[index] != null)
         {
@@ -29,7 +28,6 @@ public class SoundManager : MonoBehaviour
 
     public void playAudioClipWithPitch(int index, float pitch)
     {
-        Pause_System.Instance.UpdateSound();
 
         if (clips[index] != null)
         {
