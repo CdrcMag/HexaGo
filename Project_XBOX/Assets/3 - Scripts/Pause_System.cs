@@ -305,7 +305,7 @@ public class Pause_System : MonoBehaviour
         
     }
 
-    private void UpdateSound()
+    public void UpdateSound()
     {
         //Bouge la boule sur la barre de volume
         switch (volume)
@@ -326,9 +326,12 @@ public class Pause_System : MonoBehaviour
         //Update le texte à l'écran
         volumeText.text = $"{volume}";
 
-        for(int i = 0; i < sources.Length; i++)
+        float FinalVolume = (float)volume / 10;
+        PlayerPrefs.SetFloat("Volume", FinalVolume);
+
+        for (int i = 0; i < sources.Length; i++)
         {
-            sources[i].volume = (float)volume/10;
+            sources[i].volume = FinalVolume;
         }
             
         //Update son + feedback
